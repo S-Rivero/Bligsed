@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3307
--- Tiempo de generación: 28-04-2022 a las 21:57:29
--- Versión del servidor: 10.4.20-MariaDB
--- Versión de PHP: 8.0.8
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 09-05-2022 a las 22:05:26
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -71,6 +71,13 @@ CREATE TABLE `fichamedica` (
   `Familiar responsable` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `fichamedica`
+--
+
+INSERT INTO `fichamedica` (`DNI`, `Enfermedad`, `Internacion`, `Alergia`, `Tratamiento medico`, `Quirurjico`, `Discapacidad fisica`, `Vacunacion`, `Altura`, `Peso`, `Hospital`, `Obra social`, `N de afiliado obra social`, `Medico cabecera`, `Domiciliomed`, `Telefono medico`, `Familiar responsable`) VALUES
+('22', '', '', '', '', '', '', '', 0, 0, '', '', 0, '', '', 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -107,9 +114,16 @@ CREATE TABLE `usuarios` (
   `Sexo` varchar(1) NOT NULL,
   `Numero_de_telefono` int(11) NOT NULL,
   `Tipo_de_usuario` tinyint(4) NOT NULL,
-  `Contraseña` char(32) NOT NULL,
+  `Contraseña` char(250) NOT NULL,
   `Fecha_de_nacimiento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`Id`, `DNI`, `Nombre`, `Mail`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `Contraseña`, `Fecha_de_nacimiento`) VALUES
+(1, '22', 'a@a.com', 'a@a.com', 'm', 1, 1, 'a@a.com', '2022-05-02');
 
 --
 -- Disparadores `usuarios`
@@ -153,8 +167,7 @@ ALTER TABLE `padres`
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`Id`),
-  ADD KEY `DNI` (`DNI`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -176,17 +189,11 @@ ALTER TABLE `materias`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `fichamedica`
---
-ALTER TABLE `fichamedica`
-  ADD CONSTRAINT `fichamedica_ibfk_1` FOREIGN KEY (`Familiar responsable`) REFERENCES `padres` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `materias`
