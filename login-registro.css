@@ -8,7 +8,7 @@
 input {
   font-family: "Poppins", sans-serif;
 }
-
+/* 
   .contenedor {
     width: 100%;
     position: absolute;
@@ -19,20 +19,27 @@ input {
     background-image: linear-gradient(-45deg, #505468 0%, #373B4D 100%);
     border-radius: 50%;
     z-index: 6;
-    /* transform: translateY(-50%); */
+    transform: translateY(-50%);
     min-height: 100vh;
-  }
+  } */
   
   .contenedor_formulario {
-    position: relative;
+    position: absolute;
     top: 0%;
-    left: 25%;
+    left: 20%;
     width:100%;
-    min-height: 100vh;
+    min-height: 100%;
     overflow: hidden;
-    display: flex;
+    display: flex;  }
+
+  #no_cuenta{
+    color: white;
   }
-  
+
+  #no_cuenta a{
+    text-decoration: none;
+  }
+
   .formulario-inicio-sesion {
     width: fit-content;
     padding-top: 40px;
