@@ -1,5 +1,5 @@
 <?php
-    include('config.php');
+    include('config.php'); 
     session_start();  
 //Por ahora se loguea unicamente con el mail. En un futuro tambien con el DNI
     if(isset($_POST['login'])){
@@ -16,11 +16,11 @@
         if(!$resultado){
             echo'<script type="text/javascript">
             alert("User o Contraseña incorrectos");
+            window.location.href="login.html";
             </script>';
         }
         else{
-            //if(password_verify($Contraseña,$resultado['Contraseña'])){ REEMPLAZAR LA LINEA DE ABAJO POR ESTA CUANDO TENGA PASS HASH
-            if($password == $resultado['Contraseña']){ 
+            if(password_verify($password,$resultado['Contraseña'])){ 
                 $_SESSION['mail'] = $resultado['Mail'];
                 echo'<script type="text/javascript">
                 alert("Logueado");
@@ -29,6 +29,7 @@
             else{
                 echo'<script type="text/javascript">
                 alert("User o Contraseña incorrectos");
+                window.location.href="login.html";
                 </script>';
             }
         }

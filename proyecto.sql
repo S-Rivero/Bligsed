@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-05-2022 a las 22:05:26
+-- Tiempo de generación: 16-05-2022 a las 22:13:14
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -71,13 +71,6 @@ CREATE TABLE `fichamedica` (
   `Familiar responsable` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `fichamedica`
---
-
-INSERT INTO `fichamedica` (`DNI`, `Enfermedad`, `Internacion`, `Alergia`, `Tratamiento medico`, `Quirurjico`, `Discapacidad fisica`, `Vacunacion`, `Altura`, `Peso`, `Hospital`, `Obra social`, `N de afiliado obra social`, `Medico cabecera`, `Domiciliomed`, `Telefono medico`, `Familiar responsable`) VALUES
-('22', '', '', '', '', '', '', '', 0, 0, '', '', 0, '', '', 0, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -103,6 +96,27 @@ CREATE TABLE `padres` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `superusuarios`
+--
+
+CREATE TABLE `superusuarios` (
+  `id` int(11) NOT NULL,
+  `pago` tinyint(1) NOT NULL,
+  `fecha_creacion` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `superusuarios`
+--
+
+INSERT INTO `superusuarios` (`id`, `pago`, `fecha_creacion`) VALUES
+(1, 0, '2022-05-09'),
+(2, 0, '2022-05-03'),
+(3, 0, '2022-05-08');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuarios`
 --
 
@@ -117,13 +131,6 @@ CREATE TABLE `usuarios` (
   `Contraseña` char(250) NOT NULL,
   `Fecha_de_nacimiento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `usuarios`
---
-
-INSERT INTO `usuarios` (`Id`, `DNI`, `Nombre`, `Mail`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `Contraseña`, `Fecha_de_nacimiento`) VALUES
-(1, '22', 'a@a.com', 'a@a.com', 'm', 1, 1, 'a@a.com', '2022-05-02');
 
 --
 -- Disparadores `usuarios`
@@ -189,7 +196,7 @@ ALTER TABLE `materias`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
