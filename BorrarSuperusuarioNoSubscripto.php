@@ -6,7 +6,7 @@
         $consulta = $conn->prepare("SELECT * FROM superusuarios WHERE pago = 0"); 
         $consulta ->execute();
         while($resultado = $consulta->fetch(PDO::FETCH_ASSOC)){
-            if(calcularTiempo($resultado['fecha_creacion']) >= 14){
+            if(calcularTiempo($resultado['fecha_creacion']) >= 14){ //Borrar de la tabla usuarios
                 $borrar = $conn -> prepare("DELETE FROM `superusuarios` WHERE id = :id");
                 $borrar -> bindParam("id",$resultado['id'],PDO::PARAM_STR);
                 $borrar ->execute();
