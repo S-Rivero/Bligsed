@@ -17,7 +17,7 @@
         }
         else{
             $passHash = password_hash($password,PASSWORD_DEFAULT);
-            $consulta = $conn->prepare("INSERT INTO usuarios(Mail, Tipo_de_usuario, Contraseña) VALUES (:mail, 34, :password)");
+            $consulta = $conn->prepare("INSERT INTO usuarios(Mail, Tipo_de_usuario, Contraseña) VALUES (:mail, 0, :password)");
             $consulta->bindParam("mail", $mail, PDO::PARAM_STR); 
             $consulta->bindParam("password", $passHash, PDO::PARAM_STR);
             $resultado = $consulta -> execute();

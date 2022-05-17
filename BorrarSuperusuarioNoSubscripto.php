@@ -1,21 +1,18 @@
 <?php
     include('config.php'); 
-
+    //Para el disparador: https://es.stackoverflow.com/questions/197770/ejecutar-php-cada-cierto-tiempo-sin-ajax
     if(isset($_POST['BORRAR']))//Tiene que haber un disparador automatico para este evento. no tiene que hacerse a traves de un boton con isset
     {
         $consulta = $conn->prepare("SELECT * FROM superusuarios WHERE pago = 0"); 
         $consulta ->execute();
-        $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
-        print_r($resultado);//Solo esta bajando una de las 3 coincidencias
-        foreach($resultado as $r){ //Esto analiza cada dato del resultado, no cada resultado. Corregir
-            echo calcularTiempo($r['fecha_creacion']);
-            // if(calcularTiempo($resultado['fecha_creacion']) >= 14){
-            // }
-         
-        }
-        
+        while($resultado = $consulta->fetch(PDO::FETCH_ASSOC)){
+            if(calcularTiempo($resultado['fecha_creacion']) >= 14){
+                $borrar = $conn -> prepare("DELETE FROM `superusuarios` WHERE id = :id");
+                $borrar -> bindParam("id",$resultado['id'],PDO::PARAM_STR);
+                $borrar ->execute();
+            }
+        }    
     }
-
 
     function calcularTiempo($creacion){
         $dateHoy = date_create("now");
