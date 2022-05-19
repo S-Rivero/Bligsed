@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-05-2022 a las 22:13:14
+-- Tiempo de generación: 19-05-2022 a las 22:32:13
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -74,6 +74,32 @@ CREATE TABLE `fichamedica` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `inasistencias_alum`
+--
+
+CREATE TABLE `inasistencias_alum` (
+  `id` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `motivo` char(40) NOT NULL,
+  `cantidad` float NOT NULL,
+  `tipo` tinyint(1) NOT NULL,
+  `id_usuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `inasistencias_alum`
+--
+
+INSERT INTO `inasistencias_alum` (`id`, `fecha`, `motivo`, `cantidad`, `tipo`, `id_usuario`) VALUES
+(1, '2022-05-11', 'Por lindo', 1, 3, 2),
+(2, '2022-05-09', 'Peru', 20, 0, 2),
+(3, '2022-05-25', 'AAAAA', 3, 2, 1),
+(4, '2022-05-09', 'Peru', 20, 0, 2),
+(5, '2022-05-25', 'AAAAA', 3, 2, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `materias`
 --
 
@@ -81,6 +107,22 @@ CREATE TABLE `materias` (
   `ID` int(11) NOT NULL,
   `Materia` varchar(70) NOT NULL,
   `IdCurso` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `notas`
+--
+
+CREATE TABLE `notas` (
+  `id` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_curso` int(11) NOT NULL,
+  `id_materia` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `nota` int(11) NOT NULL,
+  `nombre` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -158,11 +200,23 @@ ALTER TABLE `fichamedica`
   ADD KEY `Familiar responsable` (`Familiar responsable`);
 
 --
+-- Indices de la tabla `inasistencias_alum`
+--
+ALTER TABLE `inasistencias_alum`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `materias`
 --
 ALTER TABLE `materias`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `IdCurso` (`IdCurso`);
+
+--
+-- Indices de la tabla `notas`
+--
+ALTER TABLE `notas`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `padres`
@@ -187,10 +241,22 @@ ALTER TABLE `curso`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `inasistencias_alum`
+--
+ALTER TABLE `inasistencias_alum`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de la tabla `materias`
 --
 ALTER TABLE `materias`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `notas`
+--
+ALTER TABLE `notas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
