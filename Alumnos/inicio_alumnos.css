@@ -3,16 +3,17 @@
     margin: 0;
     text-decoration: none;
     list-style: none;
+    font-family: "Poppins", sans-serif;
 }
 
 body {
-    font-family: monospace;
+    background-color: #35384A;
 }
 
 nav {
     height: 80px;
     width: 100%;
-    background: #353E;
+    background: #242733;
 }
 
 .logo {
@@ -44,7 +45,7 @@ nav a {
 }
 
 a.active, a:hover {
-    border: 1px solid white;
+    color:#8288A1;
     transition: .5s;
 }
 

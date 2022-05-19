@@ -22,6 +22,50 @@ input {
     transform: translateY(-50%);
     min-height: 100vh;
   } */
+
+
+nav {
+    height: 80px;
+    width: 100%;
+    background: #242733;
+}
+
+
+.logo {
+  font-family: montserrat;
+  font-size: 35px;
+  font-weight: bold;
+  color: white;
+  padding: 0px 100px;
+  line-height: 80px;
+ }
+ 
+ 
+nav ul {
+  float: right;
+  margin-right: 40px;
+}
+
+nav li {
+  display: inline-block;
+  margin: 0 8px;
+  line-height: 80px;
+}
+
+nav a {
+  color: white;
+  font-size: 18px;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  padding: 7px 10px;
+  border-radius: 3px;
+}
+
+a.active, a:hover {
+  color:#8288A1;
+  transition: .5s;
+}
+
   
   .contenedor_formulario {
     position: absolute;
