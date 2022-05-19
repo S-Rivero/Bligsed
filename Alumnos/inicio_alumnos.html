@@ -4,22 +4,29 @@
         <title>Inicio_Alumno</title>
         <link rel="stylesheet" href="inicio_alumnos.css">
         <script src="https://kit.fontawesome.com/a5bfa5bf5a.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#icon').click(function(){
+                    $('ul').toggleClass('show');
+                });
+            });
+        </script>
     </head>
     <body>
-        <header  class="header_inicio">
-            <h1>👺​☠️​🤬​😈​❤️‍🔥​</h1>
-            <p>Contacto</p>
-        </header>
-        <aside class="menu_inicio">
-            <ul id="botones_menu">
-                <li>
-                    <i class="fa-regular fa-house"></i>
-                    Inicio
-                </li>
-                <li>Mi Cuenta</li>
-                <li>Mensajes</li>
-                <li>Contacto</li>
+        <nav  class="nav_inicio">
+            <label class="logo">Xhendra2.0</label>
+            <ul>
+                <li><a class="active" href="">Inicio</a></li>
+                <li><a href="">Mi Cuenta</a></li>
+                <li><a href="">Mensajes</a></li>
+                <li><a href="">Contacto</a></li>
             </ul>
-        </aside>
+            <label id="icon">
+                <i class="fas fa-bars"></i>
+            </label>
+        </nav>
+        <section>
+        </section>
     </body>
 </html>
