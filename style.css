@@ -169,7 +169,7 @@ form.sign-in-form {
   top: -10%;
   right: 48%;
   transform: translateY(-50%);
-  background-image: linear-gradient(-45deg, #252733 0%, #35384A 100%);
+  background-image: linear-gradient(-45deg, #252733 15%, #535872 85%);
   transition: 1.8s ease-in-out;
   border-radius: 50%;
   z-index: 6;
@@ -225,6 +225,11 @@ form.sign-in-form {
   height: 41px;
   font-weight: 600;
   font-size: 0.8rem;
+}
+
+.btn.transparent:hover{
+    background-color: #fff;
+    color: #252733;
 }
 
 .right-panel .image,
