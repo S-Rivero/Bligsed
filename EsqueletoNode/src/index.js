@@ -4,8 +4,9 @@ require('dotenv').config();
 const path = require('path');
 const mysql = require('mysql');
 const express = require('express');
+//const session = require('express-session');
 
-
+//Instancia el sv y conecta con la DB
 const app = express();
 const connection = mysql.createConnection({
     port: 3000,
@@ -27,6 +28,16 @@ connection.connect((err)=>{
 app.set('port', 3000);
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
+/*  SESSION
+    app.use(session({
+        secret: 'secret',
+        resave: true,
+        saveUninitialized: true
+    }));
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
+    app.use(express.static(path.join(__dirname, 'static')));
+*/
 
 //middlewares
 
