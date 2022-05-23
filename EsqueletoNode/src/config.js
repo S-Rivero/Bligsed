@@ -3,11 +3,11 @@ config();
 
 module.exports = {
     database: {
-      connectionLimit: 10,
-      host: process.env.DATABASE_HOST || "localhost",
-      user: process.env.DATABASE_USER || "root",
-      password: process.env.DATABASE_PASSWORD || "",
-      database: process.env.DATABASE_NAME || "bligsed",
+      connectionLimit: 15,
+      host: "localhost",
+      user:  "root",
+      password:  "",
+      database:  "proyecto",
     },
-    port: process.env.PORT || 4000
+    port:  4000
 }
