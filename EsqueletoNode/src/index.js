@@ -4,17 +4,21 @@ require('dotenv').config();
 const path = require('path');
 const mysql = require('mysql');
 const express = require('express');
+const {database, port} = require('./config');
 //const session = require('express-session');
 
 //Instancia el sv y conecta con la DB
 const app = express();
-const connection = mysql.createConnection({
-    port: 3000,
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'prueba'
-});
+const connection = mysql.createConnection({ database });
+
+    /* Parte q falta del config.php
+    try{
+        $conn = new PDO("mysql:host=".$host.";dbname=".$database, $user, $pass);
+    }
+    catch (PDOException $e){
+        exit("Error: " . $e->getMessage());
+    }
+    */
 
 connection.connect((err)=>{
     if(err){
