@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: #35384A;
+    background-color: white;
 }
 
 nav {
@@ -45,7 +45,7 @@ nav a {
 }
 
 a.active, a:hover {
-    color:#8288A1;
+    color: #8795dd;
     transition: .5s;
 }
 
@@ -57,6 +57,7 @@ nav #icon {
     margin-right: 40px;
     cursor: pointer;
     display: none;
+    margin-top: 25px;
 }
 
 @media (max-width: 1048px) {
@@ -110,3 +111,61 @@ nav #icon {
     }
 }
 
+
+.contenedor_publicacion {
+    background-color: transparent;
+    position: fixed;
+    left: 15vh;
+    bottom: 15vh;
+    width: 45vw;
+    height: 60vh;
+}
+
+.contenedor_titulo {
+    background-color: transparent;
+    width: 100%;
+    height: 15%;
+    margin-bottom: 3%;
+    border-bottom: 1px solid #242733;
+}
+
+.titulo_emisor {
+    position: relative;
+    background-color: transparent;
+    height: fit-content;
+    top: 20%;
+    font-weight:bold;
+    font-size: 18px;
+}
+
+.titulo_fecha {
+    position: relative;
+    background-color: transparent;
+    height: fit-content;
+    top: 20%;
+    font-size: 15px;
+    color: #56595e;
+}
+
+.contenedor_contenido {
+    background-color: transparent;
+    width: 100%;
+    height: 85%;
+    margin-top: 1%;
+    border: 1px solid #242733;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #aaaaaa;
+}
+
+.contenido_titulo{
+    text-transform: uppercase;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.contenido_texto{
+    font-size: 18px;
+    text-align: justify;
+    margin: 20px;
+}

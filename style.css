@@ -11,6 +11,19 @@ input {
   font-family: "Poppins", sans-serif;
 }
 
+/* .logo h1{
+  color: black;
+  position: fixed;
+  right: 2vw;
+  top: 50px; */
+  /* background-image: linear-gradient(-45deg, #252733 15%, #535872 85%);
+  border-radius: 30px; */
+
+.content h1 {
+  margin: 35px;
+  font-size: 60px;
+}
+
 .container {
   position: relative;
   width: 100%;
@@ -169,7 +182,9 @@ form.sign-in-form {
   top: -10%;
   right: 48%;
   transform: translateY(-50%);
-  background-image: linear-gradient(-45deg, #252733 15%, #535872 85%);
+  /* background-image: linear-gradient(-45deg, #003485 50%, #AE3485 50%); */
+  background: rgb(63,94,251);
+background: radial-gradient(circle, rgba(63,94,251,1) 10%, rgba(252,70,95,1) 100%);
   transition: 1.8s ease-in-out;
   border-radius: 50%;
   z-index: 6;
@@ -251,6 +266,15 @@ form.sign-in-form {
 
 .container.sign-up-mode .signin-signup {
   left: 25%;
+}
+
+.signin-signup a {
+  text-decoration: none;
+  color: #252733;
+}
+
+.signin-signup a:hover{
+  text-decoration: underline;
 }
 
 .container.sign-up-mode form.sign-up-form {
