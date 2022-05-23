@@ -40,7 +40,7 @@ app.engine(
 
 //middlewares
 app.use(passport.initialize());
-app.use(passport.sesion());
+app.use(passport.session());
 
 //routes
 app.use(require('./routes/'));

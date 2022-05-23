@@ -5,15 +5,19 @@ const router = express.Router();
 const passport = require('../lib/passport');
 
 
-router.get('/about', (req, res) => {
-    res.send('/About');
+router.get('/registro', (req, res) => {
+    res.render('registro.hbs');
 });
 
-router.post('/login',
-    passport.authenticate('local', { failureRedirect: '/about' }),
-    function (req, res) {
-        res.redirect('/');
+router.post('/registro', (req, res) => {
+    res.send(req.body);
 });
+
+// router.post('/login',
+//     passport.authenticate('local', { failureRedirect: '/about' }),
+//     function (req, res) {
+//         res.redirect('/');
+// });
 
 // router.post('/auth', function (req, res) {
 // 	// Capture the input fields
