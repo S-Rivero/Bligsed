@@ -7,7 +7,7 @@ module.exports = {
       host: "localhost",
       user:  "root",
       password:  "",
-      database:  "proyecto",
+      database:  "database_mensajeria",
     },
     port:  4000
 }
