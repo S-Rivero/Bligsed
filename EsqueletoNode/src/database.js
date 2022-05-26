@@ -1,6 +1,5 @@
-// const mysql = require('mysql2/promise');
-// const { promisify } = require('util');
-const mysql = require('mysql');
+const mysql = require('mysql2');
+const { promisify } = require('util');
 const { database } = require('./config');
 
 const pool = mysql.createPool(database);
@@ -23,5 +22,8 @@ pool.getConnection((err, connection) => {
 
     return;
 });
+
+
+
 
 module.exports = pool;

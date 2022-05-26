@@ -8,20 +8,10 @@ router.get('/registro', (req, res) => {
 });
 
 router.post('/registro',  passport.authenticate('local.signup', {
-    successRedirect: '/inicio',
+    successRedirect: '/home',
     failureRedirect: '/registro',
-    failureFlash: true,
-
-}));
-
-router.get('/login', (req, res) => {
-    res.render('login.hbs');
-});
-
-router.post('/login', passport.authenticate('local.signup', {
-    successRedirect: '/inicio',
-    failureRedirect: '/login',
     failureFlash: true
 }));
 
+ 
 module.exports = router;

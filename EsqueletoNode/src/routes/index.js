@@ -7,8 +7,8 @@ router.get('/', (req,res) => {
     res.redirect('/registro');
 });
 
-router.get('/inicio', (req,res) => {
-    res.send('Estamos en inicio loco');
+router.get('/home', (req,res) => {
+    res.send('Inicio xd');
 });
 
 
