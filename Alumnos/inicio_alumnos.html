@@ -1,49 +1,123 @@
-<html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <title>Inicio_Alumno</title>
-        <link rel="stylesheet" href="inicio_alumnos.css">
-        <script src="https://kit.fontawesome.com/a5bfa5bf5a.js" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-        <script>
-            $(document).ready(function(){
-                $('#icon').click(function(){
-                    $('ul').toggleClass('show');
-                });
-            });
-        </script>
-    </head>
-    <body>
-
-        <nav  class="nav_inicio">
-            <label class="logo">Bligsed</label>
-            <ul>
-                <li><a class="active" href="">Inicio</a></li>
-                <li><a href="">Mi Cuenta</a></li>
-                <li><a href="">Mensajes</a></li>
-                <li><a href="">Contacto</a></li>
-            </ul>
-            <label id="icon">
-                <i class="fas fa-bars"></i>
-            </label>
-        </nav>
-        
-        <div class="contenedor_publicacion">
-            <div class="contenedor_titulo">
-                <div class="titulo_emisor">De Jesús, Sebastian Andrés</div>
-                <div class="titulo_fecha">12/3/2021</div>
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <!--<title> Responsive Sidebar Menu  | CodingLab </title>-->
+    <link rel="stylesheet" href="inicio_alumnos.css">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="sidebar">
+    <div class="logo">
+        <div class="logo_name">Bligsed</div>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <ul class="nav-list">
+      <!-- <li>
+          <i class='bx bx-search' ></i>
+         <input type="text" placeholder="Search...">
+         <span class="tooltip">Buscar</span>
+      </li> -->
+      <li>
+        <a href="#">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name">Inicio</span>
+        </a>
+         <span class="tooltip">Inicio</span>
+      </li>
+      <li>
+       <a href="#">
+         <i class='bx bx-user'></i>
+         <span class="links_name">Mi cuenta</span>
+       </a>
+       <span class="tooltip">Mi cuenta</span>
+     </li>
+     <li>
+       <a href="#">
+         <i class='bx bx-chat' ></i>
+         <span class="links_name">Mensajes</span>
+       </a>
+       <span class="tooltip">Mensajes</span>
+     </li>
+     <li>
+       <a href="#">
+         <i class='bx bx-folder' ></i>
+         <span class="links_name">Documentos</span>
+       </a>
+       <span class="tooltip">Documentos</span>
+     </li>
+     <li class="profile">
+         <div class="profile-details">
+           <!--<img src="profile.jpg" alt="profileImg">-->
+           <div class="name_job">
+             <div class="name">Hola, Usuario123</div>
+             <div class="job">Alumno</div>
+           </div>
+         </div>
+         <i class='bx bx-log-out' id="log_out" ></i>
+     </li>
+    </ul>
+  </div>
+  <section class="home-section">
+      <div class="text">Inicio</div>
+      <div class="contenedor_publicaciones">
+          <div class="publicaciones_autor">
+            <div class="autor_nombre">
+                De Jesús, Sebastian Andres                
             </div>
-            <div class="contenedor_contenido">
-                <div class="contenido_titulo">Titulo de la publicacion</div>
-                <div class="contenido_texto">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat debitis id laborum ab distinctio ipsum officiis quos tempora natus necessitatibus, 
-                    tempore adipisci eveniet voluptatem modi consequatur cumque repellendus non? Laudantium.
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi rerum quos, quia ut veritatis, nihil, aspernatur quidem veniam adipisci doloribus aut quaerat 
-                    laborum aliquid nobis aliquam quam temporibus ullam reprehenderit.
-                    
-                </div>
+            <div class="autor_fecha">
+                12/3/2022
             </div>
-        </div>
+          </div>
+          <div class="publicaciones_contenido">
+            <div class="contenido_titulo">
+                Título de la publicación
+            </div>
+            <div class="contenido_texto">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores consequuntur a possimus quos ad dolorum facere laboriosam nemo, animi 
+                vitae reprehenderit optio ratione, dolores eligendi, autem reiciendis deleniti commodi repudiandae?
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis necessitatibus ab maxime ex impedit temporibus? Temporibus corporis 
+                tempore laborum et dolorum voluptatum veritatis quam tenetur placeat. Placeat voluptatibus distinctio molestias? <br>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis necessitatibus ab maxime ex impedit temporibus? Temporibus corporis 
+                tempore laborum et dolorum voluptatum veritatis quam tenetur placeat. Placeat voluptatibus distinctio molestias? 
+            </div>
+            <div class="contenido_vermas">
+                <a class="boton_vermas" >Ver Mas</a>
+            </div>
+          </div>
+          
+      </div>
+      
 
-    </body>
+    </div>
+  </section>
+  <script>
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+
+  closeBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
+
+  searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+    sidebar.classList.toggle("open");
+    menuBtnChange(); //calling the function(optional)
+  });
+
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+   if(sidebar.classList.contains("open")){
+     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+   }else {
+     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+   }
+  }
+  </script>
+
+  
+</body>
 </html>

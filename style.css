@@ -183,8 +183,8 @@ form.sign-in-form {
   right: 48%;
   transform: translateY(-50%);
   /* background-image: linear-gradient(-45deg, #003485 50%, #AE3485 50%); */
-  background: rgb(63,94,251);
-background: radial-gradient(circle, rgba(63,94,251,1) 10%, rgba(252,70,95,1) 100%);
+  background: rgb(2,0,36);
+background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(63,94,251,1) 100%);
   transition: 1.8s ease-in-out;
   border-radius: 50%;
   z-index: 6;
