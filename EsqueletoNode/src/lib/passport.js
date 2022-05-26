@@ -19,9 +19,9 @@ passport.use('local.signup', new LocalStrategy({
     };
     
     newUser.password = await helpers.encryptPassword(password);
-    const resUser =  pool.query('SELECT * FROM users WHERE username = ?', [newUser.username], function(error,res,fields){
+    const resUser =  pool.query('SELECT * FROM usuarios WHERE username = ?', [newUser.username], function(error,res,fields){
         if(!res[0]){
-            const result =  pool.query('INSERT INTO users SET ? ', [newUser], function(error,results,fields){
+            const result =  pool.query('INSERT INTO usuarios SET ? ', [newUser], function(error,results,fields){
                 if (error) throw error;
                 newUser.id = results.insertId;
                 return done(null, newUser);
@@ -33,11 +33,45 @@ passport.use('local.signup', new LocalStrategy({
     
 }));
 
+
+passport.use('local.signin', new LocalStrategy({
+    usernameField: 'username',
+    passwordField: 'password',
+    passReqToCallback: true
+}, async (req, username, password, done) => {
+    const rows = pool.query( "SELECT * FROM usuarios WHERE username = ?", [username], async function(error,results,fields){
+      console.log('\n\n\nROWS: ' + results[0] + '\n\n\n');
+      if (results.length > 0) {
+        const user = results[0];
+        
+        const validPassword = await helpers.matchPassword(
+          password,
+          user.password
+        );        
+        if (validPassword) {
+          done(null, user);
+        } else {
+          done(null, false);
+        }
+      } else {
+        return done(
+          null,
+          false
+        );
+      }
+    });
+}
+)
+);
+
+
+
+
 passport.serializeUser(function (user, done) {
     done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
-    const rows = await pool.promise().query('SELECT * FROM users WHERE id = ?', [id]);
+    const rows = await pool.promise().query('SELECT * FROM usuarios WHERE id = ?', [id]);
     done(null, rows[0]);
 });

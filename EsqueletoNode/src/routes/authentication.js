@@ -13,5 +13,15 @@ router.post('/registro',  passport.authenticate('local.signup', {
     failureFlash: true
 }));
 
+router.get('/login', (req, res) => {
+    res.render('auth/login.hbs');
+});
+
+router.post('/login',  passport.authenticate('local.signin', {
+    successRedirect: '/home',
+    failureRedirect: '/login',
+    failureFlash: true
+}));
+
  
 module.exports = router;

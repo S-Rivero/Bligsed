@@ -14,7 +14,7 @@ module.exports = {
         return await bcrypt.hash(password, salt);
     },
     matchPassword: async function(password, savedPassword){
-        await bcrypt.compare(password, savedPassword);
+        return await bcrypt.compare(password, savedPassword);
     }
 }
 
