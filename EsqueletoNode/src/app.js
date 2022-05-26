@@ -31,7 +31,7 @@ app.engine(
       layoutsDir: path.join(app.get("views"), "layouts"),
       partialsDir: path.join(app.get("views"), "partials"),
       extname: ".hbs",
-    //   helpers: require("./lib/..."),
+      helpers: require('./lib/hbshelpers')
     }).engine
   );
   app.set("view engine", ".hbs");
@@ -66,7 +66,6 @@ app.use((req, res, next) => {
 //routes
 app.use(require('./routes'));
 app.use(require('./routes/authentication.js'));
-// app.use(require('./routes'));
 
 
 //static files

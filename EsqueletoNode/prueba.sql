@@ -7,6 +7,15 @@
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
+
+
+
+--mysql -u root  < prueba.sql
+
+
+
+
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -23,7 +32,18 @@ SET time_zone = "+00:00";
 CREATE DATABASE proyecto;
 USE proyecto;
 -- --------------------------------------------------------
-
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `DNI` varchar(11) NOT NULL,
+  `Nombre` varchar(65) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `Sexo` varchar(1) NOT NULL,
+  `Numero_de_telefono` int(11) NOT NULL,
+  `Tipo_de_usuario` tinyint(4) NOT NULL,
+  `password` char(250) NOT NULL,
+  `Fecha_de_nacimiento` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 --
 -- Estructura de tabla para la tabla `alumno`
 --
@@ -121,17 +141,7 @@ INSERT INTO `superusuarios` (`id`, `pago`, `fecha_creacion`) VALUES
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-CREATE TABLE `usuarios` (
-  `Id` int(11) NOT NULL,
-  `DNI` varchar(11) NOT NULL,
-  `Nombre` varchar(65) NOT NULL,
-  `Mail` varchar(50) NOT NULL,
-  `Sexo` varchar(1) NOT NULL,
-  `Numero_de_telefono` int(11) NOT NULL,
-  `Tipo_de_usuario` tinyint(4) NOT NULL,
-  `Contraseña` char(250) NOT NULL,
-  `Fecha_de_nacimiento` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 --
 -- Disparadores `usuarios`
@@ -174,8 +184,6 @@ ALTER TABLE `padres`
 --
 -- Indices de la tabla `usuarios`
 --
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`Id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -196,8 +204,7 @@ ALTER TABLE `materias`
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
-ALTER TABLE `usuarios`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
 
 --
 -- Restricciones para tablas volcadas
@@ -209,6 +216,25 @@ ALTER TABLE `usuarios`
 ALTER TABLE `materias`
   ADD CONSTRAINT `materias_ibfk_1` FOREIGN KEY (`IdCurso`) REFERENCES `curso` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
+
+
+
+CREATE TABLE `publicaciones` ( `id` INT NOT NULL AUTO_INCREMENT ,
+  `titulo` VARCHAR(20) NOT NULL ,
+  `descripcion` VARCHAR(255) NOT NULL ,
+  `autor` INT NOT NULL COMMENT 'relacionar con id usuario' ,
+  PRIMARY KEY (`id`)
+)ENGINE = InnoDB;
+
+
+CREATE TABLE `inasistencias` ( `id` INT NOT NULL AUTO_INCREMENT ,
+  `tipo` tinyint(1) NOT NULL ,
+  `motivo` VARCHAR(255) NOT NULL ,
+  `cantidad` INT NOT NULL,
+  `fecha` DATE NOT NULL,
+  PRIMARY KEY (`id`)
+)ENGINE = InnoDB;
+ALTER TABLE `inasistencias` ADD `id_us` INT NOT NULL AFTER `fecha`;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
