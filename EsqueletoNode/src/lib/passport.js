@@ -3,8 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const bodyParser = require('body-parser');
 const pool = require('../database');
 const res = require('express/lib/response');
-const helpers = require('./helpers');
-
+const {encryptPassword, matchPassword} = require('./helpers');
 
 passport.use('local.signup', new LocalStrategy({
     usernameField: 'username',
@@ -18,7 +17,7 @@ passport.use('local.signup', new LocalStrategy({
         password
     };
     
-    newUser.password = await helpers.encryptPassword(password);
+    newUser.password = await encryptPassword(password);
     const resUser =  pool.query('SELECT * FROM usuarios WHERE username = ?', [newUser.username], function(error,res,fields){
         if(!res[0]){
             const result =  pool.query('INSERT INTO usuarios SET ? ', [newUser], function(error,results,fields){
@@ -40,11 +39,10 @@ passport.use('local.signin', new LocalStrategy({
     passReqToCallback: true
 }, async (req, username, password, done) => {
     const rows = pool.query( "SELECT * FROM usuarios WHERE username = ?", [username], async function(error,results,fields){
-      console.log('\n\n\nROWS: ' + results[0] + '\n\n\n');
+      
       if (results.length > 0) {
         const user = results[0];
-        
-        const validPassword = await helpers.matchPassword(
+        const validPassword = await matchPassword(
           password,
           user.password
         );        

@@ -65,7 +65,6 @@ app.use((req, res, next) => {
 
 //routes
 app.use(require('./routes'));
-app.use(require('./routes/authentication.js'));
 
 
 //static files
