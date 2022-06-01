@@ -1,20 +1,26 @@
 const express = require('express');
 const router = express.Router();
+const {isLoggedIn, isNotLoggedIn} = require('../lib/auth');
 const {
     renderSignup,
     signUp,
     renderSignin,
-    signIn
+    signIn,
+    logout
 } = require('../controllers/auth.controller');
 
 
-router.get('/registro', renderSignup);
+router.get('/registro', isNotLoggedIn, renderSignup);
 
-router.post('/registro', signUp);
+router.post('/registro', isNotLoggedIn, signUp);
 
-router.get('/login', renderSignin);
+router.get('/login', isNotLoggedIn, renderSignin);
 
-router.post('/login',  signIn);
+router.post('/login',  isNotLoggedIn, signIn);
+
+router.get('/logout', isLoggedIn, logout);
+
+router.post('/logout', isLoggedIn, logout);//Esto hay que chequearlo
 
  
 module.exports = router;
