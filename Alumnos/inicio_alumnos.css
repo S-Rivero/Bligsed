@@ -252,7 +252,7 @@
 
 .contenedor_publicaciones {
     /* background-color: red; */
-    position: fixed;
+    position: absolute;
     width: 50vw;
     height: 65vh;
     margin-top: 2vh;
