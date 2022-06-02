@@ -20,9 +20,8 @@
 
 .contenedor_nombre{
     background-color:transparent;
+    position: relative;
     font-weight: bold;
-    bottom: 30%;
-    left: 23%;
     font-size: 23px;
     width: fit-content;
 }
@@ -30,6 +29,7 @@
 #contenedor_primario {
     height: 25%;
     background-color: red;
+    display: flex;
 }
 
 #contenedor_secundario {
