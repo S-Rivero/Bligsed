@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="cuenta_alumnos.css">>
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Cuenta - Bligsed</title>
 </head>
 
 <body>
@@ -22,14 +23,14 @@
          <span class="tooltip">Buscar</span>
       </li> -->
       <li>
-        <a href="#">
+        <a href="inicio_alumnos.html">
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">Inicio</span>
         </a>
         <span class="tooltip">Inicio</span>
       </li>
       <li>
-        <a href="#">
+        <a href="cuenta_alumnos.html">
           <i class='bx bx-user'></i>
           <span class="links_name">Mi cuenta</span>
         </a>
@@ -62,18 +63,51 @@
     </ul>
   </div>
   <section class="home-section">
-    <div class="text"></div>
+    <div class="text">Mi Cuenta</div>
+    
     <div class="contenedor_cuenta">
-      <img src="media/user_png.png" alt="user default">
-      <div class="contenedor_nombre">APELLIDO, Nombre</div>
-      <div class="contenedor_curso">7°"C" - Técnico en Informática personal y profesional</div>
-      <div class="contenedor_datos"></div>
-      <div class="contenedor_flia"></div>
-      <div class="contenedor_botones">
+      <div id="contenedor_primario">
+        <img src="media/user_png.jpg" alt="user default">
+        <div class="contenedor_nombre">APELLIDO, Nombre</div>
+        <div class="contenedor_curso">7°"C" - Técnico en Informática personal y profesional</div>
+      </div>
+      
+    
+    
+      <div id="contenedor_secundario">
+        <div class="contenedor_datos">
+          <div class="datos_titulo">
+            <p>Datos Personales</p>
+          </div>
+          <div class="datos_cont">
+            <ul class="datos_alumno">
+              <li><b>Fecha de Nacimiento:</b> 1/2/2004</li>
+              <li><b>DNI:</b> 46.123.982</li>
+              <li><b>ID:</b> JJSB99237SHJ</li>
+              <li><b>Correo:</b> mbelen411@gmail.com</li>
+              <li><b>Telefono:</b> 11-2157-3001</li>
+            </ul>
+          </div>
+        </div>
+        <div class="contenedor_datos" id="contenedor_flia">
+          <div class="datos_titulo" id="flia_titulo">
+            <p>Contacto</p>
+          </div>
+          <div class="datos_cont" id="flia_cont">
+            <div class="datos_alumno" id="datos_familia">
+              <b>Tutor 1 (Nombre y Apellido)</b>
+              <li>Teléfono: 1289371837</li>
+              <li>DNI: 11215387</li>
+            </div>
+          </div>
         </div>
       </div>
+    
+      <!-- <div class="contenedor_botones">
+            </div> -->
     </div>
-  </section>
+    </div>
+    </section>
   <script>
     let sidebar = document.querySelector(".sidebar");
     let closeBtn = document.querySelector("#btn");

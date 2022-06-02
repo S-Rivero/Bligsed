@@ -11,27 +11,39 @@
 .contenedor_cuenta img{
     margin-bottom: 7%;
     position: relative;
-    width: 17%;
+    width: 16%;
     height: auto;
     left: 3%;
     top: 5%;
-    border-radius: 100px;
+    border-radius: 100%;
 }
 
 .contenedor_nombre{
     background-color:transparent;
     font-weight: bold;
-    position: relative;
     bottom: 30%;
     left: 23%;
     font-size: 23px;
     width: fit-content;
 }
 
+#contenedor_primario {
+    height: 25%;
+    background-color: red;
+}
+
+#contenedor_secundario {
+    position: relative;
+    border: 1px solid black;
+    width: auto;
+    height: 75%;
+}
+
+
 .contenedor_curso{
     background-color: transparent;
     padding: 1%;
-    position: relative;
+    /* position: relative; */
     bottom: 35%;
     left: 23%;
     margin-top: 3%;
@@ -40,21 +52,34 @@
 }
 
 .contenedor_datos{
-    background-color:  rgba(4, 4, 83, 0.093);
-    height: 40vh;
+    height: 44vh;
     width:45vh;
-    position: absolute;
     bottom: 10%;
     left: 23%;
+    /* border: 1px solid black; */
+}
+
+
+.datos_alumno {
+    list-style: none;
+}
+
+.datos_titulo {
+    font-size: 25px;
+    width: auto;
+    height: 10%;
+}
+
+.datos_cont {
+    padding: 10%;
+    background-color:  rgba(4, 4, 83, 0.093);
+    width: auto;
+    height: 90%;
     border-radius: 15px;
 }
 
-.contenedor_flia{
-    background-color:  rgba(4, 4, 83, 0.093);
-    height: 40vh;
-    width:45vh;
-    position: absolute;
+
+#contenedor_flia{
     bottom: 10%;
     left: 61%;
-    border-radius: 15px;
 }
