@@ -1,0 +1,60 @@
+.contenedor_cuenta{
+    position: fixed;
+    width: 60vw;
+    height: 75vh;
+    margin-top: 2vh;
+    margin-left: 37vh;
+    background-color:  rgba(4,4,83,0.05942752100840336);
+    border-radius: 15px;
+}
+
+.contenedor_cuenta img{
+    margin-bottom: 7%;
+    position: relative;
+    width: 17%;
+    height: auto;
+    left: 3%;
+    top: 5%;
+    border-radius: 100px;
+}
+
+.contenedor_nombre{
+    background-color:transparent;
+    font-weight: bold;
+    position: relative;
+    bottom: 30%;
+    left: 23%;
+    font-size: 23px;
+    width: fit-content;
+}
+
+.contenedor_curso{
+    background-color: transparent;
+    padding: 1%;
+    position: relative;
+    bottom: 35%;
+    left: 23%;
+    margin-top: 3%;
+    font-size: 16px;
+    width: fit-content;
+}
+
+.contenedor_datos{
+    background-color:  rgba(4, 4, 83, 0.093);
+    height: 40vh;
+    width:45vh;
+    position: absolute;
+    bottom: 10%;
+    left: 23%;
+    border-radius: 15px;
+}
+
+.contenedor_flia{
+    background-color:  rgba(4, 4, 83, 0.093);
+    height: 40vh;
+    width:45vh;
+    position: absolute;
+    bottom: 10%;
+    left: 61%;
+    border-radius: 15px;
+}
