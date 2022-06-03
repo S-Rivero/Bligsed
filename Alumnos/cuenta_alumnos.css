@@ -144,6 +144,7 @@
 }
 
 #botones_alumno button{
+    display: block;
     position: relative;
     margin-top: 13%;
     margin-bottom: 5%;
@@ -171,17 +172,3 @@
     color: #fff;
 }
 
-
-
-#contenedor_boletin {
-    /* width: 90vh; */
-}
-
-#datos_cont_boletin .datos_cont {
-    /* margin-top: 7%;
-    padding: 10%;
-    background-color:  rgba(4, 4, 83, 0.093);
-    width: auto;
-    height: 90%;
-    border-radius: 15px; */
-}
