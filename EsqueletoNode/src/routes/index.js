@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const index = require('./index.routes');
 const auth = require('./auth.routes');
+const index = require('./index.routes');
 
-router.use(index);
 router.use(auth);
+router.use(index);
 
 module.exports = router;
