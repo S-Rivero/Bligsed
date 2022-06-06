@@ -98,8 +98,8 @@ CREATE TABLE `historial_notas` (
   `id` int(11) NOT NULL,
   `id_alum` int(11) NOT NULL,
   `id_materia` int(11) NOT NULL,
-  `id_curso` int(11) NOT NULL,
-  `fecha_cambion` date NOT NULL
+  `fecha_cambion` date NOT NULL,
+  `nota` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -153,7 +153,9 @@ CREATE TABLE `notas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
-
+CREATE TRIGGER `carganotas` BEFORE UPDATE ON `notas`
+ FOR EACH ROW INSERT INTO historial_notas 
+(id, id_alum, id_materia, fecha_cambion, nota) VALUES (old.id, old.id_alum, old.id_materia, NOW(), old.nota)
 --
 -- Estructura de tabla para la tabla `padres`
 --
@@ -245,8 +247,6 @@ ALTER TABLE `fichamedica`
 --
 -- Indices de la tabla `historial_notas`
 --
-ALTER TABLE `historial_notas`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `inasistencias`
@@ -304,8 +304,6 @@ ALTER TABLE `curso`
 --
 -- AUTO_INCREMENT de la tabla `historial_notas`
 --
-ALTER TABLE `historial_notas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `inasistencias`
