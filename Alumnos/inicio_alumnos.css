@@ -12,8 +12,8 @@
   top: 0;
   height: 100%;
   width: 78px;
-  background: rgb(2,29,52);
-  background: linear-gradient(180deg, rgba(2,29,52,1) 7%, rgba(2,37,61,1) 49%, rgba(1,46,70,1) 86%);
+  background: rgb(87,196,193);
+  background: linear-gradient(180deg, rgba(87,196,193,1) 69%, rgba(127,198,213,1));
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.5s ease;
@@ -301,7 +301,7 @@
     padding-top: 3%;
     letter-spacing: 1px;
     /* margin-bottom:1%; */
-    background-color:  rgba(4,4,83,0.05942752100840336);
+    background-color:  rgba(4, 83, 63, 0.059);
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
     color: #333;
@@ -316,7 +316,7 @@
     padding-right: 2%;
     overflow: hidden;
     position: relative;
-    background-color: rgba(4,4,83,0.05942752100840336);
+    background-color:  rgba(4, 83, 63, 0.059);
    
 }
 
@@ -340,7 +340,7 @@
     text-align: center;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    background-color: rgba(4,4,83,0.05942752100840336);
+    background-color:  rgba(4, 83, 63, 0.059);
     /* border-top: 1px solid rgb(187, 187, 187); */
 }
 
@@ -364,7 +364,7 @@
 .datos_colegio {
   position:relative;
   border-radius: 15px;
-  background-color:  rgba(4, 4, 83, 0.05942752100840336);
+  background-color:  rgba(4, 83, 63, 0.059);
   width: 22vw;
   height: 70vh;
   margin-top: 1vh;

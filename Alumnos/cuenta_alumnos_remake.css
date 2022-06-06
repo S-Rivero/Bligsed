@@ -1,81 +1,139 @@
-#contenedor_micuenta {
+.contenedor_micuenta {
+    display: grid;
+    grid-template-columns: 19% auto auto;
+    grid-template-rows: 25% 75%;
     width: 70vw;
-    height: 85vh;
+    height: 78vh;
     background-color: transparent;
     margin-left: 3vw;
 }
 
-
-#contenedor_primario {
-    width: auto;
-    height: 30%;
-    background-color: green;
+.contenedor_primario {
+    grid-column: 1 / span 3;
+    background-color: transparent;
     display: flex;
 }
 
-#contenedor_secundario {
-    width: auto;
-    height: 70%;
-    background-color: blue;
-    display: flex;
+.contenedor_imagen{
+    height: 100%;
+    width: 19%;
 }
 
-
-
-
-#contenedor_primario img {
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 100%;
-}
-
-#contenedor_imagen {
+.contenedor_imagen img {
     position: relative;
-    width: fit-content;
-    margin-left: 5%;
-    height: 80%;
-    background-color: darkcyan;
-}
-
-
-#datos_alumno_primario {
-    height: auto;
     width: 80%;
-    background-color: blueviolet;
-    margin-left: 1%;
-    margin-right: 1%;
+    height: auto;
+    justify-content: center;
+    margin-left: 10%;
 }
 
-#nombre_alumno {
+.contenedor_nombre{
+    background-color: transparent;
+    width: 81%;
+    height: auto;
+    margin-left: 2.5%;
+}
+
+.nombre_alumno{
+    background-color: transparent;
+    font-size: 25px;
     font-weight: bold;
-    font-size: 2em;
+    width: fit-content;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
-#curso_alumno {
-    width: 70%;
-    position: relative;
-    border: 1px solid black;
+.profesion_alumno{
+    background-color: transparent;
+    width: 98%;
+    height: auto;
+    font-size: 17px;
     padding-top: 1%;
     padding-bottom: 1%;
+    border: 1px solid black;
     padding-left: 1%;
-    font-size: 1em;
-    left: 5%;
 }
 
-#contenedor_botones {
-    height: auto;
-    width: 25%;
-    background-color: red;
+.contenedor_botones {
+    background-color: transparent;
 }
 
-#contenedor_datos {
-    height: auto;
-    width: 35%;
-    background-color: lightblue;
+.contenedor_datos h2 {
+    height: 10%;
+    /* padding: 15px; */
+    margin-left: 5%;
 }
 
-#contenedor_contacto {
-    height: auto;
-    width: 35%;
-    background-color: lightgreen;
+.contenedor_contacto h2 {
+    height: 10%;
+    /* padding: 15px; */ 
+    margin-left: 5%;
+}
+
+.contenedor_datos div {
+    border: 1px solid black;
+    height: 80%;
+    width: auto;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.contenedor_contacto div {
+    border: 1px solid black;
+    height: 80%;
+    width: auto;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.contenedor_datos{
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+}
+
+.contenedor_datos p{
+    font-size: 17px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 3%;
+    margin-top: 3%;
+
+}
+
+.contenedor_contacto{
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+}
+
+.contenedor_contacto p{
+    font-size: 17px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 3%;
+    margin-top: 3%;
+}
+
+.botones_alumno{
+    list-style: none;
+    font-size: 17px;
+    height: 90%;
+}
+
+.botones_alumno a{
+    text-decoration: none;
+}
+
+.botones_alumno li{
+    padding-top: 6%;
+    margin: 5%;
+    margin-bottom: 10%;
+    margin-top: 10%;
+    width: auto;
+    height: 15%;
+    border: 1px solid black;
+    border-radius: 25px;
+    text-align: center;
+    cursor: pointer;
 }
