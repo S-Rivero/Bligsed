@@ -1,4 +1,4 @@
---mysql -u root  < prueba.sql
+--mysql -u root  < proyecto.sql
 -- phpMyAdmin SQL Dump
 -- version 5.1.3
 -- https://www.phpmyadmin.net/
@@ -27,6 +27,8 @@ SET time_zone = "+00:00";
 --
 -- Estructura de tabla para la tabla `alumno`
 --
+CREATE DATABASE proyecto;
+USE proyecto;
 
 CREATE TABLE `alumno` (
   `ID` int(11) NOT NULL,

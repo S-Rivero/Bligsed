@@ -4,7 +4,8 @@ const {isLoggedIn, isNotLoggedIn} = require('../lib/auth');
 const {
     root,
     renderHome,
-    renderInasistencias
+    renderInasistencias,
+    renderPromediosAl
 } = require('../controllers/index.controller');
 
 
@@ -15,6 +16,8 @@ router.get('/', root);
 router.get('/home', isLoggedIn, renderHome);
 
 router.get('/inasistencias', isLoggedIn, renderInasistencias);
+
+router.get('/promediosAl', isLoggedIn, renderPromediosAl);
 
 /*
 
