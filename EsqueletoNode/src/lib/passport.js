@@ -52,10 +52,7 @@ passport.use('local.signin', new LocalStrategy({
           done(null, false);
         }
       } else {
-        return done(
-          null,
-          false
-        );
+          return done(null, false);
       }
     });
 }
