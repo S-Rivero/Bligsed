@@ -1,11 +1,17 @@
 <table>
     <tr>
-        <td>MATERIA</td>
+        <td>MATERIA</td> 
+        {{!-- NECESTIO QUE LAS NOTAS ESTAS SE GENEREN DE FORMA DINAMICA SEGUN LA FILA MAS LARGA --}}
         <td>Nota 1</td>
         <td>Nota 2</td>
         <td>Promedio</td>
     </tr>
     {{#each ma}}
-        {{>calificaciones/TrNota this}}
+    <tr>
+        <td>{{@key}}</td>
+        {{#each this}}
+            <td>{{this}}</td>
+        {{/each}}
+    </tr>
     {{/each}}
 </table>
