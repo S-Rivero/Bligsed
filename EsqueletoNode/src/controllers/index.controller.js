@@ -21,12 +21,6 @@ exports.renderInasistencias = ((req,res) => {
     });
 });
 
-exports.renderPromediosAl = ((req,res) => {//Muestra los promedios por cuatrimestre y final de cada materia.
-    const rows = pool.query("SELECT * FROM materias WHERE IdCurso = 1", function(err, materias){ //Agregar un join para obtener el curso del usuario actual
-        res.render('promediosAl.hbs', {ma: materias});
-    });
-});
-
 exports.renderPromediosAl = ((req,res) => {//FALTA HACER EL JOIN DEL CURSO Y ETC
     const rows = pool.query("SELECT * FROM materias m JOIN notas n ON m.ID = n.id_materia ORDER BY m.Materia ASC", function(err, materias){
         const formateado = JSONPromediosAl(materias);
