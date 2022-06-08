@@ -202,8 +202,13 @@ CREATE TABLE `sessions` (
 
 CREATE TABLE `superusuarios` (
   `id` int(11) NOT NULL,
-  `pago` tinyint(1) NOT NULL,
   `fecha_creacion` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `colegio` (
+  `id` int(11) NOT NULL,
+  `pago` tinyint(1) NOT NULL,
+  `superusuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -221,7 +226,8 @@ CREATE TABLE `usuarios` (
   `Numero_de_telefono` int(11) NOT NULL,
   `Tipo_de_usuario` tinyint(4) NOT NULL,
   `password` char(250) NOT NULL,
-  `Fecha_de_nacimiento` date NOT NULL
+  `Fecha_de_nacimiento` date NOT NULL,
+  `colegio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -354,3 +360,12 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+INSERT INTO `curso` (`Nombre curso`) VALUES ( '7C');
+INSERT INTO `materias` (`Materia`, `IdCurso`, `profesor`) VALUES ( 'Matematicas', 1, 1), ( 'Lengua', 1, 1);
+INSERT INTO `alumno` (`ID`, `ID Curso`, `Padre` ) VALUES ( 1, 1, 1);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`) VALUES ( 1, 1, 1), ( 1, 1, 10), (1, 1, 9), (1, 1, 5), (1, 2, 4), (1, 2, 7), (1, 2, 8), (1, 2, 9);
+
+
+
+
+
