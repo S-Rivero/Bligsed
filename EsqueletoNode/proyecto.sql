@@ -155,9 +155,12 @@ CREATE TABLE `notas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
+DELIMITER $$
 CREATE TRIGGER `carganotas` BEFORE UPDATE ON `notas`
  FOR EACH ROW INSERT INTO historial_notas 
 (id, id_alum, id_materia, fecha_cambion, nota) VALUES (old.id, old.id_alum, old.id_materia, NOW(), old.nota)
+$$
+DELIMITER ;
 --
 -- Estructura de tabla para la tabla `padres`
 --
