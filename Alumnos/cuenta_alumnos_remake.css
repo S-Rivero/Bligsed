@@ -41,6 +41,7 @@
     width: fit-content;
     margin-top: 1%;
     margin-bottom: 1%;
+    color: #333;
 }
 
 .profesion_alumno{
@@ -50,8 +51,10 @@
     font-size: 17px;
     padding-top: 1%;
     padding-bottom: 1%;
-    border: 1px solid black;
     padding-left: 1%;
+    color: #333;
+    -webkit-box-shadow: 3px 5px 7px 4px #ABD7E0; 
+    box-shadow: 3px 3px 5px 3px #ABD7E0;
 }
 
 .contenedor_botones {
@@ -71,25 +74,28 @@
 }
 
 .contenedor_datos div {
-    border: 1px solid black;
     height: 80%;
     width: auto;
     margin-left: 5%;
     margin-right: 5%;
+    background-color: rgb(191, 245, 244);
+    border-radius: 17px;
 }
 
 .contenedor_contacto div {
-    border: 1px solid black;
     height: 80%;
     width: auto;
     margin-left: 5%;
     margin-right: 5%;
+    background-color: rgb(191, 245, 244);
+    border-radius: 17px;
 }
 
 .contenedor_datos{
     background-color: transparent;
     height: 100%;
     width: 100%;
+    color: #333;
 }
 
 .contenedor_datos p{
@@ -98,13 +104,14 @@
     margin-right: 5%;
     margin-bottom: 3%;
     margin-top: 3%;
-
+    padding: 1.5%;
 }
 
 .contenedor_contacto{
     background-color: transparent;
     height: 100%;
     width: 100%;
+    color: #333;
 }
 
 .contenedor_contacto p{
@@ -113,6 +120,7 @@
     margin-right: 5%;
     margin-bottom: 3%;
     margin-top: 3%;
+    padding: 2%;
 }
 
 .botones_alumno{
@@ -123,6 +131,7 @@
 
 .botones_alumno a{
     text-decoration: none;
+    color: white;
 }
 
 .botones_alumno li{
@@ -132,8 +141,11 @@
     margin-top: 10%;
     width: auto;
     height: 15%;
-    border: 1px solid black;
     border-radius: 25px;
     text-align: center;
     cursor: pointer;
+    background: #02002480;
+    color: white;
 }
+
+

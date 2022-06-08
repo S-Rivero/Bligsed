@@ -1,0 +1,55 @@
+.contenedor_documentacion{
+    display: grid;
+    grid-template-columns: 19% auto auto;
+    grid-template-rows: 20% 80%;
+    width: 70vw;
+    height: 78vh;
+    background-color: rgb(190, 147, 147);
+    margin-left: 3vw;
+}
+
+.contenedor_nombre_doc{
+    grid-column: 1 / span 3;
+    background-color:rgb(144, 144, 231);
+    display: flex;
+    position: absolute;
+    background-color: #3333;
+}
+
+.contenedor_data_doc{
+    grid-column: 1 / span 3;
+    background-color:rgb(44, 44, 141);
+    display: flex;
+}
+
+.menu_facturas li a{
+    display: block;
+    padding: 15px;
+    color: #ffff;
+    text-decoration: none;
+    list-style: none;
+}
+
+.menu_facturas ul{
+    list-style: none;
+}
+
+.menu_facturas{
+    list-style: none;
+}
+
+
+.submenu{
+    position: absolute;
+    background: #3333;
+    width: 120%;
+}
+
+.submenu li a{
+    display: block;
+    color: #fff;
+    padding: 15px;
+    text-decoration: none;
+}
+
+
