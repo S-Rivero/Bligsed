@@ -22,7 +22,7 @@ exports.renderInasistencias = ((req,res) => {
 });
 
 exports.renderPromediosAl = ((req,res) => {//FALTA HACER EL JOIN DEL CURSO Y ETC
-    const rows = pool.query("SELECT * FROM materias m JOIN notas n ON m.ID = n.id_materia ORDER BY m.Materia ASC", function(err, materias){
+    const rows = pool.query("SELECT `nota`, `Materia` FROM usuarios u JOIN notas n ON u.id = n.id_alum JOIN materias m ON m.ID = n.id_materia WHERE u.id = 1 ORDER BY m.Materia ASC;", function(err, materias){
         const formateado = JSONPromediosAl(materias);
         res.render('cuat1.hbs', {ma: formateado});
     });
