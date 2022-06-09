@@ -2,54 +2,53 @@
     display: grid;
     grid-template-columns: 19% auto auto;
     grid-template-rows: 20% 80%;
-    width: 70vw;
-    height: 78vh;
-    background-color: rgb(190, 147, 147);
+    width: 75vw;
+    height: 82vh;
+    background-color:  rgba(4, 83, 63, 0.059);
     margin-left: 3vw;
+    border-top-left-radius: 17px;
+    border-top-right-radius: 17px;
 }
 
 .contenedor_nombre_doc{
     grid-column: 1 / span 3;
-    background-color:rgb(144, 144, 231);
     display: flex;
-    position: absolute;
-    background-color: #3333;
+    background-color: rgba(97,196,193,10);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 
-.contenedor_data_doc{
+select{
+    background: white;
+    border: none;
+    font-size: 14px;
+    height: 30px;
+    padding: 5px;
+    width: 250px;
+    border-radius: 15px;
+    margin-top: 3%;
+    margin-left: 3%  
+}
+
+select:focus{ outline: none;}
+
+.home-section table{
     grid-column: 1 / span 3;
-    background-color:rgb(44, 44, 141);
-    display: flex;
-}
-
-.menu_facturas li a{
-    display: block;
-    padding: 15px;
-    color: #ffff;
-    text-decoration: none;
-    list-style: none;
-}
-
-.menu_facturas ul{
-    list-style: none;
-}
-
-.menu_facturas{
-    list-style: none;
+    border-collapse: collapse;
+    
+    width: 100%;
 }
 
 
-.submenu{
-    position: absolute;
-    background: #3333;
-    width: 120%;
-}
 
-.submenu li a{
-    display: block;
-    color: #fff;
-    padding: 15px;
-    text-decoration: none;
-}
 
+td, th {
+    border: 1px solid #6e6f6f41;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
 

@@ -4,10 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="inicio_alumnos.css">>
-  <link rel="stylesheet" href="cuenta_alumnos.css">>
+  <link rel="stylesheet" href="documentos_alumnos.css">>
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Cuenta - Bligsed</title>
 </head>
 
 <body>
@@ -30,7 +29,7 @@
         <span class="tooltip">Inicio</span>
       </li>
       <li>
-        <a href="cuenta_alumnos.html">
+        <a href="cuenta_alumnos_remake.html">
           <i class='bx bx-user'></i>
           <span class="links_name">Mi cuenta</span>
         </a>
@@ -63,50 +62,80 @@
     </ul>
   </div>
   <section class="home-section">
-    <div class="text">Mi Cuenta</div>
-    
-    <div class="contenedor_cuenta">
-      <div id="contenedor_primario">
-        <div class="contenedor_imagen">
-          <img src="media/user_png.png" alt="user default">
-        </div>
-        <div class="contenedor_titulo">
-          <div class="contenedor_nombre">APELLIDO, Nombre</div>
-          <div class="contenedor_curso">7°"C" - Técnico en Informática personal y profesional</div>
-        </div>
-      </div>
-      
-      
-      
-    <div id="contenedor_secundario">
-      <div class="contenedor_botones">
-        <ul id="botones_alumno">
-          <li><button><a href="cuenta_alumnos.html">Datos personales</a></button></li>
-          <li><button>Ficha médica</button></li>
-          <li><button class="boton_presionado" onclick=""><a href="cuenta_alumnos_boletin.html">Boletín</a></button></li>
-          <li><button>Inasistencias</button></li>
-          <li><button>Enviar Mensaje</button></li>
-          <!-- <li><a href="" class="boton_alumno">Enviar Mensaje</a></li>
-          <li><a href="" class="boton_alumno">Ficha Médica</a></li>
-          <li><a href="" class="boton_alumno">Boletín</a></li>
-          <li><a href="" class="boton_alumno">Inasistencias</a></li>
-          <li><a href="" class="boton_alumno">Datos Personales</a></li> -->
-        </ul>
-      </div>
-      <div style=" width: 79%" class="contenedor_datos" id="contenedor_boletin">
-        <div class="datos_titulo">
-          <!-- <p>Datos del Alumno</p> -->
-        </div>
-        <div class="datos_cont" id="datos_cont_boletin">
-          <!-- <table>
+    <div class="text">Boletín de calificaciones</div>
+      <div class="contenedor_documentacion">
+      <div class="contenedor_nombre_doc">
+        <select name="tipo_doc">
+          <option value="Cuatrimestre 1">Cuatrimestre 1</option>
+            <option value="Cuatrimestre 2">Cuatrimestre 2</option>
+            <option value="Final">Final</option>
             
-          </table> -->
-        </div>
+          </select>
       </div>
+      <table>
+        <tr>
+          <th></th>
+          <th>Npa1</th>
+          <th>Npa2</th>
+          <th>Npa3</th>
+          <th>Informe bimestral</th>
+          <th>Npa4</th>
+          <th>Npa5</th>
+          <th>Npa6</th>
+        </tr>
+        <tr>
+          <td>MODELOS Y SISTEMAS</td>
+          <td>CS</td>
+          <td>CA</td>
+          <td>CA</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+        </tr>
+        <tr>
+            <td>BASES DE DATOS</td>
+            <td>CS</td>
+            <td>CA</td>
+            <td>CA</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>MATEMATICA</td>
+            <td>CS</td>
+            <td>CA</td>
+            <td>CA</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>LITERATURA</td>
+            <td>CS</td>
+            <td>CA</td>
+            <td>CA</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>INGLES</td>
+            <td>CS</td>
+            <td>CA</td>
+            <td>CA</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+      </table>
     </div>
-    </div>
-    </div>
-    </section>
+  </section>
   <script>
     let sidebar = document.querySelector(".sidebar");
     let closeBtn = document.querySelector("#btn");

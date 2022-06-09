@@ -29,7 +29,7 @@
         <span class="tooltip">Inicio</span>
       </li>
       <li>
-        <a href="cuenta_alumnos.html">
+        <a href="cuenta_alumnos_remake.html">
           <i class='bx bx-user'></i>
           <span class="links_name">Mi cuenta</span>
         </a>
@@ -65,18 +65,53 @@
     <div class="text">Documentación</div>
       <div class="contenedor_documentacion">
       <div class="contenedor_nombre_doc">
-        <ul class="menu_facturas">
-          <li><a href="#">hola uwu</a></li>
-          <ul class="sub_menu">
-          <li><a href="#">facturas</a></li>
-          <li><a href="#">recibos</a></li>
-          <li><a href="#">contancias</a></li>
-        </ul>
-        </ul>
+      
+        <select name="tipo_doc">
+          <option value="facturas">Facturas</option>
+          <option value="recibos">Recibos</option>
+          <option value="constancias">Constancias</option>
+          <option value="permisos">Permisos</option>
+        </select>
       </div>
-      <div class="contenedor_data_doc">CUOTA AGOSTO - APELLIDO, Nombre</div>
+      <table>
+        <tr>
+          <th>Fecha</th>
+          <th>Alumno</th>
+          <th>Nombre</th>
+          <th>Titulo</th>
+          <th>Curso</th>
+        </tr>
+        <tr>
+          <td>31/05/2022</td>
+          <td>ARROTA, María Belén</td>
+          <td>0122A0040001876_0001_04_ARROTA, Maria Belen.pdf</td>
+          <td>CUOTA JUNIO</td>
+          <td>7º "C" - (50) TÉCNICO EN INFORMÁTICA PERSONAL Y PROFESIONAL</td>
+        </tr>
+        <tr>
+          <td>31/05/2022</td>
+          <td>ARROTA, María Belén</td>
+          <td>0122A0040001876_0001_04_ARROTA, Maria Belen.pdf</td>
+          <td>CUOTA JUNIO</td>
+          <td>7º "C" - (50) TÉCNICO EN INFORMÁTICA PERSONAL Y PROFESIONAL</td>
+        </tr>
+        <tr>
+          <td>31/05/2022</td>
+          <td>ARROTA, María Belén</td>
+          <td>0122A0040001876_0001_04_ARROTA, Maria Belen.pdf</td>
+          <td>CUOTA JUNIO</td>
+          <td>7º "C" - (50) TÉCNICO EN INFORMÁTICA PERSONAL Y PROFESIONAL</td>
+        </tr>
+        <tr>
+          <td>31/05/2022</td>
+          <td>ARROTA, María Belén</td>
+          <td>0122A0040001876_0001_04_ARROTA, Maria Belen.pdf</td>
+          <td>CUOTA JUNIO</td>
+          <td>7º "C" - (50) TÉCNICO EN INFORMÁTICA PERSONAL Y PROFESIONAL</td>
+        </tr>
+        
+      </table>
     </div>
-    
   </section>
   <script>
     let sidebar = document.querySelector(".sidebar");

@@ -54,7 +54,7 @@
     padding-left: 1%;
     color: #333;
     -webkit-box-shadow: 3px 5px 7px 4px #ABD7E0; 
-    box-shadow: 3px 3px 5px 3px #ABD7E0;
+    box-shadow: 3px 3px 5px 3px rgba(4, 83, 63, 0.059);;
 }
 
 .contenedor_botones {
@@ -78,7 +78,7 @@
     width: auto;
     margin-left: 5%;
     margin-right: 5%;
-    background-color: rgb(191, 245, 244);
+    background-color:  rgba(4, 83, 63, 0.059);
     border-radius: 17px;
 }
 
@@ -87,7 +87,7 @@
     width: auto;
     margin-left: 5%;
     margin-right: 5%;
-    background-color: rgb(191, 245, 244);
+    background-color:  rgba(4, 83, 63, 0.059);
     border-radius: 17px;
 }
 
@@ -131,7 +131,7 @@
 
 .botones_alumno a{
     text-decoration: none;
-    color: white;
+    color: #333
 }
 
 .botones_alumno li{
@@ -141,11 +141,21 @@
     margin-top: 10%;
     width: auto;
     height: 15%;
-    border-radius: 25px;
+    border-radius: 15px;
     text-align: center;
     cursor: pointer;
-    background: #02002480;
-    color: white;
+    /* background: #02002480; */
+    color: #333
 }
 
+.botones_alumno li:hover{
+    background-color: rgba(87,196,193,10);
+    transition: 0.5s;
+    
+}
+
+.botones_alumno li:hover a{
+    color: white;
+    transition: 0.1s;
+}
 
