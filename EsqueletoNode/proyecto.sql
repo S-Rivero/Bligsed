@@ -124,7 +124,7 @@ CREATE TABLE `inasistencias` (
 -- Disparadores `inasistencias`
 --
 DELIMITER $$
-CREATE TRIGGER `historial` BEFORE UPDATE ON `inasistencias` FOR EACH ROW INSERT INTO historial_inasistencias (id_original, tipo, motivo, cantidad, fecha, id_us, fecha_cambio, id_usuario_modif) VALUES (old.id, old.tipo, old.motivo, old.cantidad, old.fecha, old.id_us, NOW(), old.id_creador)
+CREATE TRIGGER `editar-historial` BEFORE UPDATE ON `inasistencias` FOR EACH ROW INSERT INTO historial_inasistencias (id_original, tipo, motivo, cantidad, fecha, id_us, fecha_cambio, id_usuario_modif) VALUES (old.id, old.tipo, old.motivo, old.cantidad, old.fecha, old.id_us, NOW(), old.id_creador)
 $$
 DELIMITER ;
 
@@ -237,11 +237,12 @@ DELIMITER $$
 CREATE TRIGGER `cargadni` AFTER INSERT ON `usuarios` FOR EACH ROW INSERT INTO fichamedica (DNI) VALUES (concat(new.DNI))
 $$
 DELIMITER ;
+
 DELIMITER $$
 CREATE TRIGGER `borrar fichamedica` BEFORE DELETE ON `usuarios`
  FOR EACH ROW DELETE FROM fichamedica WHERE fichamedica.DNI = OLD.DNI
  $$
- DELIMITER;
+ DELIMITER ;
 --
 -- Índices para tablas volcadas
 --
@@ -285,8 +286,6 @@ ALTER TABLE `notas`
 --
 -- Indices de la tabla `padres`
 --
-ALTER TABLE `padres`
-  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indices de la tabla `publicaciones`
@@ -370,6 +369,8 @@ INSERT INTO `alumno` (`ID`, `ID Curso`, `Padre` ) VALUES ( 6, 1, 5);
 INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`) VALUES ( 6, 1, 1), ( 6, 1, 10), (6, 1, 9), (6, 1, 5), (6, 2, 4), (6, 2, 7), (6, 2, 8), (6, 2, 9);
 INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`) VALUES(0, '0', '0', 'F', 00000000, 0, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '0000-0-00', 0), (1, '1', '1', 'M', 11111111, 1, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '1111-1-11', 0), (2, '2', '2', 'F', 22222222, 2, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '2222-2-22', 0),  (3, '3', '3', 'F', 33333333, 3, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '3333-3-3', 0), (4, '4', '4', 'M', 44444444, 4, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '4444-4-4', 0), (5, '5', '5', 'F', 55555555, 5, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '5555-5-5', 0), (6, '6', '6', 'M', 66666666, 6, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '6666-6-6', 0);
 INSERT INTO `inasistencias`(`tipo`, `motivo`, `cantidad`, `fecha`, `id_us`, `id_creador`) VALUES (1, "Tarde por ir al medico", 0, "2022-6-4", 6, 3), (0,"Inasistencia total", 1, "2022-5-23", 6, 3);
+INSERT INTO `colegio`(`pago`,`superusuario`) VALUES (1,0);
+INSERT INTO `superusuarios`(`id`,`fecha_creacion`) VALUES (0,2012-2-15);
 
 
 
