@@ -15,7 +15,7 @@ exports.encryptPassword = async function(password) {
     return await bcrypt.hash(password, salt);
 }
 
-exports. matchPassword = async function(password, savedPassword){
+exports.matchPassword = async function(password, savedPassword){
     return await bcrypt.compare(password, savedPassword);
 }
 

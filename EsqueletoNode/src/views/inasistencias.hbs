@@ -7,6 +7,11 @@
         <td>Tipo</td>
     </tr>
     {{#each in}}
-        {{>inasistencia this}}
+        <tr class={{#ifCond @index}}'a'{{/ifCond}}>
+            <td colspan="2">{{fecha}}</td>
+            <td colspan="3">{{motivo}}</td>
+            <td>{{cantidad}}</td>
+            <td>{{tipo}}</td>
+        </tr>
     {{/each}}
 </table>
