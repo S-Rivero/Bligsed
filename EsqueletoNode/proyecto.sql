@@ -237,7 +237,11 @@ DELIMITER $$
 CREATE TRIGGER `cargadni` AFTER INSERT ON `usuarios` FOR EACH ROW INSERT INTO fichamedica (DNI) VALUES (concat(new.DNI))
 $$
 DELIMITER ;
-
+DELIMITER $$
+CREATE TRIGGER `borrar fichamedica` BEFORE DELETE ON `usuarios`
+ FOR EACH ROW DELETE FROM fichamedica WHERE fichamedica.DNI = OLD.DNI
+ $$
+ DELIMITER;
 --
 -- Índices para tablas volcadas
 --
@@ -364,6 +368,7 @@ INSERT INTO `curso` (`Nombre curso`) VALUES ( '7C');
 INSERT INTO `materias` (`Materia`, `IdCurso`, `profesor`) VALUES ( 'Matematicas', 1, 1), ( 'Lengua', 1, 1);
 INSERT INTO `alumno` (`ID`, `ID Curso`, `Padre` ) VALUES ( 1, 1, 1);
 INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`) VALUES ( 1, 1, 1), ( 1, 1, 10), (1, 1, 9), (1, 1, 5), (1, 2, 4), (1, 2, 7), (1, 2, 8), (1, 2, 9);
+INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`) VALUES (1, 'Roca', 'rocaelcrack', 'M', 99999999, 6, 'indio', '1843-6-17', 0), (2, 'Amongus', 'amongonuse', 'F', 88888888, 6, 'sus', '1600-6-17', 0);
 
 
 
