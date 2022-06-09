@@ -365,11 +365,11 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 INSERT INTO `curso` (`Nombre curso`) VALUES ( '7C');
-INSERT INTO `materias` (`Materia`, `IdCurso`, `profesor`) VALUES ( 'Matematicas', 1, 1), ( 'Lengua', 1, 1);
-INSERT INTO `alumno` (`ID`, `ID Curso`, `Padre` ) VALUES ( 1, 1, 1);
-INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`) VALUES ( 1, 1, 1), ( 1, 1, 10), (1, 1, 9), (1, 1, 5), (1, 2, 4), (1, 2, 7), (1, 2, 8), (1, 2, 9);
-INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`) VALUES (1, 'Roca', 'rocaelcrack', 'M', 99999999, 6, 'indio', '1843-6-17', 0), (2, 'Amongus', 'amongonuse', 'F', 88888888, 6, 'sus', '1600-6-17', 0);
-
+INSERT INTO `materias` (`Materia`, `IdCurso`, `profesor`) VALUES ( 'Matematicas', 1, 4), ( 'Lengua', 1, 4);
+INSERT INTO `alumno` (`ID`, `ID Curso`, `Padre` ) VALUES ( 6, 1, 5);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`) VALUES ( 6, 1, 1), ( 6, 1, 10), (6, 1, 9), (6, 1, 5), (6, 2, 4), (6, 2, 7), (6, 2, 8), (6, 2, 9);
+INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`) VALUES(0, '0', '0', 'F', 00000000, 0, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '0000-0-00', 0), (1, '1', '1', 'M', 11111111, 1, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '1111-1-11', 0), (2, '2', '2', 'F', 22222222, 2, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '2222-2-22', 0),  (3, '3', '3', 'F', 33333333, 3, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '3333-3-3', 0), (4, '4', '4', 'M', 44444444, 4, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '4444-4-4', 0), (5, '5', '5', 'F', 55555555, 5, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '5555-5-5', 0), (6, '6', '6', 'M', 66666666, 6, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '6666-6-6', 0);
+INSERT INTO `inasistencias`(`tipo`, `motivo`, `cantidad`, `fecha`, `id_us`, `id_creador`) VALUES (1, "Tarde por ir al medico", 0, "2022-6-4", 6, 3), (0,"Inasistencia total", 1, "2022-5-23", 6, 3);
 
 
 
