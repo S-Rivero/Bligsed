@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 
 exports.renderSignup = (req, res) => {
-    res.render('auth/registro.hbs');
+    res.render('auth/login.hbs');
 };
 
 exports.signUp = passport.authenticate('local.signup', {
