@@ -246,7 +246,20 @@ CREATE TRIGGER `borrar fichamedica` BEFORE DELETE ON `usuarios`
 --
 -- Índices para tablas volcadas
 --
+  CREATE TABLE `mensajes` (
+    id int(11) NOT NULL AUTO_INCREMENT,
+    id_emisor int(11) NOT NULL,
+    id_receptor int(11) NOT NULL,
+    fecha DATE NOT NULL,
+    contenido mediumtext NOT NULL,
+    chatroom int(11) NOT NULL,
+    PRIMARY KEY (id)
+  )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+  CREATE TABLE `sala_chat` (
+    id_chat int(11) NOT NULL,
+    id_usuario int(11) NOT NULL
+  )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 --
 -- Indices de la tabla `curso`
 --
