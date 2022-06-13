@@ -233,16 +233,21 @@ CREATE TABLE `usuarios` (
 --
 -- Disparadores `usuarios`
 --
-DELIMITER $$
-CREATE TRIGGER `cargadni` AFTER INSERT ON `usuarios` FOR EACH ROW INSERT INTO fichamedica (DNI) VALUES (concat(new.DNI))
-$$
-DELIMITER ;
+
 
 DELIMITER $$
 CREATE TRIGGER `borrar fichamedica` BEFORE DELETE ON `usuarios`
  FOR EACH ROW DELETE FROM fichamedica WHERE fichamedica.DNI = OLD.DNI
  $$
  DELIMITER ;
+
+ DELIMITER $$
+ CREATE TRIGGER `cargadnionlyalum` AFTER INSERT ON `usuarios`
+ FOR EACH ROW IF COALESCE(new.Tipo_de_usuario) = 6 THEN BEGIN
+INSERT INTO fichamedica (DNI) VALUES (concat(new.DNI));
+END; END IF
+$$
+DELIMITER ;
 --
 -- Índices para tablas volcadas
 --
