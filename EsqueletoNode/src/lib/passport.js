@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const bodyParser = require('body-parser');
 const pool = require('../database');
 const res = require('express/lib/response');
-const {encryptPassword, matchPassword} = require('./helpers');
+const {encryptPassword, matchPassword, findChild} = require('./helpers');
 
 passport.use('local.signup', new LocalStrategy({
     usernameField: 'username',
@@ -45,8 +45,16 @@ passport.use('local.signin', new LocalStrategy({
         const validPassword = await matchPassword(
           password,
           user.password
-        );        
+        );
         if (validPassword) {
+            if(user.Tipo_de_usuario == 5){
+                const uchilds = findChild(user.id, user, function(err, uchilds, user){
+                    req.session.passport['childs'] = [];
+                    uchilds.forEach(c => {
+                        req.session.passport['childs'].push(c.ID);
+                    });
+                });
+            }
           done(null, user);
         } else {
           done(null, false);
