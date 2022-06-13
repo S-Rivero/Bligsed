@@ -31,12 +31,10 @@ exports.renderPromediosAl = ((req,res) => {
     let tdu = req.user[0].Tipo_de_usuario;
     switch(tdu){
         case 5://No contempla multiples hijos. Esto hay que verlo despues cuando se tenga la interfaz en la que se selecciona el hijo al que ver.
-            const r = pool.query("SELECT a.ID FROM alumno a JOIN usuarios u ON a.Padre = u.id WHERE u.id = ?", [req.user[0].id], function(err, i){ 
-                uid = i[0].ID;
-                renderQueryNotas(req,res,uid);
-            });
+            uid = req.session.passport.childs[0];
+            renderQueryNotas(req,res,uid);
             break;
-        case 6: //ES ALUMNO
+        case 6: //ES ALUMNO 
             uid = req.user[0].id;
             renderQueryNotas(req,res,uid);
             break;

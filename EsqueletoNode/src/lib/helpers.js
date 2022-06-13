@@ -19,7 +19,10 @@ exports.matchPassword = async function(password, savedPassword){
     return await bcrypt.compare(password, savedPassword);
 }
 
-
-
+exports.findChild = function(idPadre,  user, next){
+    const r = pool.query("SELECT a.ID FROM alumno a JOIN usuarios u ON a.Padre = u.id WHERE u.id = ?", [idPadre], function(err, i){ 
+        return next(null,i,user);
+    });
+}
 
 
