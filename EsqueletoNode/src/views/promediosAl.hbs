@@ -1,11 +1,20 @@
 <table>
     <tr>
-        <td>MATERIA</td>
-        <td>Cuat1</td>
-        <td>Cuat2</td>
-        <td>Final</td>
+        <th></th>
+        <th>Npa1</th>
+        <th>Npa2</th>
+        <th>Npa3</th>
+        <th>Npa4</th>
+        <th>Npa5</th>
+        <th>Npa6</th>
     </tr>
     {{#each ma}}
-        {{>calificaciones/TrMateria this}}
+        <tr>
+            <td>{{@key}}</td>
+            {{#each this}}
+                <td>{{this}}</td>
+            {{/each}}
+        </tr>
     {{/each}} 
+
 </table>

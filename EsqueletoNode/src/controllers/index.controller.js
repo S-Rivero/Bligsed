@@ -54,6 +54,6 @@ exports.renderPromediosAl = ((req,res) => {
 const renderQueryNotas = function(req,res,uid){
     const rows = pool.query("SELECT `nota`, `Materia` FROM usuarios u JOIN notas n ON u.id = n.id_alum JOIN materias m ON m.ID = n.id_materia WHERE u.id = ? ORDER BY m.Materia ASC;", [uid], function(err, materias){
         const formateado = JSONPromediosAl(materias);
-        res.render('cuat1.hbs', {ma: formateado});
+        res.render('promediosAl.hbs', {ma: formateado, layout: 'General'});
     });
 }
