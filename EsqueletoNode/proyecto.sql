@@ -250,6 +250,7 @@ CREATE TRIGGER `borrar fichamedica` BEFORE DELETE ON `usuarios`
  CREATE TRIGGER `cargadnionlyalum` AFTER INSERT ON `usuarios`
  FOR EACH ROW IF COALESCE(new.Tipo_de_usuario) = 6 THEN BEGIN
 INSERT INTO fichamedica (DNI) VALUES (concat(new.DNI));
+INSERT INTO alumno (id) VALUES (new.id);
 END; END IF
 $$
 DELIMITER ;
