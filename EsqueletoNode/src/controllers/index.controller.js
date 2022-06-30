@@ -18,7 +18,7 @@ exports.renderHome = ((req,res) => { //Actualmente muestra publicaciones nada ma
 
 exports.renderInasistencias = ((req,res) => {
     const rows = pool.query("SELECT * FROM inasistencias WHERE id_us = ?", [req.user[0].id], function(err, inasistencias){
-        res.render('inasistencias.hbs', {in: inasistencias});
+        res.render('micuenta.hbs', {in: inasistencias, layout:'General', title: 'Mi Cuenta - Bligsed'});
     }); 
 });
 
@@ -54,6 +54,6 @@ exports.renderPromediosAl = ((req,res) => {
 const renderQueryNotas = function(req,res,uid){
     const rows = pool.query("SELECT `nota`, `Materia` FROM usuarios u JOIN notas n ON u.id = n.id_alum JOIN materias m ON m.ID = n.id_materia WHERE u.id = ? ORDER BY m.Materia ASC;", [uid], function(err, materias){
         const formateado = JSONPromediosAl(materias);
-        res.render('promediosAl.hbs', {ma: formateado, layout: 'General'});
+        res.render('promediosAl.hbs', {ma: formateado, layout: 'General', title: 'Calificaciones - Bligsed'});
     });
 }

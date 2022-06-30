@@ -1,20 +1,30 @@
-<table>
-    <tr>
-        <th></th>
-        <th>Npa1</th>
-        <th>Npa2</th>
-        <th>Npa3</th>
-        <th>Npa4</th>
-        <th>Npa5</th>
-        <th>Npa6</th>
-    </tr>
-    {{#each ma}}
+<div class="text">Boletín de calificaciones</div>
+<div class="contenedor_documentacion">
+    <div class="contenedor_nombre_doc">
+        <select name="tipo_doc">
+            <option value="Cuatrimestre 1">Cuatrimestre 1</option>
+            <option value="Cuatrimestre 2">Cuatrimestre 2</option>
+            <option value="Final">Final</option>
+
+        </select>
+    </div>
+    <table>
+        <tr>
+            <th></th>
+            <th>Npa1</th>
+            <th>Npa2</th>
+            <th>Npa3</th>
+            <th>Npa4</th>
+            <th>Npa5</th>
+            <th>Npa6</th>
+        </tr>
+        {{#each ma}}
         <tr>
             <td>{{@key}}</td>
             {{#each this}}
-                <td>{{this}}</td>
+            <td>{{this}}</td>
             {{/each}}
         </tr>
-    {{/each}} 
-
-</table>
+        {{/each}}
+    </table>
+</div>

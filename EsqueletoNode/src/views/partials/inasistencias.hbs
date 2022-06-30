@@ -1,0 +1,16 @@
+<table>
+    <tr>
+        <th>Fecha</th>
+        <th>Motivo</th>
+        <th>Cantidad</th>
+        <th>Tipo</th>
+    </tr>
+    {{#each in}}
+        <tr class={{#ifCond @index}}'a'{{/ifCond}}>
+            <td>fecha</td>
+            <td>comotivo</td>
+            <td>cantidad</td>
+            <td>tipo</td>
+        </tr>
+    {{/each}}
+</table>
