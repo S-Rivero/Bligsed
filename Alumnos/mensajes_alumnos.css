@@ -1,7 +1,7 @@
 .contenedor_principal {
     display: grid;
     grid-template-columns: 30% 70%;
-    grid-template-rows: 15% auto 15%;
+    grid-template-rows: 15% 80% 15%;
     margin-left: 4%;
     background-color: red;
     height: 75vh;
@@ -46,7 +46,7 @@
     position: relative;
     left: 7%;
     width: fit-content;
-    margin-top: 1.5%;
+    margin-top: 2%;
     padding-left: 1.5%;
     padding-right: 1.5%;
     background-color: white;
@@ -80,10 +80,7 @@
     padding-right: 1.5%;
     background-color: white;
     border-radius: 100px;
-
 }
-
-
 
 .contenedor_superior_busqueda_input input {
     border: none;
@@ -101,4 +98,30 @@
 .contenedor_superior h6 {
     margin-left: 4%;
 }
+
+.contenedor_medio{
+    overflow-y: auto;
+}
+
+.contenedor_medio img{
+    display: inline-block;
+    height: 15%;
+    width: auto;
+    margin-left: 2%;
+    margin-top: 2%;
+    margin-right: 2%;
+}
+
+.mensaje_recibido{
+    position: absolute;
+    top: 26%;
+    display: inline-block;
+    background-color: rgb(61, 27, 94);
+    border-radius: 7px;
+    color: white;
+    padding: 1%;
+    margin-right: 5%;
+}
+
+
 
