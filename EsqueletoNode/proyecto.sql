@@ -127,6 +127,12 @@ CREATE TRIGGER `editar-historial` BEFORE UPDATE ON `inasistencias` FOR EACH ROW 
 $$
 DELIMITER ;
 
+DELIMITER $$
+CREATE TRIGGER `borrar-inasistencias` BEFORE DELETE ON `inasistencias`
+ FOR EACH ROW INSERT INTO historial_inasistencias (id_original, tipo, motivo, cantidad, fecha, id_us, fecha_cambio, id_usuario_modif) VALUES (old.id, old.tipo, old.motivo, old.cantidad, old.fecha, old.id_us, NOW(), old.id_creador)
+ $$
+ DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -247,12 +253,18 @@ INSERT INTO fichamedica (DNI) VALUES (concat(new.DNI));
 END; END IF
 $$
 DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER `carga padre only` AFTER INSERT ON `usuarios`
+ FOR EACH ROW IF COALESCE(new.Tipo_de_usuario) = 5 THEN BEGIN
+INSERT INTO padres (ID) VALUES (concat(new.ID));
+END; END IF$$
+DELIMITER ;
 --
 -- Índices para tablas volcadas
 --
   CREATE TABLE `mensajes` (
     id int(11) NOT NULL AUTO_INCREMENT,
-    id_emisor int(11) NOT NULL,
     id_receptor int(11) NOT NULL,
     fecha DATE NOT NULL,
     hora TIME NOT NULL,
