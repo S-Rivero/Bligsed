@@ -49,10 +49,12 @@ passport.use('local.signin', new LocalStrategy({
         if (validPassword) {
             if(user.Tipo_de_usuario == 5){
                 const uchilds = findChild(user.id, user, function(err, uchilds, user){
+                    req.session.passport = [];
                     req.session.passport['childs'] = [];
                     uchilds.forEach(c => {
                         req.session.passport['childs'].push(c.ID);
                     });
+                    console.log(req.session);
                 });
             }
           done(null, user);

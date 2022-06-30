@@ -5,18 +5,14 @@
             <option value="Cuatrimestre 1">Cuatrimestre 1</option>
             <option value="Cuatrimestre 2">Cuatrimestre 2</option>
             <option value="Final">Final</option>
-
         </select>
     </div>
     <table>
         <tr>
             <th></th>
-            <th>Npa1</th>
-            <th>Npa2</th>
-            <th>Npa3</th>
-            <th>Npa4</th>
-            <th>Npa5</th>
-            <th>Npa6</th>
+            {{#each cant}}
+                <th>Npa{{@index}}</th>
+            {{/each}}
         </tr>
         {{#each ma}}
         <tr>

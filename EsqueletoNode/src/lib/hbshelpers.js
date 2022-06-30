@@ -7,10 +7,42 @@ module.exports = {
       }
       return options.inverse(this);
     },
-    getNotas: function(materia){
-      // const rows = pool.query("SELECT * FROM notas WHERE id_alum = 0 AND id_materia = ", function(err, publicaciones){
-      //   return publicaciones;
-      // });
-      console.log('Materia:' + materia);
+    tipoUsuarioToString: function(tipo){
+      switch(tipo){
+        case 0:
+          return 'superusuario';
+          break;
+        case 1:
+          return 'administracion';
+          break;
+        case 2:
+          return 'directivo';
+          break;
+        case 3:
+          return 'preceptor';
+          break;
+        case 4:
+          return 'docente';
+          break;
+        case 5:
+          return 'tutor';
+          break;
+        case 6:
+          return 'alumno';
+          break;
+      }
+    },
+    tipoInasistenciaToString: function(tipo){
+      switch(tipo){
+        case 0:
+          return 'No justificada';
+          break;
+        case 1:
+          return 'Justificada';
+          break;
+      }
+    },
+    dateTimeToDate: function(dateTime){
+      return dateTime.toLocaleDateString();
     }
   } 
