@@ -1,0 +1,52 @@
+.contenedor_principal {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: 15% auto 15%;
+    margin-left: 4%;
+    background-color: red;
+    height: 75vh;
+    width: 75vw;
+}
+
+.contenedor_superior_busqueda {
+    background-color: lightblue;
+}
+
+.contenedor_superior {
+    background-color: lightgoldenrodyellow;
+}
+
+.contenedor_medio_lateral {
+    background-color: blueviolet;
+}
+
+.contenedor_medio_lateral ul {
+    list-style: none;
+}
+
+.contenedor_medio_lateral li{
+    padding: 5%;
+}
+
+.contenedor_medio_lateral li:hover {
+    cursor: pointer;
+    background-color: rgb(162, 105, 216);
+    transition: 0.2s;
+}
+
+.contenedor_medio {
+    background-color: darkgray;
+}
+
+.contenedor_inferior {
+    background-color: darkkhaki;
+}
+
+.contenedor_inferior input {
+    border: none;
+    outline: none;
+}
+
+.contenedor_inferior_lateral {
+    background-color: lawngreen;
+}
