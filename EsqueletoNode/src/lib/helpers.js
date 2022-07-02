@@ -19,10 +19,31 @@ exports.matchPassword = async function(password, savedPassword){
     return await bcrypt.compare(password, savedPassword);
 }
 
-exports.findChild = function(idPadre,  user, next){
-    const r = pool.query("SELECT a.ID FROM alumno a JOIN usuarios u ON a.Padre = u.id WHERE u.id = ?", [idPadre], function(err, i){ 
-        return next(null,i,user);
-    });
+// exports.findChild = function(idPadre, next){
+//     const r = pool.query("SELECT a.ID FROM alumno a JOIN usuarios u ON a.Padre = u.id WHERE u.id = ?", [idPadre], function(err, i){ 
+//         return next(null,i);
+//     });
+// }
+
+let findChild = function(idPadre){
+    return pool.promise().query("SELECT a.ID FROM alumno a JOIN usuarios u ON a.Padre = u.id WHERE u.id = ?", [idPadre]);
+}
+
+exports.setChild = function(user){
+    return new Promise((res,rej)=>{
+        if(user.Tipo_de_usuario == 5){
+            let uchilds = findChild(user.id).then((r)=>{
+                let childs = [];
+                r[0].forEach(c => {
+                    childs.push(c.ID);
+                });
+                res(childs);
+            });     
+        }else{
+            res();
+        }
+    })
+    
 }
 
 

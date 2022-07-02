@@ -7,7 +7,7 @@ exports.renderSignup = (req, res) => {
 };
 
 exports.signUp = passport.authenticate('local.signup', {
-    successRedirect: '/home',
+    successRedirect: '/',
     failureRedirect: '/registro',
     failureFlash: true
 });
@@ -17,7 +17,7 @@ exports.renderSignin = (req, res) => {
 };
 
 exports.signIn = passport.authenticate('local.signin', {
-    successRedirect: '/home',
+    successRedirect: '/',
     failureRedirect: '/login',
     failureFlash: true
 });
