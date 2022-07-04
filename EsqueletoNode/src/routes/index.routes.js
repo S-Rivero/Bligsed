@@ -7,6 +7,7 @@ const {
     renderInasistencias,
     renderPromediosAl
 } = require('../controllers/index.controller');
+const {sendMsg} = require('../lib/msg');
 
 
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
@@ -18,7 +19,6 @@ router.get('/home', isLoggedIn, renderHome);
 router.get('/inasistencias', isLoggedIn, renderInasistencias);
 
 router.get('/promediosAl', isLoggedIn, renderPromediosAl);
-
 /*
 
 //general

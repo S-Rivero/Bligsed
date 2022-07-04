@@ -11,7 +11,6 @@ exports.root = ((req,res) => {
         req.session['childs'] = r;
         res.redirect('/promediosAl');
     });
-    
 });
 
 exports.renderHome = ((req,res) => { //Actualmente muestra publicaciones nada mas
