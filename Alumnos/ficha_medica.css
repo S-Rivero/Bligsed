@@ -70,7 +70,7 @@
 .contenedor_datos div {
     height: 80%;
     width: 100%;
-    margin-left: 5%;
+    margin-left: 3%;
     margin-right: 5%;
     background-color:  rgba(4, 83, 63, 0.059);
     border-radius: 17px;
@@ -105,14 +105,14 @@
     color: #333;
 }
 
-.contenedor_datos p{
-    font-size: 17px;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-bottom: 3%;
-    margin-top: 3%;
-    padding: 1.5%;
-}
+    /* .contenedor_datos p{
+        font-size: 17px;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-bottom: 3%;
+        margin-top: 3%;
+        padding: 1.5%;
+    } */
 
 .botones_alumno{
     list-style: none;
@@ -149,4 +149,38 @@
     color: white;
     transition: 0.1s;
 }
+
+.contenedor_datos .ingreso{
+    border: 1px solid rgb(161, 160, 160);
+    border-radius: 15px;
+    padding: 0.5%;
+    outline: none;
+    margin-left: 2%;
+    margin-top: 1%;
+    margin-bottom: 2%;
+    width: 30%;
+}
+
+input{
+    margin-left: 2%;
+}
+
+.contenedor_datos p{
+    margin-left: 2%;
+}
+
+.contenedor_datos h4{
+    margin-left: 2%;
+    margin-top: 2%;
+}
+
+#texto_vac{
+    margin-left: 2%;
+}
+
+#select_vacunacion{
+    margin-bottom: 1%;
+    border-radius: 7px;
+}
+
 
