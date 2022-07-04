@@ -7,7 +7,8 @@ const {JSONPromediosAl} = require('../lib/jsonFormat');
 
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
 exports.root = ((req,res) => {
-    res.redirect('/home');
+    // res.redirect('/home');
+    res.render('chat.hbs', {layout: 'mensajeriaPrueba'});
 });
 
 exports.renderHome = ((req,res) => { //Actualmente muestra publicaciones nada mas

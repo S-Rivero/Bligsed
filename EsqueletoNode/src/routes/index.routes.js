@@ -19,8 +19,6 @@ router.get('/home', isLoggedIn, renderHome);
 router.get('/inasistencias', isLoggedIn, renderInasistencias);
 
 router.get('/promediosAl', isLoggedIn, renderPromediosAl);
-
-router.post('/msg', isLoggedIn, sendMsg);
 /*
 
 //general
