@@ -191,6 +191,7 @@ CREATE TABLE `publicaciones` (
   `titulo` varchar(20) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
   `autor` int(11) NOT NULL COMMENT 'relacionar con id usuario',
+   fecha DATE NOT NULL,
     PRIMARY KEY (`id`)
 );
 
@@ -310,3 +311,6 @@ INSERT INTO `inasistencias`(`tipo`, `motivo`, `cantidad`, `fecha`, `id_us`, `id_
 INSERT INTO `colegio`(`pago`,`superusuario`) VALUES (1,0);
 INSERT INTO `superusuarios`(`id`,`fecha_creacion`) VALUES (0,"2012-2-15");
 UPDATE `alumno` SET  `ID Curso`= 1, `Padre`=5 WHERE `ID` = 6;  
+UPDATE fichamedica SET `Enfermedad` = "Sida", `Internacion` = "Internacion debido a cirujia por apendicitis", `Alergia` = "Intolerancia a la lactosa", `Tratamiento medico` = "Antibioticos", `Quirurjico` = "Cirujia por apendicitis. 7 puntos sector inferior izquierdo del abdomen", `Vacunacion` = "En fecha", `Altura` = 1.45, `Peso` = 93.5, `Hospital` = "Hospital italiano", `Obra social` = "Osecac", `N de afiliado obra social` = 112312312312, `Medico cabecera` = "Dr Michael Morbius", `Domiciliomed` = "Antesana 247", `Telefono medico` = 2133352223, `Familiar responsable` = 5 WHERE `DNI` = "6";
+
+INSERT INTO `publicaciones` (`titulo`, `descripcion`, `autor`) VALUES ('Aniversario del Noba', 'Hoy recordamos un tragico accidente que se llevo a uno de los mas prometedores musicos de el siglo 21. Descansa en paz Lautaro.', '2', "2022-7-4")
