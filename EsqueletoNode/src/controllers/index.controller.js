@@ -11,7 +11,7 @@ exports.root = ((req,res) => {
     /* ESTO ES DE NASHER
     setChild(req.user[0]).then((r)=>{
         req.session['childs'] = r;
-        res.redirect('/promediosAl');
+        res.redirect('/home');
     });
     */
     
@@ -20,14 +20,15 @@ exports.root = ((req,res) => {
 });
 
 exports.renderHome = ((req,res) => { //Actualmente muestra publicaciones nada mas
-    const rows = pool.query("SELECT * FROM publicaciones", function(err, publicaciones){
-        res.render('publicaciones.hbs', {pub: publicaciones, user:req.user[0]});
+    const rows = pool.query("SELECT * FROM publicaciones p JOIN usuarios u ON p.autor = u.id", function(err, publicaciones){
+        res.render('publicaciones.hbs', {pub: publicaciones, links: 'headerLinks/home', user:req.user[0]});
     });
 });
+//SELECT `nota`, `Materia` FROM usuarios u JOIN notas n ON u.id = n.id_alum JOIN materias m ON m.ID = n.id_materia WHERE u.id = ? ORDER BY m.Materia ASC;
 
 exports.renderInasistencias = ((req,res) => {
     const rows = pool.query("SELECT * FROM inasistencias WHERE id_us = ?", [req.user[0].id], function(err, inasistencias){
-        res.render('micuenta.hbs', {in: inasistencias, title: 'Mi Cuenta - Bligsed', layout: 'profile', user:req.user[0]});
+        res.render('micuenta.hbs', {in: inasistencias, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profile', user:req.user[0]});
         // res.send(req.session.passport);
     }); 
 });
@@ -64,6 +65,6 @@ exports.renderPromediosAl = ((req,res) => {
 const renderQueryNotas = function(req,res,uid){
     const rows = pool.query("SELECT `nota`, `Materia` FROM usuarios u JOIN notas n ON u.id = n.id_alum JOIN materias m ON m.ID = n.id_materia WHERE u.id = ? ORDER BY m.Materia ASC;", [uid], function(err, materias){
         const formateado = JSONPromediosAl(materias);
-        res.render('promediosAl.hbs', {ma: formateado['materias'], cant: formateado.materias[formateado.max['materia']], title: 'Calificaciones - Bligsed', user:req.user[0]});
+        res.render('promediosAl.hbs', {ma: formateado['materias'],links: 'headerLinks/boletin', cant: formateado.materias[formateado.max['materia']], title: 'Calificaciones - Bligsed', user:req.user[0]});
     });
 }

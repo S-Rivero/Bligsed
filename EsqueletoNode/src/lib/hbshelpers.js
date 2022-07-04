@@ -44,5 +44,8 @@ module.exports = {
     },
     dateTimeToDate: function(dateTime){
       return dateTime.toLocaleDateString();
-    }
+    },
+    partials: function(string) {
+        return string;
+      }
   } 
