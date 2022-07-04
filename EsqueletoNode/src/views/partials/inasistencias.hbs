@@ -1,0 +1,16 @@
+<table>
+    <tr>
+        <th>Fecha</th>
+        <th>Motivo</th>
+        <th>Cantidad</th>
+        <th>Tipo</th>
+    </tr>
+    {{#each this}}
+        <tr>
+            <td>{{#dateTimeToDate fecha}}{{/dateTimeToDate}}</td>
+            <td>{{motivo}}</td>
+            <td>{{cantidad}}</td>
+            <td>{{#tipoInasistenciaToString tipo}}{{/tipoInasistenciaToString}}</td>
+        </tr>
+    {{/each}}
+</table>

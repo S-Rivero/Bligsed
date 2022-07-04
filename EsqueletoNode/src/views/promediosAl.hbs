@@ -1,11 +1,26 @@
-<table>
-    <tr>
-        <td>MATERIA</td>
-        <td>Cuat1</td>
-        <td>Cuat2</td>
-        <td>Final</td>
-    </tr>
-    {{#each ma}}
-        {{>calificaciones/TrMateria this}}
-    {{/each}} 
-</table>
+<div class="text">Boletín de calificaciones</div>
+<div class="contenedor_documentacion">
+    <div class="contenedor_nombre_doc">
+        <select name="tipo_doc">
+            <option value="Cuatrimestre 1">Cuatrimestre 1</option>
+            <option value="Cuatrimestre 2">Cuatrimestre 2</option>
+            <option value="Final">Final</option>
+        </select>
+    </div>
+    <table>
+        <tr>
+            <th></th>
+            {{#each cant}}
+                <th>Npa{{@index}}</th>
+            {{/each}}
+        </tr>
+        {{#each ma}}
+        <tr>
+            <td>{{@key}}</td>
+            {{#each this}}
+            <td>{{this}}</td>
+            {{/each}}
+        </tr>
+        {{/each}}
+    </table>
+</div>

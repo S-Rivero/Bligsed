@@ -3,21 +3,21 @@ const router = express.Router();
 const passport = require('passport');
 
 exports.renderSignup = (req, res) => {
-    res.render('auth/login.hbs');
+    res.render('auth/login.hbs', {layout: 'auth'});
 };
 
 exports.signUp = passport.authenticate('local.signup', {
-    successRedirect: '/home',
+    successRedirect: '/',
     failureRedirect: '/registro',
     failureFlash: true
 });
 
 exports.renderSignin = (req, res) => {
-    res.render('auth/login.hbs');
+    res.render('auth/login.hbs', {layout: 'auth'});
 };
 
 exports.signIn = passport.authenticate('local.signin', {
-    successRedirect: '/home',
+    successRedirect: '/',
     failureRedirect: '/login',
     failureFlash: true
 });

@@ -45,7 +45,7 @@ passport.use('local.signin', new LocalStrategy({
         const validPassword = await matchPassword(
           password,
           user.password
-        );        
+        );
         if (validPassword) {
           done(null, user);
         } else {

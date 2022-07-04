@@ -1,0 +1,54 @@
+.contenedor_documentacion{
+    display: grid;
+    grid-template-columns: 19% auto auto;
+    grid-template-rows: 20% 80%;
+    width: 75vw;
+    height: 82vh;
+    background-color:  rgba(4, 83, 63, 0.059);
+    margin-left: 3vw;
+    border-top-left-radius: 17px;
+    border-top-right-radius: 17px;
+}
+
+.contenedor_nombre_doc{
+    grid-column: 1 / span 3;
+    display: flex;
+    background-color: rgba(97,196,193,10);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+select{
+    background: white;
+    border: none;
+    font-size: 14px;
+    height: 30px;
+    padding: 5px;
+    width: 250px;
+    border-radius: 15px;
+    margin-top: 3%;
+    margin-left: 3%  
+}
+
+select:focus{ outline: none;}
+
+.home-section table{
+    grid-column: 1 / span 3;
+    border-collapse: collapse;
+    
+    width: 100%;
+}
+
+
+
+
+td, th {
+    border: 1px solid #6e6f6f41;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+

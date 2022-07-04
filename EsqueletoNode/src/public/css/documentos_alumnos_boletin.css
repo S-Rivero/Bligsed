@@ -1,0 +1,47 @@
+.contenedor_documentacion{
+    display: grid;
+    grid-template-columns: 19% auto auto;
+    grid-template-rows: 20% 80%;
+    width: 75vw;
+    height: 82vh;
+    background-color:  rgba(4, 83, 63, 0.059);
+    margin-left: 3vw;
+    border-top-left-radius: 17px;
+    border-top-right-radius: 17px;
+}
+
+.contenedor_nombre_doc{
+    /* background-color: red; */
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+select{
+    background: white;
+    border: none;
+    font-size: 14px;
+    height: 30px;
+    padding: 5px;
+    width: 250px;
+    border-radius: 15px;
+    margin-top: 3%;
+    margin-left: 3%  
+}
+
+select:focus{ outline: none;}
+
+.home-section table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: none;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
