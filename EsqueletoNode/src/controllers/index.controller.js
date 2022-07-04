@@ -7,10 +7,16 @@ const {JSONPromediosAl} = require('../lib/jsonFormat');
 const {setChild} = require('../lib/helpers');
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
 exports.root = ((req,res) => {
+    
+    /* ESTO ES DE NASHER
     setChild(req.user[0]).then((r)=>{
         req.session['childs'] = r;
         res.redirect('/promediosAl');
     });
+    */
+    
+    // ESTO ES PARA LOS MENSAJES
+    res.render('chat.hbs', {layout: 'mensajeriaPrueba.hbs', user:req.user[0]});
 });
 
 exports.renderHome = ((req,res) => { //Actualmente muestra publicaciones nada mas

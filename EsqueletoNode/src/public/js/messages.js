@@ -1,4 +1,4 @@
-const pool = require('../../database')
+const pool = require('../../database');
 function pushMsg (data){
 
     document.getElementById('msg').value = '';   
