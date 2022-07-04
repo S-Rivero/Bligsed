@@ -159,3 +159,10 @@
     transition: 0.1s;
 }
 
+.color_fijo{
+    background-color: rgba(87,196,193,10);
+}
+
+.color_fijo a{
+    color: white;
+}

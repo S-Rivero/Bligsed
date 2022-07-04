@@ -39,11 +39,7 @@ select:focus{ outline: none;}
     width: 100%;
 }
 
-
-
-
 td, th {
-    border: 1px solid #6e6f6f41;
     text-align: left;
     padding: 8px;
   }
@@ -52,3 +48,11 @@ td, th {
     background-color: #dddddd;
   }
 
+  .bordered { 
+    border: solid #dddddd 1px; 
+    -moz-border-radius: 20px; 
+    -webkit-border-radius: 20px; 
+    border-radius: 20px; 
+    box-shadow: 0 3px #dddddd; 
+}
+ 

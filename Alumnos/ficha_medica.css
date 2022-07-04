@@ -183,4 +183,11 @@ input{
     border-radius: 7px;
 }
 
+.color_fijo{
+    background-color: rgba(87,196,193,10);
+}
+
+.color_fijo a{
+    color: white;
+}
 
