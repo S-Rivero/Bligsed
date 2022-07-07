@@ -1,0 +1,168 @@
+.contenedor_micuenta {
+    display: grid;
+    grid-template-columns: 19% auto auto;
+    grid-template-rows: 25% 75%;
+    width: 70vw;
+    height: 78vh;
+    background-color: transparent;
+    margin-left: 3vw;
+}
+
+.contenedor_primario {
+    grid-column: 1 / span 3;
+    background-color: transparent;
+    display: flex;
+}
+
+.contenedor_imagen{
+    height: 100%;
+    width: 19%;
+}
+
+.contenedor_imagen img {
+    position: relative;
+    width: 80%;
+    height: auto;
+    justify-content: center;
+    margin-left: 10%;
+}
+
+.contenedor_nombre{
+    background-color: transparent;
+    width: 81%;
+    height: auto;
+    margin-left: 2.5%;
+}
+
+.nombre_alumno{
+    background-color: transparent;
+    font-size: 25px;
+    font-weight: bold;
+    width: fit-content;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    color: #333;
+}
+
+.profesion_alumno{
+    background-color: transparent;
+    width: 98%;
+    height: auto;
+    font-size: 17px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 1%;
+    color: #333;
+    -webkit-box-shadow: 3px 5px 7px 4px #ABD7E0; 
+    box-shadow: 3px 3px 5px 3px rgba(4, 83, 63, 0.059);;
+}
+
+.contenedor_botones {
+    background-color: transparent;
+}
+
+.contenedor_datos h2 {
+    height: 10%;
+    /* padding: 15px; */
+    margin-left: 5%;
+}
+
+.contenedor_contacto h2 {
+    height: 10%;
+    /* padding: 15px; */ 
+    margin-left: 5%;
+}
+
+.contenedor_datos div {
+    height: 80%;
+    width: auto;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color:  rgba(4, 83, 63, 0.059);
+    border-radius: 17px;
+}
+
+.contenedor_contacto div {
+    height: 80%;
+    width: auto;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color:  rgba(4, 83, 63, 0.059);
+    border-radius: 17px;
+}
+
+.contenedor_datos{
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    color: #333;
+}
+
+.contenedor_datos p{
+    font-size: 17px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 3%;
+    margin-top: 3%;
+    padding: 1.5%;
+}
+
+.contenedor_contacto{
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    color: #333;
+}
+
+.contenedor_contacto p{
+    font-size: 17px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 3%;
+    margin-top: 3%;
+    padding: 2%;
+}
+
+.botones_alumno{
+    list-style: none;
+    font-size: 17px;
+    height: 90%;
+}
+
+.botones_alumno a{
+    text-decoration: none;
+    color: #333
+}
+
+.botones_alumno li{
+    padding-top: 6%;
+    margin: 5%;
+    margin-bottom: 10%;
+    margin-top: 10%;
+    width: auto;
+    height: 15%;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+    /* background: #02002480; */
+    color: #333
+}
+
+.botones_alumno li:hover{
+    background-color: rgba(87,196,193,10);
+    transition: 0.5s;
+    
+}
+
+.botones_alumno li:hover a{
+    color: white;
+    transition: 0.1s;
+}
+
+.color_fijo{
+    background-color: rgba(87,196,193,10);
+}
+
+.color_fijo a{
+    color: white;
+}

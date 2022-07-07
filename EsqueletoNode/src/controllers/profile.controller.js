@@ -10,7 +10,8 @@ exports.root = ((req,res) => {
 });
 
 exports.datosPersonales = ((req,res) => {
-    res.send("/datosPersonales");
+    
+    res.render('perfil.hbs', {in: req.user[0], title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileDatosPersonales', user:req.user[0], partial: 'profile/datosPersonales'});
 });
 
 exports.FichaMedica = ((req,res) => {
