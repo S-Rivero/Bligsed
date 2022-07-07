@@ -1,17 +1,18 @@
-<div class="text">Boletín de calificaciones</div>
-<div class="contenedor_documentacion">
+
+
+<div class="contenedor_datos">
+    <h2>Boletín de calificaciones</h2>
     <div class="contenedor_nombre_doc">
         <select name="tipo_doc">
+            <option value="Final">Final</option>
             <option value="Cuatrimestre 1">Cuatrimestre 1</option>
             <option value="Cuatrimestre 2">Cuatrimestre 2</option>
-            <option value="Final">Final</option>
         </select>
-    </div>
-    <table>
+        <table>
         <tr>
             <th></th>
             {{#each cant}}
-                <th>Npa{{@index}}</th>
+            <th>Npa{{@index}}</th>
             {{/each}}
         </tr>
         {{#each ma}}
@@ -23,4 +24,6 @@
         </tr>
         {{/each}}
     </table>
+    </div>
+</div>
 </div>

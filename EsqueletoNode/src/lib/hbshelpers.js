@@ -32,6 +32,9 @@ module.exports = {
           break;
       }
     },
+    partials: function(string) {
+        return string;
+      },
     tipoInasistenciaToString: function(tipo){
       switch(tipo){
         case 0:
@@ -44,8 +47,5 @@ module.exports = {
     },
     dateTimeToDate: function(dateTime){
       return dateTime.toLocaleDateString();
-    },
-    partials: function(string) {
-        return string;
-      }
+    }
   } 

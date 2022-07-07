@@ -2,7 +2,7 @@
 <div class="contenedor_micuenta">
     <div class="contenedor_primario">
         <div class="contenedor_imagen">
-            <img src="media/user_png.png" alt="">
+            <img src="../media/user_png.png" alt="">
         </div>
         <div class="contenedor_nombre">
             <div class="nombre_alumno">APELLIDO, Nombre</div>
@@ -14,20 +14,12 @@
         <ul class="botones_alumno">
             <li><a href="cuenta_alumnos_remake.html">Datos Personales</a></li>
             <li><a href="ficha_medica.html">Ficha Médica</a></li>
-            <li><a href="promediosAl">Boletín</a></li>
+            <li><a href="Boletin">Boletín</a></li>
             <li><a href="inasistencias">Inasistencias</a></li>
             <li><a href="">Mensajes</a></li>
         </ul>
     </div>
     <div class="contenedor_datos">
-        
-        {{!-- <h2>Boletín de inasistencias</h2>
-        <div class="contenedor_nombre_doc">
-            <select name="tipo_doc">
-                <option value="Cuatrimestre 1">Cuatrimestre 1</option>
-                <option value="Cuatrimestre 2">Cuatrimestre 2</option>
-            </select>
-            {{>inasistencias in}}
-        </div> --}}
+        {{>(partials partial)in}}
     </div>
 </div>

@@ -3,10 +3,7 @@ const router = express.Router();
 const {isLoggedIn, isNotLoggedIn} = require('../lib/auth');
 const {
     root,
-    renderHome,
-    renderInasistencias,
-    renderPromediosAl,
-    profile
+    renderHome
 } = require('../controllers/index.controller');
 const {sendMsg} = require('../lib/msg');
 
@@ -16,9 +13,6 @@ router.get('/',isLoggedIn, root);
 
 router.get('/home', isLoggedIn, renderHome);
 
-router.get('/inasistencias', isLoggedIn, renderInasistencias);
-
-router.get('/promediosAl', isLoggedIn, renderPromediosAl);
 
 
 module.exports = router;

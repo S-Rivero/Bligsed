@@ -317,6 +317,7 @@
     overflow: hidden;
     position: relative;
     background-color:  rgba(4, 83, 63, 0.059);
+    overflow-y: scroll;
    
 }
 
@@ -368,7 +369,7 @@
   width: 22vw;
   height: 70vh;
   margin-top: 1vh;
-  margin-left: 5vh;
+  margin-left: 3%;
   left: 65%;
   top: 15%;
   text-align: center;
@@ -404,4 +405,29 @@
 .texto_infocolegio{
   margin-left: 3%;
   margin-right: 3%;
+}
+
+#log_out:hover{
+  color: #525072;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: grey; 
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #333; 
 }
