@@ -1,7 +1,21 @@
   <body>
-    <ul id="contenedor-mensajes"></ul>
-    <form action="" onsubmit="pushMsg(this.msg.value); return false">
+    <ul id="mensaje_contenedor">
+      <li>{{user.id}}</li>
+      <li>{{user.DNI}}</li>
+      <li>{{user.Nombre}}</li>
+      <li>{{user.username}}</li>
+      <li>{{user.Sexo}}</li>
+      <li>{{user.Numero_de_telefono}}</li>
+      <li>{{user.Tipo_de_usuario}}</li>
+      <li>{{user.password}}</li>
+      <li>{{user.colegio}}</li>
+    </ul>
+    <form action="" onsubmit="pushMsg(this); return false">
       <input type="text" id="msg" placeholder="Escribe un mensaje..."/>
+      <input type="text" id="uname" value="{{user.Nombre}}" style="display:none;">
+      <input type="number" id="uid" value="{{user.id}}" style="display:none;">
+      <input type="number" id="cid" value="" style="display:none;">
       <input type="submit" value="Enviar"/>
     </form>
+    <script src="/js/messages.js"></script>
   </body>

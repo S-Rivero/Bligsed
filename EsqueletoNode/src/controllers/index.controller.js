@@ -17,6 +17,7 @@ exports.root = ((req,res) => {
     
     // ESTO ES PARA LOS MENSAJES
     res.render('chat.hbs', {layout: 'mensajeriaPrueba.hbs', user:req.user[0]});
+    //res.send(req.user);
 });
 
 exports.renderHome = ((req,res) => { //Actualmente muestra publicaciones nada mas
