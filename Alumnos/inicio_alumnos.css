@@ -317,7 +317,7 @@
     overflow: hidden;
     position: relative;
     background-color:  rgba(4, 83, 63, 0.059);
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
    
 }
 
@@ -345,7 +345,7 @@
     /* border-top: 1px solid rgb(187, 187, 187); */
 }
 
-.boton_vermas {
+#boton_vermas {
     position: relative;
     margin: 5%;
     border: 1px solid #333;
@@ -353,7 +353,7 @@
     border:none;
 }
 
-.boton_vermas:hover{
+#boton_vermas:hover{
     cursor: pointer;
     background-color:  rgba(4,4,83,0.05942752100840336);
     transition: 0.2s;
@@ -431,3 +431,33 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #333; 
 }
+
+.modal-contenido{
+  background-color:rgb(108, 197, 185);
+  width:600px;
+  padding: 10px 20px;
+  margin: 20% auto;
+  position: relative;
+  border-radius: 15px;
+}
+
+.modal{
+  background-color: rgba(0,0,0,.8);
+  position:fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  opacity:0;
+  pointer-events:none;
+  transition: all 1s;
+  z-index: 5;
+}
+
+#miModal:target{
+  opacity:1;
+  pointer-events:auto;
+}
+
+
+

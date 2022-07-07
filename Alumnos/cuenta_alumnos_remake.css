@@ -166,3 +166,64 @@
 .color_fijo a{
     color: white;
 }
+
+
+@media (max-width: 800px) {
+    .contenedor_datos, .contenedor_contacto{
+        font-size: 15px;
+    }
+
+    .contenedor_datos p, .contenedor_contacto p {
+        font-size: 13px;
+    }
+
+    .contenedor_botones li a{
+        position: relative;
+        font-size: 100%;
+        bottom: 15%;
+    }
+}
+
+
+
+@media (max-width: 600px) {
+    .text{
+        font-size: 1vw;
+    }
+
+    .contenedor_micuenta {
+        grid-template-columns: 50% 50% ;
+        grid-template-rows: 25% 25% 50%;
+    }
+
+    .contenedor_botones{
+        grid-column: 1 / span 2;
+        grid-row: 2;
+    }
+
+    .contenedor_datos {
+        grid-column: 1;
+    }
+
+    .contenedor_contacto {
+        grid-column: 2;
+    }
+
+    .contenedor_botones ul {
+        display: flex;
+    }
+
+    .contenedor_datos, .contenedor_contacto{
+        font-size: 2vw;
+    }
+
+    .contenedor_datos p, .contenedor_contacto p {
+        font-size: 1vw;
+    }
+
+    .contenedor_botones li {
+        font-size: 2vw;
+    }
+
+
+}

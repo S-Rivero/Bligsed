@@ -4,10 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="inicio_alumnos.css">>
-  <link rel="stylesheet" href="cuenta_alumnos_remake.css">>
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Cuenta - Bligsed</title>
 </head>
 
 <body style="overflow-y:hidden">
@@ -63,62 +61,62 @@
     </ul>
   </div>
   <section class="home-section">
-    <div class="text">Mi Cuenta</div>
+    <div class="text">Inicio</div>
 
-        <div class="contenedor_micuenta">
-<!-- 
-            <div id="contenedor_primario">
-                <div id="contenedor_imagen"><img src="media/user_png.png" alt="" id="imagen_alumno"></div>
-                <div id="datos_alumno_primario">
-                    <p id="nombre_alumno">APELLIDO, Nombre</p>
-                <div id="curso_alumno">
-                    <p>7°"C" - Técnico en Informática Personal y Profesional</p>
-                </div>
-                </div>
-            </div>
-           -->
-                <div class="contenedor_primario">
-                  <div class="contenedor_imagen">
-                    <img src="media/user_png.png" alt="">
-                  </div>
-                  <div class="contenedor_nombre">
-                    <div class="nombre_alumno">APELLIDO, Nombre</div>
-                    <div class="profesion_alumno">7°"C" - Técnico en informática personal y profesional</div>
-                  </div>
-                </div>
-                
-                <div class="contenedor_botones">
-                  <ul class="botones_alumno">
-                    <li class="color_fijo"><a href="cuenta_alumnos_remake.html">Datos Personales</a></li>
-                    <li><a href="ficha_medica.html">Ficha Médica</a></li>
-                    <li><a href="Boletin_alumnos_prueba.html">Boletín</a></li>
-                    <li><a href="inasistencias.html">Inasistencias</a></li>
-                    <li><a href="">Mensajes</a></li>
-                  </ul>
-                </div>
-                <div class="contenedor_datos">
-                  <h2>Datos Personales</h2> 
-                  <div>
-                    <p><b>Fecha de Nacimiento:</b> 1/5/2004</p>
-                    <p><b>DNI:</b>46.574.754</p>
-                    <p><b>ID:</b> 1278BHDI83</p>
-                    <p><b>E-Mail:</b> holanjvd@gmail.com</p>
-                    <p><b>Tel:</b> 4467-6535</p>
-                    <p><b>Direccion: </b>Calle Falsa 123</p>
-                  </div>
-                </div>
-                <div class="contenedor_contacto">
-                  <h2>Contacto</h2>
-                  <div>
-                  <p><b>Tutor 1: </b>Pepe Gonzalez</p>
-                  <p><b>Tel: </b>11 4568-9755</p>
-                  <p><b>DNI: </b>20.654.876</p>
-                  <p><b>Tutor 2: </b>Marta Quiroga</p>
-                  <p><b>Tel: </b>11 9854-3567</p>
-                  <p><b>DNI: </b>22.658.987</p>
-                </div>
+    <div class="contenedor_publicaciones">
+      <div class="publicaciones_autor">
+        <div class="autor_nombre">
+          De Jesús, Sebastian Andres
         </div>
-    </section>
+        <div class="autor_fecha">
+          12/3/2022
+        </div>
+      </div>
+      <div class="publicaciones_contenido">
+        <div class="contenido_titulo">
+          Título de la publicación
+        </div>
+        <div class="contenido_texto">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi corporis iste ipsa blanditiis porro
+          perspiciatis delectus, officiis quidem accusantium id vitae consectetur aspernatur exercitationem eaque? Porro
+          quam facere ea dmet consectetur adipisicing elit. Nostrum voluptates reiciendis sit optio distinctio
+          architecto, totare corporis officia nsectetur, repellendus ipsam delectus soluta nemo? Aliquid vero soluta
+          quidem placeat! Lorem ipsum dolor sit met consectetur adipisicing elit. <br> Perspiciatis illum, saepe ex fuga
+          ut accusamus officiis modi quam perferendis expedita nemo vel esse culpa id libero odit minus ipsa mollitia?
+          Lorem ipsum dor. . . sit amet, consectetur adipisicing elit. Pariatur consequatur laborum expedita molestiae
+          dolores recusandae repellat labore velit hic aspernatur veniam eveniet neque, id tempore. Esse in iusto
+          nostrum neque
+        </div>
+        <div class="contenido_vermas">
+            <input type="checkbox" id="vermas"></input>
+            <label for="vermas">Ver mas</label>
+            <div class="vermenos">Ver menos</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="datos_colegio">
+      <img src="media/logoJXXIII-sin_fondo.png" alt="Logo Juan XXIII">
+      <br>
+      <div class="texto_infocolegio">Instituto Juan XXIII / Colegio Parroquial Juan XXIII </div>
+      <ul class="info_colegio">
+        <li>
+          <i class='bx bx-phone'></i>
+          <span>4464-3255</span>
+        </li>
+
+        <li>
+          <i class='bx bx-envelope'></i>
+          <span>colparroquial23@hotmail.com</span>
+        </li>
+
+        <li>
+          <i class='bx bx-home'></i>
+          <span>9 de Julio - 125</span>
+        </li>
+      </ul>
+    </div>
+  </section>
   <script>
     let sidebar = document.querySelector(".sidebar");
     let closeBtn = document.querySelector("#btn");
