@@ -1,20 +1,30 @@
   <body>
     <ul id="mensaje_contenedor">
-      <li>{{user.id}}</li>
-      <li>{{user.DNI}}</li>
-      <li>{{user.Nombre}}</li>
-      <li>{{user.username}}</li>
-      <li>{{user.Sexo}}</li>
-      <li>{{user.Numero_de_telefono}}</li>
-      <li>{{user.Tipo_de_usuario}}</li>
-      <li>{{user.password}}</li>
-      <li>{{user.colegio}}</li>
+      <li>{{db.connectionLimit}}</li>
+      <li>{{db.host}}</li>
+      <li>{{db.user}}</li>
+      <li>{{db.password}}</li>
+      <li>{{db.database}}</li>
+      {{!-- 
+        connectionLimit: 15,
+        host: "localhost",
+        user:  "root",
+        password:  "",
+        database:  "proyecto",
+      --}}
     </ul>
     <form action="" onsubmit="pushMsg(this); return false">
       <input type="text" id="msg" placeholder="Escribe un mensaje..."/>
       <input type="text" id="uname" value="{{user.Nombre}}" style="display:none;">
       <input type="number" id="uid" value="{{user.id}}" style="display:none;">
       <input type="number" id="cid" value="" style="display:none;">
+
+      <input type="number" id="dbc" value="{{db.connectionLimit}}" style="display:none;">
+      <input type="text" id="dbh" value="{{db.host}}" style="display:none;">
+      <input type="text" id="dbu" value="{{db.user}}" style="display:none;">
+      <input type="text" id="dbp" value="{{db.password}}" style="display:none;">
+      <input type="text" id="dbdb" value="{{db.database}}" style="display:none;">
+
       <input type="submit" value="Enviar"/>
     </form>
     <script src="/js/messages.js"></script>

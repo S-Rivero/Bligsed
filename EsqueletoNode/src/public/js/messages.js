@@ -5,7 +5,7 @@ function pushMsg(data){
     if (str != '')
     {
         let now = getDate();
-        var msg = {
+        let msg = {
             user_id: data.uid.value,
             user_name: data.uname.value,
             chat: 0,//id del chat document.getElementByClass('chat active');
@@ -13,20 +13,28 @@ function pushMsg(data){
             date: now.date,
             time: now.time,
         };
+        let db = {
+            connectionLimit: data.dbc.value,
+            host: data.dbh.value,
+            user: data.dbu.value,
+            password:  data.dbp.value,
+            database:  data.dbdb.value,
+        }
+        console.log(db);
 
         showMsg(msg.user_name, msg.time, msg.text);
 
-        var sql = "INSERT INTO mensajes (chat, id_emisor, contenido, fecha, hora) VALUES ("+msg.chat+", "+msg.user_id+", '"+msg.text+"', '"+msg.date+"', '"+msg.time+"')";
+        let sql = "INSERT INTO mensajes (chat, id_emisor, contenido, fecha, hora) VALUES ("+msg.chat+", "+msg.user_id+", '"+msg.text+"', '"+msg.date+"', '"+msg.time+"')";
         console.log(sql);
-        /*
-        pool.query(sql, function (err, result) {
-            if (err) throw err;
-            console.log("1 record inserted");
-        });
-        */
+        
+        // pool.query(sql, function (err, result) {
+        //     if (err) throw err;
+        //     console.log("1 record inserted");
+        // });
+        
     }
 
-    document.getElementById('msg').value = '';   
+    document.getElementById('msg').value = '';
     return false;
 }
 

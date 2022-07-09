@@ -5,7 +5,6 @@ const {
     root,
     renderHome
 } = require('../controllers/index.controller');
-const {sendMsg} = require('../lib/msg');
 
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
 
