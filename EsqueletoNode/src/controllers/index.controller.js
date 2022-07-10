@@ -10,13 +10,13 @@ const {setChild} = require('../lib/helpers');
 exports.root = ((req,res) => {
     
     // ESTO ES DE NASHER
-    setChild(req.user[0]).then((r)=>{
-        req.session['childs'] = r;
-        res.redirect('/home');
-    });
+    // setChild(req.user[0]).then((r)=>{
+    //     req.session['childs'] = r;
+    //     res.redirect('/home');
+    // });
     
     // ESTO ES PARA LOS MENSAJES
-    //res.render('chat.hbs', {layout: 'mensajeriaPrueba.hbs', user:req.user[0], db: database});
+    res.render('chat.hbs', {layout: 'mensajeriaPrueba.hbs', user:req.user[0], db: database});
 });
 
 exports.renderHome = ((req,res) => { //Actualmente muestra publicaciones nada mas
@@ -24,3 +24,8 @@ exports.renderHome = ((req,res) => { //Actualmente muestra publicaciones nada ma
         res.render('publicaciones.hbs', {pub: publicaciones, links: 'headerLinks/home', user:req.user[0]});
     });
 });
+
+exports.renderMsg = (req, res) => {
+    res.render('chat.hbs', {layout: 'mensajeriaPrueba.hbs', user:req.user[0], db: database});
+    //ACA TENGO QUE PONER UNA FUNCION PARA LOS EACH DE LOS MENSAJES, 1 PARA LOS PUSH Y OTRA PARA LOS GET
+}

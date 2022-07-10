@@ -1,20 +1,46 @@
-  <body>
+ <body>
     <ul id="mensaje_contenedor">
       <li>{{db.connectionLimit}}</li>
       <li>{{db.host}}</li>
       <li>{{db.user}}</li>
       <li>{{db.password}}</li>
       <li>{{db.database}}</li>
-      {{!-- 
-        connectionLimit: 15,
-        host: "localhost",
-        user:  "root",
-        password:  "",
-        database:  "proyecto",
-      --}}
+
+      {{!-- {{#each msg}}
+        
+        <li class="plantilla_mensaje mensaje_emisor">
+            <div class="creador_mensaje">{{user.Nombre}}</div>
+            <div class="contenido_mensaje">
+                <img src="/Alumnos/media/momo_sad2.jpg" alt="">
+                Que sad prro :'v xdxdxdxd
+            </div>
+        </li>
+                                          <div class="publicaciones_autor">
+                                          <div class="autor_nombre">
+                                              {{Nombre}}
+                                          </div>
+                                          <div class="autor_fecha">
+                                              12/3/2022
+                                          </div>
+                                      </div>
+                                      <div class="publicaciones_contenido">
+                                          <div class="contenido_titulo">
+                                              {{titulo}}
+                                          </div>
+                                          <div class="contenido_texto">
+                                              {{descripcion}}
+                                          </div>
+                                          <div class="contenido_vermas">
+                                              <a class="boton_vermas">Ver Mas</a>
+                                          </div>
+                                      </div>
+    {{/each}} --}}
+
     </ul>
-    <form action="" onsubmit="pushMsg(this); return false">
-      <input type="text" id="msg" placeholder="Escribe un mensaje..."/>
+
+    <form id="form" action="msg" method="post" >
+    {{!-- onsubmit="return false" --}}
+      <input type="text" id="msg" placeholder="Escribe un mensaje...">
       <input type="text" id="uname" value="{{user.Nombre}}" style="display:none;">
       <input type="number" id="uid" value="{{user.id}}" style="display:none;">
       <input type="number" id="cid" value="" style="display:none;">
@@ -25,7 +51,27 @@
       <input type="text" id="dbp" value="{{db.password}}" style="display:none;">
       <input type="text" id="dbdb" value="{{db.database}}" style="display:none;">
 
-      <input type="submit" value="Enviar"/>
+      <input type="submit" value="Enviar" />
+      {{!-- onclick="updateURL()" --}}
     </form>
-    <script src="/js/messages.js"></script>
+    {{!-- <script src="/js/messages.js"></script> --}}
+
+    <script>
+      function updateURL(){
+        let form = document.getElementById('form');
+        form.action = document.location.href + "msg";
+        console.log(document.location.href);
+        console.log(form);
+        console.log(form.action);
+      }
+
+      window.onload = function(){
+        console.log(document.location.href);
+        if(document.location.href === "http://localhost:4000/msg")
+          back();
+      }
+      function back(){
+        document.location.href = document.location.href.replace('msg', '');
+      }
+    </script>
   </body>
