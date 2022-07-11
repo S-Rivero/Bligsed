@@ -38,36 +38,33 @@
 
     </ul>
 
-    <form action="/msg" method="post" target="iframe" onsubmit="return send(this.msg_in.value)">
+    <form action="/msg" method="post" target="iframe" onsubmit="send(this.msg_in.value)">
       <input type="text" id="msg_in" placeholder="Escribe un mensaje...">
       <input type="submit" id="btn" value="Enviar"/>
     </form>	
-    <iframe name="iframe" id="frame" src="">
-      <form id="iform" action="/msg" method="post" >
-        <input type="text" id="msg" value="" style="display:none;">
-        <input type="text" id="uname" value="{{user.Nombre}}" style="display:none;">
-        <input type="number" id="uid" value="{{user.id}}" style="display:none;">
-        <input type="number" id="cid" value="" style="display:none;">
-
-        <input type="number" id="dbc" value="{{db.connectionLimit}}" style="display:none;">
-        <input type="text" id="dbh" value="{{db.host}}" style="display:none;">
-        <input type="text" id="dbu" value="{{db.user}}" style="display:none;">
-        <input type="text" id="dbp" value="{{db.password}}" style="display:none;">
-        <input type="text" id="dbdb" value="{{db.database}}" style="display:none;">
-      </form>
+    <iframe name="iframe" id="frame" src=""
+      style="height: 250px; width: 250px;">
     </iframe>
     
     <script>
-      function send(form){
-        console.log(form);
+      window.onload = function() {
         const iframe = document.getElementById("frame");
         const iDocument = iframe.contentDocument;
+        const iBody = iDocument.body;
+        iBody.innerHTML = 
+          '<form id="iform" action="/msg" method="post" >              <input type="text" id="msg" value="" style="display:none;">              <input type="text" id="uname" value="{{user.Nombre}}" style="display:none;">              <input type="number" id="uid" value="{{user.id}}" style="display:none;">              <input type="number" id="cid" value="" style="display:none;">              <input type="number" id="dbc" value="{{db.connectionLimit}}" style="display:none;">              <input type="text" id="dbh" value="{{db.host}}" style="display:none;">              <input type="text" id="dbu" value="{{db.user}}" style="display:none;">              <input type="text" id="dbp" value="{{db.password}}" style="display:none;">              <input type="text" id="dbdb" value="{{db.database}}" style="display:none;">            </form>';
+          
+      };
+      function send(data){
+        console.log(data);
+        const iframe = document.getElementById("frame");
+        const iDocument = iframe.contentDocument;
+        var msg = iDocument.getElementById('msg').value;
+        msg = data;
         console.log(iframe);
         console.log(iDocument);
-        console.log(iDocument.body);
-        let msg = iDocument.getElementById(msg);
         console.log(msg);
-        return false;
+        
       }
     </script>
   </body>

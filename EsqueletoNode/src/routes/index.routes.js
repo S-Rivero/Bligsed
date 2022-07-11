@@ -6,6 +6,7 @@ const {
     renderHome,
     renderMsg
 } = require('../controllers/index.controller');
+const { pushMsg } = require('../lib/messages');
 
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
 
@@ -13,6 +14,6 @@ router.get('/',isLoggedIn, root);
 
 router.get('/home', isLoggedIn, renderHome);
 
-router.post('/msg', isLoggedIn, renderMsg);
+router.post('/msg', isLoggedIn, pushMsg);
 
 module.exports = router;
