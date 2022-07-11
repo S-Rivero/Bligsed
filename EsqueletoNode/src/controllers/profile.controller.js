@@ -3,23 +3,28 @@ const router = express.Router();
 const path = require('path');
 const pool = require('../database');
 const {JSONPromediosAl} = require('../lib/jsonFormat');
-const {setChild} = require('../lib/helpers');
+const {esAlumno, setTutor} = require('../lib/helpers');
 
 exports.root = ((req,res) => {
     res.redirect("/perfil/datosPersonales");
 });
 
 exports.datosPersonales = ((req,res) => {
-    
-    res.render('perfil.hbs', {in: req.user[0], title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileDatosPersonales', user:req.user[0], partial: 'profile/datosPersonales'});
+    let contacto = esAlumno(req.user[0].Tipo_de_usuario);
+    let contactos = setTutor(req.user[0].id).then((r)=>{
+        res.render('perfil.hbs', {in: req.user[0], title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileDatosPersonales', user:req.user[0], partial: 'profile/datosPersonales', contacto, contactos: r});
+    });
 });
+
+// exports.datosPersonales = ((req,res) => {
+//     setTutor(req.user[0]).then(()=>{
+//         res.render('perfil.hbs', {in: req.user[0], title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileDatosPersonales', user:req.user[0], partial: 'profile/datosPersonales'});
+//     });
+// });
+
 
 exports.FichaMedica = ((req,res) => {
     res.send("/FichaMedica");
-});
-
-exports.Boletin = ((req,res) => {
-    res.send("/Boletin");
 });
 
 exports.inasistencias = ((req,res) => {

@@ -42,8 +42,22 @@ exports.setChild = function(user){
         }else{
             res();
         }
-    })
-    
+    })    
 }
 
+let findTutor = function(idUs){
+    return pool.promise().query("SELECT a.ID FROM alumno a JOIN usuarios u ON a.Padre = u.id WHERE u.id = ?", [idPadre]);
+}
 
+exports.setTutor = function(idUs){
+    return new Promise((res,rej)=>{
+        res();
+    })    
+}
+
+exports.esAlumno = function(tdu) {
+    if(tdu === 6) {
+      return 'profile/datosContacto';
+    }
+    return 'profile/void';
+}

@@ -34,7 +34,7 @@ module.exports = {
     },
     partials: function(string) {
         return string;
-      },
+    },
     tipoInasistenciaToString: function(tipo){
       switch(tipo){
         case 0:
