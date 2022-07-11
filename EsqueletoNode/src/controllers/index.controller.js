@@ -26,6 +26,8 @@ exports.renderHome = ((req,res) => { //Actualmente muestra publicaciones nada ma
 });
 
 exports.renderMsg = (req, res) => {
-    res.render('chat.hbs', {layout: 'mensajeriaPrueba.hbs', user:req.user[0], db: database});
+    //res.render('chat.hbs', {layout: 'mensajeriaPrueba.hbs', user:req.user[0], db: database});
+    console.log("FUNCAAAAAAAAAAAA");
+    res.send(req.user);
     //ACA TENGO QUE PONER UNA FUNCION PARA LOS EACH DE LOS MENSAJES, 1 PARA LOS PUSH Y OTRA PARA LOS GET
 }

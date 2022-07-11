@@ -38,40 +38,36 @@
 
     </ul>
 
-    <form id="form" action="msg" method="post" >
-    {{!-- onsubmit="return false" --}}
-      <input type="text" id="msg" placeholder="Escribe un mensaje...">
-      <input type="text" id="uname" value="{{user.Nombre}}" style="display:none;">
-      <input type="number" id="uid" value="{{user.id}}" style="display:none;">
-      <input type="number" id="cid" value="" style="display:none;">
+    <form action="/msg" method="post" target="iframe" onsubmit="return send(this.msg_in.value)">
+      <input type="text" id="msg_in" placeholder="Escribe un mensaje...">
+      <input type="submit" id="btn" value="Enviar"/>
+    </form>	
+    <iframe name="iframe" id="frame" src="">
+      <form id="iform" action="/msg" method="post" >
+        <input type="text" id="msg" value="" style="display:none;">
+        <input type="text" id="uname" value="{{user.Nombre}}" style="display:none;">
+        <input type="number" id="uid" value="{{user.id}}" style="display:none;">
+        <input type="number" id="cid" value="" style="display:none;">
 
-      <input type="number" id="dbc" value="{{db.connectionLimit}}" style="display:none;">
-      <input type="text" id="dbh" value="{{db.host}}" style="display:none;">
-      <input type="text" id="dbu" value="{{db.user}}" style="display:none;">
-      <input type="text" id="dbp" value="{{db.password}}" style="display:none;">
-      <input type="text" id="dbdb" value="{{db.database}}" style="display:none;">
-
-      <input type="submit" value="Enviar" />
-      {{!-- onclick="updateURL()" --}}
-    </form>
-    {{!-- <script src="/js/messages.js"></script> --}}
-
+        <input type="number" id="dbc" value="{{db.connectionLimit}}" style="display:none;">
+        <input type="text" id="dbh" value="{{db.host}}" style="display:none;">
+        <input type="text" id="dbu" value="{{db.user}}" style="display:none;">
+        <input type="text" id="dbp" value="{{db.password}}" style="display:none;">
+        <input type="text" id="dbdb" value="{{db.database}}" style="display:none;">
+      </form>
+    </iframe>
+    
     <script>
-      function updateURL(){
-        let form = document.getElementById('form');
-        form.action = document.location.href + "msg";
-        console.log(document.location.href);
+      function send(form){
         console.log(form);
-        console.log(form.action);
-      }
-
-      window.onload = function(){
-        console.log(document.location.href);
-        if(document.location.href === "http://localhost:4000/msg")
-          back();
-      }
-      function back(){
-        document.location.href = document.location.href.replace('msg', '');
+        const iframe = document.getElementById("frame");
+        const iDocument = iframe.contentDocument;
+        console.log(iframe);
+        console.log(iDocument);
+        console.log(iDocument.body);
+        let msg = iDocument.getElementById(msg);
+        console.log(msg);
+        return false;
       }
     </script>
   </body>
