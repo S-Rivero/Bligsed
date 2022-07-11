@@ -1,10 +1,8 @@
  <body>
     <ul id="mensaje_contenedor">
-      <li>{{db.connectionLimit}}</li>
-      <li>{{db.host}}</li>
-      <li>{{db.user}}</li>
-      <li>{{db.password}}</li>
-      <li>{{db.database}}</li>
+      <li>{{user.password}}</li>
+      <li>Como andas</li>
+      <li>DFEAAAAAAAAAAAAAAAAA</li>
 
       {{!-- {{#each msg}}
         
@@ -38,7 +36,7 @@
 
     </ul>
 
-    <form action="/msg" method="post" target="iframe" onsubmit="send(this.msg_in.value)">
+    <form action="/msg" method="get" target="iframe" onsubmit="send(this.msg_in.value)">
       <input type="text" id="msg_in" placeholder="Escribe un mensaje...">
       <input type="submit" id="btn" value="Enviar"/>
     </form>	
@@ -52,19 +50,52 @@
         const iDocument = iframe.contentDocument;
         const iBody = iDocument.body;
         iBody.innerHTML = 
-          '<form id="iform" action="/msg" method="post" >              <input type="text" id="msg" value="" style="display:none;">              <input type="text" id="uname" value="{{user.Nombre}}" style="display:none;">              <input type="number" id="uid" value="{{user.id}}" style="display:none;">              <input type="number" id="cid" value="" style="display:none;">              <input type="number" id="dbc" value="{{db.connectionLimit}}" style="display:none;">              <input type="text" id="dbh" value="{{db.host}}" style="display:none;">              <input type="text" id="dbu" value="{{db.user}}" style="display:none;">              <input type="text" id="dbp" value="{{db.password}}" style="display:none;">              <input type="text" id="dbdb" value="{{db.database}}" style="display:none;">            </form>';
+          '<form id="iform" action="" method="get" > <input type="text" id="msg" > <input type="text" id="uname" value="{{user.Nombre}}" > <input type="number" id="uid" value="{{user.id}}" > <input type="number" id="cid" value="" > </form>';
           
       };
       function send(data){
-        console.log(data);
         const iframe = document.getElementById("frame");
         const iDocument = iframe.contentDocument;
-        var msg = iDocument.getElementById('msg').value;
-        msg = data;
-        console.log(iframe);
-        console.log(iDocument);
-        console.log(msg);
-        
+        var iform = iDocument.getElementById('iform');
+        var msg = iDocument.getElementById('msg');
+        msg.setAttribute('value', data);
+        iform.submit();
+        console.log(msg.value); 
+        let time = new Date();
+        console.log(time); 
+        /*
+        let str = cleanData(data.msg.value);
+        console.log(str);
+        if (str != '')
+        {
+            let now = getDate();
+            let msg = {
+                user_id: data.uid.value,
+                user_name: data.uname.value,
+                chat: 0,//id del chat document.getElementByClass('chat active');
+                text: str,
+                date: now.date,
+                time: now.time,
+            };
+            let db = {
+                connectionLimit: data.dbc.value,
+                host: data.dbh.value,
+                user: data.dbu.value,
+                password:  data.dbp.value,
+                database:  data.dbdb.value,
+            }
+            console.log(db);
+            showMsg(msg.user_name, msg.time, msg.text);
+            let sql = "INSERT INTO mensajes (chat, id_emisor, contenido, fecha, hora) VALUES ("+msg.chat+", "+msg.user_id+", '"+msg.text+"', '"+msg.date+"', '"+msg.time+"')";
+            console.log(sql);
+            
+            // pool.query(sql, function (err, result) {
+            //     if (err) throw err;
+            //     console.log("1 record inserted");
+            // });
+            
+        }
+        */
       }
     </script>
   </body>

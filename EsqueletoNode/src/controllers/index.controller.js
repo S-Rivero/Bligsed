@@ -3,7 +3,6 @@ const router = express.Router();
 const path = require('path');
 const { isUndefined } = require('util');
 const pool = require('../database');
-const { database } = require('../config');
 const {JSONPromediosAl} = require('../lib/jsonFormat');
 const {setChild} = require('../lib/helpers');
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
@@ -16,7 +15,7 @@ exports.root = ((req,res) => {
     // });
     
     // ESTO ES PARA LOS MENSAJES
-    res.render('chat.hbs', {layout: 'mensajeriaPrueba.hbs', user:req.user[0], db: database});
+    res.render('chat.hbs', {layout: 'mensajeriaPrueba.hbs', user:req.user[0]});
 });
 
 exports.renderHome = ((req,res) => { //Actualmente muestra publicaciones nada mas

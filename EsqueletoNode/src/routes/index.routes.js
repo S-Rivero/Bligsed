@@ -4,7 +4,6 @@ const {isLoggedIn, isNotLoggedIn} = require('../lib/auth');
 const {
     root,
     renderHome,
-    renderMsg
 } = require('../controllers/index.controller');
 const { pushMsg } = require('../lib/messages');
 
@@ -14,6 +13,7 @@ router.get('/',isLoggedIn, root);
 
 router.get('/home', isLoggedIn, renderHome);
 
-router.post('/msg', isLoggedIn, pushMsg);
+router.get('/msg', isLoggedIn, pushMsg);
+//router.post('/msg', isLoggedIn, pushMsg);
 
 module.exports = router;

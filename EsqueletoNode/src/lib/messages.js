@@ -1,6 +1,8 @@
-exports.pushMsg = function(data){
+const bodyParser = require('body-parser');
+exports.pushMsg = function(req, res){
 
-    console.log('FUNCAAAA');
+    var body = req.body;
+    console.log('Este es el post: %o', body);
     /*
     let str = cleanData(data.msg.value);
     console.log(str);
