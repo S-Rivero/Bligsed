@@ -1,18 +1,28 @@
-
+<script type="text/javascript">
+   function changeFunc() {
+    var selectBox = document.getElementById("selectBox");
+    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+    var formulario = document.getElementById("form");
+    formulario.submit();
+   }
+</script>
 
 <div class="contenedor_datos">
     <h2>Boletín de calificaciones</h2>
     <div class="contenedor_nombre_doc">
-        <select name="tipo_doc">
-            <option value="Final">Final</option>
-            <option value="Cuatrimestre 1">Cuatrimestre 1</option>
-            <option value="Cuatrimestre 2">Cuatrimestre 2</option>
-        </select>
+        <form action="Boletin" id="form" method="GET">
+            <select name="t" id="selectBox" onchange="changeFunc();">
+                <option value="0">Final</option>
+                <option value="1" selected="selected">Trimestre 1</option>
+                <option value="2">Trimestre 2</option>
+                <option value="3">Trimestre 3</option>
+            </select>
+        </form>
         <table>
         <tr>
             <th></th>
             {{#each cant}}
-            <th>Npa{{@index}}</th>
+            <th>Npa{{#unoMas @index}}{{/unoMas}}</th>
             {{/each}}
         </tr>
         {{#each ma}}

@@ -46,12 +46,14 @@ exports.setChild = function(user){
 }
 
 let findTutor = function(idUs){
-    return pool.promise().query("SELECT a.ID FROM alumno a JOIN usuarios u ON a.Padre = u.id WHERE u.id = ?", [idPadre]);
+    return pool.promise().query("SELECT nombre,username,Numero_de_telefono,DNI FROM usuarios WHERE id = (SELECT Padre FROM alumno WHERE id = ?)", [idUs]);
 }
 
 exports.setTutor = function(idUs){
     return new Promise((res,rej)=>{
-        res();
+        findTutor(idUs).then((r)=>{
+            res(r);
+        });
     })    
 }
 

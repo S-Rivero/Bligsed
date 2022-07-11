@@ -12,7 +12,7 @@ exports.root = ((req,res) => {
 exports.datosPersonales = ((req,res) => {
     let contacto = esAlumno(req.user[0].Tipo_de_usuario);
     let contactos = setTutor(req.user[0].id).then((r)=>{
-        res.render('perfil.hbs', {in: req.user[0], title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileDatosPersonales', user:req.user[0], partial: 'profile/datosPersonales', contacto, contactos: r});
+        res.render('perfil.hbs', {in: req.user[0], title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileDatosPersonales', user:req.user[0], partial: 'profile/datosPersonales', contacto, contactos: r[0]});
     });
 });
 
@@ -24,17 +24,17 @@ exports.datosPersonales = ((req,res) => {
 
 
 exports.FichaMedica = ((req,res) => {
-    res.send("/FichaMedica");
+    res.redirect("/");
 });
 
 exports.inasistencias = ((req,res) => {
     const rows = pool.query("SELECT * FROM inasistencias WHERE id_us = ?", [req.user[0].id], function(err, inasistencias){
-        res.render('perfil.hbs', {in: inasistencias, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileInasistencias', user:req.user[0], partial: 'profile/inasistencias'});
+        res.render('perfil.hbs', {in: inasistencias, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileInasistencias', user:req.user[0], partial: 'profile/inasistencias', contacto: 'profile/void'});
     });
 });
 
 exports.mensajes = ((req,res) => {
-    res.send("/mensajes");
+    res.redirect("/");
 });
 
 exports.Boletin = ((req,res) => {
@@ -64,10 +64,14 @@ exports.Boletin = ((req,res) => {
 
 
 const renderQueryNotas = function(req,res,uid){
-    const rows = pool.query("SELECT `nota`, `Materia` FROM usuarios u JOIN notas n ON u.id = n.id_alum JOIN materias m ON m.ID = n.id_materia WHERE u.id = ? ORDER BY m.Materia ASC;", [uid], function(err, materias){
+    const rows = pool.query("SELECT `nota`, `Materia` FROM usuarios u JOIN notas n ON u.id = n.id_alum JOIN materias m ON m.ID = n.id_materia WHERE u.id = ? AND n.trimestre = 1 ORDER BY m.Materia ASC;", [uid], function(err, materias){
         const formateado = JSONPromediosAl(materias);
-        res.render('perfil.hbs', {in:{ma: formateado['materias'], cant: formateado.materias[formateado.max['materia']]}, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileBoletin', user:req.user[0], partial: 'profile/boletin'});
+        res.render('perfil.hbs', {in:{ma: formateado['materias'], cant: formateado.materias[formateado.max['materia']]}, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileBoletin', user:req.user[0], partial: 'profile/boletin', contacto: 'profile/void'});
         // res.send(formateado);
         //Se pasa IN porque solamente puede recibirse 1 parametro. Los objetos estan encapsulados dentro
     });
+    // const queryString = window.location.search;
+    // const urlParams = new URLSearchParams(queryString);
+    // req.send(urlParams.get('c'));
+    // https://www.sitepoint.com/get-url-parameters-with-javascript/
 }

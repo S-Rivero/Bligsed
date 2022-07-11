@@ -1,11 +1,10 @@
 <div class="contenedor_contacto">
     <h2>Contacto</h2>
     <div>
-        <p><b>Tutor 1: </b>Pepe Gonzalez</p>
-        <p><b>Tel: </b>11 4568-9755</p>
-        <p><b>DNI: </b>20.654.876</p>
-        <p><b>Tutor 2: </b>Marta Quiroga</p>
-        <p><b>Tel: </b>11 9854-3567</p>
-        <p><b>DNI: </b>22.658.987</p>
+        {{#each this}}
+            <p><b>Tutor {{#unoMas @index}}{{/unoMas}}: </b>{{nombre}}</p>
+            <p><b>Tel: </b>{{Numero_de_telefono}}</p>
+            <p><b>DNI: </b>{{DNI}}</p>
+        {{/each}}
     </div>
 </div>

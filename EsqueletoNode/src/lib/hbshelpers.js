@@ -1,6 +1,9 @@
 const pool = require('../database');
 
 module.exports = {
+    unoMas: function(n){
+      return n+1;
+    },
     ifCond: function(v1, options) {
       if(v1%2 === 0) {
         return options.fn(this);
