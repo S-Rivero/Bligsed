@@ -16,15 +16,11 @@ exports.datosPersonales = ((req,res) => {
     });
 });
 
-// exports.datosPersonales = ((req,res) => {
-//     setTutor(req.user[0]).then(()=>{
-//         res.render('perfil.hbs', {in: req.user[0], title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileDatosPersonales', user:req.user[0], partial: 'profile/datosPersonales'});
-//     });
-// });
-
 
 exports.FichaMedica = ((req,res) => {
-    res.redirect("/");
+    const rows = pool.query("SELECT * FROM ficha_medica WHERE DNI = ?", [req.user[0].DNI], function(err, ficha){
+        res.render('perfil.hbs', {in: ficha, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileFichaMedica', user:req.user[0], partial: 'profile/fichaMedica', contacto: 'profile/void'});
+    });
 });
 
 exports.inasistencias = ((req,res) => {
