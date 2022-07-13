@@ -1,9 +1,11 @@
+//Insert basura
+//INSERT INTO mensajes (chatroom, id_emisor, contenido, fecha, hora) VALUES (1, 6, "Hola, como estas?", "2022-6-4", "12:30:47"), (1, 3, "Todo bien, vos?", "2022-6-4", "12:32:47"),(1, 6, "Todo joya", "2022-6-4", "12:35:47"),(1, 3, "NASHEEEEE", "2022-6-4", "12:35:17");
+
 const bodyParser = require('body-parser');
 const pool = require('../database');
 exports.pushMsg = function(req, res){
 
-    var body = req.body;
-    console.log('Este es el post: %o', body);
+    console.log(req.body);
     /*
     let str = cleanData(data.msg.value);
     console.log(str);
@@ -29,7 +31,13 @@ exports.pushMsg = function(req, res){
         showMsg(msg.user_name, msg.time, msg.text);
         let sql = "INSERT INTO mensajes (chat, id_emisor, contenido, fecha, hora) VALUES ("+msg.chat+", "+msg.user_id+", '"+msg.text+"', '"+msg.date+"', '"+msg.time+"')";
         console.log(sql);
-        
+
+        //datos basura
+        /*
+        INSERT INTO mensajes (chat, id_emisor, contenido, fecha, hora) 
+        VALUES (2, 6, Hola, 12/07/2003, 12:30:47);
+        *-/
+
         // pool.query(sql, function (err, result) {
         //     if (err) throw err;
         //     console.log("1 record inserted");

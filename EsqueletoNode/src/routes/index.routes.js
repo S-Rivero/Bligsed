@@ -13,7 +13,7 @@ router.get('/',isLoggedIn, root);
 
 router.get('/home', isLoggedIn, renderHome);
 
-router.get('/msg', isLoggedIn, pushMsg);
+router.post('/msg', isLoggedIn, pushMsg);
 //router.post('/msg', isLoggedIn, pushMsg);
 
 module.exports = router;
