@@ -63,3 +63,8 @@ exports.esAlumno = function(tdu) {
     }
     return 'profile/void';
 }
+
+exports.queTrimestre = function(n){
+    return (n>=0&&n<=3)?n:1;
+    
+}

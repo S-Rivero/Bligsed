@@ -1,23 +1,14 @@
-<script type="text/javascript">
-   function changeFunc() {
-    var selectBox = document.getElementById("selectBox");
-    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    var formulario = document.getElementById("form");
-    formulario.submit();
-   }
-</script>
+
 
 <div class="contenedor_datos">
-    <h2>Boletín de calificaciones</h2>
+    <h2 id="Juan">Boletín de calificaciones</h2>
     <div class="contenedor_nombre_doc">
-        <form action="Boletin" id="form" method="GET">
-            <select name="t" id="selectBox" onchange="changeFunc();">
-                <option value="0">Final</option>
-                <option value="1" selected="selected">Trimestre 1</option>
-                <option value="2">Trimestre 2</option>
-                <option value="3">Trimestre 3</option>
-            </select>
-        </form>
+        <select name="t" id="selectBox" onchange="changeFunc();">
+            <option id="op1" value="1">Trimestre 1</option>
+            <option id="op2" value="2">Trimestre 2</option>
+            <option id="op3" value="3">Trimestre 3</option>
+            <option id="op0" value="0">Final</option>
+        </select>
         <table>
         <tr>
             <th></th>
@@ -37,3 +28,18 @@
     </div>
 </div>
 </div>
+
+<script type="text/javascript"> //POSIBLE FALLA DE SEGURIDAD AGUANTE BOCA JUNIORS
+    function changeFunc() {
+        var selectBox = document.getElementById("selectBox");
+        var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+        window.location.replace("/perfil/boletin" + selectedValue);
+    };
+    var url = window.location.href;
+    var trim = url.split("boletin");
+    if (trim[2]) {
+        trim[1] = 1;
+    }
+    document.getElementById("op" + trim[1]).setAttribute('selected', 'selected');
+
+</script>

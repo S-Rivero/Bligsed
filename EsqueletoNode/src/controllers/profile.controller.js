@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require('path');
 const pool = require('../database');
 const {JSONPromediosAl} = require('../lib/jsonFormat');
-const {esAlumno, setTutor} = require('../lib/helpers');
+const {esAlumno, setTutor, queTrimestre} = require('../lib/helpers');
 
 exports.root = ((req,res) => {
     res.redirect("/perfil/datosPersonales");
@@ -64,14 +64,14 @@ exports.Boletin = ((req,res) => {
 
 
 const renderQueryNotas = function(req,res,uid){
-    const rows = pool.query("SELECT `nota`, `Materia` FROM usuarios u JOIN notas n ON u.id = n.id_alum JOIN materias m ON m.ID = n.id_materia WHERE u.id = ? AND n.trimestre = 1 ORDER BY m.Materia ASC;", [uid], function(err, materias){
-        const formateado = JSONPromediosAl(materias);
-        res.render('perfil.hbs', {in:{ma: formateado['materias'], cant: formateado.materias[formateado.max['materia']]}, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileBoletin', user:req.user[0], partial: 'profile/boletin', contacto: 'profile/void'});
-        // res.send(formateado);
-        //Se pasa IN porque solamente puede recibirse 1 parametro. Los objetos estan encapsulados dentro
-    });
-    // const queryString = window.location.search;
-    // const urlParams = new URLSearchParams(queryString);
-    // req.send(urlParams.get('c'));
-    // https://www.sitepoint.com/get-url-parameters-with-javascript/
+    
+    const trimestre = queTrimestre(req.params.t);
+    if(trimestre != 0){
+        const rows = pool.query("SELECT `nota`, `Materia` FROM usuarios u JOIN notas n ON u.id = n.id_alum JOIN materias m ON m.ID = n.id_materia WHERE u.id = ? AND n.trimestre = ? ORDER BY m.Materia ASC;", [uid,trimestre], function(err, materias){
+            const formateado = JSONPromediosAl(materias);
+            res.render('perfil.hbs', {in:{ma: formateado['materias'], cant: formateado.materias[formateado.max['materia']]}, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileBoletin', user:req.user[0], partial: 'profile/boletin', contacto: 'profile/void'});
+        });
+    }else{
+        res.send("todavia no esta hecho xd");
+    }
 }
