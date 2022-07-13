@@ -7,6 +7,7 @@ router.get('/', isLoggedIn, root);
 router.get('/datosPersonales', isLoggedIn, datosPersonales);
 router.get('/FichaMedica', isLoggedIn, root);
 router.get('/Boletin', isLoggedIn, Boletin);
+router.get('/Boletin:t', isLoggedIn, Boletin);
 router.get('/inasistencias', isLoggedIn, inasistencias);
 router.get('/mensajes', isLoggedIn, mensajes);
 
