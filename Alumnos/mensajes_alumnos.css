@@ -23,6 +23,7 @@
 
 .contenedor_medio_lateral {
     background-color: rgba(127, 199, 213, 0.192);
+    overflow:scroll;
 }
 
 .contenedor_medio_lateral ul {
@@ -94,9 +95,10 @@
 .contenedor_superior_busqueda_input input {
     border: none;
     outline: none;
-    width: 35vh;
+    width: 100%;
     border-radius: 100px;
     padding: 1%;
+    margin-right: 5%;
 }
 
 .contenedor_superior h4 {
@@ -125,6 +127,8 @@
     position: absolute;
     top: 26%;
     display: inline-block;
+    width: 100%;
+    height: auto;
     background-color: rgba(127,198,213,1);
     border-radius: 7px;
     padding: 1%;
@@ -158,13 +162,13 @@
     margin-left: 0.5%;
 }
 
-.mensaje_emisor {
+.mensaje_receptor {
     float: left;
     margin-right: 70%;
     margin-left: 1%;
 }
 
-.mensaje_receptor {
+.mensaje_emisor {
     float: right;
     margin-left: 70%;
     margin-right: 1%;
