@@ -4,35 +4,37 @@
       <li>Como andas</li>
       <li>DFEAAAAAAAAAAAAAAAAA</li>
 
-      {{!-- {{#each msg}}
-        
-        <li class="plantilla_mensaje mensaje_emisor">
-            <div class="creador_mensaje">{{user.Nombre}}</div>
+      {{!-- 
+      /*  Creo que va en helpers esto
+      Handlebars.registerHelper('ifCond', function(v1, v2, options) {
+        if(v1 === v2) {
+          return options.fn(this);
+        }
+        return options.inverse(this);
+      });
+      */
+
+      {{#each push_msg}}  
+        {{#ifCond msg_user '===' user.Nombre}}
+          <li class="plantilla_mensaje mensaje_emisor">
+            <div class="creador_mensaje">{{msg_user}}</div>
+            <div class="hora_mensaje">{{time}}</div>
             <div class="contenido_mensaje">
-                <img src="/Alumnos/media/momo_sad2.jpg" alt="">
-                Que sad prro :'v xdxdxdxd
+                <p>{{msg}}</p>
             </div>
-        </li>
-                                          <div class="publicaciones_autor">
-                                          <div class="autor_nombre">
-                                              {{Nombre}}
-                                          </div>
-                                          <div class="autor_fecha">
-                                              12/3/2022
-                                          </div>
-                                      </div>
-                                      <div class="publicaciones_contenido">
-                                          <div class="contenido_titulo">
-                                              {{titulo}}
-                                          </div>
-                                          <div class="contenido_texto">
-                                              {{descripcion}}
-                                          </div>
-                                          <div class="contenido_vermas">
-                                              <a class="boton_vermas">Ver Mas</a>
-                                          </div>
-                                      </div>
-    {{/each}} --}}
+          </li>
+        {{else}}
+          <li class="plantilla_mensaje mensaje_receptor">
+            <div class="creador_mensaje">{{msg_user}}</div>
+            <div class="hora_mensaje">{{time}}</div>
+            <div class="contenido_mensaje">
+                <p>{{msg}}</p>
+            </div>
+          </li>
+        {{/ifCond}}
+        
+      {{/each}}
+      --}}
 
     </ul>
 
@@ -51,7 +53,9 @@
         const iBody = iDocument.body;
         iBody.innerHTML = 
           '<form id="iform" action="" method="get" > <input type="text" id="msg" > <input type="text" id="uname" value="{{user.Nombre}}" > <input type="number" id="uid" value="{{user.id}}" > <input type="number" id="cid" value="" > </form>';
-          
+        // Probar poner esto en el src del iframe
+        // window.history.back()
+        // Hace que vuelva al ultimo url registrado
       };
       function send(data){
         const iframe = document.getElementById("frame");
