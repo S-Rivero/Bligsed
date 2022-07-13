@@ -23,3 +23,9 @@ exports.renderHome = ((req,res) => { //Actualmente muestra publicaciones nada ma
         res.render('publicaciones.hbs', {pub: publicaciones, links: 'headerLinks/home', user:req.user[0]});
     });
 });
+
+exports.renderChat = ((req,res) => {
+    const rows = pool.query("SELECT * FROM mensajes p JOIN usuarios u ON p.autor = u.id", function(err, mensajes){
+        res.render('chat.hbs', {layout: 'mensajeriaPrueba.hbs', message: mensajes, user:req.user[0]});
+    });
+});

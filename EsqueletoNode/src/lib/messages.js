@@ -1,4 +1,5 @@
 const bodyParser = require('body-parser');
+const pool = require('../database');
 exports.pushMsg = function(req, res){
 
     var body = req.body;

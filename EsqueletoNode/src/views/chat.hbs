@@ -4,37 +4,27 @@
       <li>Como andas</li>
       <li>DFEAAAAAAAAAAAAAAAAA</li>
 
-      {{!-- 
-      /*  Creo que va en helpers esto
-      Handlebars.registerHelper('ifCond', function(v1, v2, options) {
-        if(v1 === v2) {
-          return options.fn(this);
-        }
-        return options.inverse(this);
-      });
-      */
-
-      {{#each push_msg}}  
-        {{#ifCond msg_user '===' user.Nombre}}
+    {{!-- 
+      {{#each message}}  
+        {{#ifCond id_emisor '===' user.Nombre}}
           <li class="plantilla_mensaje mensaje_emisor">
-            <div class="creador_mensaje">{{msg_user}}</div>
-            <div class="hora_mensaje">{{time}}</div>
+            <div class="creador_mensaje">{{id_emisor}}</div>
+            <div class="hora_mensaje">{{hora}}</div>
             <div class="contenido_mensaje">
-                <p>{{msg}}</p>
+                <p>{{contenido}}</p>
             </div>
           </li>
         {{else}}
           <li class="plantilla_mensaje mensaje_receptor">
-            <div class="creador_mensaje">{{msg_user}}</div>
-            <div class="hora_mensaje">{{time}}</div>
+            <div class="creador_mensaje">{{id_emisor}}</div>
+            <div class="hora_mensaje">{{hora}}</div>
             <div class="contenido_mensaje">
-                <p>{{msg}}</p>
+                <p>{{contenido}}</p>
             </div>
           </li>
         {{/ifCond}}
-        
       {{/each}}
-      --}}
+    --}}
 
     </ul>
 
