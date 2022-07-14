@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="/plantilla_inicial.css">
+  <link rel="stylesheet" href="inicio_directivos.css">
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -53,8 +54,8 @@
         <div class="profile-details">
           <!--<img src="profile.jpg" alt="profileImg">-->
           <div class="name_job">
-            <div class="name">Hola, Usuario123</div>
-            <div class="job">Alumno</div>
+            <div class="name">Hola, Martín de Jesús</div>
+            <div class="job">Directivo</div>
           </div>
         </div>
         <a href="logout"><i class='bx bx-log-out' id="log_out"></i></a>
@@ -64,98 +65,11 @@
   <section class="home-section">
     <div class="text">Inicio</div>
 
-    <div class="contenedor_publicaciones">
-      <div class="publicaciones_autor">
-        <div class="autor_nombre">
-          De Jesús, Sebastian Andres
-        </div>
-        <div class="autor_fecha">
-          12/3/2022
-        </div>
-      </div>
-      <div class="publicaciones_contenido">
-        <div class="contenido_titulo">
-          Título de la publicación
-        </div>
-        <div class="contenido_texto">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi corporis iste ipsa blanditiis porro
-          perspiciatis delectus, officiis quidem accusantium id vitae consectetur aspernatur exercitationem eaque? Porro
-          quam facere ea dmet consectetur adipisicing elit. Nostrum voluptates reiciendis sit optio distinctio
-          architecto, totare corporis officia nsectetur, repellendus ipsam delectus soluta nemo? Aliquid vero soluta
-          quidem placeat! Lorem ipsum dolor sit met consectetur adipisicing elit. <br> Perspiciatis illum, saepe ex fuga
-          ut accusamus officiis modi quam perferendis expedita nemo vel esse culpa id libero odit minus ipsa mollitia?
-          Lorem ipsum dor. . . sit amet, consectetur adipisicing elit. Pariatur consequatur laborum expedita molestiae
-          dolores recusandae repellat labore velit hic aspernatur veniam eveniet neque, id tempore. Esse in iusto
-          nostrum nequeLorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi corporis iste ipsa blanditiis porro
-          perspiciatis delectus, officiis quidem accusantium id vitae consectetur aspernatur exercitationem eaque? Porro
-          quam facere ea dmet consectetur adipisicing elit. Nostrum voluptates reiciendis sit optio distinctio
-          architecto, totare corporis officia nsectetur, repellendus ipsam delectus soluta nemo? Aliquid vero soluta
-          quidem placeat! Lorem ipsum dolor sit met consectetur adipisicing elit. <br> Perspiciatis illum, saepe ex fuga
-          ut accusamus officiis modi quam perferendis expedita nemo vel esse culpa id libero odit minus ipsa mollitia?
-          Lorem ipsum dor. . . sit amet, consectetur adipisicing elit. Pariatur consequatur laborum expedita molestiae
-          dolores recusandae repellat labore velit hic aspernatur veniam eveniet neque, id tempore. Esse in iusto
-          nostrum neque
-        </div>
-        <div class="contenido_vermas">
-          <!-- <input type="checkbox" id="vermas"></input>
-            <label for="vermas">Ver mas</label>
-            <div class="vermenos">Ver menos</div> -->
-            <!-- <a class="boton_vermas">Ver Más</a> -->
-            <a id="boton_vermas" href="#miModal">Ver Más</a>
-              <div id="miModal" class="modal">
-                <div class="modal-contenido">
-                  <div class="modal_contenedor_primario">
-                    <div class="modal_publicaciones_autor">
-                      <div class="modal_autor_nombre">
-                        <b>De Jesús, Sebastian Andrés</b>
-                      </div>
-                      <div class="modal_autor_fecha">
-                        <p>12/3/2022</p>
-                      </div>  
-                      
-                    </div>
-                    <a href="#" class="boton_salir">X</a>
-  
-                  </div>
-                  <div class="modal_contenedor_secundario">
-                    <h2>Título de la publicación</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus vitae libero in adipisci natus repellendus rerum quidem fugiat nam explicabo, aliquid at esse, minima architecto nisi iusto voluptates dicta consectetur. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora earum facere molestiae aliquid doloremque, assumenda debitis fugit cumque sed dignissimos ea officia, nobis reiciendis numquam sit voluptatem sapiente repellendus amet? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam dolorum hic beatae possimus fugiat dolorem, alias, at blanditiis labore similique quod minima ipsam quos molestias exercitationem ipsa. Aliquam, nobis ipsa.</p> 
-                    <br>
-                  </div>
-                  <div class="modal_contenedor_terciario">
-                    <ul class="archivos_adjuntos">
-                      <li><a href="">Planilla1.pdf</a></li>
-                    </ul>
-                  </div>
-                </div>
-                </div>
-              </div>
-        </div>
-      </div>
+    <div class="contenedor_inicio">
+        <div class="contenedor_publicaciones"></div>
+        <div class="contenedor_lateral"></div>
     </div>
-
-    <div class="datos_colegio">
-     <img src="media/logoJXXIII-sin_fondo.png" alt="Logo Juan XXIII">
-      <br>
-      <div class="texto_infocolegio">Instituto Juan XXIII / Colegio Parroquial Juan XXIII </div>
-      <ul class="info_colegio">
-        <li>
-          <i class='bx bx-phone'></i>
-          <span>4464-3255</span>
-        </li>
-
-        <li>
-          <i class='bx bx-envelope'></i>
-          <span>colparroquial23@hotmail.com</span>
-        </li>
-
-        <li>
-          <i class='bx bx-home'></i>
-          <span>9 de Julio - 125</span>
-        </li>
-      </ul>
-    </div>
-  </section>
+</section>
   <script>
     let sidebar = document.querySelector(".sidebar");
     let closeBtn = document.querySelector("#btn");

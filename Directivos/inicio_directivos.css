@@ -1,4 +1,5 @@
 
+
 .contenedor_publicaciones {
     /* background-color: red; */
     position: absolute;
@@ -184,9 +185,9 @@
 }
 
 .modal-contenido{
-  /* display: grid; */
-  /* grid-template-columns: 66% 33%;
-  grid-template-rows: 15% 70% 15%; */
+  display: grid;
+  grid-template-columns: 66% 33%;
+  grid-template-rows: 15% 70% 15%;
   background-color:rgb(108, 197, 185);
   width:50vw;
   height: fit-content;
@@ -198,20 +199,16 @@
 }
 
 .modal_contenedor_primario {
-  /* grid-column: 1 / span 2; */
-  /* grid-row: 1; */
-  background-color:rgb(108, 197, 185);
+  grid-column: 1 / span 2;
+  grid-row: 1;
+  background-color: red;
+  display: flex;
 }
 
 .modal_contenedor_secundario {
   grid-column: 1 / span 2;
   grid-row: 2;
   text-align: justify;
-}
-
-.modal_contenedor_secundario h2 {
-  margin-bottom: 1%;
-  margin-top: 1%;
 }
 
 .modal_contenedor_terciario {
@@ -221,7 +218,7 @@
 }
 
 .modal_contenedor_terciario ul {
-  /* padding-top: 1%; */
+  padding-top: 1%;
 }
 
 .modal_publicaciones_autor {
@@ -234,9 +231,8 @@
   width: 25%;
   text-decoration: none;
   font-size: 3.5vh;
-  position: relative;
-  left: 45%;
 }
+
 
 .modal{
   background-color: rgba(0,0,0,.8);
@@ -256,16 +252,5 @@
   pointer-events:auto;
 }
 
-.archivos_adjuntos li{
-  list-style: none;
-}
 
-.archivos_adjuntos a{
-  text-decoration: none;
-  color: #fff;
-}
 
-.iconify{
-  width: 3%;
-  height: auto;
-}
