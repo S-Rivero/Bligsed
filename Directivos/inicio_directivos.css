@@ -1,12 +1,64 @@
+.home_section .text {
+    height: 10vh;
+}
 
 .contenedor_inicio {
     display: grid;
-    grid-template-columns: 66% 33%;
+    grid-template-columns: 70% 30%;
     background-color: lightblue;
     width: 100%;
+    height: 100vh;
+    overflow: scroll;
 }
+
 
 .contenedor_publicaciones {
-    background-color: red;
+    margin-right: 5%;
 }
 
+.contenedor_lateral {
+    margin-top: 1%;
+    position: sticky;
+    background-color: red;
+    height: 65%;
+    width: 90%;
+    align-self: start;
+}
+
+.publicacion {
+    border: 1px solid black;
+    background-color: lightgreen;
+    height: 80%;
+    width: 100%;
+    margin-bottom: 1vh;
+}
+
+
+.contenido_titulo {
+    height: 15%;
+    font-size: 26px;
+    border: 2px solid transparent;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 3%;
+    letter-spacing: 1px;
+    /* margin-bottom:1%; */
+    background-color:  rgba(4, 83, 63, 0.059);
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    color: #333;
+}
+
+.contenido_texto {
+    height:65%;
+    border: 2px dotted transparent ;
+    text-align: justify;
+    padding-top: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+    overflow: hidden;
+    position: relative;
+    background-color:  rgba(4, 83, 63, 0.059);
+    /* overflow-y: scroll; */
+   
+}
