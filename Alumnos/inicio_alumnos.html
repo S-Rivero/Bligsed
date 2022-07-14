@@ -80,7 +80,7 @@
           Título de la publicación
         </div>
         <div class="contenido_texto">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi corporis iste ipsa blanditiis porro
+          orem ipsum dolor, sit amet consectetur adipisicing elit. Sequi corporis iste ipsa blanditiis porro
           perspiciatis delectus, officiis quidem accusantium id vitae consectetur aspernatur exercitationem eaque? Porro
           quam facere ea dmet consectetur adipisicing elit. Nostrum voluptates reiciendis sit optio distinctio
           architecto, totare corporis officia nsectetur, repellendus ipsam delectus soluta nemo? Aliquid vero soluta
@@ -96,14 +96,16 @@
           ut accusamus officiis modi quam perferendis expedita nemo vel esse culpa id libero odit minus ipsa mollitia?
           Lorem ipsum dor. . . sit amet, consectetur adipisicing elit. Pariatur consequatur laborum expedita molestiae
           dolores recusandae repellat labore velit hic aspernatur veniam eveniet neque, id tempore. Esse in iusto
-          nostrum neque
+          nostrum neque lorem
         </div>
         <div class="contenido_vermas">
           <!-- <input type="checkbox" id="vermas"></input>
             <label for="vermas">Ver mas</label>
             <div class="vermenos">Ver menos</div> -->
             <!-- <a class="boton_vermas">Ver Más</a> -->
-            <a id="boton_vermas" href="#miModal">Ver Más</a>
+
+            <a id="boton_vermas" href="#miModal" >Ver Más</a>
+            <!-- <a id="boton_vermas" onclick="mostrarModal();">Ver Más</a> -->
               <div id="miModal" class="modal">
                 <div class="modal-contenido">
                   <div class="modal_contenedor_primario">
@@ -117,7 +119,7 @@
                       
                     </div> -->
                     <!-- <div class="boton_salir"> -->
-                    <a href=""> <span class="iconify" data-icon="clarity:close-line"></span></a>
+                    <a onclick="closeModal()" href=""><span class="iconify" data-icon="clarity:close-line"></span></a>
                   </div>
                   <div class="modal_contenedor_secundario">
                     <h2>Título de la publicación</h2>
@@ -164,6 +166,40 @@
     let sidebar = document.querySelector(".sidebar");
     let closeBtn = document.querySelector("#btn");
     let searchBtn = document.querySelector(".bx-search");
+
+  //   function mostrarModal(){
+  //     document.querySelector(".modal").style.display = "block";
+  //   }
+
+  //   document.addEventListener(
+  //    "click",
+  //    function(event) {
+  //      if (
+  //        event.target.matches(".iconify") ||
+  //        !event.target.closest("#MiModal")
+  //      ) {
+  //        closeModal()
+  //      }
+  //     },
+  //    false
+  //   )
+  //  function closeModal() {
+  //    document.querySelector(".modal").style.display = "none";
+  //  }
+
+      //   function mostrarModal(){
+      //   modal.style.display = "block";
+      // }
+      // // Cuando el usuario toca la "X" del span se cierra
+      // function closeModal() {
+      //   modal.style.display = "none";
+      // }
+      // // Cuando el usuario toca fuera del modal se cierra
+      // window.onclick = function(event) {
+      //   if (event.target == modal) {
+      //     modal.style.display = "none";
+      //   }
+      // }
 
     closeBtn.addEventListener("click", () => {
       sidebar.classList.toggle("open");

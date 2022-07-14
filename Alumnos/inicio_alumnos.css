@@ -230,13 +230,13 @@
   padding-left: 3%;
 }
 
-.modal .boton_salir {
+/* .modal .boton_salir {
   width: 25%;
   text-decoration: none;
   font-size: 3.5vh;
   position: relative;
   left: 45%;
-}
+} */
 
 .modal{
   background-color: rgba(0,0,0,.8);
@@ -245,7 +245,7 @@
   right:0;
   bottom:0;
   left:0;
-  opacity:0;
+ opacity: 0;
   pointer-events:none;
   transition: all 0.3s;
   z-index: 5;
@@ -265,7 +265,22 @@
   color: #fff;
 }
 
-.iconify{
+.archivos_adjuntos .iconify{
   width: 3%;
   height: auto;
+  margin-left: 2%;
+}
+
+.modal_contenedor_primario .iconify{
+  width: fit-content;
+  text-decoration: none;
+  font-size: 3.5vh;
+  position: relative;
+  left: 47%;
+}
+
+.modal_contenedor_primario .iconify:hover{
+  background-color: aliceblue;
+  border-radius: 7px;
+  transition: 0.5s;
 }
