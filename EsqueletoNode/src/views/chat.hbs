@@ -42,13 +42,17 @@
               else
                 showMsg(datos.u_name, datos.time, datos.text);
 
+              var array = [0,1,2,3,4,5,6,7,8,9];
               $.ajax({
                   type: 'post',
                   url: '/msg',
-                  data: datos,
+                  //data: datos,
+                  data: form,
+                  //data: array,
                   cache: false,
                   processData: false,
-                  contentType: false
+                  contentType: 'application/x-www-form-urlencoded'
+                  //contentType: 'multipart/form-data'
               })
               form.msg_in.value = '';
           });

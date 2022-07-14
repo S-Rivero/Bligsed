@@ -40,7 +40,7 @@ app.engine(
 
 //middlewares
 // app.use(morgan('dev'));  Lo comento porque esta re GD
-app.use(bodyParser.urlencoded({ extended: false })); //https://stackoverflow.com/questions/9177049/express-js-req-body-undefined
+app.use(bodyParser.urlencoded({ extended: true })); //https://stackoverflow.com/questions/9177049/express-js-req-body-undefined
 app.use(bodyParser.json());
 
 app.use(session({
