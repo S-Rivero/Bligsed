@@ -29,3 +29,11 @@ exports.renderChat = ((req,res) => {
         res.render('chat.hbs', {layout: 'mensajeriaPrueba.hbs', message: mensajes, user:req.user[0]});
     });
 });
+
+exports.renderXample = (req,res) => {
+    res.render('xample.hbs', {layout: 'mensajeriaPrueba.hbs'});
+}
+
+exports.renderBody = (req,res) => {
+    res.send(req.body);
+}
