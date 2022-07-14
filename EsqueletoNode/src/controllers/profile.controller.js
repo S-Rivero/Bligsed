@@ -18,7 +18,7 @@ exports.datosPersonales = ((req,res) => {
 
 
 exports.FichaMedica = ((req,res) => {
-    const rows = pool.query("SELECT * FROM ficha_medica WHERE DNI = ?", [req.user[0].DNI], function(err, ficha){
+    const rows = pool.query("SELECT * FROM fichamedica WHERE DNI = ?", [req.user[0].DNI], function(err, ficha){
         res.render('perfil.hbs', {in: ficha, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileFichaMedica', user:req.user[0], partial: 'profile/fichaMedica', contacto: 'profile/void'});
     });
 });
