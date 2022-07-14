@@ -2,15 +2,15 @@
 <html lang="en" dir="ltr">
 
 <head>
-  <title>Inicio</title>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="buscar_directivos.css">
   <link rel="stylesheet" href="/plantilla_inicial.css">
-  <link rel="stylesheet" href="inicio_directivos.css">
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Cuenta - Bligsed</title>
 </head>
 
-<!-- <body style="overflow-y:hidden"> -->
 <body>
   <div class="sidebar open">
     <div class="logo">
@@ -45,7 +45,7 @@
         <span class="tooltip">Mensajes</span>
       </li>
       <li>
-        <a href="buscar_directivos.html">
+        <a href="documentos_alumnos.html">
           <i class='bx bx-folder'></i>
           <span class="links_name">Buscar...</span>
         </a>
@@ -55,8 +55,8 @@
         <div class="profile-details">
           <!--<img src="profile.jpg" alt="profileImg">-->
           <div class="name_job">
-            <div class="name">Hola, Martín de Jesús</div>
-            <div class="job">Directivo</div>
+            <div class="name">Hola, Usuario123</div>
+            <div class="job">Alumno</div>
           </div>
         </div>
         <a href="logout"><i class='bx bx-log-out' id="log_out"></i></a>
@@ -64,13 +64,18 @@
     </ul>
   </div>
   <section class="home-section">
-    <div class="text">Inicio</div>
+    <div class="text">Buscar</div>
 
-    <div class="contenedor_inicio">
-        <div class="contenedor_publicaciones"></div>
-        <div class="contenedor_lateral"></div>
-    </div>
-</section>
+        <div class="contenedor_micuenta">
+                <div class="contenedor_botones">
+                  <ul class="botones_alumno">
+                    <li><a href="cuenta_alumnos_remake.html">Alumnos <span class="iconify" data-icon="bx:folder"></span></a></li>
+                    <li><a href="ficha_medica.html">Profesores <span class="iconify" data-icon="bx:folder"></span></a></li>
+                    <li><a href="Boletin_alumnos_prueba.html">Preceptores <span class="iconify" data-icon="bx:folder"></span></a></li>
+                    <li><a href="inasistencias.html">Staff <span class="iconify" data-icon="bx:folder"></span></a></li>
+                  </ul>
+                </div>
+    </section>
   <script>
     let sidebar = document.querySelector(".sidebar");
     let closeBtn = document.querySelector("#btn");
@@ -95,6 +100,7 @@
       }
     }
   </script>
+
 
 </body>
 
