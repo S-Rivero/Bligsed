@@ -9,13 +9,20 @@ exports.pushMsg = function(req, res){
     var obj = Object.assign({},req.body);
     var json1 = JSON.stringify(req.body);
     var json2 = JSON.parse(json1);
-    
+    // const formDataObj = {};
+    // req.body.forEach((value, key) => (formDataObj[key] = value));
+    // console.log(formDataObj);
+
     console.log('++++++++++++++++++++');
     console.log(body);
-    console.log(obj);
+    //console.log('--------------------');
+    //console.log(formDataObj);
+    console.log('--------------------');
     console.log(json1);
+    console.log('--------------------');
     console.log(json2);
     console.log('++++++++++++++++++++');
+    
     /*
     let str = cleanData(data.msg.value);
     console.log(str);

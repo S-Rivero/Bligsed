@@ -23,10 +23,10 @@
     </ul>
 
     <form id="form_data" action="/msg" method="post" >
-      <input type="text" id="msg_in" placeholder="Escribe un mensaje...">
-      <input type="text" id="uname" value="{{user.Nombre}}" style="display: none;">
-      <input type="number" id="uid" value="{{user.id}}" style="display: none;">
-      <input type="number" id="cid" value="1" style="display: none;">
+      <input type="text" name="msg_in" id="msg_in" placeholder="Escribe un mensaje...">
+      <input type="text" name="uname" id="uname" value="{{user.Nombre}}" style="display: none;">
+      <input type="number" name="uid" id="uid" value="{{user.id}}" style="display: none;">
+      <input type="number" name="cid" id="cid" value="1" style="display: none;">
       <input type="submit" id="btn" value="Enviar"/>
     </form>
     
@@ -36,20 +36,28 @@
           $("form#form_data").on('submit', function(e){
               e.preventDefault();
               var form = document.getElementById('form_data');
+              var formdata = new FormData(form);
               datos = msgCompressing(form);
               if(datos === undefined)
                 console.log('En una futura instancia deberia matar el post');
               else
                 showMsg(datos.u_name, datos.time, datos.text);
+              
+              const formDataObj = {};
+              formdata.forEach((value, key) => (formDataObj[key] = value));
+              console.log(formdata);
+              console.log(formDataObj);
 
-              var array = [0,1,2,3,4,5,6,7,8,9];
+              var array = [form,formdata,datos];
               $.ajax({
                   type: 'post',
                   url: '/msg',
                   //data: datos,
-                  data: form,
+                  //data: form,
+                  data: formdata,
+                  //data: formDataObj,
                   //data: array,
-                  cache: false,
+                  //cache: false,
                   processData: false,
                   contentType: 'application/x-www-form-urlencoded'
                   //contentType: 'multipart/form-data'
