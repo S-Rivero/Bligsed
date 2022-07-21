@@ -1,28 +1,10 @@
 //Insert basura
-//INSERT INTO mensajes (chatroom, id_emisor, contenido, fecha, hora) VALUES (1, 6, "Hola, como estas?", "2022-6-4", "12:30:47"), (1, 3, "Todo bien, vos?", "2022-6-4", "12:32:47"),(1, 6, "Todo joya", "2022-6-4", "12:35:47"),(1, 3, "NASHEEEEE", "2022-6-4", "12:35:17");
+// INSERT INTO `mensajes` (chatroom, id_emisor, `contenido`, fecha, hora) VALUES (1, 6, 'Hola, como estas?', "2022-6-4", "12:30:47"), (1, 3, 'Todo bien, vos?', "2022-6-4", "12:32:47"),(1, 6, 'Todo joya', "2022-6-4", "12:35:47"),(1, 3, 'NASHEEEEE', "2022-6-4", "12:35:17");
 
-const bodyParser = require('body-parser');
 const pool = require('../database');
 exports.pushMsg = function(req, res){
-
-    var body = req.body;
-    var obj = Object.assign({},req.body);
-    var json1 = JSON.stringify(req.body);
-    var json2 = JSON.parse(json1);
-    // const formDataObj = {};
-    // req.body.forEach((value, key) => (formDataObj[key] = value));
-    // console.log(formDataObj);
-
-    console.log('++++++++++++++++++++');
-    console.log(body);
-    //console.log('--------------------');
-    //console.log(formDataObj);
-    console.log('--------------------');
-    console.log(json1);
-    console.log('--------------------');
-    console.log(json2);
-    console.log('++++++++++++++++++++');
     
+    console.log(req.body);  
     /*
     let str = cleanData(data.msg.value);
     console.log(str);
