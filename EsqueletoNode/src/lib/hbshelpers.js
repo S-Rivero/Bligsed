@@ -55,7 +55,7 @@ module.exports = {
     },
     partials: function(string) {
         return string;
-      },
+    },
     tipoInasistenciaToString: function(tipo){
       switch(tipo){
         case 0:
@@ -68,5 +68,15 @@ module.exports = {
     },
     dateTimeToDate: function(dateTime){
       return dateTime.toLocaleDateString();
+    },
+    selectVacunacion: function(vac){
+      switch(vac){
+        case '1':
+          return "Completa";
+        case '2':
+          return "Incompleta";
+        default:
+          return "Sin datos";
+      }
     }
   } 

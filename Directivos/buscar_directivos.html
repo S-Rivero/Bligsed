@@ -3,10 +3,12 @@
 
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="buscar_directivos.css">
   <link rel="stylesheet" href="/plantilla_inicial.css">
-  <link rel="stylesheet" href="documentos_alumnos.css">
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Cuenta - Bligsed</title>
 </head>
 
 <body>
@@ -45,9 +47,9 @@
       <li>
         <a href="documentos_alumnos.html">
           <i class='bx bx-folder'></i>
-          <span class="links_name">Documentos</span>
+          <span class="links_name">Buscar...</span>
         </a>
-        <span class="tooltip">Documentos</span>
+        <span class="tooltip">Buscar...</span>
       </li>
       <li class="profile">
         <div class="profile-details">
@@ -62,80 +64,18 @@
     </ul>
   </div>
   <section class="home-section">
-    <div class="text">Boletín de calificaciones</div>
-      <div class="contenedor_documentacion">
-      <div class="contenedor_nombre_doc">
-        <select name="tipo_doc">
-          <option value="Cuatrimestre 1">Cuatrimestre 1</option>
-            <option value="Cuatrimestre 2">Cuatrimestre 2</option>
-            <option value="Final">Final</option>
-            
-          </select>
-      </div>
-      <table>
-        <tr>
-          <th></th>
-          <th>Npa1</th>
-          <th>Npa2</th>
-          <th>Npa3</th>
-          <th>Informe bimestral</th>
-          <th>Npa4</th>
-          <th>Npa5</th>
-          <th>Npa6</th>
-        </tr>
-        <tr>
-          <td>MODELOS Y SISTEMAS</td>
-          <td>CS</td>
-          <td>CA</td>
-          <td>CA</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-        </tr>
-        <tr>
-            <td>BASES DE DATOS</td>
-            <td>CS</td>
-            <td>CA</td>
-            <td>CA</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-          </tr>
-          <tr>
-            <td>MATEMATICA</td>
-            <td>CS</td>
-            <td>CA</td>
-            <td>CA</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-          </tr>
-          <tr>
-            <td>LITERATURA</td>
-            <td>CS</td>
-            <td>CA</td>
-            <td>CA</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-          </tr>
-          <tr>
-            <td>INGLES</td>
-            <td>CS</td>
-            <td>CA</td>
-            <td>CA</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-          </tr>
-      </table>
-    </div>
-  </section>
+    <div class="text">Buscar</div>
+
+        <div class="contenedor_micuenta">
+                <div class="contenedor_botones">
+                  <ul class="botones_alumno">
+                    <li><a href="cuenta_alumnos_remake.html">Alumnos <span class="iconify" data-icon="bx:folder"></span></a></li>
+                    <li><a href="ficha_medica.html">Profesores <span class="iconify" data-icon="bx:folder"></span></a></li>
+                    <li><a href="Boletin_alumnos_prueba.html">Preceptores <span class="iconify" data-icon="bx:folder"></span></a></li>
+                    <li><a href="inasistencias.html">Staff <span class="iconify" data-icon="bx:folder"></span></a></li>
+                  </ul>
+                </div>
+    </section>
   <script>
     let sidebar = document.querySelector(".sidebar");
     let closeBtn = document.querySelector("#btn");

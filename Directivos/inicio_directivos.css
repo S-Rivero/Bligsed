@@ -1,45 +1,38 @@
+.home_section .text {
+    height: 10vh;
+}
+
+.contenedor_inicio {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    background-color: lightblue;
+    width: 100%;
+    height: 100vh;
+    overflow: scroll;
+}
+
 
 .contenedor_publicaciones {
-    /* background-color: red; */
-    position: absolute;
-    width: 50vw;
-    height: 65vh;
-    margin-top: 2vh;
-    margin-left: 5vh;
+    margin-right: 5%;
 }
 
-.autor_nombre {
-    margin-top: 0.9%;
-    height: auto;
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
+.contenedor_lateral {
+    margin-top: 1%;
+    position: sticky;
+    background-color: red;
+    height: 65%;
+    width: 90%;
+    align-self: start;
 }
 
-.autor_fecha {
-    font-size: 14px;
-    height: auto;
-    padding-bottom: 2%;
-    border-bottom: 1px solid rgb(134, 134, 134);
-    color: #333;
+.publicacion {
+    border: 1px solid black;
+    background-color: lightgreen;
+    height: 80%;
+    width: 100%;
+    margin-bottom: 1vh;
 }
 
-
-.publicaciones_autor {
-    /* background-color: lightcoral; */
-    height: 15%;
-}
-
-.publicaciones_contenido {
-    
-    border-radius: 15px;
-    margin-top: 3%;
-    /* background-color: green; */
-    height: 85%;
-    /* box-shadow: 0px 0px 7px 4px rgba(209, 209, 209, 0.75);
-    -webkit-box-shadow: 0px 0px 7px 4px rgba(212, 212, 212, 0.75);
-    -moz-box-shadow: 0px 0px 7px 4px rgba(199, 199, 199, 0.75); */
-}
 
 .contenido_titulo {
     height: 15%;
@@ -69,20 +62,6 @@
     /* overflow-y: scroll; */
    
 }
-
-/* .contenido_texto:after {
-    content  : "";
-    position : absolute;
-    z-index  : 1;
-    bottom   : 0;
-    left     : 0;
-    pointer-events:none;
-    background-image : linear-gradient(to bottom, 
-                      rgba(255,255,255, 0), 
-                      rgba(255,255,255, 1) 90%);
-    width    : 100%;
-    height   : 4em; 
-} */
 
 .contenido_vermas {
     height: 20%;

@@ -42,8 +42,29 @@ exports.setChild = function(user){
         }else{
             res();
         }
-    })
-    
+    })    
 }
 
+let findTutor = function(idUs){
+    return pool.promise().query("SELECT nombre,username,Numero_de_telefono,DNI FROM usuarios WHERE id = (SELECT Padre FROM alumno WHERE id = ?)", [idUs]);
+}
 
+exports.setTutor = function(idUs){
+    return new Promise((res,rej)=>{
+        findTutor(idUs).then((r)=>{
+            res(r);
+        });
+    })    
+}
+
+exports.esAlumno = function(tdu) {
+    if(tdu === 6) {
+      return 'profile/datosContacto';
+    }
+    return 'profile/void';
+}
+
+exports.queTrimestre = function(n){
+    return (n>=0&&n<=3)?n:1;
+    
+}

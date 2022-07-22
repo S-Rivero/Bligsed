@@ -56,22 +56,30 @@ CREATE TABLE `curso` (
 
 CREATE TABLE `fichamedica` (
   `DNI` varchar(11) NOT NULL,
+  `Obra_social` varchar(20) NOT NULL,
+  `N_de_afiliado_obra_social` int(11) NOT NULL,
   `Enfermedad` varchar(200) NOT NULL,
   `Internacion` varchar(200) NOT NULL COMMENT 'Razon por la que fue internado',
   `Alergia` varchar(100) NOT NULL,
-  `Tratamiento medico` varchar(200) NOT NULL,
+  `manifestalergia` varchar (100) NOT NULL,
+  `Tratamiento_medico` varchar(200) NOT NULL,
+  `edad_quirurjico` int (11) NOT NULL,
   `Quirurjico` varchar(100) NOT NULL COMMENT 'Recibio cirujias?',
-  `Discapacidad fisica` varchar(100) NOT NULL COMMENT 'Ej rodilla destrozada no puede hacer movimientos bruscos\r\n',
+  `Discapacidad_fisica` varchar(100) NOT NULL COMMENT 'Ej rodilla destrozada no puede hacer movimientos bruscos\r\n',
+  `problemas_salud` varchar (100) NOT NULL,
   `Vacunacion` varchar(3) NOT NULL COMMENT '1',
-  `Altura` double NOT NULL,
+  `Altura` int (11) NOT NULL,
   `Peso` double NOT NULL,
   `Hospital` varchar(50) NOT NULL COMMENT 'Hospital al cual llamar',
-  `Obra social` varchar(20) NOT NULL,
-  `N de afiliado obra social` int(11) NOT NULL,
-  `Medico cabecera` varchar(50) NOT NULL,
+  `localidad` varchar (40) NOT NULL,
+  `N_telehospit` int (11) NOT NULL,
+  `Medico_cabeceraln` varchar(50) NOT NULL,
+  `Medico_cabecerafn` varchar(50) NOT NULL,
   `Domiciliomed` varchar(50) NOT NULL,
-  `Telefono medico` int(11) NOT NULL,
-  `Familiar responsable` int(11) NOT NULL
+  `Telefono_medico` int(11) NOT NULL,
+  `Familiar_responsableln` varchar(40) NOT NULL,
+  `Familiar_responsablefn` varchar(40) NOT NULL,
+  `Telefono_familiar` int(11) NOT NULL
 ) ;
 
 -- --------------------------------------------------------
@@ -313,8 +321,8 @@ INSERT INTO `curso` (`Nombre curso`) VALUES ( '7C');
 INSERT INTO `materias` (`Materia`, `IdCurso`, `profesor`) VALUES ( 'Matematicas', 1, 4), ( 'Lengua', 1, 4);
 
 INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 6, 1, 1, 1, 1), ( 6, 1, 10, 1, 2), (6, 1, 9, 1, 3), (6, 1, 5, 1, 4), (6, 2, 4, 1, 5), (6, 2, 7, 1, 6), (6, 2, 8, 1, 7), (6, 2, 9, 1, 8);
-INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 6, 1, 1, 1, 1), ( 6, 1, 10, 1, 2), (6, 1, 9, 1, 3), (6, 1, 5, 1, 4), (6, 2, 4, 1, 5), (6, 2, 7, 1, 6), (6, 2, 8, 1, 7), (6, 2, 9, 1, 8);
-INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 6, 1, 1, 1, 1), ( 6, 1, 10, 1, 2), (6, 1, 9, 1, 3), (6, 1, 5, 1, 4), (6, 2, 4, 1, 5), (6, 2, 7, 1, 6), (6, 2, 8, 1, 7), (6, 2, 9, 1, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 6, 1, 1, 2, 1), ( 6, 1, 10, 2, 2), (6, 1, 9, 2, 3), (6, 1, 5, 2, 4), (6, 2, 4, 2, 5), (6, 2, 7, 2, 6), (6, 2, 8, 2, 7), (6, 2, 9, 2, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 6, 1, 1, 3, 1), ( 6, 1, 10, 3, 2), (6, 1, 9, 3, 3), (6, 1, 5, 3, 4), (6, 2, 4, 3, 5), (6, 2, 7, 3, 6), (6, 2, 8, 3, 7), (6, 2, 9, 3, 8);
 
 INSERT INTO `usuarios` (`id` , `DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`) VALUES(0, 0, '0', '0', 'F', 00000000, 0, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '0000-0-00', 0);
 INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`, `domicilio`) VALUES(1, '1', '1', 'M', 11111111, 1, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '1111-1-11', 0, 'florencio varela'), (2, '2', '2', 'F', 22222222, 2, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '2222-2-22', 0, 'Chacabuco'),  (3, '3', '3', 'F', 33333333, 3, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '3333-3-3', 0, 'Villa Tesei'), (4, '4', '4', 'M', 44444444, 4, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '4444-4-4', 0, 'maleante keloke'), (5, '5', '5', 'F', 55555555, 5, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '5555-5-5', 0, 'Lazytown'), (6, '6', '6', 'M', 66666666, 6, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '6666-6-6', 0, 'Calle bolivia');
@@ -322,6 +330,6 @@ INSERT INTO `inasistencias`(`tipo`, `motivo`, `cantidad`, `fecha`, `id_us`, `id_
 INSERT INTO `colegio`(`pago`,`superusuario`) VALUES (1,0);
 INSERT INTO `superusuarios`(`id`,`fecha_creacion`) VALUES (0,"2012-2-15");
 UPDATE `alumno` SET  `ID Curso`= 1, `Padre`=5 WHERE `ID` = 6;  
-UPDATE fichamedica SET `Enfermedad` = "Sida", `Internacion` = "Internacion debido a cirujia por apendicitis", `Alergia` = "Intolerancia a la lactosa", `Tratamiento medico` = "Antibioticos", `Quirurjico` = "Cirujia por apendicitis. 7 puntos sector inferior izquierdo del abdomen", `Vacunacion` = "En fecha", `Altura` = 1.45, `Peso` = 93.5, `Hospital` = "Hospital italiano", `Obra social` = "Osecac", `N de afiliado obra social` = 112312312312, `Medico cabecera` = "Dr Michael Morbius", `Domiciliomed` = "Antesana 247", `Telefono medico` = 2133352223, `Familiar responsable` = 5 WHERE `DNI` = "6";
+UPDATE fichamedica SET `Enfermedad` = "Sida", `Internacion` = "Internacion debido a cirujia por apendicitis", `Alergia` = "Intolerancia a la lactosa", `Tratamiento_medico` = "Antibioticos", `Quirurjico` = "Cirujia por apendicitis. 7 puntos sector inferior izquierdo del abdomen", `Vacunacion` = "1", `Altura` = 145, `Peso` = 93.5, `Hospital` = "Hospital italiano", `Obra_social` = "Osecac", `N_de_afiliado_obra_social` = 112312312312, `Medico_cabeceraln` = "Morbius", `Medico_cabecerafn` = "Michael", `Domiciliomed` = "Antesana 247", `Telefono_medico` = 2133352223;
 
 INSERT INTO `publicaciones` (`titulo`, `descripcion`, `autor`, fecha) VALUES ('Aniversario del Noba', 'Hoy recordamos un tragico accidente que se llevo a uno de los mas prometedores musicos de el siglo 21. Descansa en paz Lautaro.', '2', "2022-7-4"), ('Murio fortnite', 'Fortnite ha tocado fondo con sus usuarios activos este 4 de marzo de 2022 con una gran cantidad de bots por partida y una playerbese simultanea de solo 300 jugadores Fortnite se puede declarar como un juego muerto', '2', "2022-8-4"), ('Tragedia en Florencio Varela', 'Un oso que invocaba rayos asesino a una mujer policia de manera brutal este 4 de septiembre. Segun testigos el oso se nombraba a si mismo Volibear', '2', "2022-9-4"), ('Suicidios masivos en Europá', 'En europa recientemente surgio una ola de suicidios debido a lo que se cree que es el final de las criptomonedas', '2', "2022-10-4");
