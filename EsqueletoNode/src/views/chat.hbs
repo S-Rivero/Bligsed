@@ -1,31 +1,35 @@
-  <body>
+ <body>
     <ul id="mensaje_contenedor">
-      <li>{{db.connectionLimit}}</li>
-      <li>{{db.host}}</li>
-      <li>{{db.user}}</li>
-      <li>{{db.password}}</li>
-      <li>{{db.database}}</li>
-      {{!-- 
-        connectionLimit: 15,
-        host: "localhost",
-        user:  "root",
-        password:  "",
-        database:  "proyecto",
-      --}}
+      <li>Como andas</li>
+      {{#each message}}
+        {{#ifCond id_emisor '===' user.Nombre}}
+          <li class="plantilla_mensaje mensaje_emisor">
+            <div class="creador_mensaje">{{id_emisor}}</div>
+            <div class="hora_mensaje">{{hora}}</div>
+            <div class="contenido_mensaje">
+                <p>{{contenido}}</p>
+            </div>
+          </li>
+        {{else}}
+          <li class="plantilla_mensaje mensaje_receptor">
+            <div class="creador_mensaje">{{id_emisor}}</div>
+            <div class="hora_mensaje">{{hora}}</div>
+            <div class="contenido_mensaje">
+                <p>{{contenido}}</p>
+            </div>
+          </li>
+        {{/ifCond}}
+      {{/each}}
     </ul>
-    <form action="" onsubmit="pushMsg(this); return false">
-      <input type="text" id="msg" placeholder="Escribe un mensaje..."/>
-      <input type="text" id="uname" value="{{user.Nombre}}" style="display:none;">
-      <input type="number" id="uid" value="{{user.id}}" style="display:none;">
-      <input type="number" id="cid" value="" style="display:none;">
 
-      <input type="number" id="dbc" value="{{db.connectionLimit}}" style="display:none;">
-      <input type="text" id="dbh" value="{{db.host}}" style="display:none;">
-      <input type="text" id="dbu" value="{{db.user}}" style="display:none;">
-      <input type="text" id="dbp" value="{{db.password}}" style="display:none;">
-      <input type="text" id="dbdb" value="{{db.database}}" style="display:none;">
-
-      <input type="submit" value="Enviar"/>
+    <form id="form_data" action="/msg" method="post" >
+      <input type="text" name="msg_in" id="msg_in" placeholder="Escribe un mensaje...">
+      <input type="text" name="uname" id="uname" value="{{user.Nombre}}" style="display: none;">
+      <input type="number" name="uid" id="uid" value="{{user.id}}" style="display: none;">
+      <input type="number" name="cid" id="cid" value="1" style="display: none;">
+      <input type="submit" id="btn" value="Enviar"/>
     </form>
-    <script src="/js/messages.js"></script>
+    
+    <script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="/js/msg.js"></script>
   </body>

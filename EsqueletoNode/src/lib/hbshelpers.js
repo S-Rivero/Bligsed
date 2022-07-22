@@ -1,14 +1,32 @@
 const pool = require('../database');
 
 module.exports = {
-    unoMas: function(n){
-      return n+1;
-    },
-    ifCond: function(v1, options) {
-      if(v1%2 === 0) {
-        return options.fn(this);
+    ifCond: function(v1, operator, v2, options) {
+
+      switch (operator) {
+          case '==':
+              return (v1 == v2) ? options.fn(this) : options.inverse(this);
+          case '===':
+              return (v1 === v2) ? options.fn(this) : options.inverse(this);
+          case '!=':
+              return (v1 != v2) ? options.fn(this) : options.inverse(this);
+          case '!==':
+              return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+          case '<':
+              return (v1 < v2) ? options.fn(this) : options.inverse(this);
+          case '<=':
+              return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+          case '>':
+              return (v1 > v2) ? options.fn(this) : options.inverse(this);
+          case '>=':
+              return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+          case '&&':
+              return (v1 && v2) ? options.fn(this) : options.inverse(this);
+          case '||':
+              return (v1 || v2) ? options.fn(this) : options.inverse(this);
+          default:
+              return options.inverse(this);
       }
-      return options.inverse(this);
     },
     tipoUsuarioToString: function(tipo){
       switch(tipo){
