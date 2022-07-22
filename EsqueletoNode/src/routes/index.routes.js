@@ -19,7 +19,4 @@ router.get('/home', isLoggedIn, renderHome);
 
 router.post('/msg', pushMsg);
 
-router.get('/xample', renderXample);
-router.post('/xample', renderBody);
-
 module.exports = router;
