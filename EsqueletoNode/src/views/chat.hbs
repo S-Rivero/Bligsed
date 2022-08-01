@@ -2,7 +2,7 @@
     <ul id="mensaje_contenedor">
       <li>Como andas</li>
       {{#each message}}
-        {{#ifCond id_emisor '===' user.Nombre}}
+        {{#ifCond id_emisor '==' userid}}
           <li class="plantilla_mensaje mensaje_emisor">
             <div class="creador_mensaje">{{id_emisor}}</div>
             <div class="hora_mensaje">{{hora}}</div>

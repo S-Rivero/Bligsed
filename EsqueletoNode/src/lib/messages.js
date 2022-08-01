@@ -4,13 +4,12 @@
 const pool = require('../database');
 exports.pushMsg = function(req, res){
     
-    console.log(req.body);  
     let sql = "INSERT INTO mensajes (chatroom, id_emisor, contenido, fecha, hora) VALUES ("+req.body.chat+", "+req.body.uid+", '"+req.body.text+"', '"+req.body.date+"', '"+req.body.time+"')";
-    console.log(sql);
+
 
     pool.query(sql, function (err, result) {
         if (err) throw err;
-        console.log("1 record inserted");
+        console.log("1 message uploaded");
     });
     
 }
