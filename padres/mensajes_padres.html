@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="/plantilla_inicial.css">
-  <link rel="stylesheet" href="documentos_alumnos.css">
+  <link rel="stylesheet" href="mensajes_padres.css">
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -31,9 +31,16 @@
       <li>
         <a href="cuenta_padres_remake.html">
           <i class='bx bx-user'></i>
-          <span class="links_name">Mi cuenta</span>
+          <span class="links_name">Alumno 1</span>
         </a>
-        <span class="tooltip">Mi cuenta</span>
+        <span class="tooltip">Alumno 1</span>
+      </li>
+      <li>
+        <a href="cuenta_padres_remake.html">
+          <i class='bx bx-user'></i>
+          <span class="links_name">Alumno 2</span>
+        </a>
+        <span class="tooltip">Alumno 2</span>
       </li>
       <li>
         <a href="mensajes_padres.html">
@@ -53,8 +60,8 @@
         <div class="profile-details">
           <!--<img src="profile.jpg" alt="profileImg">-->
           <div class="name_job">
-            <div class="name">Hola, Usuario123</div>
-            <div class="job">Alumno</div>
+            <div class="name">Hola, Charly123</div>
+            <div class="job">Padre</div>
           </div>
         </div>
         <a href="logout"><i class='bx bx-log-out' id="log_out"></i></a>
@@ -62,56 +69,42 @@
     </ul>
   </div>
   <section class="home-section">
-    <div class="text">Documentación</div>
-      <div class="contenedor_documentacion">
-      <div class="contenedor_nombre_doc">
-      
-        <select name="tipo_doc">
-          <option value="facturas">Facturas</option>
-          <option value="recibos">Recibos</option>
-          <option value="constancias">Constancias</option>
-          <option value="permisos">Permis os</option>
-        </select>
-      </div>
-      <table class="bordered">
-        <tr>
-          <th>Fecha</th>
-          <th>Alumno</th>
-          <th>Nombre</th>
-          <th>Titulo</th>
-          <th>Curso</th>
-        </tr>
-        <tr>
-          <td>31/05/2022</td>
-          <td>ARROTA, María Belén</td>
-          <td>0122A0040001876_0001_04_ARROTA, Maria Belen.pdf</td>
-          <td>CUOTA JUNIO</td>
-          <td>7º "C" - (50) TÉCNICO EN INFORMÁTICA PERSONAL Y PROFESIONAL</td>
-        </tr>
-        <tr>
-          <td>31/05/2022</td>
-          <td>ARROTA, María Belén</td>
-          <td>0122A0040001876_0001_04_ARROTA, Maria Belen.pdf</td>
-          <td>CUOTA JUNIO</td>
-          <td>7º "C" - (50) TÉCNICO EN INFORMÁTICA PERSONAL Y PROFESIONAL</td>
-        </tr>
-        <tr>
-          <td>31/05/2022</td>
-          <td>ARROTA, María Belén</td>
-          <td>0122A0040001876_0001_04_ARROTA, Maria Belen.pdf</td>
-          <td>CUOTA JUNIO</td>
-          <td>7º "C" - (50) TÉCNICO EN INFORMÁTICA PERSONAL Y PROFESIONAL</td>
-        </tr>
-        <tr>
-          <td>31/05/2022</td>
-          <td>ARROTA, María Belén</td>
-          <td>0122A0040001876_0001_04_ARROTA, Maria Belen.pdf</td>
-          <td>CUOTA JUNIO</td>
-          <td>7º "C" - (50) TÉCNICO EN INFORMÁTICA PERSONAL Y PROFESIONAL</td>
-        </tr>
-        
-      </table>
+    <div class="text">Mensajes</div>
+
+    <div class="contenedor_principal">
+        <div class="contenedor_superior_busqueda">
+            <div class="contenedor_superior_busqueda_input"><input type="search" placeholder="Buscar..."></div>
+        </div>
+        <div class="contenedor_superior">
+           <h4>Lunes 30/05- Actividad en el turno tarde SUSPENDIDA -</h4> 
+            <h6>116 Participantes</h6>
+        </div>
+        <div class="contenedor_medio_lateral">
+            <ul>
+                <li>Lunes 30/05- Actividad en el turno tarde SUSPENDIDA -</li>
+                <li>Documentación pendiente -</li>
+                <li>ACLARACION SOBRE AUSENTE NO COMPUTABLE -</li>
+                <li>NUEVA FECHA DE VACUNACION COVID 19 EN LA PARROQUIA -</li>
+                <li>Vacunación 24 de Mayo -</li>
+                <li>VACUNACIÓN MARTES 24 DE MAYO -</li>
+            </ul>
+        </div>
+        <div class="contenedor_medio">
+            <!-- <img src="/padres/media/user2.png" alt="">
+            <div class="mensaje_recibido">Lorem ipsum dolor sit amet coem lorem</div> -->
+            <ul class="mensaje_contenedor">
+                <li class="plantilla_mensaje mensaje_receptor"><div class="creador_mensaje">Federico Melograna</div><div class="contenido_mensaje"><img src="/media/momo_sad.jpg" alt=""> Checa este momo we :'v</div></li>
+                <li class="plantilla_mensaje mensaje_receptor"><div class="creador_mensaje">Martin Touriño</div><div class="contenido_mensaje"><img src="/media/momo_sad2.jpg" alt=""> Que sad prro :'v xdxdxdxd</div></li>
+                <li class="plantilla_mensaje mensaje_emisor"><div class="contenido_mensaje">Lorem ipsum dolor sit amet coem lorem</div></li>
+            </ul>
+        </div>
+        <div class="contenedor_inferior_lateral">
+        </div>
+        <div class="contenedor_inferior">
+            <div class="contenedor_input"><input type="text" placeholder="Escribí un mensaje..."><a href="">></a></div>
+        </div>
     </div>
+
   </section>
   <script>
     let sidebar = document.querySelector(".sidebar");
