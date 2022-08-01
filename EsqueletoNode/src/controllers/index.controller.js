@@ -15,9 +15,13 @@ exports.root = ((req,res) => {
     // });
     
     // ESTO ES PARA LOS MENSAJES
-    res.render('chat.hbs', {layout: 'mensajeriaPrueba.hbs', user:req.user[0]});
+    const rows = pool.query("SELECT * FROM mensajes WHERE chatroom = 1", function(err, mensajes){
+        for(let i = 0; i < mensajes.length; i++){
+          mensajes[i].userid = req.user[0].id;
+        }
+        res.render('chat.hbs', {layout: 'mensajeriaPrueba.hbs', message: mensajes, user:req.user[0]});
+    });
 });
-
 exports.renderHome = ((req,res) => { //Actualmente muestra publicaciones nada mas
     const rows = pool.query("SELECT * FROM publicaciones p JOIN usuarios u ON p.autor = u.id", function(err, publicaciones){
         res.render('publicaciones.hbs', {pub: publicaciones, links: 'headerLinks/home', user:req.user[0]});
@@ -26,6 +30,9 @@ exports.renderHome = ((req,res) => { //Actualmente muestra publicaciones nada ma
 
 exports.renderChat = ((req,res) => {
     const rows = pool.query("SELECT * FROM mensajes WHERE chatroom = ?", [req.body.chat_id], function(err, mensajes){
+        for(let i = 0; i < mensajes.length; i++){
+            mensajes[i].userid = req.user[0].id;
+        }
         res.render('chat.hbs', {layout: 'mensajeriaPrueba.hbs', message: mensajes, user:req.user[0]});
     });
 });

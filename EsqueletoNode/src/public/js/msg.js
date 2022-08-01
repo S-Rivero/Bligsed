@@ -33,7 +33,6 @@ function msgCompressing(data){
       showMsg(o.uname, o.time, o.text);
       var string = 'uid='+o.uid+'&u_name='+o.uname+'&chat='+o.chat+'&text='+o.text+'&date='+o.date+'&time='+o.time;
       //name=John&age=12
-      console.log(o.time);
   }
   else 
     console.log('En una futura instancia deberia matar el post');
