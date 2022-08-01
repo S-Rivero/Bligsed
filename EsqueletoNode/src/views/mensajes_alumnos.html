@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/plantilla_inicial.css">
+  <link rel="stylesheet" href="/mensajes_alumnos.css">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <div class="sidebar open">
+    <div class="logo">
+      <div class="logo_name">Bligs<u>ed</u></div>
+      <i class='bx bx-menu' id="btn"></i>
+    </div>
+    <ul class="nav-list">
+      <!-- <li>
+          <i class='bx bx-search' ></i>
+         <input type="text" placeholder="Search...">
+         <span class="tooltip">Buscar</span>
+      </li> -->
+      <li>
+        <a href="inicio_alumnos.html">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name">Inicio</span>
+        </a>
+        <span class="tooltip">Inicio</span>
+      </li>
+      <li>
+        <a href="cuenta_alumnos_remake.html">
+          <i class='bx bx-user'></i>
+          <span class="links_name">Mi cuenta</span>
+        </a>
+        <span class="tooltip">Mi cuenta</span>
+      </li>
+      <li>
+        <a href="mensajes_alumnos.html">
+          <i class='bx bx-chat'></i>
+          <span class="links_name">Mensajes</span>
+        </a>
+        <span class="tooltip">Mensajes</span>
+      </li>
+      <li>
+        <a href="documentos_alumnos.html">
+          <i class='bx bx-folder'></i>
+          <span class="links_name">Documentos</span>
+        </a>
+        <span class="tooltip">Documentos</span>
+      </li>
+      <li class="profile">
+        <div class="profile-details">
+          <!--<img src="profile.jpg" alt="profileImg">-->
+          <div class="name_job">
+            <div class="name">Hola, Usuario123</div>
+            <div class="job">Alumno</div>
+          </div>
+        </div>
+        <a href="logout"><i class='bx bx-log-out' id="log_out"></i></a>
+      </li>
+    </ul>
+  </div>
+  <section class="home-section">
+    <div class="text">Mensajes</div>
+
+    <div class="contenedor_principal">
+        <div class="contenedor_superior_busqueda">
+            <div class="contenedor_superior_busqueda_input"><input type="search" placeholder="Buscar..."></div>
+        </div>
+        <div class="contenedor_superior">
+           <h4>Lunes 30/05- Actividad en el turno tarde SUSPENDIDA -</h4> 
+            <h6>116 Participantes</h6>
+        </div>
+        <div class="contenedor_medio_lateral">
+            <ul>
+                <li>Lunes 30/05- Actividad en el turno tarde SUSPENDIDA -</li>
+                <li>Documentación pendiente -</li>
+                <li>ACLARACION SOBRE AUSENTE NO COMPUTABLE -</li>
+                <li>NUEVA FECHA DE VACUNACION COVID 19 EN LA PARROQUIA -</li>
+                <li>Vacunación 24 de Mayo -</li>
+                <li>VACUNACIÓN MARTES 24 DE MAYO -</li>
+            </ul>
+        </div>
+        <div class="contenedor_medio">
+            <!-- <img src="/Alumnos/media/user2.png" alt="">
+            <div class="mensaje_recibido">Lorem ipsum dolor sit amet coem lorem</div> -->
+            <ul class="mensaje_contenedor">
+                <li class="plantilla_mensaje mensaje_receptor"><div class="creador_mensaje">Federico Melograna</div><div class="contenido_mensaje"><img src="/media/momo_sad.jpg" alt=""> Checa este momo we :'v</div></li>
+                <li class="plantilla_mensaje mensaje_receptor"><div class="creador_mensaje">Martin Touriño</div><div class="contenido_mensaje"><img src="/media/momo_sad2.jpg" alt=""> Que sad prro :'v xdxdxdxd</div></li>
+                <li class="plantilla_mensaje mensaje_emisor"><div class="contenido_mensaje">Lorem ipsum dolor sit amet coem lorem</div></li>
+            </ul>
+        </div>
+        <div class="contenedor_inferior_lateral">
+        </div>
+        <div class="contenedor_inferior">
+            <div class="contenedor_input"><input type="text" placeholder="Escribí un mensaje..."><a href="">></a></div>
+        </div>
+    </div>
+
+  </section>
+  <script>
+    let sidebar = document.querySelector(".sidebar");
+    let closeBtn = document.querySelector("#btn");
+    let searchBtn = document.querySelector(".bx-search");
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("open");
+      menuBtnChange();//calling the function(optional)
+    });
+
+    searchBtn.addEventListener("click", () => { // Sidebar open when you click on the search iocn
+      sidebar.classList.toggle("open");
+      menuBtnChange(); //calling the function(optional)
+    });
+
+    // following are the code to change sidebar button(optional)
+    function menuBtnChange() {
+      if (sidebar.classList.contains("open")) {
+        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+      } else {
+        closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
+      }
+    }
+  </script>
+
+
+</body>
+
+</html>

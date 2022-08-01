@@ -41,3 +41,7 @@ exports.renderChat = ((req,res) => {
         res.render('chat.hbs', {layout: 'mensajeriaPrueba.hbs', message: mensajes, user:req.user[0]});
     });
 });
+
+exports.renderChatHTML = ((req,res) => {
+    res.render('mensajes_alumnos.html');
+});

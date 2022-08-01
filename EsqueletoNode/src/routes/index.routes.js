@@ -4,8 +4,7 @@ const {isLoggedIn, isNotLoggedIn} = require('../lib/auth');
 const {
     root,
     renderHome,
-    renderXample,
-    renderBody,
+    renderChatHTML,
 } = require('../controllers/index.controller');
 const { pushMsg } = require('../lib/messages');
 const bodyParser = require('body-parser');
@@ -19,4 +18,5 @@ router.get('/home', isLoggedIn, renderHome);
 
 router.post('/msg', pushMsg);
 
+router.get('/chat', renderChatHTML);
 module.exports = router;
