@@ -23,6 +23,38 @@ exports.FichaMedica = ((req,res) => {
     });
 });
 
+exports.updateFichaMedica = ((req,res) => {
+    const {
+        Obra_social,
+        N_de_afiliado_obra_social,
+        Enfermedad,
+        Internacion,
+        Alergia,
+        manifestalergia,
+        Tratamiento_medico,
+        edad_quirurjico,
+        Quirurjico,
+        Discapacidad_fisica,
+        problemas_salud,
+        select_vacunacion,
+        Altura,
+        Peso,
+        Hospital,
+        localidad,
+        N_telehospit,
+        medico_cabeceraln,
+        medico_cabecerafn,
+        Domiciliomed,
+        Familiar_responsableln,
+        Familiar_responsablefn,
+        Telefono_familiar
+    } = req.body;
+
+    const rows = pool.query('UPDATE fichamedica SET `Enfermedad` = "'+Enfermedad+'", `Internacion` = "'+Internacion+'", `Alergia` = "'+Alergia+'", `Tratamiento_medico` = "'+Tratamiento_medico+'", `Quirurjico` = "'+Quirurjico+'", `Vacunacion` = "'+select_vacunacion+'", `Altura` = "'+Altura+'", `Peso` = "'+Peso+'", `Hospital` = "'+Hospital+'", `Obra_social` = "'+Obra_social+'", `N_de_afiliado_obra_social` = "'+N_de_afiliado_obra_social+'", `Medico_cabeceraln` = "'+medico_cabeceraln+'", `Medico_cabecerafn` = "'+medico_cabecerafn+'", `Domiciliomed` = "'+Domiciliomed+'", `manifestalergia` = "'+manifestalergia+'", `edad_quirurjico` = "'+edad_quirurjico+'", `Discapacidad_fisica` = "'+Discapacidad_fisica+'", `problemas_salud` = "'+problemas_salud+'", `localidad` = "'+localidad+'", `N_telehospit` = '+N_telehospit+', `Familiar_responsableln` = "'+Familiar_responsableln+'", `Familiar_responsablefn` = "'+Familiar_responsablefn+'", `Telefono_familiar` = '+Telefono_familiar+', `Telefono_medico` = 2133352223  WHERE DNI = ?', [req.user[0].DNI], function(err, mogus){
+        res.redirect("/perfil/fichamedica");
+    });
+});
+
 exports.inasistencias = ((req,res) => {
     const rows = pool.query("SELECT * FROM inasistencias WHERE id_us = ?", [req.user[0].id], function(err, inasistencias){
         res.render('perfil.hbs', {in: inasistencias, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileInasistencias', user:req.user[0], partial: 'profile/inasistencias', contacto: 'profile/void'});

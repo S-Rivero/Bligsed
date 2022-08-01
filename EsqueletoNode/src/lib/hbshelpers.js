@@ -1,6 +1,11 @@
 const pool = require('../database');
 
 module.exports = {
+
+    unoMas: function(n){
+      return n+1;
+    },
+    
     ifCond: function(v1, operator, v2, options) {
       switch (operator) {
           case '==':

@@ -1,127 +1,83 @@
 {{#each this}}
 <div class="contenedor_datos">
     <h2>Información de salud</h2>
-    <h1>{{Obra_social}}</h1>
-    <div class="input_fichamedica">
-        <input type="text" placeholder="Obra Social" class="ingreso" value="{{Obra_social}}">
-        <input type="text" placeholder="Nº Afiliado" class="ingreso" value="{{N_de_afiliado_obra_social}}">
 
-        <h4>Antecedentes de enfermedad</h4>
-        <p>¿Tiene alguna enfermedad que requiere periódicamente tratamiento o control médico?</p>
-        <input onchange="update();" type="radio" value="" name="tiene_enfermedad" id="inr0A">
-            <label for=""> Si </label>
-        <input onchange="update();" type="radio" value="" name="tiene_enfermedad" id="inr0B">
-            <label for=""> No </label><br>
-        <input onchange="update();" class="int0" type="text" placeholder="¿Cuál?" class="ingreso" value="{{Enfermedad}}">
-        <p>¿Durante los últimos años fue internado alguna vez? </p>
-        <input onchange="update();" type="radio" value="" name="fue_internado" id="inr1A">
-            <label for=""> Si </label>
-        <input onchange="update();" type="radio" value="" name="fue_internado" id="inr1B">
-            <label for=""> No </label>
+    <form action="updateFichaMedica" method="POST" name="formFichaMed">
+
+
+        <div class="input_fichamedica">
+            <input type="text" name="Obra_social" placeholder="Obra Social" class="ingreso" value="{{Obra_social}}">
+            <input type="text" name="N_de_afiliado_obra_social" placeholder="Nº Afiliado" class="ingreso" value="{{N_de_afiliado_obra_social}}">
+
+            <h4>Antecedentes de enfermedad</h4>
+            <p>¿Tiene alguna enfermedad que requiere periódicamente tratamiento o control médico?</p>
             <br>
-        <input onchange="update();" class="int1" type="text" placeholder="¿Por qué?" class="ingreso" value="{{Internacion}}">
+            <input class="int0" name="Enfermedad" type="text" placeholder="¿Cuál?" class="ingreso" value="{{Enfermedad}}">
+            <p>¿Durante los últimos años fue internado alguna vez? </p>
+            <br>
+            <input class="int1" name="Internacion" type="text" placeholder="¿Por qué?" class="ingreso" value="{{Internacion}}">
 
-        <h4>Alergias</h4>
-        <p>¿Recibe tratamiento médico?</p>
-        <input onchange="update();" type="radio" value="" name="recibe_tratamiento" id="inr2A">
-            <label for=""> Si </label>
-        <input onchange="update();" type="radio" value="" name="recibe_tratamiento" id="inr2B">
-            <label for=""> No </label><br>
-        <input onchange="update();" class="int2" type="text" placeholder="Alergia a..." class="ingreso" value="{{Alergia}}">
-        <input onchange="update();" class="int2" type="text" placeholder="Manifestaciones" class="ingreso" value="{{manifestalergia}}">
-        
-        <h4>Tratamientos</h4>
-        <p>¿Recibe tratamiento médico?</p>
-        <input onchange="update();" type="radio" value="" name="tratamiento_medico" id="inr3A">
-            <label for=""> Si </label>
-        <input onchange="update();" type="radio" value="" name="tratamiento_medico" id="inr3B">
-            <label for=""> No </label><br>
-        <input onchange="update();" class="int3" type="text" placeholder="Especifique" class="ingreso" value="{{Tratamiento_medico}}">
-        <p>¿Procedimientos quirúrgicos?</p>
-        <input onchange="update();" type="radio" value="" name="procedimientos_quirurgicos" id="inr4A">
-            <label for=""> Si </label>
-        <input onchange="update();" type="radio" value="" name="procedimientos_quirurgicos" id="inr4B">
-            <label for=""> No </label><br>
-        <input onchange="update();" class="int4" type="text" placeholder="¿A que edad?" class="ingreso" value="{{edad_quirurjico}}">
-        <input onchange="update();" class="int4" type="text" placeholder="Tipo de cirugía" class="ingreso" value="{{Quirurjico}}">
-        <p>¿Presenta alguna limitación física?</p>
-        <input onchange="update();" type="radio" value="" name="limitacion_fisica" id="inr5A">
-            <label for=""> Si </label>
-        <input onchange="update();" type="radio" value="" name="limitacion_fisica" id="inr5B">
-            <label for=""> No </label> <br>
-        <input onchange="update();" class="int5" type="text" placeholder="Aclaración" class="ingreso" value="{{Discapacidad_fisica}}">
-        <input onchange="update();" class="int5" type="text" placeholder="Otros problemas de salud..." class="ingreso" value="{{problemas_salud}}">
+            <h4>Alergias</h4>
+            <p>¿Recibe tratamiento médico?</p>
+            <br>
+            <input class="int2" name="Alergia" type="text" placeholder="Alergia a..." class="ingreso" value="{{Alergia}}">
+            <input class="int2" name="manifestalergia" type="text" placeholder="Manifestaciones" class="ingreso" value="{{manifestalergia}}">
 
-        <h4>Vacunación {{#selectVacunacion Vacunacion}}{{/selectVacunacion}}</h4>
-        <form action="">
+            <h4>Tratamientos</h4>
+            <p>¿Recibe tratamiento médico?</p>
+            <br>
+            <input class="int3" name="Tratamiento_medico" type="text" placeholder="Especifique" class="ingreso" value="{{Tratamiento_medico}}">
+            <p>¿Procedimientos quirúrgicos?</p>
+            <br>
+            <input class="int4" name="edad_quirurjico" type="text" placeholder="¿A que edad?" class="ingreso" value="{{edad_quirurjico}}">
+            <input class="int4" name="Quirurjico" type="text" placeholder="Tipo de cirugía" class="ingreso" value="{{Quirurjico}}">
+            <p>¿Presenta alguna limitación física?</p>
+            <br>
+            <input class="int5" name="Discapacidad_fisica" type="text" placeholder="Aclaración" class="ingreso" value="{{Discapacidad_fisica}}">
+            <input class="int5" name="problemas_salud" type="text" placeholder="Otros problemas de salud..." class="ingreso"
+                value="{{problemas_salud}}">
+
+            <h4>Vacunación {{#selectVacunacion Vacunacion}}{{/selectVacunacion}}</h4>
+            
             <label for="" id="texto_vac">Elija la opción que corresponda</label>
             <select name="select_vacunacion" id="select_vacunacion">
-                    <option value="{{#selectVacunacion Vacunacion}}{{/selectVacunacion}}" hidden="hidden" selected="selected">{{#selectVacunacion Vacunacion}}{{/selectVacunacion}}</option>
-                    <option id="vac1" value="volvo" >Completa</option>
-                    <option id="vac2" value="saab">Incompleta</option>
-                    <option id="vac3" value="opel">Sin datos</option>
+                <option value="{{#selectVacunacion Vacunacion}}{{/selectVacunacion}}" hidden="hidden"
+                    selected="selected">{{#selectVacunacion Vacunacion}}{{/selectVacunacion}}</option>
+                <option id="vac1" value="1">Completa</option>
+                <option id="vac2" value="2">Incompleta</option>
+                <option id="vac3" value="0">Sin datos</option>
                 <select>
-        </form>
-
-        <input type="text" placeholder="Talla (en cm)" class="ingreso" value="{{Altura}}">
-        <input type="text" placeholder="Peso (en kg, separar con coma (,))" class="ingreso" value="{{Peso}}">
-
-        <h4>Si el alumno tiene algún problema de salud en la escuela...</h4>
-        <p>Recurrir a</p>
-        <input type="text" placeholder="Institución" class="ingreso" value="{{Hospital}}">
-        <input type="text" placeholder="Domicilio" class="ingreso" value="{{localidad}}">
-        <input type="text" placeholder="Teléfono" class="ingreso" value="{{N_telehospit}}">
-
-        <p>Médico</p>
-        <input type="text" placeholder="Apellido" class="ingreso" value="{{medico_cabeceraln}}">
-        <input type="text" placeholder="Nombre" class="ingreso" value="{{medico_cabecerafn}}">
-        <input type="text" placeholder="Domicilio" class="ingreso" value="{{Domiciliomed}}">
-
-        <p>Familiar</p>
-        <input type="text" placeholder="Apellido" class="ingreso" value="{{Familiar_responsableln}}">
-        <input type="text" placeholder="Nombre" class="ingreso" value="{{Familiar_responsablefn}}">
-        <input type="text" placeholder="Teléfono" class="ingreso" value="{{Telefono_familiar}}">
-
-    </div>
-    
-{{/each}}
-
-<script type="text/javascript"> //POSIBLE FALLA DE SEGURIDAD AGUANTE BOCA JUNIORS
-    update();
-    function update(){
-        for(let i = 0 ; i < 6 ; i++){
-            let OpA = document.getElementById("inr"+i+"A");
-            let OpB = document.getElementById("inr"+i+"B");
-            let Text = [];
-            Text = document.getElementsByClassName("int"+i);
             
 
-            if(esVacio(Text[0])){
-                OpA.removeAttribute('checked');
-                OpA.value = 1;
-                OpB.setAttribute('checked','');
-                OpA.value = 0;
-            }else{
-                OpB.removeAttribute('checked');
-                OpB.value = 1
-                OpA.setAttribute('checked','');
-                OpA.value = 0;
-            }
+            <input type="text" name="Altura" placeholder="Talla (en cm)" class="ingreso" value="{{Altura}}">
+            <input type="text" name="Peso" placeholder="Peso (en kg, separar con coma (,))" class="ingreso" value="{{Peso}}">
 
-            for(j=0;j<Text.length;j++){
-                if(esNo(OpB)){
-                    Text[j].setAttribute('disabled','');
-                }else{
-                    Text[j].removeAttribute('disabled');
-                }
-            }
-            
+            <h4>Si el alumno tiene algún problema de salud en la escuela...</h4>
+            <p>Recurrir a</p>
+            <input type="text" name="Hospital" placeholder="Institución" class="ingreso" value="{{Hospital}}">
+            <input type="text" name="localidad" placeholder="Domicilio" class="ingreso" value="{{localidad}}">
+            <input type="text" name="N_telehospit" placeholder="Teléfono" class="ingreso" value="{{N_telehospit}}">
+
+            <p>Médico</p>
+            <input type="text" name="medico_cabeceraln" placeholder="Apellido" class="ingreso" value="{{Medico_cabeceraln}}">
+            <input type="text" name="medico_cabecerafn" placeholder="Nombre" class="ingreso" value="{{Medico_cabecerafn}}">
+            <input type="text" name="Domiciliomed" placeholder="Domicilio" class="ingreso" value="{{Domiciliomed}}">
+
+            <p>Familiar</p>
+            <input type="text" name="Familiar_responsableln" placeholder="Apellido" class="ingreso" value="{{Familiar_responsableln}}">
+            <input type="text" name="Familiar_responsablefn" placeholder="Nombre" class="ingreso" value="{{Familiar_responsablefn}}">
+            <input type="text" name="Telefono_familiar" placeholder="Teléfono" class="ingreso" value="{{Telefono_familiar}}">
+
+            {{!-- CORREGIR ESTO XD 
+                TAMBIEN HAY QUE AGREGAR UN INPUT CON NAME Telefono_medico
+            --}}
+            <input type="submit" value="HOLA">
+        </div>
+    </form>
+    {{/each}}
+
+    <script type="text/javascript">
+        function update() {
+
         }
-    }
-    function esVacio(t){
-        return t.value===''?true:false;
-    }
-    function esNo(o){
-        return o.checked===true || o.value === 1;
-    }
-</script>
+    </script>
