@@ -13,7 +13,18 @@
 
 
 .contenedor_publicaciones {
-    margin-right: 5%;
+  position: relative;
+  left: 10%;
+  top: 5%;
+}
+
+.autor_nombre{
+  margin-left: 3%;
+  margin-top: 2%;
+}
+
+.autor_fecha{
+  margin-left: 3%;
 }
 
 .contenedor_lateral {
@@ -31,8 +42,8 @@
     height: 80%;
     width: 100%;
     margin-bottom: 1vh;
+    border-radius: 15px;
 }
-
 
 .contenido_titulo {
     height: 15%;
