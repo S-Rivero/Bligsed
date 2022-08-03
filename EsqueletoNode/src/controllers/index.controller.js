@@ -42,6 +42,11 @@ exports.renderChat = ((req,res) => {
     });
 });
 
-exports.renderChatHTML = ((req,res) => {
-    res.render('mensajes_alumnos.html');
+exports.renderChatPrueba = ((req,res) => {
+    const rows = pool.query("SELECT * FROM mensajes WHERE chatroom = 1", function(err, mensajes){
+        for(let i = 0; i < mensajes.length; i++){
+            mensajes[i].userid = req.user[0].id;
+        }
+        res.render('mensajes_alumnos.hbs', {layout: 'chatLY.hbs', message: mensajes, user:req.user[0]});
+    });
 });

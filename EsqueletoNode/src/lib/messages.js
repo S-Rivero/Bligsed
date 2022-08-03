@@ -14,3 +14,12 @@ exports.pushMsg = function(req, res){
     
 }
 
+
+/*
+MENSAJES CON IMAGES QUE SAQUE DEL EJEMPLO
+
+<li class="plantilla_mensaje mensaje_receptor"><div class="creador_mensaje">Federico Melograna</div><div class="contenido_mensaje"><img src="/media/momo_sad.jpg" alt=""> Checa este momo we :'v</div></li>
+<li class="plantilla_mensaje mensaje_receptor"><div class="creador_mensaje">Martin Touriño</div><div class="contenido_mensaje"><img src="/media/momo_sad2.jpg" alt=""> Que sad prro :'v xdxdxdxd</div></li>
+<li class="plantilla_mensaje mensaje_emisor"><div class="contenido_mensaje">Lorem ipsum dolor sit amet coem lorem</div></li>
+*/
+

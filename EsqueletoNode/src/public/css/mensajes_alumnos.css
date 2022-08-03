@@ -162,13 +162,13 @@
     margin-left: 0.5%;
 }
 
-.mensaje_emisor {
+.mensaje_receptor {
     float: left;
     margin-right: 70%;
     margin-left: 1%;
 }
 
-.mensaje_receptor {
+.mensaje_emisor {
     float: right;
     margin-left: 70%;
     margin-right: 1%;
