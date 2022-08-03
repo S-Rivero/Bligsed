@@ -4,6 +4,7 @@ const router = express.Router();
 const {isLoggedIn, isNotLoggedIn} = require('../lib/auth');
 
 router.get('/', isLoggedIn, root);
+router.get('/root:id', isLoggedIn, root);
 router.get('/datosPersonales', isLoggedIn, datosPersonales);
 router.get('/FichaMedica', isLoggedIn, FichaMedica);
 router.post('/updateFichaMedica', isLoggedIn, updateFichaMedica);

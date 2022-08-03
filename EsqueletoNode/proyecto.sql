@@ -79,7 +79,8 @@ CREATE TABLE `fichamedica` (
   `Telefono_medico` int(11) NOT NULL,
   `Familiar_responsableln` varchar(40) NOT NULL,
   `Familiar_responsablefn` varchar(40) NOT NULL,
-  `Telefono_familiar` int(11) NOT NULL
+  `Telefono_familiar` int(11) NOT NULL,
+ `id_us` int (11) NOT NULL
 ) ;
 
 -- --------------------------------------------------------
@@ -276,7 +277,7 @@ CREATE TRIGGER `borrar fichamedica` BEFORE DELETE ON `usuarios`
  DELIMITER $$
  CREATE TRIGGER `cargadnionlyalum` AFTER INSERT ON `usuarios`
  FOR EACH ROW IF COALESCE(new.Tipo_de_usuario) = 6 THEN BEGIN
-INSERT INTO fichamedica (DNI) VALUES (concat(new.DNI));
+INSERT INTO fichamedica (DNI, id_us) VALUES (concat(new.DNI), concat(new.id));
 INSERT INTO alumno (id) VALUES (new.id);
 END; END IF
 $$
