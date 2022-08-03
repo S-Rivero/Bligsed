@@ -16,6 +16,15 @@
                 </a>
                 <span class="tooltip">Inicio</span>
             </li>
+            {{#each childs}}
+                <li>
+                    <a href="/perfil/root{{this}}">
+                        <i class='bx bx-user'></i>
+                        <span class="links_name">Alumno 1</span>
+                    </a>
+                    <span class="tooltip">Alumno 1</span>
+                </li>
+            {{/each}}
             <li>
                 <a href="../../../perfil">
                     <i class='bx bx-user'></i>
@@ -41,8 +50,8 @@
                 <div class="profile-details">
                     <!--<img src="profile.jpg" alt="profileImg">-->
                     <div class="name_job">
-                        <div class="name">Hola, {{Nombre}}</div>
-                        <div class="job">{{#tipoUsuarioToString Tipo_de_usuario}}{{/tipoUsuarioToString}}</div>
+                        <div class="name">Hola, {{user.Nombre}}</div>
+                        <div class="job">{{#tipoUsuarioToString user.Tipo_de_usuario}}{{/tipoUsuarioToString}}</div>
                     </div>
                 </div>
                 <a href="../../../logout"><i class='bx bx-log-out' id="log_out"></i></a>
