@@ -6,7 +6,12 @@
       <div class="contenedor_superior_busqueda_input"><input type="search" placeholder="Buscar..."></div>
     </div>
     <div class="contenedor_superior">
-      <h4>{{nombre_chat_sel}}</h4> 
+      {{#each selected_chat}}
+        <h3>{{nombre_chat}}</h3>
+      {{/each}}
+      {{#each count}}
+        <p>{{id_chat}} participantes</p>
+      {{/each}}
     </div>
     <div class="contenedor_medio_lateral">
       <ul id="lista_chats">
@@ -41,14 +46,11 @@
       </div>
       <div class="contenedor_inferior">
         <div class="contenedor_input">
-          {{!-- <input type="text" placeholder="Escribí un mensaje...">
-          <a href="">></a>
-            --}}
           <form id="form_data" action="/msg" method="post" >
             <input type="text" name="msg_in" id="msg_in" placeholder="Escribe un mensaje...">
             <input type="text" name="uname" id="uname" value="{{user.Nombre}}" style="display: none;">
             <input type="number" name="uid" id="uid" value="{{user.id}}" style="display: none;">
-            <input type="number" name="cid" id="cid" value="1" style="display: none;">
+            <input type="number" name="cid" id="cid" value="{{selected_chat.id}}" style="display: none;">
             <input type="submit" id="submit" value="Enviar"/>
             {{!-- <a href="">></a> --}}
           </form>
