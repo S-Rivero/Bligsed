@@ -7,24 +7,9 @@ const {JSONPromediosAl} = require('../lib/jsonFormat');
 const {setChild} = require('../lib/helpers');
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
 exports.root = ((req,res) => {
-    
-    // ESTO ES DE NASHER
-    // setChild(req.user[0]).then((r)=>{
-    //     req.session['childs'] = r;
-    //     res.redirect('/home');
-    // });
-    
-    // ESTO ES PARA LOS MENSAJES
-    const rows = pool.query("SELECT * FROM mensajes WHERE chatroom = 1", function(err, mensajes){
-        for(let i = 0; i < mensajes.length; i++){
-          mensajes[i].userid = req.user[0].id;
-        }
-
-        //ESTO ES DE NASHER, ES COPY PASTE DE LO DE ARRIBA PARA NO CAMBIAR LAS RUTAS. NO BORRAR ESTE NI EL DE ARRIBA. DESPUES EN UN FUTURO SE BORRA TODO ESTO Y QUEDA SOLO EL DE ARRIBA 
-        setChild(req.user[0]).then((r)=>{
-            req.session['childs'] = r;
-        });
-        res.render('chat.hbs', {layout: 'mensajeriaPrueba.hbs', message: mensajes, user:req.user[0]});
+    setChild(req.user[0]).then((r)=>{
+        req.session['childs'] = r;
+        res.redirect('/home');
     });
 });
 exports.renderHome = ((req,res) => { //Actualmente muestra publicaciones nada mas
@@ -47,6 +32,6 @@ exports.renderChatPrueba = ((req,res) => {
         for(let i = 0; i < mensajes.length; i++){
             mensajes[i].userid = req.user[0].id;
         }
-        res.render('mensajes_alumnos.hbs', {layout: 'chatLY.hbs', message: mensajes, user:req.user[0]});
+        res.render('chat.hbs', {layout: 'chatLY.hbs', message: mensajes, user:req.user[0]});
     });
 });
