@@ -5,7 +5,7 @@
 .contenedor_inicio {
     display: grid;
     grid-template-columns: 70% 30%;
-    background-color: lightblue;
+    background-color: white;
     width: 100%;
     height: 100vh;
     overflow: scroll;
@@ -14,38 +14,33 @@
 
 .contenedor_publicaciones {
   position: relative;
-  left: 10%;
-  top: 5%;
+  left: 5%;
+  top: 1%;
 }
 
 .autor_nombre{
-  margin-left: 3%;
-  margin-top: 2%;
+  font-weight: bold;
 }
 
 .autor_fecha{
-  margin-left: 3%;
+  border-bottom: 1px solid rgba(92, 102, 100, 0.295);
 }
 
-.contenedor_lateral {
-    margin-top: 1%;
-    position: sticky;
+.datos_colegio {
     background-color: red;
-    height: 65%;
-    width: 90%;
-    align-self: start;
 }
 
 .publicacion {
-    border: 1px solid black;
-    background-color: lightgreen;
-    height: 80%;
-    width: 100%;
-    margin-bottom: 1vh;
+    /* border: 1px solid black;
+    background-color: lightgreen; */
+    height: auto;
+    width: 80%;
+    margin-bottom: 6vh;
     border-radius: 15px;
 }
 
 .contenido_titulo {
+    margin-top: 3%;
     height: 15%;
     font-size: 26px;
     border: 2px solid transparent;
@@ -55,29 +50,27 @@
     letter-spacing: 1px;
     /* margin-bottom:1%; */
     background-color:  rgba(4, 83, 63, 0.059);
-    border-top-right-radius: 15px;
-    border-top-left-radius: 15px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
     color: #333;
 }
 
 .contenido_texto {
-  background: #4CAF50;
   /* color: white; */
   padding: 15px;
   width: 100%;
-  height: 300px;
-  overflow: scroll;
+  height: 40vh;
+  overflow: hidden;
+  background-color:  rgba(4, 83, 63, 0.059);
+  padding: 3%;
 }
 
 .contenido_vermas {
-    height: 20%;
-    /* border-top: 1px solid rgb(223, 223, 223); */
+    height: 10vh;
     text-align: center;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     background-color:  rgba(4, 83, 63, 0.059);
-    margin-top: 3%;
-    /* border-top: 1px solid rgb(187, 187, 187); */
 }
 
 #boton_vermas {
@@ -96,52 +89,6 @@
     transition: 0.2s;
     border-radius: 7px;
     padding: 10px;
-}
-
-
-.datos_colegio {
-  position:relative;
-  border-radius: 15px;
-  background-color:  rgba(4, 83, 63, 0.059);
-  width: 22vw;
-  height: 70vh;
-  margin-top: 1vh;
-  margin-left: 3%;
-  left: 65%;
-  top: 15%;
-  text-align: center;
-  font-weight: bold;
-  font-size: 20px;
-  color: #333;
-}
-
-.datos_colegio img {
-  margin-top: 7%;
-  margin-bottom: 7%;
-  position: relative;
-  /* left: 25%; */
-  width: 45%;
-  height: auto;
-}
-
-.info_colegio{
-  list-style: none;
-  text-align: left;
-  margin-left: 10%;
-}
-
-.info_colegio .bx-phone, .bx-envelope, .bx-home{
-  color: #333;
-}
-
-.info_colegio span{
-  font-size: 15px;
-  font-weight: normal;
-}
-
-.texto_infocolegio{
-  margin-left: 3%;
-  margin-right: 3%;
 }
 
 #log_out:hover{
@@ -206,10 +153,6 @@
   text-align: left;
 }
 
-.modal_contenedor_terciario ul {
-  /* padding-top: 1%; */
-}
-
 .modal_publicaciones_autor {
   width: 75%;
   text-align: left;
@@ -269,4 +212,8 @@
   background-color: aliceblue;
   border-radius: 7px;
   transition: 0.5s;
+}
+
+.text {
+  width: 100%;
 }
