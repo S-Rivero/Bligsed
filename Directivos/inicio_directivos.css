@@ -11,6 +11,48 @@
     overflow: scroll;
 }
 
+.botones_uwu{
+  display: grid;
+  grid-template-columns: 30% auto 15%;
+  margin-bottom: 3%;
+  /* justify-content: space-between; */
+  width: 80%;
+}
+
+
+.botones_uwu .iconify{
+  color: #333;
+  text-decoration: none;
+}
+
+.botones {
+  grid-column: 1;
+}
+
+.enviar_publicacion{
+  grid-column: 3;
+  background: rgb(87,196,193);
+  padding: 1%;
+  border-radius: 15px;
+  text-decoration: none;
+  color: white;
+  height: 7vh;
+}
+
+.enviar_publicacion p {
+  position: relative;
+  top: 1.5vh;
+  text-align: center;
+}
+
+.iconify{
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+}
+
+textarea {
+  resize: none;
+}
 
 .contenedor_publicaciones {
   position: relative;
@@ -27,6 +69,7 @@
   align-items: center;
   border-radius: 20px;
   text-align: left;
+  overflow: hidden;
 }
 
 .contenedor_lateral img {
@@ -47,11 +90,12 @@
 
 .contenedor_lateral div, ul {
   margin-left: 5%;
+  margin-right: 5%;
   list-style: none;
 }
 
-.ingreso_publicacion{
-  height: 40vh;
+.ingreso_titulo{
+  height: 5vh;
   width: 80%;
   padding: 0;
   position: relative;
@@ -61,15 +105,37 @@
   border-color: rgba(0,0,0,.15);
   background-color: white;
   font-size: 16px;
-  border-radius: 20px;
-  margin-bottom: 5%;
+  border-radius: 7px;
+  margin-bottom: 1%;
+}
+
+.ingreso_titulo::placeholder{
+  position: relative;
+  left: 2vh;
+}
+
+.ingreso_publicacion{
+  height: 30vh;
+  width: 80%;
+  padding: 0;
+  position: relative;
+  left: 0;
+  outline: none;
+  border: 1px solid #cdcdcd;
+  border-color: rgba(0,0,0,.15);
+  background-color: white;
+  font-size: 16px;
+  border-radius: 10px;
+  margin-bottom: 1%;
+  overflow-x: hidden;
 }
 
 
 .ingreso_publicacion::placeholder {
   position: relative;
-  bottom: 16vh;
-  left: 1.5vh;
+  left: 1vh;
+  top: 1vh;
+
 }
 
 
