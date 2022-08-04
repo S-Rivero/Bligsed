@@ -1,0 +1,93 @@
+<section class="home-section">
+  <div class="text">Mensajes</div>
+
+  <div class="contenedor_principal">
+    <div class="contenedor_superior_busqueda">
+      <div class="contenedor_superior_busqueda_input"><input type="search" placeholder="Buscar..."></div>
+    </div>
+    <div class="contenedor_superior">
+      {{#each selected_chat}}
+        <h3>{{nombre_chat}}</h3>
+      {{/each}}
+      {{#each count}}
+        <p>{{id_chat}} participantes</p>
+      {{/each}}
+    </div>
+    <div class="contenedor_medio_lateral">
+      <ul id="lista_chats">
+        {{#each chats}}
+          <form action="/chat" method="get">
+            <li class="chat_lateral">
+              <input type="number" name="id_chat" value="{{id_chat}}" style="display:none;">
+              <input type="submit" value=" {{nombre_chat}}">
+              </li>
+          </form>
+        {{/each}}
+        <li>Lunes 30/05- Actividad en el turno tarde SUSPENDIDA -</li>
+        <li>Documentación pendiente -</li>
+      </ul>
+    </div>
+
+    {{#ifCond mensajes '==' null}}
+      <div class="contenedor_medio">
+        <h3>SELECCIONA UN CHAT</h3>
+      </div>
+      <div class="contenedor_inferior_lateral">
+      </div>
+      <div class="contenedor_inferior">
+        <div class="contenedor_input">
+        </div>
+      </div>
+    {{else}}
+      <div class="contenedor_medio">
+        {{>chat mensajes}}
+      </div>
+      <div class="contenedor_inferior_lateral">
+      </div>
+      <div class="contenedor_inferior">
+        <div class="contenedor_input">
+          <form id="form_data" action="/msg" method="post" >
+            <input type="text" name="msg_in" id="msg_in" placeholder="Escribe un mensaje...">
+            <input type="text" name="uname" id="uname" value="{{user.Nombre}}" style="display: none;">
+            <input type="number" name="uid" id="uid" value="{{user.id}}" style="display: none;">
+            <input type="number" name="cid" id="cid" value="{{selected_chat.id}}" style="display: none;">
+            <input type="submit" id="submit" value="Enviar"/>
+            {{!-- <a href="">></a> --}}
+          </form>
+        </div>
+      </div>
+    {{/ifCond}}
+  </div>
+</section>
+
+<script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="/js/msg.js"></script>
+<script>
+  let submit = document.getElementById("submit");
+  submit.addEventListener("click", () => {
+    console.log('Detecta');
+  });
+
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+
+  closeBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
+
+  searchBtn.addEventListener("click", () => { // Sidebar open when you click on the search iocn
+    sidebar.classList.toggle("open");
+    menuBtnChange(); //calling the function(optional)
+  });
+
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+    if (sidebar.classList.contains("open")) {
+      closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+    } else {
+      closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
+    }
+  }
+</script>

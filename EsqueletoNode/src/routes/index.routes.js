@@ -4,11 +4,9 @@ const {isLoggedIn, isNotLoggedIn} = require('../lib/auth');
 const {
     root,
     renderHome,
-    renderChatPrueba,
+    renderChat,
 } = require('../controllers/index.controller');
 const { pushMsg } = require('../lib/messages');
-const bodyParser = require('body-parser');
-var jsonParser = bodyParser.json();
 
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
 
@@ -18,5 +16,6 @@ router.get('/home', isLoggedIn, renderHome);
 
 router.post('/msg', pushMsg);
 
-router.get('/chat', renderChatPrueba);
+router.get('/chat', renderChat);
+
 module.exports = router;

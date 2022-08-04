@@ -1,0 +1,21 @@
+<ul id="mensaje_contenedor" class="mensaje_contenedor">
+  {{#each this}}
+    {{#ifCond id_emisor '==' userid}}
+      <li class="plantilla_mensaje mensaje_emisor">
+        <div class="creador_mensaje">{{id_emisor}}</div>
+        <div class="hora_mensaje">{{hora}}</div>
+        <div class="contenido_mensaje">
+            <p>{{contenido}}</p>
+        </div>
+      </li>
+    {{else}}
+      <li class="plantilla_mensaje mensaje_receptor">
+        <div class="creador_mensaje">{{id_emisor}}</div>
+        <div class="hora_mensaje">{{hora}}</div>
+        <div class="contenido_mensaje">
+            <p>{{contenido}}</p>
+        </div>
+      </li>
+    {{/ifCond}}
+  {{/each}}
+</ul>
