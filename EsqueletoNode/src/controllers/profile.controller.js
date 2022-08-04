@@ -26,16 +26,19 @@ exports.root = ((req,res) => {
 });
 
 exports.datosPersonales = ((req,res) => {
-    let contacto = esAlumno(req.session.currentUser.Tipo_de_usuario);
+    // let contacto = esAlumno(req.session.currentUser.Tipo_de_usuario);
+    // let contactos = setTutor(req.session.currentUser.id).then((r)=>{
+    //     res.render('perfil.hbs', {in: req.session.currentUser, cu: req.session.currentUser, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileDatosPersonales', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/datosPersonales', contacto, contactos: r[0]});
+    // });
     let contactos = setTutor(req.session.currentUser.id).then((r)=>{
-        res.render('perfil.hbs', {in: req.session.currentUser, cu: req.session.currentUser, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileDatosPersonales', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/datosPersonales', contacto, contactos: r[0]});
-    });
+        res.render('perfil.hbs', {in: {in: req.session.currentUser, contactos: r[0]}, cu: req.session.currentUser, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileDatosPersonales', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/datosPersonales'});
+    });    
 });
 
 
 exports.FichaMedica = ((req,res) => {
     const rows = pool.query("SELECT * FROM fichamedica WHERE id_us = ?", [req.session.uid], function(err, ficha){
-        res.render('perfil.hbs', {cu: req.session.currentUser, in: ficha[0], title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileFichaMedica', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/fichaMedica', contacto: 'profile/void'});
+        res.render('perfil.hbs', {cu: req.session.currentUser, in: ficha[0], title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileFichaMedica', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/fichaMedica'});
     });
 });
 
@@ -73,7 +76,7 @@ exports.updateFichaMedica = ((req,res) => {
 
 exports.inasistencias = ((req,res) => {
     const rows = pool.query("SELECT * FROM inasistencias WHERE id_us = ?", [req.session.uid], function(err, inasistencias){
-        res.render('perfil.hbs', {cu: req.session.currentUser, in: inasistencias, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileInasistencias', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/inasistencias', contacto: 'profile/void'});
+        res.render('perfil.hbs', {cu: req.session.currentUser, in: inasistencias, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileInasistencias', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/inasistencias'});
     });
 });
 
@@ -86,7 +89,7 @@ exports.Boletin = ((req,res) => {
     if(trimestre != 0){
         const rows = pool.query("SELECT `nota`, `Materia` FROM usuarios u JOIN notas n ON u.id = n.id_alum JOIN materias m ON m.ID = n.id_materia WHERE u.id = ? AND n.trimestre = ? ORDER BY m.Materia ASC;", [req.session.uid,trimestre], function(err, materias){
             const formateado = JSONPromediosAl(materias);
-            res.render('perfil.hbs', {cu: req.session.currentUser, in:{ma: formateado['materias'], cant: formateado.materias[formateado.max['materia']]}, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileBoletin', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/boletin', contacto: 'profile/void'});
+            res.render('perfil.hbs', {cu: req.session.currentUser, in:{ma: formateado['materias'], cant: formateado.materias[formateado.max['materia']]}, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileBoletin', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/boletin'});
         });
     }else{
         res.send("todavia no esta hecho xd");

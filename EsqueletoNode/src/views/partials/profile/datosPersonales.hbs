@@ -1,11 +1,23 @@
 <div class="contenedor_datos">
-    <h2>Datos Personales</h2>
-    <div>
-        <p><b>Fecha de Nacimiento:</b> {{#textToDate Fecha_de_nacimiento}}{{/textToDate}}</p>
-        <p><b>DNI:</b> {{DNI}}</p>
-        <p><b>ID:</b> {{id}}</p>
-        <p><b>E-Mail:</b> {{username}}</p>
-        <p><b>Tel:</b> {{Numero_de_telefono}}</p>
-        <p><b>Direccion: </b>{{domicilio}}</p>
+        <h2>Datos Personales</h2>
+        <div>
+            <p><b>Fecha de Nacimiento:</b> {{#textToDate in.Fecha_de_nacimiento}}{{/textToDate}}</p>
+            <p><b>DNI:</b> {{in.DNI}}</p>
+            <p><b>ID:</b> {{in.id}}</p>
+            <p><b>E-Mail:</b> {{in.username}}</p>
+            <p><b>Tel:</b> {{in.Numero_de_telefono}}</p>
+            <p><b>Direccion: </b>{{in.domicilio}}</p>
+        </div>
     </div>
-</div>
+    {{#if in.Tipo_de_usuario 6}}
+    <div class="contenedor_contacto">
+        <h2>Contacto</h2>
+        <div>
+            {{#each contactos}}
+                <p><b>Tutor {{#unoMas @index}}{{/unoMas}}: </b>{{nombre}}</p>
+                <p><b>Tel: </b>{{Numero_de_telefono}}</p>
+                <p><b>DNI: </b>{{DNI}}</p>
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
