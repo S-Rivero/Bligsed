@@ -28,7 +28,7 @@ exports.renderChat = ((req,res) => {
                 }
                 const rows3 = pool.query("SELECT * FROM chats WHERE id_chat = "+req.query.id_chat+" AND id_usuario = "+req.user[0].id, function(err, selected_chat){
                     const rows4 = pool.query("SELECT COUNT(id_chat) as id_chat FROM chats WHERE id_chat="+req.query.id_chat, function(err, count){
-                        res.render('mensajes.hbs', {layout: 'chatLY.hbs', chats, mensajes, user:req.user[0], selected_chat, count});
+                        res.render('mensajes.hbs', {layout: 'chatLY.hbs', chats, mensajes, user:req.user[0], selected_chat: selected_chat[0], count: count[0]});
                     });
                 });
             });
