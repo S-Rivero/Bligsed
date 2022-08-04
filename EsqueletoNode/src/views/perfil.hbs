@@ -1,25 +1,38 @@
-<div class="text">Mi Cuenta</div>
+<div class="text">{{#if user.user.id cu.id}}Mi Cuenta{{else}}Cuenta de {{cu.Nombre}}{{/if}}</div>
 <div class="contenedor_micuenta">
     <div class="contenedor_primario">
         <div class="contenedor_imagen">
             <img src="../media/user_png.png" alt="">
         </div>
         <div class="contenedor_nombre">
-            <div class="nombre_alumno">APELLIDO, Nombre</div>
+            <div class="nombre_alumno">{{cu.Nombre}}</div>
             <div class="profesion_alumno">7°"C" - Técnico en informática personal y profesional</div>
         </div>
     </div>
 
     <div class="contenedor_botones">
         <ul class="botones_alumno">
-            <li><a href="datosPersonales">Datos Personales</a></li>
-            <li><a href="fichamedica">Ficha Médica</a></li>
-            <li><a href="Boletin">Boletín</a></li>
-            <li><a href="inasistencias">Inasistencias</a></li>
-            <li><a href="">Mensajes</a></li>
+            <li id="datosPersonales"><a href="datosPersonales">Datos Personales</a></li>
+            {{#if cu.Tipo_de_usuario 6}}
+                <li id="fichamedica"><a href="fichamedica">Ficha Médica</a></li>
+                <li id="Boletin"><a href="Boletin">Boletín</a></li>
+                <li id="inasistencias"><a href="inasistencias">Inasistencias</a></li>
+                <li><a href="">Mensajes</a></li>
+            {{/if}}
         </ul>
     </div>
 
     {{>(partials partial)in}}
     {{>(partials contacto)contactos}}
 </div>
+
+
+<script type="text/javascript"> //POSIBLE FALLA DE SEGURIDAD AGUANTE BOCA JUNIORS
+
+    var url = window.location.href;
+    var trim = url.split("perfil/");
+    
+    let el = document.getElementById(trim[1]);
+    el.setAttribute('class','color_fijo');
+
+</script>

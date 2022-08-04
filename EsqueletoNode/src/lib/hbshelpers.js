@@ -5,7 +5,12 @@ module.exports = {
     unoMas: function(n){
       return n+1;
     },
-    
+    if: function(v1, v2, options) {
+      if(v1 === v2) {
+        return options.fn(this);
+      }
+      return options.inverse(this);
+    },
     ifCond: function(v1, operator, v2, options) {
       switch (operator) {
           case '==':
@@ -72,6 +77,9 @@ module.exports = {
     },
     dateTimeToDate: function(dateTime){
       return dateTime.toLocaleDateString();
+    },
+    textToDate: function(text){
+      return new Date(text).toLocaleDateString();
     },
     selectVacunacion: function(vac){
       switch(vac){
