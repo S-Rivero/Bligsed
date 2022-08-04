@@ -18,6 +18,65 @@
   top: 1%;
 }
 
+.contenedor_lateral {
+  position: relative;
+  background-color:  rgba(4, 83, 63, 0.059);
+  right: 10%;
+  height: 72.5vh;
+  width: 90%;
+  align-items: center;
+  border-radius: 20px;
+  text-align: left;
+}
+
+.contenedor_lateral img {
+  margin-top: 5vh;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: auto;
+}
+
+.texto_infocolegio{
+  font-weight: bold;
+  font-size: 130%;
+  text-align: center;
+  margin-bottom: 5%;
+}
+
+.contenedor_lateral div, ul {
+  margin-left: 5%;
+  list-style: none;
+}
+
+.ingreso_publicacion{
+  height: 40vh;
+  width: 80%;
+  padding: 0;
+  position: relative;
+  left: 0;
+  outline: none;
+  border: 1px solid #cdcdcd;
+  border-color: rgba(0,0,0,.15);
+  background-color: white;
+  font-size: 16px;
+  border-radius: 20px;
+  margin-bottom: 5%;
+}
+
+
+.ingreso_publicacion::placeholder {
+  position: relative;
+  bottom: 16vh;
+  left: 1.5vh;
+}
+
+
+.info_colegio li{
+  margin-bottom: 3%;
+}
+
 .autor_nombre{
   font-weight: bold;
 }
