@@ -14,6 +14,25 @@ exports.pushMsg = function(req, res){
     
 }
 
+exports.adminChat = function(req, res){
+    var sqlQuerys = [
+        //Contar los chats existentes para tener el id del siguiente chat (this + 1)
+        "SELECT COUNT(DISTINCT id_chat) FROM chats;",
+        //Crea chat con los usuarios seleccionados
+        "INSERT INTO chats (id_chat, id_usuario, nombre_chat) VALUES ("+count + 1 +", "+req.body.id_usuario[x]+", '"+req.body.nombre_chat+"'), ("+count + 1 +", "+req.body.id_usuario[x]+", '"+req.body.nombre_chat+"');",
+
+        //Aca borra el chat seleccionado
+        "DELETE FROM chats WHERE id_chat = "+req.body.id_chat+" AND nombre_chat = '"+req.body.nombre_chat+"';",
+        "INSERT INTO chats (id_chat, id_usuario, nombre_chat) VALUES ("+req.body.id_chat+", -1, '"+req.body.nombre_chat+"');",
+        // El usuario -1 no existe y por eso lo meto, para que ocupe el id de chat y las cuentas se puedan seguir dando
+
+
+        //"Abandonar chat"
+        "DELETE FROM chats WHERE id_chat = "+req.body.id_chat+" AND id_usuario = "+req.user[0].id+" AND nombre_chat = '"+req.body.nombre_chat+"';",
+    ];
+    console.log(sqlQuerys);
+
+}
 
 /*
 MENSAJES CON IMAGES QUE SAQUE DEL EJEMPLO
