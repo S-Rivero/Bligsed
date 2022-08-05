@@ -21,13 +21,17 @@ exports.renderHome = ((req,res) => { //Actualmente muestra publicaciones nada ma
 
 exports.renderChat = ((req,res) => {
     const rows1 = pool.query("SELECT * FROM chats WHERE id_usuario = ?", req.user[0].id, function(err, chats){
+        if (err) throw err;
         if (req.query.id_chat != null) {
             const rows2 = pool.query("SELECT * FROM mensajes WHERE chatroom = ?", [req.query.id_chat], function(err, mensajes){
+                if (err) throw err;
                 for(let i = 0; i < mensajes.length; i++){
                     mensajes[i].userid = req.user[0].id;
                 }
                 const rows3 = pool.query("SELECT * FROM chats WHERE id_chat = "+req.query.id_chat+" AND id_usuario = "+req.user[0].id, function(err, selected_chat){
+                    if (err) throw err;
                     const rows4 = pool.query("SELECT COUNT(id_chat) as id_chat FROM chats WHERE id_chat="+req.query.id_chat, function(err, count){
+                        if (err) throw err;
                         res.render('mensajes.hbs', {layout: 'chatLY.hbs', chats, mensajes, user:req.user[0], selected_chat: selected_chat[0], count: count[0]});
                     });
                 });
