@@ -16,7 +16,7 @@ body{
 }
 
 .nav__link{
-    color: #303440;
+    color: white;
     display: block;
     padding: 15px 0;
     text-decoration: none;
@@ -80,7 +80,7 @@ body{
 .list__show{
     width: 80%;
     margin-left: auto;
-    border-left: 2px solid #303440;
+    border-left: 2px solid white;
     list-style: none;
     transition: height .6s;
     height: 0;

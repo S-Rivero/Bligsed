@@ -6,6 +6,8 @@
   box-sizing: border-box;
   font-family: "Poppins" , sans-serif;
 }
+
+
 .sidebar{
   position: fixed;
   left: 0;
@@ -165,6 +167,8 @@
   transition: all 0.5s ease;
   color: #11101D;
 }
+
+
 .sidebar li i{
   height: 50px;
   line-height: 50px;
@@ -249,7 +253,6 @@
     display: none;
   }
 }
-
 
 .contenedor_inicio {
   background-color: lightblue;

@@ -8,6 +8,14 @@
     margin-left: 5vh;
 }
 
+.nav__link_A{
+  color: white;
+}
+
+.nav__link--inside-A{
+  color: white;
+}
+
 .autor_nombre {
     margin-top: 0.9%;
     height: auto;
