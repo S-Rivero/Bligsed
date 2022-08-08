@@ -28,9 +28,9 @@ body{
     text-align: left;
 }
 
-.nav__link--inside:hover{
+/* .nav__link--inside:hover{
     background: #fff;
-}
+} */
 
 .list{
     width: 100%;
@@ -56,13 +56,12 @@ body{
 .list__button{
     display: flex;
     align-items: center;
-    width: 70%;
+    width: 100%;
     margin: 0 auto;
 }
 
 .list__button__inside {
     position: relative;
-    right: 15%;
     background-color: lightslategray;
 }
 
@@ -110,14 +109,14 @@ body{
     margin-top: 3%;
 }
 
-.list__item__padres {
+/* .list__item__padres {
     position: relative;
     right: 15%;
-}
+} */
 
 .list__show__padres {
     position: relative;
-    left: 25%;
+    left: 10%;
 }
 .list__inside {
     border-radius: 0px;
