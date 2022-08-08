@@ -16,7 +16,7 @@ body{
 }
 
 .nav__link{
-    color: white;
+    /* color: white; */
     display: block;
     padding: 15px 0;
     text-decoration: none;
@@ -105,3 +105,18 @@ body{
   ::-webkit-scrollbar-thumb:hover {
     background: #333; 
   }
+
+
+.clase_bolita {
+    margin-top: 3%;
+}
+
+.list__item__padres {
+    position: relative;
+    right: 15%;
+}
+
+.list__show__padres {
+    position: relative;
+    left: 25%;
+}

@@ -10,12 +10,12 @@
 }
 
 .contenedor_superior_busqueda {
-    background-color: rgba(127,198,213,1);
+    background-color: rgb(87,196,193);
     border-top-left-radius: 15px;
 }
 
 .contenedor_superior {
-    background-color: rgba(127,198,213,1);
+    background-color: rgb(87,196,193);
     border-top-right-radius: 15px;
     border-left:1px solid rgb(103, 179, 194);
     color: #020024;
@@ -46,7 +46,7 @@
 }
 
 .contenedor_inferior {
-    background-color: rgba(127,198,213,1);
+    background-color: rgb(87,196,193);
     border-bottom-right-radius: 15px;
     border-left:1px solid rgb(103, 179, 194);
 }
@@ -76,7 +76,7 @@
 }
 
 .contenedor_inferior_lateral {
-    background-color: rgba(127,198,213,1);
+    background-color: rgb(87,196,193);
     border-bottom-left-radius: 15px;
 }
 
