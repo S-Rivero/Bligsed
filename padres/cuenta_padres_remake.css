@@ -8,6 +8,10 @@
     margin-left: 3vw;
 }
 
+.nav__link_A {
+    color: white;
+}
+
 .contenedor_primario {
     grid-column: 1 / span 3;
     background-color: transparent;

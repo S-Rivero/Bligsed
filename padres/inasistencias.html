@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="/plantilla_inicial.css">
   <link rel="stylesheet" href="ficha_medica.css">
   <link rel="stylesheet" href="documentos_padres_boletin.css">
+  <link rel="stylesheet" href="/Directivos/Experimentos uwu/Menu Despegable/Menu/estilos.css">
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Cuenta - Bligsed</title>
@@ -30,22 +31,28 @@
         </a>
         <span class="tooltip">Inicio</span>
       </li>
-      <li>
-        <a href="cuenta_padres_remake.html">
+
+      <li class="list__item list__item__padres list__item--click">
+        <div class="list__button list__button--click">
           <i class='bx bx-user'></i>
-          <span class="links_name">Alumno 1</span>
-        </a>
-        <span class="tooltip">Alumno 1</span>
-      </li>
+            <!-- <img src="/media/docs.svg" class="list__img"> -->
+            <a href="#" class="nav__link_A">Hijos</a>
+            
+        </div>
+
+        <ul class="list__show list__show__padres">
+            <li class="list__inside">
+                <a href="cuenta_padres_remake.html" class="nav__link nav__link_A nav__link--inside">Hijo A</a>
+            </li>
+
+            <li class="list__inside">
+                <a href="cuenta_padres_remake.html" class="nav__link nav__link_A nav__link--inside">Hijo B</a>
+            </li>
+        </ul>
+
+    </li>
       <li>
-        <a href="cuenta_padres_remake.html">
-          <i class='bx bx-user'></i>
-          <span class="links_name">Alumno 2</span>
-        </a>
-        <span class="tooltip">Alumno 2</span>
-      </li>
-      <li>
-        <a href="#">
+        <a href="mensajes_padres.html">
           <i class='bx bx-chat'></i>
           <span class="links_name">Mensajes</span>
         </a>
@@ -197,7 +204,7 @@
         }
       }
     </script>
-
+<script src="/Directivos/Experimentos uwu/Menu Despegable/Menu/main.js"></script>
 
 </body>
 

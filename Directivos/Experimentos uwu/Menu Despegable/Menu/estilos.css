@@ -30,7 +30,6 @@ body{
 
 .nav__link--inside:hover{
     background: #fff;
-    width: 85%;
 }
 
 .list{
@@ -57,7 +56,6 @@ body{
 .list__button{
     display: flex;
     align-items: center;
-    gap: 1em;
     width: 70%;
     margin: 0 auto;
 }
@@ -78,12 +76,13 @@ body{
 }
 
 .list__show{
-    width: 80%;
-    margin-left: auto;
+    width: 60%;
+    float: left;
+    margin-left: 13.5%;
     border-left: 2px solid white;
     list-style: none;
-    transition: height .6s;
-    height: 0;
+    transition: 0.4s;
+    height: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -119,4 +118,7 @@ body{
 .list__show__padres {
     position: relative;
     left: 25%;
+}
+.list__inside {
+    border-radius: 0px;
 }

@@ -10,6 +10,10 @@
     border-top-right-radius: 17px;
 }
 
+.nav__link_A {
+    color: white;
+}
+
 .contenedor_nombre_doc{
     grid-column: 1 / span 3;
     display: flex;
