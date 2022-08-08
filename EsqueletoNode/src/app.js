@@ -39,7 +39,7 @@ app.engine(
 
 
 //middlewares
-// app.use(morgan('dev'));  Lo comento porque esta re GD
+app.use(morgan('dev'));  //Lo comento porque esta re GD
 app.use(bodyParser.urlencoded({ extended: true })); //https://stackoverflow.com/questions/9177049/express-js-req-body-undefined
 app.use(bodyParser.json());
 
@@ -49,15 +49,15 @@ app.use(session({
   saveUninitialized: false,
   store: new MySQLStore(database)
 }));
-app.use(flash());
+// app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
 
 // Global
 
-// app.use((req, res, next) => {  Lo comento porque esta re GD
-//   console.log('handling request for: ' + req.url);
+// app.use((req, res, next) => { 
+//   console.log('');
 //   next();
 // });
 

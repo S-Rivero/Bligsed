@@ -6,11 +6,8 @@ const {JSONPromediosAl} = require('../lib/jsonFormat');
 const {esAlumno, setTutor, queTrimestre} = require('../lib/helpers');
 
 exports.root = ((req,res) => {
-    // delete req.session.uid;
-    let tdu = req.user[0].Tipo_de_usuario;
-    
     if(req.params.id){
-        
+        console.log("\nAlumno\n");
         req.session.uid = req.params.id;
         pool.query("SELECT * FROM usuarios WHERE id = ?", [req.params.id], function(err,a){
             req.session.currentUser = a[0];
@@ -18,7 +15,7 @@ exports.root = ((req,res) => {
         });
     }
     else{
-
+        console.log("\nMiPerfil\n");
         req.session.uid = req.user[0].id;
         req.session.currentUser = req.user[0];
         res.redirect('/perfil/datosPersonales');
@@ -26,11 +23,7 @@ exports.root = ((req,res) => {
 });
 
 exports.datosPersonales = ((req,res) => {
-    // let contacto = esAlumno(req.session.currentUser.Tipo_de_usuario);
-    // let contactos = setTutor(req.session.currentUser.id).then((r)=>{
-    //     res.render('perfil.hbs', {in: req.session.currentUser, cu: req.session.currentUser, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileDatosPersonales', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/datosPersonales', contacto, contactos: r[0]});
-    // });
-    let contactos = setTutor(req.session.currentUser.id).then((r)=>{
+    setTutor(req.session.currentUser.id).then((r)=>{ 
         res.render('perfil.hbs', {in: {in: req.session.currentUser, contactos: r[0]}, cu: req.session.currentUser, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileDatosPersonales', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/datosPersonales'});
     });    
 });
@@ -39,6 +32,7 @@ exports.datosPersonales = ((req,res) => {
 exports.FichaMedica = ((req,res) => {
     const rows = pool.query("SELECT * FROM fichamedica WHERE id_us = ?", [req.session.uid], function(err, ficha){
         res.render('perfil.hbs', {cu: req.session.currentUser, in: ficha[0], title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileFichaMedica', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/fichaMedica'});
+        // res.send(req.session.currentUser);
     });
 });
 
