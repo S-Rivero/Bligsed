@@ -1,9 +1,11 @@
 const {root, datosPersonales, Boletin, inasistencias, mensajes, FichaMedica, updateFichaMedica} = require('../controllers/profile.controller');
 const express = require('express');
 const router = express.Router();
-const {usedRoot, isLoggedIn, isNotLoggedIn, usedRootDp} = require('../lib/auth');
+const {isLoggedIn, isNotLoggedIn} = require('../lib/auth');
+const {usedRoot, usedRootDp, who} = require('../lib/nexts');
 
 router.get('/', isLoggedIn, root);
+router.get('/root', isLoggedIn, root);
 router.get('/root:id', isLoggedIn, root);
 router.get('/datosPersonales', isLoggedIn, usedRootDp, datosPersonales);
 router.get('/FichaMedica', isLoggedIn, usedRoot, FichaMedica);

@@ -1,4 +1,3 @@
-
 <div class="contenedor_datos">
     <h2>Información de salud</h2>
 
@@ -6,36 +5,36 @@
 
 
         <div class="input_fichamedica">
-            <input type="text" name="Obra_social" placeholder="Obra Social" class="ingreso" value="{{Obra_social}}">
-            <input type="text" name="N_de_afiliado_obra_social" placeholder="Nº Afiliado" class="ingreso" value="{{N_de_afiliado_obra_social}}">
+            <input type="text" name="Obra_social" placeholder="Obra Social" class="ingreso" value="{{ina.Obra_social}}">
+            <input type="text" name="N_de_afiliado_obra_social" placeholder="Nº Afiliado" class="ingreso" value="{{ina.N_de_afiliado_obra_social}}">
 
             <h4>Antecedentes de enfermedad</h4>
             <p>¿Tiene alguna enfermedad que requiere periódicamente tratamiento o control médico?</p>
             <br>
-            <input class="int0" name="Enfermedad" type="text" placeholder="¿Cuál?" class="ingreso" value="{{Enfermedad}}">
+            <input class="int0" name="Enfermedad" type="text" placeholder="¿Cuál?" class="ingreso" value="{{ina.Enfermedad}}">
             <p>¿Durante los últimos años fue internado alguna vez? </p>
             <br>
-            <input class="int1" name="Internacion" type="text" placeholder="¿Por qué?" class="ingreso" value="{{Internacion}}">
+            <input class="int1" name="Internacion" type="text" placeholder="¿Por qué?" class="ingreso" value="{{ina.Internacion}}">
 
             <h4>Alergias</h4>
             <p>¿Recibe tratamiento médico?</p>
             <br>
-            <input class="int2" name="Alergia" type="text" placeholder="Alergia a..." class="ingreso" value="{{Alergia}}">
-            <input class="int2" name="manifestalergia" type="text" placeholder="Manifestaciones" class="ingreso" value="{{manifestalergia}}">
+            <input class="int2" name="Alergia" type="text" placeholder="Alergia a..." class="ingreso" value="{{ina.Alergia}}">
+            <input class="int2" name="manifestalergia" type="text" placeholder="Manifestaciones" class="ingreso" value="{{ina.manifestalergia}}">
 
             <h4>Tratamientos</h4>
             <p>¿Recibe tratamiento médico?</p>
             <br>
-            <input class="int3" name="Tratamiento_medico" type="text" placeholder="Especifique" class="ingreso" value="{{Tratamiento_medico}}">
+            <input class="int3" name="Tratamiento_medico" type="text" placeholder="Especifique" class="ingreso" value="{{ina.Tratamiento_medico}}">
             <p>¿Procedimientos quirúrgicos?</p>
             <br>
-            <input class="int4" name="edad_quirurjico" type="text" placeholder="¿A que edad?" class="ingreso" value="{{edad_quirurjico}}">
-            <input class="int4" name="Quirurjico" type="text" placeholder="Tipo de cirugía" class="ingreso" value="{{Quirurjico}}">
+            <input class="int4" name="edad_quirurjico" type="text" placeholder="¿A que edad?" class="ingreso" value="{{ina.edad_quirurjico}}">
+            <input class="int4" name="Quirurjico" type="text" placeholder="Tipo de cirugía" class="ingreso" value="{{ina.Quirurjico}}">
             <p>¿Presenta alguna limitación física?</p>
             <br>
-            <input class="int5" name="Discapacidad_fisica" type="text" placeholder="Aclaración" class="ingreso" value="{{Discapacidad_fisica}}">
+            <input class="int5" name="Discapacidad_fisica" type="text" placeholder="Aclaración" class="ingreso" value="{{ina.Discapacidad_fisica}}">
             <input class="int5" name="problemas_salud" type="text" placeholder="Otros problemas de salud..." class="ingreso"
-                value="{{problemas_salud}}">
+                value="{{ina.problemas_salud}}">
 
             <h4>Vacunación {{#selectVacunacion Vacunacion}}{{/selectVacunacion}}</h4>
             
@@ -49,34 +48,41 @@
                 <select>
             
 
-            <input type="text" name="Altura" placeholder="Talla (en cm)" class="ingreso" value="{{Altura}}">
-            <input type="text" name="Peso" placeholder="Peso (en kg, separar con coma (,))" class="ingreso" value="{{Peso}}">
+            <input type="text" name="Altura" placeholder="Talla (en cm)" class="ingreso" value="{{ina.Altura}}">
+            <input type="text" name="Peso" placeholder="Peso (en kg, separar con coma (,))" class="ingreso" value="{{ina.Peso}}">
 
             <h4>Si el alumno tiene algún problema de salud en la escuela...</h4>
             <p>Recurrir a</p>
-            <input type="text" name="Hospital" placeholder="Institución" class="ingreso" value="{{Hospital}}">
-            <input type="text" name="localidad" placeholder="Domicilio" class="ingreso" value="{{localidad}}">
-            <input type="text" name="N_telehospit" placeholder="Teléfono" class="ingreso" value="{{N_telehospit}}">
+            <input type="text" name="Hospital" placeholder="Institución" class="ingreso" value="{{ina.Hospital}}">
+            <input type="text" name="localidad" placeholder="Domicilio" class="ingreso" value="{{ina.localidad}}">
+            <input type="text" name="N_telehospit" placeholder="Teléfono" class="ingreso" value="{{ina.N_telehospit}}">
 
             <p>Médico</p>
-            <input type="text" name="medico_cabeceraln" placeholder="Apellido" class="ingreso" value="{{Medico_cabeceraln}}">
-            <input type="text" name="medico_cabecerafn" placeholder="Nombre" class="ingreso" value="{{Medico_cabecerafn}}">
-            <input type="text" name="Domiciliomed" placeholder="Domicilio" class="ingreso" value="{{Domiciliomed}}">
+            <input type="text" name="medico_cabeceraln" placeholder="Apellido" class="ingreso" value="{{ina.Medico_cabeceraln}}">
+            <input type="text" name="medico_cabecerafn" placeholder="Nombre" class="ingreso" value="{{ina.Medico_cabecerafn}}">
+            <input type="text" name="Domiciliomed" placeholder="Domicilio" class="ingreso" value="{{ina.Domiciliomed}}">
 
             <p>Familiar</p>
-            <input type="text" name="Familiar_responsableln" placeholder="Apellido" class="ingreso" value="{{Familiar_responsableln}}">
-            <input type="text" name="Familiar_responsablefn" placeholder="Nombre" class="ingreso" value="{{Familiar_responsablefn}}">
-            <input type="text" name="Telefono_familiar" placeholder="Teléfono" class="ingreso" value="{{Telefono_familiar}}">
+            <input type="text" name="Familiar_responsableln" placeholder="Apellido" class="ingreso" value="{{ina.Familiar_responsableln}}">
+            <input type="text" name="Familiar_responsablefn" placeholder="Nombre" class="ingreso" value="{{ina.Familiar_responsablefn}}">
+            <input type="text" name="Telefono_familiar" placeholder="Teléfono" class="ingreso" value="{{ina.Telefono_familiar}}">
 
             {{!-- CORREGIR ESTO XD 
                 TAMBIEN HAY QUE AGREGAR UN INPUT CON NAME Telefono_medico
             --}}
-            <input type="submit" value="HOLA">
+            <input id="submitBtn" type="submit" value="HOLA">
         </div>
     </form>
-
     <script type="text/javascript">
         function update() {
 
         }
+        if({{tdu}} == 6){
+            inputs = document.getElementsByTagName('input');
+            for (index = 0; index < inputs.length; ++index) {
+                inputs[index].setAttribute("disabled", "");
+            }
+            document.getElementById("submitBtn").style.display = "none";
+        }
+        
     </script>

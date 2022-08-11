@@ -8,11 +8,19 @@ const {esAlumno, setTutor, queTrimestre} = require('../lib/helpers');
 exports.root = ((req,res) => {
     if(req.params.id){
         console.log("\nAlumno\n");
-        req.session.uid = req.params.id;
-        pool.query("SELECT * FROM usuarios WHERE id = ?", [req.params.id], function(err,a){
-            req.session.currentUser = a[0];
-            res.redirect('/perfil/datosPersonales');
-        });
+        if(!req.session.childs){
+            req.session.childs = [];
+        }
+        if([0,1,2,3,4].includes(req.user[0].Tipo_de_usuario) || req.session.childs.includes(parseInt(req.params.id))){
+            req.session.uid = req.params.id;
+            pool.query("SELECT * FROM usuarios WHERE id = ?", [req.params.id], function(err,a){
+                req.session.currentUser = a[0];
+                res.redirect('/perfil/datosPersonales');
+            });
+        }else{
+            res.redirect('/perfil');
+        }
+        
     }
     else{
         console.log("\nMiPerfil\n");
@@ -21,6 +29,10 @@ exports.root = ((req,res) => {
         res.redirect('/perfil/datosPersonales');
     }
 });
+
+// exports.root = ((req,res) => {
+//     res.redirect('/perfil/datosPersonales');
+// });
 
 exports.datosPersonales = ((req,res) => {
     setTutor(req.session.currentUser.id).then((r)=>{ 
@@ -31,7 +43,7 @@ exports.datosPersonales = ((req,res) => {
 
 exports.FichaMedica = ((req,res) => {
     const rows = pool.query("SELECT * FROM fichamedica WHERE id_us = ?", [req.session.uid], function(err, ficha){
-        res.render('perfil.hbs', {cu: req.session.currentUser, in: ficha[0], title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileFichaMedica', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/fichaMedica'});
+        res.render('perfil.hbs', {cu: req.session.currentUser, in: {ina: ficha[0], tdu: req.user[0].Tipo_de_usuario}, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileFichaMedica', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/fichaMedica'});
         // res.send(req.session.currentUser);
     });
 });
