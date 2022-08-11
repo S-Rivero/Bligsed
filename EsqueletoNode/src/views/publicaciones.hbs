@@ -1,27 +1,24 @@
-
-    
-
-
 <div class="text">Inicio</div>
 <div class="contenedor_publicaciones">
     {{#if user.user.Tipo_de_usuario 2}}
-        <div class="input_publicaciones">
-            <form id="form_pub" action="/pub" method="post">
-                <input type="text" name="title" placeholder="Título..." class="ingreso_titulo">
-                {{!-- <input type="text" name="desc" placeholder="Escriba una publicación..." class="ingreso_publicacion"> --}}
-                <textarea class="ingreso_publicacion" name="desc" rows="4" cols="50" placeholder="Escriba una publicación..."></textarea>
-                <input type="text" name="autor" value="{{user.user.Nombre}}" style="display: none;">
-                <div class="botones_uwu">
-                    <div class="botones">
-                        <a href="" class="iconify"><span class="iconify" data-icon="simple-line-icons:paper-clip"  data-width="25"></span></a>
-                        <a href="" class="iconify"><span class="iconify" data-icon="bxs:image-add" data-width="25"></span></a>
-                        <a href="" class="iconify"><span class="iconify" data-icon="bi:emoji-smile" data-width="25"></span></a>
-                        <a href="" class="iconify"><span class="iconify" data-icon="akar-icons:calendar" data-width="25"></span></a>  
+        <div class="contenedor_datos">
+            <div class="input_publicaciones">
+                <form id="form_pub" action="/pub" method="post">
+                    <input type="text" name="title" placeholder="Título..." class="ingreso_titulo">
+                    <textarea class="ingreso_publicacion" name="desc" rows="4" cols="50" placeholder="Escriba una publicación..."></textarea>
+                    <input type="text" name="autor" value="{{user.user.Nombre}}" style="display: none;">
+                    <div class="botones_uwu">
+                        <div class="botones">
+                            <a href="" class="iconify"><span class="iconify" data-icon="simple-line-icons:paper-clip"  data-width="25"></span></a>
+                            <a href="" class="iconify"><span class="iconify" data-icon="bxs:image-add" data-width="25"></span></a>
+                            <a href="" class="iconify"><span class="iconify" data-icon="bi:emoji-smile" data-width="25"></span></a>
+                            <a href="" class="iconify"><span class="iconify" data-icon="akar-icons:calendar" data-width="25"></span></a>  
+                        </div>
+                        {{!-- <a href="" class="enviar_publicacion"><p>Enviar</p></a> --}}
+                        <input type="submit" class="enviar_publicacion" value="Enviar">
                     </div>
-                    {{!-- <a href="" class="enviar_publicacion"><p>Enviar</p></a> --}}
-                    <input type="submit" class="enviar_publicacion" value="Enviar">
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     {{/if}}
     {{#each pub}}
