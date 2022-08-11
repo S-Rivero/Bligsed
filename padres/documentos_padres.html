@@ -10,11 +10,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
-  <div class="sidebar open">
+<body onload="showSomething()">
+  <div id="div_sidebar" class="sidebar open">
     <div class="logo">
       <div class="logo_name">Bligs<u>ed</u></div>
-      <i class='bx bx-menu' id="btn"></i>
+      <i class='bx bx-menu' id="btn" onclick="cierraHijos()"></i>
     </div>
     <ul class="nav-list">
       <!-- <li>
@@ -38,7 +38,7 @@
           </a>
         </div>
 
-        <ul class="list__show list__show__padres">
+        <ul  id="ul_hijos" class="list__show list__show__padres" style="height: 0px;">
             <li class="list__inside">
                 <a href="cuenta_padres_remake.html" class="nav__link nav__link_A nav__link--inside">Hijo A</a>
             </li>
@@ -148,6 +148,15 @@
       } else {
         closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
       }
+    }
+
+    function cierraHijos() {
+      var div = document.getElementById('div_sidebar').className;
+      var ul = document.getElementById('ul_hijos');
+      if (div === "sidebar")
+        ul.style.setProperty('height', '100%');
+      else
+        ul.style.setProperty('height', '0px');
     }
   </script>
 <script src="/Directivos/Experimentos uwu/Menu Despegable/Menu/main.js"></script>
