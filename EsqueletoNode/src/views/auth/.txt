@@ -1,4 +1,0 @@
-Aca van el registro y login. En caso de configurarse un layout van en formato HTML, sino va en .hbs.
-
-
-Dejar el name de mail como username

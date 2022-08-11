@@ -1,1 +1,0 @@
-Aca se guardan las partes de codigo html que se reutilizan en muchas partes de la aplicacion. Por ejemplo, el header y la etiqueta body.

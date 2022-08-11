@@ -197,3 +197,15 @@ input{
     color: white;
 }
 
+#submitBtn{
+    background-color: rgba(11, 97, 75, 0.129);
+    border: none;
+    padding: 1%;
+    cursor: pointer;
+    border-radius: 15px;
+    width: 20%;
+    height: auto;
+    margin-bottom: 1%;
+    position: relative;
+    left: 35%;
+}
