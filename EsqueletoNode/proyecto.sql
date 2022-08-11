@@ -70,8 +70,8 @@ CREATE TABLE `fichamedica` (
   `Vacunacion` varchar(3) NOT NULL COMMENT '1',
   `Altura` int (11) NOT NULL,
   `Peso` double NOT NULL,
-  `Hospital` varchar(50) NOT NULL COMMENT 'Hospital al cual llamar',
-  `localidad` varchar (40) NOT NULL,
+  `Hospital` varchar(100) NOT NULL COMMENT 'Hospital al cual llamar',
+  `localidad` varchar (100) NOT NULL,
   `N_telehospit` int (11) NOT NULL,
   `Medico_cabeceraln` varchar(50) NOT NULL,
   `Medico_cabecerafn` varchar(50) NOT NULL,
@@ -231,7 +231,8 @@ CREATE TABLE `sessions` (
 
 CREATE TABLE `superusuarios` (
   `id` int(11) NOT NULL,
-  `fecha_creacion` date NOT NULL
+  `fecha_creacion` date NOT NULL,
+  estado_pago tinyint(1)
 );
 
 CREATE TABLE `colegio` (
@@ -257,7 +258,7 @@ CREATE TABLE `usuarios` (
   `password` char(250) NOT NULL,
   `Fecha_de_nacimiento` date NOT NULL,
   `colegio` int(11) NOT NULL,
-  domicilio varchar(11) NOT NULL,
+  domicilio varchar(100) NOT NULL,
    PRIMARY KEY (id)
 );
 
