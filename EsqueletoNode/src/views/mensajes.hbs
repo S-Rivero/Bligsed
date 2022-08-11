@@ -42,12 +42,12 @@
       </div>
       <div class="contenedor_inferior">
         <div class="contenedor_input">
-          <form id="form_data" action="/msg" method="post" >
-            <input type="text" name="msg_in" id="msg_in" placeholder="Escribe un mensaje...">
-            <input type="text" name="uname" id="uname" value="{{user.Nombre}}" style="display: none;">
-            <input type="number" name="uid" id="uid" value="{{user.id}}" style="display: none;">
-            <input type="number" name="cid" id="cid" value="{{selected_chat.id_chat}}" style="display: none;">
-            <input type="submit" id="submit" value="Enviar"/>
+          <form id="form_msg" action="/msg" method="post" >
+            <input type="text" name="msg_in" placeholder="Escribe un mensaje...">
+            <input type="text" name="uname" value="{{user.Nombre}}" style="display: none;">
+            <input type="number" name="uid" value="{{user.id}}" style="display: none;">
+            <input type="number" name="cid" value="{{selected_chat.id_chat}}" style="display: none;">
+            <input type="submit" value="Enviar"/>
             {{!-- <a href="">></a> --}}
           </form>
         </div>
@@ -57,33 +57,5 @@
 </section>
 
 <script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
-<script src="/js/msg.js"></script>
-<script>
-  let submit = document.getElementById("submit");
-  submit.addEventListener("click", () => {
-    console.log('Detecta');
-  });
-
-  let sidebar = document.querySelector(".sidebar");
-  let closeBtn = document.querySelector("#btn");
-  let searchBtn = document.querySelector(".bx-search");
-
-  closeBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("open");
-    menuBtnChange();//calling the function(optional)
-  });
-
-  searchBtn.addEventListener("click", () => { // Sidebar open when you click on the search iocn
-    sidebar.classList.toggle("open");
-    menuBtnChange(); //calling the function(optional)
-  });
-
-  // following are the code to change sidebar button(optional)
-  function menuBtnChange() {
-    if (sidebar.classList.contains("open")) {
-      closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
-    } else {
-      closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
-    }
-  }
-</script>
+<script src="/js/posts.js"></script>
+{{>script}}

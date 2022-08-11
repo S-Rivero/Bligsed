@@ -6,7 +6,6 @@ exports.pushMsg = function(req, res){
     if(req.body.text != undefined)
     {
         let sql = "INSERT INTO mensajes (chatroom, id_emisor, contenido, fecha, hora) VALUES ("+req.body.chat+", "+req.body.uid+", '"+req.body.text+"', '"+req.body.date+"', '"+req.body.time+"');";
-        console.log(sql);
         pool.query(sql, function (err, result) {
             if (err) throw err;
             console.log("1 message uploaded");
@@ -53,6 +52,17 @@ exports.creaChat = function(req, res){
     });
 }
 
+exports.pushPub = function(req, res){
+    let sql = "INSERT INTO publicaciones (titulo, descripcion, autor, fecha) VALUES ('"+req.body.title+"', '"+req.body.desc+"', '"+req.body.autName+"', '"+req.body.date+"');";
+    pool.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("Pub subida");
+    });   
+}
+
+
+//"INSERT INTO publicaciones (titulo, descripcion, autor, fecha) VALUES ('"+req.body.title+"', '"+req.body.desc+"', '"+req.body.autName+"', '"+req.body.date+"');"
+
 /*
 MENSAJES CON IMAGES QUE SAQUE DEL EJEMPLO
 
@@ -60,4 +70,3 @@ MENSAJES CON IMAGES QUE SAQUE DEL EJEMPLO
 <li class="plantilla_mensaje mensaje_receptor"><div class="creador_mensaje">Martin Touriño</div><div class="contenido_mensaje"><img src="/media/momo_sad2.jpg" alt=""> Que sad prro :'v xdxdxdxd</div></li>
 <li class="plantilla_mensaje mensaje_emisor"><div class="contenido_mensaje">Lorem ipsum dolor sit amet coem lorem</div></li>
 */
-
