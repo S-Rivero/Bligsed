@@ -195,6 +195,10 @@ DELIMITER ;
 CREATE TABLE `padres` (
   `ID` int(11) NOT NULL
 );
+CREATE TABLE `profesores` (
+  `ID` int(11) NOT NULL
+);
+
 
 -- --------------------------------------------------------
 
@@ -204,7 +208,7 @@ CREATE TABLE `padres` (
 
 CREATE TABLE `publicaciones` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `titulo` varchar(20) NOT NULL,
+  `titulo` varchar(50) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
   `autor` int(11) NOT NULL COMMENT 'relacionar con id usuario',
    fecha DATE NOT NULL,
@@ -338,3 +342,4 @@ INSERT INTO `publicaciones` (`titulo`, `descripcion`, `autor`, fecha) VALUES ('A
 
 INSERT INTO `mensajes` (chatroom, id_emisor, `contenido`, fecha, hora) VALUES('1', '6', "Hola", "2022-07-31", "12:07:31"), ('1', '3', "Hola, como estas?", "2022-07-31", "17:48:59"), ('1', '6', "Todo bien, vos?", "2022-08-01", "00:03:07"), ('1', '3', "Todo joya", "2022-08-01", "01:41:50");
 INSERT INTO `chats` (id_chat, id_usuario, `nombre_chat`) VALUES('1', '6', "7mo C"), ('1', '3', "7mo C"), ('1', '4', "7mo C"), ('1', '8', "7mo C"), ('2', '6', "4to C"), ('2', '5', "4to C"), ('3', '6', "6to C"), ('3', '2', "6to C"), ('3', '1', "6to C");
+INSERT INTO `mensajes` ( `chatroom`, `id_emisor`, `contenido`, `fecha`, `hora`) VALUES ('1', '6', 'Hey batman did you know that despite only making up to 13% of the population blacks commite 52% of the crime?', '2022-08-11', '13:21:31');
