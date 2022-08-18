@@ -11,9 +11,11 @@ $(document).ready(function(){
           url: '/msg',
           data: datos,
           processData: false,
-          contentType: 'application/x-www-form-urlencoded'
+          contentType: 'application/x-www-form-urlencoded',
+          complete: function () {
+            form.msg_in.value = '';
+          },
       })
-      form.msg_in.value = '';
     }
   });
 });
@@ -54,10 +56,15 @@ $(document).ready(function(){
             url: '/pub',
             data: datos,
             processData: false,
-            contentType: 'application/x-www-form-urlencoded'
+            contentType: 'application/x-www-form-urlencoded',
+            beforeSend:function(){
+              return confirm("¿Esta seguro de subir la publicación?");
+            },
+            complete: function () {
+              form.title.value = '';
+              form.desc.value = '';
+            },
         })
-        form.title.value = '';
-        form.desc.value = '';
       }
   });
 });
