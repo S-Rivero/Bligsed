@@ -32,12 +32,12 @@ exports.renderChat = ((req,res) => {
                     if (err) throw err;
                     const rows4 = pool.query("SELECT COUNT(id_chat) as id_chat FROM chats WHERE id_chat="+req.query.id_chat, function(err, count){
                         if (err) throw err;
-                        res.render('mensajes.hbs', {layout: 'chatLY.hbs', chats, mensajes, user:req.user[0], selected_chat: selected_chat[0], count: count[0]});
+                        res.render('mensajes.hbs', {links: 'headerLinks/chats', chats, mensajes, user:req.user[0], selected_chat: selected_chat[0], count: count[0]});
                     });
                 });
             });
         }
         else 
-            res.render('mensajes.hbs', {layout: 'chatLY.hbs', chats, mensajes: null, user:req.user[0]});
+            res.render('mensajes.hbs', {links: 'headerLinks/chats', chats, mensajes: null, user:req.user[0]});
     });    
 });

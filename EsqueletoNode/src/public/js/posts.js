@@ -12,10 +12,8 @@ $(document).ready(function(){
           data: datos,
           processData: false,
           contentType: 'application/x-www-form-urlencoded',
-          complete: function () {
-            form.msg_in.value = '';
-          },
       })
+      form.msg_in.value = '';
     }
   });
 });
