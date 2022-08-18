@@ -4,6 +4,13 @@
     height: 90%;
 }
 
+
+.nav__link{
+    margin-bottom: 1%;
+    color: #333;
+    text-align:left;
+}
+
 .botones_alumno a{
     text-decoration: none;
     color: #333;
