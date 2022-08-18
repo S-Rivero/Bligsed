@@ -21,4 +21,33 @@
                 closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
             }
         }
-    </script>
+
+        function cierraHijos() {
+            var div = document.getElementById('div_sidebar').className;
+            var ul = document.getElementById('ul_hijos');
+            if (div === "sidebar")
+                ul.style.setProperty('height', '100%');
+            else
+                ul.style.setProperty('height', '0px');
+            }
+</script>
+<script>
+    let listElements = document.querySelectorAll('.list__button--click');
+
+    listElements.forEach(listElement => {
+        listElement.addEventListener('click', ()=>{
+            
+            listElement.classList.toggle('arrow');
+
+            let height = 0;
+            let menu = listElement.nextElementSibling;
+            if(menu.clientHeight == "0"){
+                height=menu.scrollHeight;
+            }
+
+            menu.style.height = `${height}px`;
+
+        })
+    });
+
+</script>
