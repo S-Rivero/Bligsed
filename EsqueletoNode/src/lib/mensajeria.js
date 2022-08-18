@@ -2,15 +2,11 @@ const pool = require('../database');
 
 
 exports.pushMsg = function(req, res){
-    
-    if(req.body.text != undefined)
-    {
-        let sql = "INSERT INTO mensajes (chatroom, id_emisor, contenido, fecha, hora) VALUES ("+req.body.chat+", "+req.body.uid+", '"+req.body.text+"', '"+req.body.date+"', '"+req.body.time+"');";
-        pool.query(sql, function (err, result) {
-            if (err) throw err;
-            console.log("1 message uploaded");
-        });
-    }
+    let sql = "INSERT INTO mensajes (chatroom, id_emisor, contenido, fecha, hora) VALUES ("+req.body.chat+", "+req.body.uid+", '"+req.body.text+"', '"+req.body.date+"', '"+req.body.time+"');";
+    pool.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("1 message uploaded");
+    });
 }
 
 exports.elimChat = function(req, res){

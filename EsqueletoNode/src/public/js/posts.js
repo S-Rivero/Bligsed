@@ -3,6 +3,8 @@ $(document).ready(function(){
   $("form#form_msg").on('submit', function(e){
       e.preventDefault();
       var form = document.getElementById('form_msg');
+      if(form.msg_in.value != '')
+      {
       datos = msgFormat(form);
       $.ajax({
           type: 'post',
@@ -12,6 +14,7 @@ $(document).ready(function(){
           contentType: 'application/x-www-form-urlencoded'
       })
       form.msg_in.value = '';
+    }
   });
 });
 
@@ -42,21 +45,26 @@ $(document).ready(function(){
   $("form#form_pub").on('submit', function(e){
       e.preventDefault();
       var form = document.getElementById('form_pub');
-      datos = pubFormat(form);
-      $.ajax({
-          type: 'post',
-          url: '/pub',
-          data: datos,
-          processData: false,
-          contentType: 'application/x-www-form-urlencoded'
-      })
+      if (form.title.value != '' && form.desc.value != '')
+      {
+        datos = pubFormat(form);
+        console.log(datos);
+        $.ajax({
+            type: 'post',
+            url: '/pub',
+            data: datos,
+            processData: false,
+            contentType: 'application/x-www-form-urlencoded'
+        })
+        form.title.value = '';
+        form.desc.value = '';
+      }
   });
 });
 
 function pubFormat(form){
   let now = getDate();
   var string = 'title='+form.title.value+'&desc='+form.desc.value+'&autName='+form.autor.value+'&date='+now.date;
-  console.log(string);
   return string;
 }
 
