@@ -14,9 +14,4 @@ router.get('/Boletin', isLoggedIn, usedRoot, Boletin);
 router.get('/Boletin:t', isLoggedIn, usedRoot, Boletin);
 router.get('/inasistencias', isLoggedIn, usedRoot, inasistencias);
 
-
-
-
-router.get('/mensajes', isLoggedIn, mensajes);
-
 module.exports = router;

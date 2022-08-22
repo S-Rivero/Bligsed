@@ -42,8 +42,8 @@
         <div class="contenedor_input">
           <form id="form_msg" action="/msg" method="post" >
             <input type="text" name="msg_in" placeholder="Escribe un mensaje...">
-            <input type="text" name="uname" value="{{user.Nombre}}" style="display: none;">
-            <input type="number" name="uid" value="{{user.id}}" style="display: none;">
+            <input type="text" name="uname" value="{{user.user.Nombre}}" style="display: none;">
+            <input type="number" name="uid" value="{{user.user.id}}" style="display: none;">
             <input type="number" name="cid" value="{{selected_chat.id_chat}}" style="display: none;">
             <input type="submit" value="Enviar"/>
             {{!-- <a href="">></a> --}}

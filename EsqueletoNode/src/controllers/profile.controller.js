@@ -3,30 +3,49 @@ const router = express.Router();
 const path = require('path');
 const pool = require('../database');
 const {JSONPromediosAl} = require('../lib/jsonFormat');
-const {esAlumno, setTutor, queTrimestre} = require('../lib/helpers');
+const {esAlumno, setTutor, queTrimestre, setCurso} = require('../lib/helpers');
 
 exports.root = ((req,res) => {
+    // Obtener nombre del curso
+    // SELECT Nombre_curso FROM `curso` JOIN alumno a WHERE a.ID = 6;
+
     if(req.params.id){
-        console.log("\nAlumno\n");
-        if(!req.session.childs){
-            req.session.childs = [];
-        }
-        if([0,1,2,3,4].includes(req.user[0].Tipo_de_usuario) || req.session.childs.includes(parseInt(req.params.id))){
-            req.session.uid = req.params.id;
-            pool.query("SELECT * FROM usuarios WHERE id = ?", [req.params.id], function(err,a){
-                req.session.currentUser = a[0];
-                res.redirect('/perfil/datosPersonales');
+        setCurso(req.params.id).then((curso)=>{
+            console.log("\nAlumno\n");
+            if(!req.session.childs){
+                req.session.childs = [];
+            }
+            let childsId = req.session.childs.map((res)=>{
+                return res.ID;
             });
-        }else{
-            res.redirect('/perfil');
-        }
-        
+            if([0,1,2,3,4].includes(req.user[0].Tipo_de_usuario) || childsId.includes(parseInt(req.params.id))){
+                req.session.uid = req.params.id;
+                pool.query("SELECT * FROM usuarios WHERE id = ?", [req.params.id], function(err,a){
+                    req.session.currentUser = a[0];
+                    if(curso)
+                        console.log("a");
+                        // req.session.currentUser['curso'] = curso[0].Nombre_curso;
+                    else
+                        req.session.currentUser['curso'] = "juanPerez";
+                    res.redirect('/perfil/datosPersonales');
+                });
+            }else{
+                res.redirect('/perfil');
+            }
+        });
     }
     else{
-        console.log("\nMiPerfil\n");
-        req.session.uid = req.user[0].id;
-        req.session.currentUser = req.user[0];
-        res.redirect('/perfil/datosPersonales');
+        setCurso(req.user[0].id).then((curso)=>{
+            console.log("\nMiPerfil\n");
+            req.session.uid = req.user[0].id;
+            req.session.currentUser = req.user[0];
+            if(curso)
+                // req.session.currentUser['curso'] = curso[0].Nombre_curso;
+                console.log("a");
+            else
+                req.session.currentUser['curso'] = "juanPerez";
+            res.redirect('/perfil/datosPersonales');
+        });
     }
 });
 
@@ -37,6 +56,7 @@ exports.root = ((req,res) => {
 exports.datosPersonales = ((req,res) => {
     setTutor(req.session.currentUser.id).then((r)=>{ 
         res.render('perfil.hbs', {in: {in: req.session.currentUser, contactos: r[0]}, cu: req.session.currentUser, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileDatosPersonales', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/datosPersonales'});
+        // res.send(req.session.currentUser.curso[0].Nombre_curso);
     });    
 });
 
@@ -84,10 +104,6 @@ exports.inasistencias = ((req,res) => {
     const rows = pool.query("SELECT * FROM inasistencias WHERE id_us = ?", [req.session.uid], function(err, inasistencias){
         res.render('perfil.hbs', {cu: req.session.currentUser, in: inasistencias, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileInasistencias', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/inasistencias'});
     });
-});
-
-exports.mensajes = ((req,res) => {
-    res.redirect("/");
 });
 
 exports.Boletin = ((req,res) => {

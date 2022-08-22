@@ -13,22 +13,24 @@
                 <span class="tooltip">Inicio</span>
             </li>
             
-            <li class="list__item list__item__padres list__item--click">
-                <div class="list__button list__button--click">
-                <a href="#" class="nav__link_A">
-                    <i class='bx bx-user'></i>
-                    <span class="links_name">Hijos</span>
-                </a>
-                </div>
+            {{#if user.Tipo_de_usuario 5}}
+                <li class="list__item list__item__padres list__item--click">
+                    <div class="list__button list__button--click">
+                    <a href="#" class="nav__link_A">
+                        <i class='bx bx-user'></i>
+                        <span class="links_name">Hijos</span>
+                    </a>
+                    </div>
 
-                <ul id="ul_hijos" class="list__show list__show__padres" style="height: 108px;">
-                    {{#each childs}}
-                        <li class="list__inside">
-                            <a href="/perfil/root{{this}}" class="nav__link nav__link_A nav__link--inside">Hijo A</a>
-                        </li>
-                    {{/each}}
-                </ul>
-            </li>
+                    <ul id="ul_hijos" class="list__show list__show__padres" style="height: 0px;">
+                        {{#each childs}}
+                            <li class="list__inside">
+                                <a href="/perfil/root{{ID}}" class="nav__link nav__link_A nav__link--inside">{{Nombre}}</a>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </li>
+            {{/if}}
             
             <li>
                 <a href="../../../perfil">

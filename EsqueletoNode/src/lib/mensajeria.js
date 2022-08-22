@@ -6,6 +6,7 @@ exports.pushMsg = function(req, res){
     pool.query(sql, function (err, result) {
         if (err) throw err;
         console.log("1 message uploaded");
+        notif();
     });
 }
 
@@ -54,6 +55,22 @@ exports.pushPub = function(req, res){
         if (err) throw err;
         console.log("Pub subida");
     });   
+}
+
+function notif (req,res){
+    fetch('https://api.mynotifier.app', {
+        method: 'POST',
+            headers: {
+            'Content-Type': 'application/json', // To let the server know that we're sending JSON data
+        },
+        body: JSON.stringify({
+            apiKey: 'xxxx-xxxx-xxxx-xxxx', // A unique key you get when signing up
+            message: "New payment!", // The message you want to send to yourself/team
+            description: "A payment off $99 has been made", // A more descriptive message. It's optional
+            type: "success", // info, error, warning or success
+            project: "xxxxxx" // If you have more projects on your account then you can specify the project. This is optional.
+        }),
+    });
 }
 
 

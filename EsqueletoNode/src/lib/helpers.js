@@ -26,7 +26,7 @@ exports.matchPassword = async function(password, savedPassword){
 // }
 
 let findChild = function(idPadre){
-    return pool.promise().query("SELECT a.ID FROM alumno a JOIN usuarios u ON a.Padre = u.id WHERE u.id = ?", [idPadre]);
+    return pool.promise().query("SELECT a.ID, us.Nombre FROM alumno a JOIN usuarios u ON a.Padre = u.id JOIN usuarios us ON a.ID = us.id WHERE u.id = ?", [idPadre]);
 }
 
 exports.setChild = function(user){
@@ -35,7 +35,7 @@ exports.setChild = function(user){
             let uchilds = findChild(user.id).then((r)=>{
                 let childs = [];
                 r[0].forEach(c => {
-                    childs.push(c.ID);
+                    childs.push(c);
                 });
                 res(childs);
             });     
@@ -69,4 +69,17 @@ exports.esAlumno = function(tdu) {
 exports.queTrimestre = function(n){
     return (n>=0&&n<=3)?n:1;
     
+}
+
+
+let findCurso = function(idUs){
+    return pool.promise().query("SELECT Nombre_curso FROM `curso` JOIN alumno a WHERE a.ID = ?", [idUs]);
+}
+
+exports.setCurso = function(idUs){
+    return new Promise((res,rej)=>{
+        findCurso(idUs).then((r)=>{
+            res(r[0]);
+        });
+    }) 
 }

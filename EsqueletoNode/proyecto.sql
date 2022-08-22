@@ -44,7 +44,7 @@ CREATE TABLE `alumno` (
 
 CREATE TABLE `curso` (
   ID int(11) NOT NULL AUTO_INCREMENT,
-  `Nombre curso` varchar(70) NOT NULL,
+  `Nombre_curso` varchar(70) NOT NULL,
   PRIMARY KEY (ID)
 );
 
@@ -323,7 +323,7 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 
-INSERT INTO `curso` (`Nombre curso`) VALUES ( '7C');
+INSERT INTO `curso` (`Nombre_curso`) VALUES ( '7C');
 INSERT INTO `materias` (`Materia`, `IdCurso`, `profesor`) VALUES ( 'Matematicas', 1, 4), ( 'Lengua', 1, 4);
 
 INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 6, 1, 1, 1, 1), ( 6, 1, 10, 1, 2), (6, 1, 9, 1, 3), (6, 1, 5, 1, 4), (6, 2, 4, 1, 5), (6, 2, 7, 1, 6), (6, 2, 8, 1, 7), (6, 2, 9, 1, 8);
