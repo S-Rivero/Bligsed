@@ -9,7 +9,7 @@
         <h3>{{selected_chat.nombre_chat}}</h3>
         <p>{{count.id_chat}} participantes</p>
     </div>
-    <div class="contenedor_medio_lateral">
+    <div class="contenedor_medio_lateral" style="overflow-x: hidden;">
       <ul id="lista_chats">
         {{#each chats}}
           <form action="/chat" method="get">
@@ -19,8 +19,6 @@
               </li>
           </form>
         {{/each}}
-        <li>Lunes 30/05- Actividad en el turno tarde SUSPENDIDA -</li>
-        <li>Documentación pendiente -</li>
       </ul>
     </div>
 
