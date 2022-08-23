@@ -11,7 +11,6 @@ exports.root = ((req,res) => {
 
     if(req.params.id){
         setCurso(req.params.id).then((curso)=>{
-            console.log("\nAlumno\n");
             if(!req.session.childs){
                 req.session.childs = [];
             }
@@ -22,11 +21,13 @@ exports.root = ((req,res) => {
                 req.session.uid = req.params.id;
                 pool.query("SELECT * FROM usuarios WHERE id = ?", [req.params.id], function(err,a){
                     req.session.currentUser = a[0];
-                    if(curso)
-                        console.log("a");
-                        // req.session.currentUser['curso'] = curso[0].Nombre_curso;
-                    else
-                        req.session.currentUser['curso'] = "juanPerez";
+                    if(curso[0]){
+                        req.session.currentUser['curso'] = curso[0].Nombre_curso;
+                        console.log(curso[0].Nombre_curso);
+                    }else{
+                        req.session.currentUser['curso'] = req.session.currentUser.Tipo_de_usuario;
+                        console.table(req.session.currentUser);
+                    }
                     res.redirect('/perfil/datosPersonales');
                 });
             }else{
@@ -36,14 +37,15 @@ exports.root = ((req,res) => {
     }
     else{
         setCurso(req.user[0].id).then((curso)=>{
-            console.log("\nMiPerfil\n");
             req.session.uid = req.user[0].id;
             req.session.currentUser = req.user[0];
-            if(curso)
-                // req.session.currentUser['curso'] = curso[0].Nombre_curso;
-                console.log("a");
-            else
-                req.session.currentUser['curso'] = "juanPerez";
+            if(curso[0]){
+                req.session.currentUser['curso'] = curso[0].Nombre_curso;
+                console.log(curso[0].Nombre_curso);
+            }else{
+                req.session.currentUser['curso'] = req.session.currentUser.Tipo_de_usuario;
+                console.table(req.session.currentUser);
+            }
             res.redirect('/perfil/datosPersonales');
         });
     }

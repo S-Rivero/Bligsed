@@ -46,9 +46,9 @@ exports.setChild = function(user){
 }
 
 let findTutor = function(idUs){
-    return pool.promise().query("SELECT nombre,username,Numero_de_telefono,DNI FROM usuarios WHERE id = (SELECT Padre FROM alumno WHERE id = ?)", [idUs]);
-    // return pool.promise().query("SELECT u.nombre,u.username,u.Numero_de_telefono,u.DNI FROM usuarios u JOIN alumno a WHERE a.ID = 6 AND u.id = a.Padre", [idUs]);
-    //La linea de arriba tiene la consulta fachera pero mas lenta x alguna razon xd
+    // return pool.promise().query("SELECT nombre,username,Numero_de_telefono,DNI FROM usuarios WHERE id = (SELECT Padre FROM alumno WHERE id = ?)", [idUs]);
+    // return pool.promise().query("SELECT u.nombre,u.username,u.Numero_de_telefono,u.DNI FROM usuarios u JOIN alumno a WHERE a.ID = ? AND u.id = a.Padre", [idUs]);
+    return pool.promise().query("SELECT u.nombre,u.username,u.Numero_de_telefono,u.DNI FROM usuarios u JOIN alumno a ON u.id = a.Padre WHERE a.ID = ?", [idUs]);
 }
 
 exports.setTutor = function(idUs){

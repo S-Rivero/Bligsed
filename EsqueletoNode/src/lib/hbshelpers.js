@@ -1,9 +1,45 @@
 const pool = require('../database');
 
-module.exports = {
+function tipoUsuarioToString(tipo){
+  switch(tipo){
+    case 0:
+      return 'superusuario';
+      break;
+    case 1:
+      return 'administracion';
+      break;
+    case 2:
+      return 'directivo';
+      break;
+    case 3:
+      return 'preceptor';
+      break;
+    case 4:
+      return 'docente';
+      break;
+    case 5:
+      return 'tutor';
+      break;
+    case 6:
+      return 'alumno';
+      break;
+  }
+};
 
+module.exports = {
     unoMas: function(n){
       return n+1;
+    },
+    imprimirCursoPerfil: function(curso){
+      switch(curso){
+        case "7C":
+        case "6C":
+        case "5C":
+        case "4C":
+          return curso + " - Técnico en informática personal y profesional";
+        default:
+          return tipoUsuarioToString(curso);
+      }
     },
     if: function(v1, v2, options) {
       if(v1 === v2) {
@@ -38,29 +74,7 @@ module.exports = {
       }
     },
     tipoUsuarioToString: function(tipo){
-      switch(tipo){
-        case 0:
-          return 'superusuario';
-          break;
-        case 1:
-          return 'administracion';
-          break;
-        case 2:
-          return 'directivo';
-          break;
-        case 3:
-          return 'preceptor';
-          break;
-        case 4:
-          return 'docente';
-          break;
-        case 5:
-          return 'tutor';
-          break;
-        case 6:
-          return 'alumno';
-          break;
-      }
+      return tipoUsuarioToString(tipo);
     },
     partials: function(string) {
         return string;
