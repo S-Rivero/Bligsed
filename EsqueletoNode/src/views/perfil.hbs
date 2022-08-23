@@ -2,7 +2,7 @@
 <div class="contenedor_micuenta">
     <div class="contenedor_primario">
         <div class="contenedor_imagen">
-            <img src="../media/user_png.png" alt="">
+            <img src="../../../media/user_png.png" alt="">
         </div>
         <div class="contenedor_nombre">
             <div class="nombre_alumno">{{cu.Nombre}}</div>
@@ -29,9 +29,11 @@
 <script type="text/javascript"> //POSIBLE FALLA DE SEGURIDAD AGUANTE BOCA JUNIORS
 
     var url = window.location.href;
-    var trim = url.split("perfil/");
+    var trim = url.split("/");
+    console.log(trim.length);
     
-    let el = document.getElementById(trim[1]);
+    let el = document.getElementById(trim[trim.length-1]);
     el.setAttribute('class','color_fijo');
+    document.getElementById(trim[trim.length]).setAttribute('class','color_fijo');
 
 </script>

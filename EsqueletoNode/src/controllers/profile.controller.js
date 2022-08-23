@@ -3,65 +3,59 @@ const router = express.Router();
 const path = require('path');
 const pool = require('../database');
 const {JSONPromediosAl} = require('../lib/jsonFormat');
-const {esAlumno, setTutor, queTrimestre, setCurso} = require('../lib/helpers');
+const {esAlumno, setTutor, queTrimestre, setCurso, autorizadoVerPerfil} = require('../lib/helpers');
+
+exports.test = ((req,res)=>{
+    res.send(req.params);
+});
 
 exports.root = ((req,res) => {
-    // Obtener nombre del curso
-    // SELECT Nombre_curso FROM `curso` JOIN alumno a WHERE a.ID = 6;
-
-    if(req.params.id){
-        setCurso(req.params.id).then((curso)=>{
-            if(!req.session.childs){
-                req.session.childs = [];
-            }
-            let childsId = req.session.childs.map((res)=>{
-                return res.ID;
-            });
-            if([0,1,2,3,4].includes(req.user[0].Tipo_de_usuario) || childsId.includes(parseInt(req.params.id))){
-                req.session.uid = req.params.id;
-                pool.query("SELECT * FROM usuarios WHERE id = ?", [req.params.id], function(err,a){
-                    req.session.currentUser = a[0];
-                    if(curso[0]){
-                        req.session.currentUser['curso'] = curso[0].Nombre_curso;
-                        console.log(curso[0].Nombre_curso);
-                    }else{
-                        req.session.currentUser['curso'] = req.session.currentUser.Tipo_de_usuario;
-                        console.table(req.session.currentUser);
-                    }
-                    res.redirect('/perfil/datosPersonales');
-                });
-            }else{
-                res.redirect('/perfil');
-            }
-        });
-    }
-    else{
-        setCurso(req.user[0].id).then((curso)=>{
-            req.session.uid = req.user[0].id;
-            req.session.currentUser = req.user[0];
-            if(curso[0]){
-                req.session.currentUser['curso'] = curso[0].Nombre_curso;
-                console.log(curso[0].Nombre_curso);
-            }else{
-                req.session.currentUser['curso'] = req.session.currentUser.Tipo_de_usuario;
-                console.table(req.session.currentUser);
-            }
-            res.redirect('/perfil/datosPersonales');
-        });
-    }
+    setCurso(req.user[0].id).then((curso)=>{
+        req.session.uid = req.user[0].id;
+        req.session.currentUser = req.user[0];
+        if(curso[0]){
+            req.session.currentUser['curso'] = curso[0].Nombre_curso;
+        }else{
+            req.session.currentUser['curso'] = req.session.currentUser.Tipo_de_usuario;
+        }
+        res.redirect('/perfil/datosPersonales');
+    });
 });
 
-// exports.root = ((req,res) => {
-//     res.redirect('/perfil/datosPersonales');
-// });
+exports.rootId = ((req,res) => {
+    let paramsId = req.params.id;
+    setCurso(paramsId).then((curso)=>{
+        let childsId = req.session.childs.map((res)=>{
+            return res.ID;
+        });
+        if(autorizadoVerPerfil(req.user[0].Tipo_de_usuario, childsId, paramsId)){
+            req.session.uid = paramsId;
+            pool.query("SELECT * FROM usuarios WHERE id = ?", [paramsId], function(err,a){
+                req.session.currentUser = a[0];
+                if(curso[0]){
+                    req.session.currentUser['curso'] = curso[0].Nombre_curso;
+                }else{
+                    req.session.currentUser['curso'] = req.session.currentUser.Tipo_de_usuario;
+                }
+                res.redirect('/perfil/'+paramsId+'/datosPersonales');
+            });
+        }else{
+            res.redirect('/perfil');
+        }
+    });
+});
 
-exports.datosPersonales = ((req,res) => {
+function datosPersonales(req,res){
     setTutor(req.session.currentUser.id).then((r)=>{ 
         res.render('perfil.hbs', {in: {in: req.session.currentUser, contactos: r[0]}, cu: req.session.currentUser, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileDatosPersonales', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/datosPersonales'});
-        // res.send(req.session.currentUser.curso[0].Nombre_curso);
-    });    
+    });  
+}
+exports.datosPersonales = ((req,res) => {
+    datosPersonales(req,res);
 });
-
+exports.datosPersonalesId = ((req,res) => {
+    datosPersonales(req,res);
+});
 
 exports.FichaMedica = ((req,res) => {
     const rows = pool.query("SELECT * FROM fichamedica WHERE id_us = ?", [req.session.uid], function(err, ficha){

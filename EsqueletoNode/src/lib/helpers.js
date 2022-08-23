@@ -83,3 +83,7 @@ exports.setCurso = function(idUs){
         });
     }) 
 }
+
+exports.autorizadoVerPerfil = function(tipo, childsId, id){
+    return [0,1,2,3,4].includes(tipo) || childsId.includes(parseInt(id));
+}
