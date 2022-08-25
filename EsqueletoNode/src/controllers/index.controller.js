@@ -15,7 +15,6 @@ exports.root = ((req,res) => {
         // req.session['childNames'] = r.map((res)=>{
         //     return res.Nombre;
         // });
-        console.table(req.session);
         res.redirect('/home');
     });
 });
