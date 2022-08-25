@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
 </head>
-
-<body style="overflow-y:hidden; overflow-x: hidden;">
+{{!-- Este style no deja que se scrollee en la ficha med --}}
+<body style="overflow-y:hidden; overflow-x: hidden;"> 
     {{>sidebar user}}
     <section class="home-section">
         {{{body}}}

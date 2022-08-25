@@ -11,12 +11,13 @@ exports.test = ((req,res)=>{
 
 exports.root = ((req,res) => {
     setCurso(req.user[0].id).then((curso)=>{
-        req.session.uid = req.user[0].id;
-        req.session.currentUser = req.user[0];
+        if(req.session.currentUser){
+            // delete req.session.currentUser;
+        }
         if(curso[0]){
-            req.session.currentUser['curso'] = curso[0].Nombre_curso;
+            req.session['curso'] = curso[0].Nombre_curso;
         }else{
-            req.session.currentUser['curso'] = req.session.currentUser.Tipo_de_usuario;
+            req.session['curso'] = req.user[0].Tipo_de_usuario;
         }
         res.redirect('/perfil/datosPersonales');
     });
@@ -30,12 +31,13 @@ exports.rootId = ((req,res) => {
         });
         if(autorizadoVerPerfil(req.user[0].Tipo_de_usuario, childsId, paramsId)){
             req.session.uid = paramsId;
-            pool.query("SELECT * FROM usuarios WHERE id = ?", [paramsId], function(err,a){
+            // pool.query("SELECT id, Nombre, Tipo_de_usuario FROM usuarios WHERE id = ?", [paramsId], function(err,a){
+            pool.query("SELECT id, Nombre, Tipo_de_usuario, DNI, username, Numero_de_telefono, domicilio, Fecha_de_nacimiento FROM usuarios WHERE id = ?", [paramsId], function(err,a){
                 req.session.currentUser = a[0];
                 if(curso[0]){
-                    req.session.currentUser['curso'] = curso[0].Nombre_curso;
+                    req.session['curso'] = curso[0].Nombre_curso;
                 }else{
-                    req.session.currentUser['curso'] = req.session.currentUser.Tipo_de_usuario;
+                    req.session['curso'] = req.session.currentUser.Tipo_de_usuario;
                 }
                 res.redirect('/perfil/'+paramsId+'/datosPersonales');
             });
@@ -45,23 +47,40 @@ exports.rootId = ((req,res) => {
     });
 });
 
-function datosPersonales(req,res){
-    setTutor(req.session.currentUser.id).then((r)=>{ 
-        res.render('perfil.hbs', {in: {in: req.session.currentUser, contactos: r[0]}, cu: req.session.currentUser, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileDatosPersonales', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/datosPersonales'});
+function datosPersonales(req,res, cu){
+    cu['curso'] = req.session.curso;
+    setTutor(cu.id).then((r)=>{ 
+        res.render('perfil.hbs', {in: {in: cu, contactos: r[0]}, cu, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileDatosPersonales', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/datosPersonales'});
+        // res.send(cu);
     });  
 }
 exports.datosPersonales = ((req,res) => {
-    datosPersonales(req,res);
+    datosPersonales(req,res, req.user[0]);
 });
 exports.datosPersonalesId = ((req,res) => {
-    datosPersonales(req,res);
+    datosPersonales(req,res, req.session.currentUser);
 });
+//Sidebar: User ([hijos], user.nombre, user.Tipo_de_usuario)
+//Head: Links
+//Title: title
+//Partial: partial
 
-exports.FichaMedica = ((req,res) => {
-    const rows = pool.query("SELECT * FROM fichamedica WHERE id_us = ?", [req.session.uid], function(err, ficha){
-        res.render('perfil.hbs', {cu: req.session.currentUser, in: {ina: ficha[0], tdu: req.user[0].Tipo_de_usuario}, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileFichaMedica', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/fichaMedica'});
+//Profile: cu (El perfil que estoy viendo xd)
+//In: partial data
+function FichaMedica(req, res, cu){
+    cu['curso'] = req.session.curso;
+    const rows = pool.query("SELECT * FROM fichamedica WHERE id_us = ?", [cu.id], function(err, ficha){
+        res.render('perfil.hbs', {cu, in: {ina: ficha[0], tdu: req.user[0].Tipo_de_usuario}, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileFichaMedica', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/fichaMedica'});
         // res.send(req.session.currentUser);
     });
+}
+exports.FichaMedica = ((req,res) => {
+    FichaMedica(req, res, req.user[0]);
+});
+
+exports.FichaMedicaId = ((req,res) => {
+    let cu = req.session.currentUser;
+    FichaMedica(req, res, cu);
 });
 
 exports.updateFichaMedica = ((req,res) => {
