@@ -46,8 +46,7 @@ app.use(bodyParser.json());
 app.use(session({
   secret: 'bligsedsession',
   resave: false,
-  saveUninitialized: false,
-  store: new MySQLStore(database)
+  saveUninitialized: false
 }));
 // app.use(flash());
 app.use(passport.initialize());

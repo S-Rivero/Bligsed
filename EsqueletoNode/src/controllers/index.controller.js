@@ -49,3 +49,8 @@ exports.renderChat = ((req,res) => {
             res.render('mensajes.hbs', {links: 'headerLinks/chats', chats, mensajes: null,user:{user: req.user[0], childs: req.session.childs}});
     });    
 });
+
+exports.renderDocumentos = ((req,res)=>{
+    let a = [];
+    res.render('publicaciones.hbs', {a, links: 'headerLinks/documentos', user:{user: req.user[0], childs: req.session.childs}});
+});
