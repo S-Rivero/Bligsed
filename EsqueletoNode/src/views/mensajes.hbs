@@ -1,69 +1,67 @@
-<section class="home-section">
-  <div class="text">Mensajes</div>
+<div class="text">Mensajes</div>
 
-  <div class="contenedor_principal">
-    <div class="contenedor_superior_busqueda">
-      <div class="contenedor_superior_busqueda_input"><input type="search" placeholder="Buscar..."></div>
-    </div>
-    <div class="contenedor_superior">
-        <h3>{{selected_chat.nombre_chat}}</h3>
-        <p>{{count.id_chat}} participantes</p>
-    </div>
-    <div class="contenedor_medio_lateral" style="overflow-x: hidden;">
-      <ul id="lista_chats">
-        {{#each chats}}
-          <form action="/chat" method="get">
-            <li class="chat_lateral">
-              <input type="number" name="id_chat" value="{{id_chat}}" style="display:none;">
-              <input type="submit" value=" {{nombre_chat}}">
-              </li>
-          </form>
-        {{/each}}
-      </ul>
-    </div>
-
-    {{#ifCond mensajes '==' null}}
-      <div class="contenedor_medio">
-        <h3>SELECCIONA UN CHAT</h3>
-      </div>
-      <div class="contenedor_inferior_lateral">
-      </div>
-      <div class="contenedor_inferior">
-        <div class="contenedor_input">
-        </div>
-      </div>
-    {{else}}
-      <div class="contenedor_medio">
-        {{>chat mensajes}}
-      </div>
-      <div class="contenedor_inferior_lateral">
-      </div>
-      <div class="contenedor_inferior">
-        <div class="contenedor_input">
-          {{!-- <form id="form_msg" action="/msg" method="post" >
-            <input type="text" name="msg_in" placeholder="Escribe un mensaje...">
-            <input type="text" name="uname" value="{{user.user.Nombre}}" style="display: none;">
-            <input type="number" name="uid" value="{{user.user.id}}" style="display: none;">
-            <input type="number" name="cid" value="{{selected_chat.id_chat}}" style="display: none;">
-            <input type="submit" value="Enviar"/>
-            {{!-- <a href="">></a> --}}
-          </form> --}}
-          
-          <form id="form_xample" action="/xample" method="post" enctype="multipart/form-data" >
-            <input type="text" name="msg_in" placeholder="Escribe un mensaje...">
-            <input type="text" name="uname" value="{{user.user.Nombre}}" style="display: none;">
-            <input type="number" name="uid" value="{{user.user.id}}" style="display: none;">
-            <input type="number" name="cid" value="{{selected_chat.id_chat}}" style="display: none;">
-            <input type="file" name="file">
-            <input type="submit" value="Enviar"/>
-            {{!-- <a href="">></a> --}}
-          </form>
-        </div>
-      </div>
-    {{/ifCond}}
+<div class="contenedor_principal">
+  <div class="contenedor_superior_busqueda">
+    <div class="contenedor_superior_busqueda_input"><input type="search" placeholder="Buscar..."></div>
   </div>
-</section>
+  <div class="contenedor_superior">
+      <h3>{{selected_chat.nombre_chat}}</h3>
+      <p>{{count.id_chat}} participantes</p>
+  </div>
+  <div class="contenedor_medio_lateral" style="overflow-x: hidden;">
+    <ul id="lista_chats">
+      {{#each chats}}
+        <form action="/chat" method="get">
+          <li class="chat_lateral">
+            <input type="number" name="id_chat" value="{{id_chat}}" style="display:none;">
+            <input type="submit" value=" {{nombre_chat}}">
+            </li>
+        </form>
+      {{/each}}
+    </ul>
+  </div>
+
+  {{#ifCond mensajes '==' null}}
+    <div class="contenedor_medio">
+      <h3>SELECCIONA UN CHAT</h3>
+    </div>
+    <div class="contenedor_inferior_lateral">
+    </div>
+    <div class="contenedor_inferior">
+      <div class="contenedor_input">
+      </div>
+    </div>
+  {{else}}
+    <div class="contenedor_medio">
+      {{>chat mensajes}}
+    </div>
+    <div class="contenedor_inferior_lateral">
+    </div>
+    <div class="contenedor_inferior">
+      <div class="contenedor_input">
+        {{!-- <form id="form_msg" action="/msg" method="post" >
+          <input type="text" name="msg_in" placeholder="Escribe un mensaje...">
+          <input type="text" name="uname" value="{{user.user.Nombre}}" style="display: none;">
+          <input type="number" name="uid" value="{{user.user.id}}" style="display: none;">
+          <input type="number" name="cid" value="{{selected_chat.id_chat}}" style="display: none;">
+          <input type="submit" value="Enviar"/>
+          {{!-- <a href="">></a> --}}
+        </form> --}}
+        
+        <form id="form_xample" action="/xample" method="post" enctype="multipart/form-data" >
+          <input type="text" name="msg_in" placeholder="Escribe un mensaje...">
+          <input type="text" name="uname" value="{{user.user.Nombre}}" style="display: none;">
+          <input type="number" name="uid" value="{{user.user.id}}" style="display: none;">
+          <input type="number" name="cid" value="{{selected_chat.id_chat}}" style="display: none;">
+          <input type="file" name="file">
+          <input type="submit" value="Enviar"/>
+        </form>
+      </div>
+    </div>
+  {{/ifCond}}
+</div>
 
 <script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
-<script src="/js/posts.js"></script>
+<script src="/js/post-formdata.js"></script>
+{{!-- <script src="/js/posts.js"></script> --}}
 {{>script}}

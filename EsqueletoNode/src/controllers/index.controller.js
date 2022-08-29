@@ -64,7 +64,15 @@ exports.renderChat = ((req,res) => {
     });    
 });
 
-exports.xampleFun = ((req,res) => { //Actualmente muestra publicaciones nada mas
-    console.log("Body: "+req.body+"       Files: "+req);
+exports.xample = ((req,res) => { //Actualmente muestra publicaciones nada mas
     upload.single('file');
+    console.log("Body: %o",req.body);
+    console.log("File: %o",req.file);
+    console.log("Files: %o",req.files);
+
+    res.redirect('/xample');
+});
+
+exports.rxample = ((req,res) => { //Actualmente muestra publicaciones nada mas
+    res.render('pruebaFiles.hbs', {layout: 'xamplely'});
 });
