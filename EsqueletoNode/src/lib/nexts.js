@@ -8,14 +8,14 @@ exports.setSessionCurso = (req, res, next) => {
         }else{
             req.session['curso'] = req.user[0].Tipo_de_usuario;
         }
+        return next();
     });
-    return next();
 };
 exports.esAlumno = (req, res, next) => {
-    if(req.user[0].Tipo_de_usuario == 6){
+    if(req.session.curso && req.user[0].Tipo_de_usuario == 6){
         return next();
     }else{
-        res.redirect("/perfil");
+        res.redirect("/perfil/datosPersonales");
     }
 };
 

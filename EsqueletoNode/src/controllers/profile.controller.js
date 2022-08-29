@@ -10,17 +10,7 @@ exports.test = ((req,res)=>{
 });
 
 exports.root = ((req,res) => {
-    setCurso(req.user[0].id).then((curso)=>{
-        if(req.session.currentUser){
-            // delete req.session.currentUser;
-        }
-        if(curso[0]){
-            req.session['curso'] = curso[0].Nombre_curso;
-        }else{
-            req.session['curso'] = req.user[0].Tipo_de_usuario;
-        }
-        res.redirect('/perfil/datosPersonales');
-    });
+    res.redirect('/perfil/datosPersonales');
 });
 
 exports.rootId = ((req,res) => {
@@ -79,11 +69,10 @@ exports.FichaMedica = ((req,res) => {
 });
 
 exports.FichaMedicaId = ((req,res) => {
-    let cu = req.session.currentUser;
-    FichaMedica(req, res, cu);
+    FichaMedica(req, res, req.session.currentUser);
 });
 
-exports.updateFichaMedica = ((req,res) => {
+exports.updateFichaMedica = ((req,res) => { //USA CURRENT USER. NADIE PUEDE PERSONALIZAR SU PROPIA FICHA MEDICA ASI QUE NO ES PROBLEMA
     const {
         Obra_social,
         N_de_afiliado_obra_social,
@@ -115,20 +104,40 @@ exports.updateFichaMedica = ((req,res) => {
     });
 });
 
-exports.inasistencias = ((req,res) => {
-    const rows = pool.query("SELECT * FROM inasistencias WHERE id_us = ?", [req.session.uid], function(err, inasistencias){
-        res.render('perfil.hbs', {cu: req.session.currentUser, in: inasistencias, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileInasistencias', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/inasistencias'});
+function inasistencias(req, res, cu){
+    cu['curso'] = req.session.curso;
+    const rows = pool.query("SELECT * FROM inasistencias WHERE id_us = ?", [cu.id], function(err, inasistencias){
+        res.render('perfil.hbs', {cu, in: inasistencias, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileInasistencias', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/inasistencias'});
     });
+};
+
+exports.inasistencias = ((req,res) => {
+    inasistencias(req, res,  req.user[0]);
 });
 
-exports.Boletin = ((req,res) => {
+exports.inasistenciasId = ((req,res) => {
+    inasistencias(req, res, req.session.currentUser);
+});
+
+
+
+function boletin(req, res, cu){
+    cu['curso'] = req.session.curso;
     const trimestre = queTrimestre(req.params.t);
     if(trimestre != 0){
-        const rows = pool.query("SELECT `nota`, `Materia` FROM usuarios u JOIN notas n ON u.id = n.id_alum JOIN materias m ON m.ID = n.id_materia WHERE u.id = ? AND n.trimestre = ? ORDER BY m.Materia ASC;", [req.session.uid,trimestre], function(err, materias){
+        const rows = pool.query("SELECT `nota`, `Materia` FROM usuarios u JOIN notas n ON u.id = n.id_alum JOIN materias m ON m.ID = n.id_materia WHERE u.id = ? AND n.trimestre = ? ORDER BY m.Materia ASC;", [cu.id,trimestre], function(err, materias){
             const formateado = JSONPromediosAl(materias);
-            res.render('perfil.hbs', {cu: req.session.currentUser, in:{ma: formateado['materias'], cant: formateado.materias[formateado.max['materia']]}, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileBoletin', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/boletin'});
+            res.render('perfil.hbs', {cu, in:{ma: formateado['materias'], cant: formateado.materias[formateado.max['materia']]}, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileBoletin', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/boletin'});
         });
     }else{
         res.send("todavia no esta hecho xd");
     }
+};
+
+exports.Boletin = ((req,res) => {
+    boletin(req, res, req.user[0]);
+});
+
+exports.BoletinId = ((req,res) => {
+    boletin(req, res, req.session.currentUser);
 });

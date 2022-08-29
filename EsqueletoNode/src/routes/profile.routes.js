@@ -20,10 +20,10 @@ router.post('/:id/updateFichaMedica', isLoggedIn, usedRootId, updateFichaMedica)
 
 router.get('/Boletin', isLoggedIn, esAlumno,Boletin);
 router.get('/Boletin:t', isLoggedIn, esAlumno, Boletin);
-router.get('/:id/Boletin', isLoggedIn, usedRootId, Boletin);
-router.get('/:id/Boletin:t', isLoggedIn, usedRootId, test);
+router.get('/:id/Boletin', isLoggedIn, usedRootId, BoletinId);
+router.get('/:id/Boletin:t', isLoggedIn, usedRootId, BoletinId);
 
 router.get('/inasistencias', isLoggedIn, esAlumno, inasistencias);
-router.get('/:id/inasistencias', isLoggedIn, usedRootId, inasistencias);
+router.get('/:id/inasistencias', isLoggedIn, usedRootId, inasistenciasId);
 
 module.exports = router;
