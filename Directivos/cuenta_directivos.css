@@ -74,20 +74,20 @@
 }
 
 .contenedor_datos div {
-    height: 80%;
-    width: auto;
+    height: auto;
+    width: 210%;
     /* margin-left: 5%; */
     margin-right: 5%;
-    background-color:  rgba(35, 97, 80, 0.068);
+    background-color:  #79cfc133;
     border-radius: 17px;
 }
 
 .contenedor_contacto div {
     height: 80%;
     width: auto;
-    /* margin-left: 5%; */
+    margin-left: 5%;
     margin-right: 5%;
-    background-color:  rgba(35, 97, 80, 0.178);
+    background-color:  rgba(35, 97, 80, 0.096);
     border-radius: 17px;
 }
 
@@ -100,11 +100,11 @@
 
 .contenedor_datos p{
     font-size: 17px;
-    margin-left: 5%;
+    margin-left: 2%;
     margin-right: 5%;
-    margin-bottom: 3%;
-    margin-top: 3%;
-    padding: 1.5%;
+    margin-bottom: 1%;
+    margin-top: 1%;
+    padding: 1%;
 }
 
 .contenedor_contacto{
@@ -174,7 +174,7 @@
 }
 
 
-@media (max-width: 800px) {
+/* @media (max-width: 800px) {
     .contenedor_datos, .contenedor_contacto{
         font-size: 15px;
     }
@@ -232,4 +232,4 @@
     }
 
 
-}
+} */
