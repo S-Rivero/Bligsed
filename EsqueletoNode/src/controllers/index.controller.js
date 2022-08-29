@@ -5,6 +5,19 @@ const { isUndefined } = require('util');
 const pool = require('../database');
 const {JSONPromediosAl} = require('../lib/jsonFormat');
 const {setChild} = require('../lib/helpers');
+
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: (req,file,cb) => {
+        cb(null, '../public/files');
+    },
+    filename: (req,file,cb) => {
+        console.log(file);
+        cb(null, file.filename + "-" + Date.now() +".png");
+    }
+});
+const upload = multer({storage:storage});
+
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
 exports.root = ((req,res) => {
     setChild(req.user[0]).then((r)=>{
@@ -49,4 +62,9 @@ exports.renderChat = ((req,res) => {
             // res.render('mensajes.hbs', {links: 'headerLinks/chats', chats, mensajes: null, user:req.user[0]});
             res.render('mensajes.hbs', {links: 'headerLinks/chats', chats, mensajes: null,user:{user: req.user[0], childs: req.session.childs}});
     });    
+});
+
+exports.xampleFun = ((req,res) => { //Actualmente muestra publicaciones nada mas
+    console.log("Body: "+req.body+"       Files: "+req);
+    upload.single('file');
 });

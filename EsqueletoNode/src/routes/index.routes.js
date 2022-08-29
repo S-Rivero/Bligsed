@@ -5,6 +5,7 @@ const {
     root,
     renderHome,
     renderChat,
+    xampleFun,
 } = require('../controllers/index.controller');
 const { 
     pushMsg,
@@ -27,5 +28,7 @@ router.post('/aban', isLoggedIn, abanChat);
 router.post('/crea', isLoggedIn, creaChat);
 router.post('/elim', isLoggedIn, elimChat);
 router.post('/pub', isLoggedIn, pushPub);
+
+router.post('/xample', xampleFun);
 
 module.exports = router;
