@@ -6,14 +6,15 @@ const pool = require('../database');
 const {JSONPromediosAl} = require('../lib/jsonFormat');
 const {setChild} = require('../lib/helpers');
 
+
 const multer = require('multer');
 const storage = multer.diskStorage({
     destination: (req,file,cb) => {
-        cb(null, '../public/files');
+        cb(null, path.join(__dirname, '../public/files'));
     },
     filename: (req,file,cb) => {
         console.log(file);
-        cb(null, file.filename + "-" + Date.now() +".png");
+        cb(null, "BligsedImages_"+Date.now() + path.extname(file.originalname));
     }
 });
 const upload = multer({storage:storage});
@@ -64,15 +65,27 @@ exports.renderChat = ((req,res) => {
     });    
 });
 
-exports.xample = ((req,res) => { //Actualmente muestra publicaciones nada mas
-    upload.single('file');
+exports.xample = ((req,res) => {
+    req.body.image = req.file.destination;
+
     console.log("Body: %o",req.body);
     console.log("File: %o",req.file);
-    console.log("Files: %o",req.files);
+    
+    const file = req.file;
+
+    if (!file) {
+        const error = new Error("Please upload a file");
+        error.httpStatusCode = 400;
+        return next(error);
+    }
+
+    const result = {
+        name: req.body.name // adding the name from req.body in the result
+    };
 
     res.redirect('/xample');
 });
 
-exports.rxample = ((req,res) => { //Actualmente muestra publicaciones nada mas
+exports.rxample = ((req,res) => { 
     res.render('pruebaFiles.hbs', {layout: 'xamplely'});
 });

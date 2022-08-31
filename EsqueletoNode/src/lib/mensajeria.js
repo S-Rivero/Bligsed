@@ -1,5 +1,33 @@
 const pool = require('../database');
-
+const path = require('path');
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: (req,file,cb) => {
+        if(checkMime(file.mimetype) != 0)
+            cb(null, path.join(__dirname, '../public/media'));
+        else
+            cb(null, path.join(__dirname, '../public/files'));
+    },
+    filename: (req,file,cb) => {
+        console.log(file);
+        switch(checkMime(file.mimetype)){
+            case 0: 
+                cb(null, "BligsedDocs_"+Date.now() + path.extname(file.originalname));
+                break;
+            case 1: 
+                cb(null, "BligsedImages_"+Date.now() + path.extname(file.originalname));
+                break;
+            case 2: 
+                cb(null, "BligsedAudios_"+Date.now() + path.extname(file.originalname));
+                break;
+            case 3: 
+                cb(null, "BligsedVideos_"+Date.now() + path.extname(file.originalname));
+                break;
+        }
+        
+    }
+});
+exports.upload = multer({storage:storage});
 
 exports.pushMsg = function(req, res){
     let sql = "INSERT INTO mensajes (chatroom, id_emisor, contenido, fecha, hora) VALUES ("+req.body.chat+", "+req.body.uid+", '"+req.body.text+"', '"+req.body.date+"', '"+req.body.time+"');";
@@ -9,7 +37,6 @@ exports.pushMsg = function(req, res){
         notif();
     });
 }
-
 exports.elimChat = function(req, res){
     let str = "DELETE FROM chats WHERE id_chat = "+req.body.id_chat+" AND nombre_chat = '"+req.body.nombre_chat+"';";
     const elim = pool.query(str, function(err, result){
@@ -22,7 +49,6 @@ exports.elimChat = function(req, res){
         });
     });
 }
-
 exports.abanChat = function(req, res){
     var str = "DELETE FROM chats WHERE id_chat = "+req.body.id_chat+" AND id_usuario = "+req.user[0].id+" AND nombre_chat = '"+req.body.nombre_chat+"';";
     const crea = pool.query(str, function(err, result){
@@ -30,7 +56,6 @@ exports.abanChat = function(req, res){
         console.log("Has abandonado el chat exitosamente");
     });
 }
-
 exports.creaChat = function(req, res){
     const count = pool.query("SELECT COUNT(DISTINCT id_chat) FROM chats;", function(err, count){
         if (err) throw err;
@@ -48,7 +73,6 @@ exports.creaChat = function(req, res){
         });
     });
 }
-
 exports.pushPub = function(req, res){
     let sql = "INSERT INTO publicaciones (titulo, descripcion, autor, fecha) VALUES ('"+req.body.title+"', '"+req.body.desc+"', '"+req.body.autName+"', '"+req.body.date+"');";
     pool.query(sql, function (err, result) {
@@ -56,7 +80,6 @@ exports.pushPub = function(req, res){
         console.log("Pub subida");
     });   
 }
-
 function notif (req,res){
     fetch('https://api.mynotifier.app', {
         method: 'POST',
@@ -72,14 +95,54 @@ function notif (req,res){
         }),
     });
 }
-
-
-//"INSERT INTO publicaciones (titulo, descripcion, autor, fecha) VALUES ('"+req.body.title+"', '"+req.body.desc+"', '"+req.body.autName+"', '"+req.body.date+"');"
-
-/*
-MENSAJES CON IMAGES QUE SAQUE DEL EJEMPLO
-
-<li class="plantilla_mensaje mensaje_receptor"><div class="creador_mensaje">Federico Melograna</div><div class="contenido_mensaje"><img src="/media/momo_sad.jpg" alt=""> Checa este momo we :'v</div></li>
-<li class="plantilla_mensaje mensaje_receptor"><div class="creador_mensaje">Martin Touriño</div><div class="contenido_mensaje"><img src="/media/momo_sad2.jpg" alt=""> Que sad prro :'v xdxdxdxd</div></li>
-<li class="plantilla_mensaje mensaje_emisor"><div class="contenido_mensaje">Lorem ipsum dolor sit amet coem lorem</div></li>
-*/
+function checkMime(mime){
+    switch (mime) {
+        case 'image/png':
+        case 'image/jpeg':
+        case 'image/gif':
+        case 'image/svg+xml':
+        case 'image/bmp':
+        case 'image/cis-cod':
+        case 'image/ief':
+        case 'image/pipeg':
+        case 'image/tiff':
+        case 'image/x-cmu-raster':
+        case 'image/x-cmx':
+        case 'image/x-icon':
+        case 'image/x-portable-anymap':
+        case 'image/x-portable-bitmap':
+        case 'image/x-portable-graymap':
+        case 'image/x-portable-pixmap':
+        case "image/x-rgb":
+        case 'image/x-xbitmap':
+        case 'image/x-xpixmap':
+        case 'image/x-xwindowdump':
+            return 1;
+            break;
+        case 'audio/basic':
+        case 'auido/L24':
+        case 'audio/mid':
+        case 'audio/mpeg':
+        case 'audio/mp4':
+        case 'audio/x-aiff':
+        case 'audio/x-mpegurl':
+        case 'audio/vnd.rn-realaudio':
+        case 'audio/ogg':
+        case 'audio/vorbis':
+        case 'audio/vnd.wav':
+            return 2;
+            break;
+        case 'video/mpeg':
+        case 'video/mp4':
+        case 'video/quicktime':
+        case 'video/x-la-asf':
+        case 'video/x-ms-asf':
+        case 'video/x-msvideo':
+        case 'video/x-sgi-movie':
+            return 3;
+            break;
+        default:
+            return 0;
+            break;
+    }
+}

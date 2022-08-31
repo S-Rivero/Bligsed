@@ -1,6 +1,11 @@
-<form id="form-xample" action="/xample" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" />
-    <input type="submit" value="SUBMIT" />
-</form>
+<h2>Text File Uploads with Multer</h2>
 
-<script src="/js/post-formdata.js"></script>
+  <form action="/xample" enctype="multipart/form-data" method="POST">
+    <label for="name">Your name:</label>
+    <input type="text" id="name" name="name"><br><br>
+    <label for="myFile">Single Text File:</label>
+    <input type="file" name="myFile" /> <br /><br />
+    <input type="submit" value="Submit" />
+  </form>
+
+{{!-- <script src="/js/post-formdata.js"></script> --}}

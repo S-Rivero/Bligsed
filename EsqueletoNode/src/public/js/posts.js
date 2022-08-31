@@ -1,4 +1,4 @@
-/*
+
 //"INSERT INTO publicaciones (titulo, descripcion, autor, fecha) VALUES ('"+req.body.title+"', '"+req.body.desc+"', '"+req.body.autName+"', '"+req.body.date+"');"
 $(document).ready(function(){
   $("form#form_msg").on('submit', function(e){
@@ -146,5 +146,3 @@ function getDate(){
   };
   return final_date;
 }
-
-*/
