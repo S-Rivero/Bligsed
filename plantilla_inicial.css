@@ -258,3 +258,8 @@
 .contenedor_inicio {
   background-color: lightblue;
 }
+
+.sidebar .nav-list{
+  margin-left: 0px;
+  margin-right: 0px;
+}

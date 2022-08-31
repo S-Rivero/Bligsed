@@ -3,14 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../../../css/estilos.css">
     {{>(partials links)}}
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
 </head>
-
-<body style="overflow-y:hidden; overflow-x: hidden;">
+{{!-- Este style no deja que se scrollee en la ficha med --}}
+<body style="overflow-x: hidden;"> 
     {{>sidebar user}}
     <section class="home-section">
         {{{body}}}

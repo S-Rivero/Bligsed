@@ -15,12 +15,14 @@ exports.root = ((req,res) => {
         // req.session['childNames'] = r.map((res)=>{
         //     return res.Nombre;
         // });
-        console.table(req.session);
         res.redirect('/home');
     });
 });
 
 exports.renderHome = ((req,res) => { //Actualmente muestra publicaciones nada mas
+    if(req.session.currentUser){
+        delete req.session.currentUser;
+    }
     const rows = pool.query("SELECT * FROM publicaciones p JOIN usuarios u ON p.autor = u.id", function(err, publicaciones){
         res.render('publicaciones.hbs', {pub: publicaciones, links: 'headerLinks/home', user:{user: req.user[0], childs: req.session.childs}});
     });
@@ -49,4 +51,9 @@ exports.renderChat = ((req,res) => {
             // res.render('mensajes.hbs', {links: 'headerLinks/chats', chats, mensajes: null, user:req.user[0]});
             res.render('mensajes.hbs', {links: 'headerLinks/chats', chats, mensajes: null,user:{user: req.user[0], childs: req.session.childs}});
     });    
+});
+
+exports.renderDocumentos = ((req,res)=>{
+    let a = [];
+    res.render('publicaciones.hbs', {a, links: 'headerLinks/documentos', user:{user: req.user[0], childs: req.session.childs}});
 });

@@ -5,6 +5,7 @@ const {
     root,
     renderHome,
     renderChat,
+    renderDocumentos,
 } = require('../controllers/index.controller');
 const { 
     pushMsg,
@@ -21,6 +22,8 @@ router.get('/',isLoggedIn, root);
 router.get('/home', isLoggedIn, renderHome);
 
 router.get('/chat', isLoggedIn, renderChat);
+
+router.get('/documentos', isLoggedIn, renderDocumentos);
 
 router.post('/msg', isLoggedIn, pushMsg);
 router.post('/aban', isLoggedIn, abanChat);

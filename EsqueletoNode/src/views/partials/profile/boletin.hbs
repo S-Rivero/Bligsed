@@ -33,10 +33,16 @@
     function changeFunc() {
         var selectBox = document.getElementById("selectBox");
         var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-        window.location.replace("/perfil/boletin" + selectedValue);
+        let F_url = window.location.href;
+        let F_trim = F_url.split("/Boletin")[0].split("perfil/");
+        if(F_trim[1])
+            window.location.replace("/perfil/"+F_trim[1]+"/Boletin" + selectedValue);
+        else
+            window.location.replace("/perfil/Boletin" + selectedValue);
+
     };
     var url = window.location.href;
-    var trim = url.split("boletin");
+    var trim = url.split("Boletin");
     if (trim[2]) {
         trim[1] = 1;
     }
