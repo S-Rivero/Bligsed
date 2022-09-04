@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/Directivos/buscar_directivos.css">
+  <link rel="stylesheet" href="/plantilla_inicial.css">
+  <link rel="stylesheet" href="/Directivos/Experimentos uwu/Menu Despegable/Menu/estilos.css">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Cuenta - Bligsed</title>
+</head>
+
+<body style="overflow-x: hidden;"> <!-- <li>saqué el overflow-y:hidden !!!</li> -->
+    <div class="sidebar open">
+      <div class="logo">
+        <div class="logo_name">Bligs<u>ed</u></div>
+        <i class='bx bx-menu' id="btn"></i>
+      </div>
+      <ul class="nav-list">
+        <!-- <li>
+            <i class='bx bx-search' ></i>
+           <input type="text" placeholder="Search...">
+           <span class="tooltip">Buscar</span>
+        </li> -->
+        <li>
+          <a href="inicio_docentes.html">
+            <i class='bx bx-grid-alt'></i>
+            <span class="links_name">Inicio</span>
+          </a>
+          <span class="tooltip">Inicio</span>
+        </li>
+        <li>
+          <a href="cuenta_docentes.html">
+            <i class='bx bx-user'></i>
+            <span class="links_name">Mi cuenta</span>
+          </a>
+          <span class="tooltip">Mi cuenta</span>
+        </li>
+        <li>
+          <a href="mensajes_docentes.html">
+            <i class='bx bx-chat'></i>
+            <span class="links_name">Mensajes</span>
+          </a>
+          <span class="tooltip">Mensajes</span>
+        </li>
+        <li>
+          <a href="buscar_docentes.html">
+            <i class='bx bx-folder'></i>
+            <span class="links_name">Mis cursos</span>
+          </a>
+          <span class="tooltip">Mis cursos</span>
+        </li>
+        <li class="profile">
+          <div class="profile-details">
+            <!--<img src="profile.jpg" alt="profileImg">-->
+            <div class="name_job">
+              <div class="name">Hola, Martín de Jesús</div>
+              <div class="job">Docente</div>
+            </div>
+          </div>
+          <a href="logout"><i class='bx bx-log-out' id="log_out"></i></a>
+        </li>
+      </ul>
+    </div>
+    <section class="home-section">
+      <div class="text">Buscar</div>
+  <section class="home-section">
+          <div class="contenedor_nav">
+            <ul class="list">
+
+                <li class="list__item">
+                    <div class="list__button">
+                        <h2>Cursos</h2>
+                    </div>
+                </li>
+    
+                <li class="list__item list__item--click">
+                    <div class="list__button list__button--click">
+                        <a href="#" class="nav__link">1er año</a>
+                        <img src="/media/arrow.svg" class="list__arrow">
+                    </div>
+    
+                    <ul class="list__show" style="height: 0px;">
+                        <li class="list__inside">
+                            <a href="/Docentes/tabla_curso_docentes.html" class="nav__link nav__link--inside">1°A</a>
+                        </li>
+    
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">1°B</a>
+                        </li>
+
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">1°C</a>
+                        </li>
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">1°D</a>
+                        </li>
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">1°E</a>
+                        </li>
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">1°G</a>
+                        </li>
+                    </ul>
+                </li>
+    
+    
+                <li class="list__item">
+                    <div class="list__button">
+                    </div>
+                    <li class="list__item list__item--click">
+                        <div class="list__button list__button--click">
+                            <a href="#" class="nav__link">2do año</a>
+                            <img src="/media/arrow.svg" class="list__arrow">
+                        </div>
+        
+                        <ul class="list__show" style="height: 0px;">
+                            <li class="list__inside">
+                                <a href="#" class="nav__link nav__link--inside">2°A</a>
+                            </li>
+        
+                            <li class="list__inside">
+                                <a href="#" class="nav__link nav__link--inside">2°B</a>
+                            </li>
+    
+    
+                            <li class="list__inside">
+                                <a href="#" class="nav__link nav__link--inside">23C</a>
+                            </li>
+    
+                            <li class="list__inside">
+                                <a href="#" class="nav__link nav__link--inside">2°D</a>
+                            </li>
+    
+                            <li class="list__inside">
+                                <a href="#" class="nav__link nav__link--inside">2°E</a>
+                            </li>
+    
+                            <li class="list__inside">
+                                <a href="#" class="nav__link nav__link--inside">2°G</a>
+                            </li>
+                        </ul>
+                    </li>
+                </li>
+    
+                <li class="list__item list__item--click">
+                    <div class="list__button list__button--click">
+                        <a href="#" class="nav__link">3er año</a>
+                        <img src="/media/arrow.svg" class="list__arrow">
+                    </div>
+    
+                    <ul class="list__show" style="height: 0px;">
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">3°A</a>
+                        </li>
+    
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">3°B</a>
+                        </li>
+
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">3°C</a>
+                        </li>
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">3°D</a>
+                        </li>
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">3°E</a>
+                        </li>
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">3°G</a>
+                        </li>
+                    </ul>
+                </li>
+    
+    
+                <li class="list__item">
+                    <div class="list__button">
+                    </div>
+                </li>
+                <li class="list__item list__item--click">
+                    <div class="list__button list__button--click">
+                        <a href="#" class="nav__link">4to año</a>
+                        <img src="/media/arrow.svg" class="list__arrow">
+                    </div>
+    
+                    <ul class="list__show" style="height: 0px;">
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">4°A</a>
+                        </li>
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">4°C</a>
+                        </li>
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">4°D</a>
+                        </li>
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">4°E</a>
+                        </li>
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">4°F</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="list__item list__item--click">
+                    <div class="list__button list__button--click">
+                        <a href="#" class="nav__link">5to año</a>
+                        <img src="/media/arrow.svg" class="list__arrow">
+                    </div>
+    
+                    <ul class="list__show" style="height: 0px;">
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">5°A</a>
+                        </li>
+    
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">5°B</a>
+                        </li>
+
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">5°C</a>
+                        </li>
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">5°D</a>
+                        </li>
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">5°E</a>
+                        </li>
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">5°G</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="list__item list__item--click">
+                    <div class="list__button list__button--click">
+                        <a href="#" class="nav__link">6to año</a>
+                        <img src="/media/arrow.svg" class="list__arrow">
+                    </div>
+    
+                    <ul class="list__show" style="height: 0px;">
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">6°A</a>
+                        </li>
+    
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">6°B</a>
+                        </li>
+
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">6°C</a>
+                        </li>
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">6°D</a>
+                        </li>
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">6°E</a>
+                        </li>
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">6°G</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="list__item list__item--click">
+                    <div class="list__button list__button--click">
+                        <a href="#" class="nav__link">7mo año</a>
+                        <img src="/media/arrow.svg" class="list__arrow">
+                    </div>
+    
+                    <ul class="list__show" style="height: 0px;">
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">7°A</a>
+                        </li>
+    
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">7°B</a>
+                        </li>
+
+
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">7°C</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+        <script src="/Directivos/Experimentos uwu/Menu Despegable/Menu/main.js"></script>
+
+    </section>
+  <script>
+    let sidebar = document.querySelector(".sidebar");
+    let closeBtn = document.querySelector("#btn");
+    let searchBtn = document.querySelector(".bx-search");
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("open");
+      menuBtnChange();//calling the function(optional)
+    });
+
+    searchBtn.addEventListener("click", () => { // Sidebar open when you click on the search iocn
+      sidebar.classList.toggle("open");
+      menuBtnChange(); //calling the function(optional)
+    });
+
+    // following are the code to change sidebar button(optional)
+    function menuBtnChange() {
+      if (sidebar.classList.contains("open")) {
+        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+      } else {
+        closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
+      }
+    }
+  </script>
+
+
+</body>
+
+</html>
