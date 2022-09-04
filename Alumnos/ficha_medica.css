@@ -73,7 +73,7 @@
     margin-left: 3%;
     margin-right: 5%;
     background-color:  rgba(4, 83, 63, 0.059);
-    overflow-y: scroll;
+    overflow: scroll;
     border-radius: 15px;
 }
 
