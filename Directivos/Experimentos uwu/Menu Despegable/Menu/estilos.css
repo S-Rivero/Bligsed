@@ -71,6 +71,7 @@ body{
 
 .list__arrow{
     margin-left: auto;
+    margin-right: 10%;
     transition: transform .3s;
 }
 
