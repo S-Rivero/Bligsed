@@ -104,5 +104,8 @@ module.exports = {
         default:
           return "Sin datos";
       }
-    }
+    },
+    ifMime: function(mime, type, options) {
+      return (mime.slice(0,6) == type) ? options.fn(this) : options.inverse(this);
+    },
   } 

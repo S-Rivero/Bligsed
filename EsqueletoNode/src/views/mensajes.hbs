@@ -6,14 +6,14 @@
   </div>
   <div class="contenedor_superior">
       <h3>{{selected_chat.nombre_chat}}</h3>
-      <p>{{count.id_chat}} participantes</p>
+      <p>{{count.id}} participantes</p>
   </div>
   <div class="contenedor_medio_lateral" style="overflow-x: hidden;">
     <ul id="lista_chats">
       {{#each chats}}
         <form action="/chat" method="get">
           <li class="chat_lateral">
-            <input type="number" name="id_chat" value="{{id_chat}}" style="display:none;">
+            <input type="number" name="id" value="{{id}}" style="display:none;">
             <input type="submit" value=" {{nombre_chat}}">
             </li>
         </form>
@@ -39,13 +39,15 @@
     </div>
     <div class="contenedor_inferior">
       <div class="contenedor_input">
-        <form id="form_msg" action="/msg" method="post" >
-          <input type="text" name="msg_in" placeholder="Escribe un mensaje...">
-          <input type="text" name="uname" value="{{user.user.Nombre}}" style="display: none;">
-          <input type="number" name="uid" value="{{user.user.id}}" style="display: none;">
-          <input type="number" name="cid" value="{{selected_chat.id_chat}}" style="display: none;">
+        <form id="form_msg" action="/msg"  method="POST" >
+          <input type="text" name="text" placeholder="Escribe un mensaje..." required>
+          <input type="text" name="name" value="{{user.user.Nombre}}" style="display: none;">
+          <input type="number" name="user" value="{{user.user.id}}" style="display: none;">
+          <input type="number" name="chat" value="{{selected_chat.id}}" style="display: none;">
+          <input type="file" name="file"/>
+          <input type="text" name="date" value="" style="display: none;">
+          <input type="text" name="time" value="" style="display: none;">
           <input type="submit" value="Enviar"/>
-          {{!-- <a href="">></a> --}}
         </form>
       </div>
     </div>

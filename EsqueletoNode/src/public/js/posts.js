@@ -2,45 +2,31 @@
 //"INSERT INTO publicaciones (titulo, descripcion, autor, fecha) VALUES ('"+req.body.title+"', '"+req.body.desc+"', '"+req.body.autName+"', '"+req.body.date+"');"
 $(document).ready(function(){
   $("form#form_msg").on('submit', function(e){
-      e.preventDefault();
-      var form = document.getElementById('form_msg');
-      if(form.msg_in.value != '')
-      {
-      datos = msgFormat(form);
+    e.preventDefault();
+    let now = getDate();
+    this.date.value = now.date;
+    this.time.value = now.time;
+    this.text.value = cutSpaces(this.text.value);
+    if(this.text.value != ''){
+      var formData = new FormData(this);
       $.ajax({
-          type: 'post',
-          url: '/msg',
-          data: datos,
-          processData: false,
-          contentType: 'application/x-www-form-urlencoded',
-      })
-      form.msg_in.value = '';
+        type: "POST",
+        url: '/msg',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(r){
+        },
+        error: function (e) {
+          console.log("some error", e);
+        }
+      }); 
     }
+    let f = document.getElementById('form_msg');
+    f.text.value = null;
+    f.file.value = null;
   });
 });
-
-function msgFormat(data){
-  let str = cleanData(data.msg_in.value);
-  if (str != '')
-  {
-      let now = getDate();
-      let o = {
-          uid: data.uid.value,
-          uname: data.uname.value,
-          chat: data.cid.value,
-          text: str,
-          date: now.date,
-          time: now.time,
-      };
-      showMsg(o.uname, o.time, o.text);
-      var string = 'uid='+o.uid+'&u_name='+o.uname+'&chat='+o.chat+'&text='+o.text+'&date='+o.date+'&time='+o.time;
-      //name=John&age=12
-  }
-  else 
-    console.log('En una futura instancia deberia matar el post');
-
-  return string;
-}
 
 $(document).ready(function(){
   $("form#form_pub").on('submit', function(e){
@@ -67,23 +53,7 @@ $(document).ready(function(){
       }
   });
 });
-
-function pubFormat(form){
-  let now = getDate();
-  var string = 'title='+form.title.value+'&desc='+form.desc.value+'&autName='+form.autor.value+'&date='+now.date;
-  return string;
-}
-
-
-
-
-
-
-
-
-
-function cleanData(str){
-
+function cutSpaces(str){
     let k = 0;
     while (k == 0){
       if(str[0] === ' '){
@@ -119,16 +89,6 @@ function showMsg(name, time, text){
   li.appendChild(div_text);
   ul.appendChild(li);
 }
-
-
-
-
-
-
-
-
-
-
 
 function getDate(){
   let date_ob = new Date();

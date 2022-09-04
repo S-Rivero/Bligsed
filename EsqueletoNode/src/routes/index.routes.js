@@ -24,7 +24,8 @@ router.get('/home', isLoggedIn, renderHome);
 
 router.get('/chat', isLoggedIn, renderChat);
 
-router.post('/msg', isLoggedIn, pushMsg);
+router.post('/msg', isLoggedIn, upload.any('myFile'),  pushMsg);
+// router.post('/msg', isLoggedIn, pushMsg);
 router.post('/aban', isLoggedIn, abanChat);
 router.post('/crea', isLoggedIn, creaChat);
 router.post('/elim', isLoggedIn, elimChat);

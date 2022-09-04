@@ -1,48 +1,71 @@
 const pool = require('../database');
 const path = require('path');
 const multer = require('multer');
+const { captureRejectionSymbol } = require('events');
 const storage = multer.diskStorage({
     destination: (req,file,cb) => {
-        if(checkMime(file.mimetype) != 0)
-            cb(null, path.join(__dirname, '../public/media'));
-        else
-            cb(null, path.join(__dirname, '../public/files'));
+        switch(checkMime(file.mimetype)){
+            case 0:
+                cb(null, path.join(__dirname, '../public/files'));
+                break;
+            case 1:
+                cb(null, path.join(__dirname, '../public/media/images'));
+                break;
+            case 2:
+                cb(null, path.join(__dirname, '../public/media/audios'));
+                break;
+            case 3:
+                cb(null, path.join(__dirname, '../public/media/videos'));
+                break;
+        }
     },
     filename: (req,file,cb) => {
         console.log(file);
         switch(checkMime(file.mimetype)){
-            case 0: 
+            case 0:
                 cb(null, "BligsedDocs_"+Date.now() + path.extname(file.originalname));
                 break;
-            case 1: 
+            case 1:
                 cb(null, "BligsedImages_"+Date.now() + path.extname(file.originalname));
                 break;
-            case 2: 
+            case 2:
                 cb(null, "BligsedAudios_"+Date.now() + path.extname(file.originalname));
                 break;
-            case 3: 
+            case 3:
                 cb(null, "BligsedVideos_"+Date.now() + path.extname(file.originalname));
                 break;
         }
-        
     }
 });
-exports.upload = multer({storage:storage});
+exports.upload = multer({storage:storage, limits: {fileSize: 50*1024*1024 }});
 
 exports.pushMsg = function(req, res){
-    let sql = "INSERT INTO mensajes (chatroom, id_emisor, contenido, fecha, hora) VALUES ("+req.body.chat+", "+req.body.uid+", '"+req.body.text+"', '"+req.body.date+"', '"+req.body.time+"');";
+    console.log("Body: %o",req.body);
+    var sql
+    var file = req.files[0];
+    if(file){
+        let ruta = file.destination.slice(-6) +'/'+ file.filename.replaceAll('\\', '/');
+        sql = "INSERT INTO mensajes (chat, user, text, date, time, file, mime) VALUES ("+req.body.chat+", "+req.body.user+", '"+req.body.text+"', '"+req.body.date+"', '"+req.body.time+"', '"+ruta+"', '"+file.mimetype+"');";
+    }
+    else
+        sql = "INSERT INTO mensajes (chat, user, text, date, time, file, mime) VALUES ("+req.body.chat+", "+req.body.user+", '"+req.body.text+"', '"+req.body.date+"', '"+req.body.time+"', null, null);";
+
     pool.query(sql, function (err, result) {
         if (err) throw err;
         console.log("1 message uploaded");
-        notif();
+        //notif();
     });
 }
+    /*
+exports.pushMsg = function(req, res){
+}
+*/
 exports.elimChat = function(req, res){
-    let str = "DELETE FROM chats WHERE id_chat = "+req.body.id_chat+" AND nombre_chat = '"+req.body.nombre_chat+"';";
+    let str = "DELETE FROM chats WHERE id = "+req.body.id+" AND nombre_chat = '"+req.body.nombre_chat+"';";
     const elim = pool.query(str, function(err, result){
         if (err) throw err;
         //Ahora crea el chat con usuario -1 para que quede la ID registrada
-        let str = "INSERT INTO chats (id_chat, id_usuario, nombre_chat) VALUES ("+req.body.id_chat+", -1, '"+req.body.nombre_chat+"');";
+        let str = "INSERT INTO chats (id, id_usuario, nombre_chat) VALUES ("+req.body.id+", -1, '"+req.body.nombre_chat+"');";
         const elim = pool.query(str, function(err, result){
             if (err) throw err;
             console.log("Has eliminado el chat exitosamente");
@@ -50,17 +73,17 @@ exports.elimChat = function(req, res){
     });
 }
 exports.abanChat = function(req, res){
-    var str = "DELETE FROM chats WHERE id_chat = "+req.body.id_chat+" AND id_usuario = "+req.user[0].id+" AND nombre_chat = '"+req.body.nombre_chat+"';";
+    var str = "DELETE FROM chats WHERE id = "+req.body.id+" AND id_usuario = "+req.user[0].id+" AND nombre_chat = '"+req.body.nombre_chat+"';";
     const crea = pool.query(str, function(err, result){
         if (err) throw err;
         console.log("Has abandonado el chat exitosamente");
     });
 }
 exports.creaChat = function(req, res){
-    const count = pool.query("SELECT COUNT(DISTINCT id_chat) FROM chats;", function(err, count){
+    const count = pool.query("SELECT COUNT(DISTINCT id) FROM chats;", function(err, count){
         if (err) throw err;
 
-        var str = "INSERT INTO chats (id_chat, id_usuario, nombre_chat) VALUES";
+        var str = "INSERT INTO chats (id, id_usuario, nombre_chat) VALUES";
         for (let i = 0; i < req.body.id_usuario.length; i++) {
             if (i == req.body.id_usuario.length - 1)
                 str.concat(str," ("+count + 1 +", "+req.body.id_usuario[i]+", '"+req.body.nombre_chat+"');");
@@ -78,7 +101,7 @@ exports.pushPub = function(req, res){
     pool.query(sql, function (err, result) {
         if (err) throw err;
         console.log("Pub subida");
-    });   
+    });
 }
 function notif (req,res){
     fetch('https://api.mynotifier.app', {

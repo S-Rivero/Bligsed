@@ -300,16 +300,18 @@ DELIMITER ;
 --
   CREATE TABLE `mensajes` (
     id int(11) NOT NULL AUTO_INCREMENT,
-    chatroom int(11) NOT NULL,
-    id_emisor int(11) NOT NULL,
-    contenido mediumtext NOT NULL,
-    fecha DATE NOT NULL,
-    hora TIME NOT NULL,
+    chat int(11) NOT NULL,
+    user int(11) NOT NULL,
+    text mediumtext NOT NULL,
+    date DATE NOT NULL,
+    time TIME NOT NULL,
+    file VARCHAR(40),
+    mime VARCHAR(15),
     PRIMARY KEY (id)
   );
 
   CREATE TABLE `chats` (
-    id_chat int(11) NOT NULL,
+    id int(11) NOT NULL,
     id_usuario int(11) NOT NULL,
     nombre_chat mediumtext NOT NULL
   );
@@ -340,6 +342,6 @@ UPDATE fichamedica SET `Enfermedad` = "Sida", `Internacion` = "Internacion debid
 
 INSERT INTO `publicaciones` (`titulo`, `descripcion`, `autor`, fecha) VALUES ('Aniversario del Noba', 'Hoy recordamos un tragico accidente que se llevo a uno de los mas prometedores musicos de el siglo 21. Descansa en paz Lautaro.', '2', "2022-7-4"), ('Murio fortnite', 'Fortnite ha tocado fondo con sus usuarios activos este 4 de marzo de 2022 con una gran cantidad de bots por partida y una playerbese simultanea de solo 300 jugadores Fortnite se puede declarar como un juego muerto', '2', "2022-8-4"), ('Tragedia en Florencio Varela', 'Un oso que invocaba rayos asesino a una mujer policia de manera brutal este 4 de septiembre. Segun testigos el oso se nombraba a si mismo Volibear', '2', "2022-9-4"), ('Suicidios masivos en Europá', 'En europa recientemente surgio una ola de suicidios debido a lo que se cree que es el final de las criptomonedas', '2', "2022-10-4");
 
-INSERT INTO `mensajes` (chatroom, id_emisor, `contenido`, fecha, hora) VALUES('1', '6', "Hola", "2022-07-31", "12:07:31"), ('1', '3', "Hola, como estas?", "2022-07-31", "17:48:59"), ('1', '6', "Todo bien, vos?", "2022-08-01", "00:03:07"), ('1', '3', "Todo joya", "2022-08-01", "01:41:50");
-INSERT INTO `chats` (id_chat, id_usuario, `nombre_chat`) VALUES('1', '6', "7mo C"), ('1', '3', "7mo C"), ('1', '4', "7mo C"), ('1', '8', "7mo C"), ('2', '6', "4to C"), ('2', '5', "4to C"), ('3', '6', "6to C"), ('3', '2', "6to C"), ('3', '1', "6to C");
-INSERT INTO `mensajes` ( `chatroom`, `id_emisor`, `contenido`, `fecha`, `hora`) VALUES ('1', '6', 'Hey batman did you know that despite only making up to 13% of the population blacks commite 52% of the crime?', '2022-08-11', '13:21:31');
+INSERT INTO `mensajes` (chat, user, `text`, `date`, `time`, `file`, `mime`) VALUES('1', '6', "Jesse, we need more crotolamo", "2022-07-31", "12:07:31", "images/BligsedImages_1662319342494.jpg", "image/jpeg"), ('1', '3', "Que es Crotolamo?", "2022-07-31", "17:48:59", "images/BligsedImages_1662321039596.jpg", "image/jpeg"), ('1', '6', "Esta", "2022-08-01", "00:03:07", "images/BligsedImages_1662318739846.jpg", "image/jpeg"), ('1', '3', "...", "2022-07-31", "17:48:59", "images/BligsedImages_1662313825563.gif", "image/gif"), ('1', '3', "...", "2022-08-01", "00:03:30", "audios/BligsedAudios_1661921608118.ogg", "audio/ogg"), ('1', '6', "...", "2022-08-01", "00:05:17", "videos/BligsedVideos_1661922119094.mp4", "video/mp4"), ('1', '3', "...", "2022-08-02", "17:03:07", "audios/BligsedAudios_1662322166878.ogg", "audio/ogg") ;
+
+INSERT INTO `chats` (id, id_usuario, `nombre_chat`) VALUES('1', '6', "7mo C"), ('1', '3', "7mo C"), ('1', '4', "7mo C"), ('1', '8', "7mo C"), ('2', '6', "4to C"), ('2', '5', "4to C"), ('3', '6', "6to C"), ('3', '2', "6to C"), ('3', '1', "6to C");

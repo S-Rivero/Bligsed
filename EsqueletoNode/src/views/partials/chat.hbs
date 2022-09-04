@@ -1,19 +1,57 @@
 <ul id="mensaje_contenedor" class="mensaje_contenedor">
   {{#each this}}
-    {{#ifCond id_emisor '==' userid}}
+    {{#ifCond user '==' userid}}
       <li class="plantilla_mensaje mensaje_emisor">
-        <div class="creador_mensaje">{{id_emisor}}</div>
-        <div class="hora_mensaje">{{hora}}</div>
+        <div class="creador_mensaje">{{user}}</div>
+        <div class="hora_mensaje">{{time}}</div>
         <div class="contenido_mensaje">
-            <p>{{contenido}}</p>
+          <p>{{text}}</p>
+          {{#ifCond file '!=' null}}
+            {{#ifMime file 'images'}}
+              <img src="/media/{{file}}" alt="No se ha encontrado el archivo">
+            {{/ifMime}}
+            {{#ifMime file 'videos'}}
+              <video width="320" height="240" controls>
+                <source src="/media/{{file}}" type="{{mime}}">
+              </video>
+            {{/ifMime}}
+            {{#ifMime file 'audios'}}
+              <audio controls>
+                <source src="/media/{{file}}" type="{{mime}}">
+                Tu navegador no es compatible con el formato de audio
+              </audio>
+            {{/ifMime}}
+            {{#ifMime file 'filess'}}
+              <a href="/media/{{file}}" download></a>
+            {{/ifMime}}
+          {{/ifCond}}
         </div>
       </li>
     {{else}}
       <li class="plantilla_mensaje mensaje_receptor">
-        <div class="creador_mensaje">{{id_emisor}}</div>
-        <div class="hora_mensaje">{{hora}}</div>
+        <div class="creador_mensaje">{{user}}</div>
+        <div class="hora_mensaje">{{time}}</div>
         <div class="contenido_mensaje">
-            <p>{{contenido}}</p>
+          <p>{{text}}</p>
+          {{#ifCond file '!=' null}}
+            {{#ifMime file 'images'}}
+              <img src="/media/{{file}}" alt="No se ha encontrado el archivo">
+            {{/ifMime}}
+            {{#ifMime file 'videos'}}
+              <video width="320" height="240">
+                <source src="/media/{{file}}" type="{{mime}}">
+              </video>
+            {{/ifMime}}
+            {{#ifMime file 'audios'}}
+              <audio controls>
+                <source src="/media/{{file}}" type="{{mime}}">
+                Tu navegador no es compatible con el formato de audio
+              </audio>
+            {{/ifMime}}
+            {{#ifMime file 'filess'}}
+              <a href="/media/{{file}}" download></a>
+            {{/ifMime}}
+          {{/ifCond}}
         </div>
       </li>
     {{/ifCond}}
