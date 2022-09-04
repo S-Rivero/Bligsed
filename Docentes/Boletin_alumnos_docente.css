@@ -73,7 +73,29 @@
     margin-left: 3%;
     margin-right: 5%;
     background-color:  rgba(4, 83, 63, 0.059);
+    overflow-y: scroll;
 }
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+ 
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+   
+  
+  ::-webkit-scrollbar-thumb {
+    background: grey; 
+    border-radius: 5px;
+  }
+  
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #333; 
+  }
+
 
 .contenedor_datos{
     background-color: transparent;
