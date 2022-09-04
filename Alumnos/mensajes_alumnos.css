@@ -332,3 +332,10 @@ body{
         overflow-x: auto
     }
 }
+
+.icons_mensajeria i{
+    padding: 1%;
+    border-radius: 7px;
+    color: rgba(127,198,213,1);
+    font-size: 30px;
+}
