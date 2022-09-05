@@ -36,9 +36,8 @@
             <input  name="problemas_salud" type="text" placeholder="Otros problemas de salud..." class="ingreso"
                 value="{{ina.problemas_salud}}">
 
-            <h4>Vacunación {{#selectVacunacion Vacunacion}}{{/selectVacunacion}}</h4>
             
-            <label for="" id="texto_vac">Elija la opción que corresponda</label>
+            <br><label for="" id="texto_vac">Elija la opción que corresponda</label>
             <select name="select_vacunacion" id="select_vacunacion">
                 <option value="{{#selectVacunacion Vacunacion}}{{/selectVacunacion}}" hidden="hidden"
                     selected="selected">{{#selectVacunacion Vacunacion}}{{/selectVacunacion}}</option>
@@ -47,7 +46,7 @@
                 <option id="vac3" value="0">Sin datos</option>
                 <select>
             
-
+            <br>
             <input type="text" name="Altura" placeholder="Talla (en cm)" class="ingreso" value="{{ina.Altura}}">
             <input type="text" name="Peso" placeholder="Peso (en kg, separar con coma (,))" class="ingreso" value="{{ina.Peso}}">
 
@@ -79,6 +78,7 @@
         }
         if({{tdu}} == 6){
             inputs = document.getElementsByTagName('input');
+            document.getElementById('select_vacunacion').setAttribute("disabled", "");
             for (index = 0; index < inputs.length; ++index) {
                 inputs[index].setAttribute("disabled", "");
             }
