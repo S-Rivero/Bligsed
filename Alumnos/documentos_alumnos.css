@@ -30,6 +30,15 @@ select{
     margin-left: 3%  
 }
 
+.lapicito_boliviano{
+  position: relative;
+  color: white;
+  height: auto;
+  top: 5.5vh;
+  left: 100vh;
+  cursor: pointer;
+}
+
 select:focus{ outline: none;}
 
 .home-section table{
@@ -77,3 +86,34 @@ td, th {
     background: #333; 
   }
 
+
+
+  .bordered a {
+    text-decoration: none;
+  }
+
+
+  .input_notas {
+    width: 40px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid black;
+  }
+
+.informe_bimestral{
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid black;
+}
+
+  input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+  
