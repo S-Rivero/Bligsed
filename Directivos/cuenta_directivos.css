@@ -46,12 +46,10 @@
 
 .profesion_alumno{
     background-color: transparent;
-    width: 98%;
+    width: fit-content;
     height: auto;
     font-size: 17px;
-    padding-top: 1%;
-    padding-bottom: 1%;
-    padding-left: 1%;
+    padding: 1% 2%;
     color: #333;
     -webkit-box-shadow: 3px 5px 7px 4px #ABD7E0; 
     box-shadow: 3px 3px 5px 3px rgba(4, 83, 63, 0.059);;
@@ -74,11 +72,11 @@
 }
 
 .contenedor_datos div {
-    height: auto;
-    width: 210%;
+    height: 80%;
+    width: auto;
     /* margin-left: 5%; */
     margin-right: 5%;
-    background-color:  #79cfc133;
+    background-color:  rgba(35, 97, 80, 0.068);
     border-radius: 17px;
 }
 
@@ -100,11 +98,11 @@
 
 .contenedor_datos p{
     font-size: 17px;
-    margin-left: 2%;
+    margin-left: 5%;
     margin-right: 5%;
-    margin-bottom: 1%;
-    margin-top: 1%;
-    padding: 1%;
+    margin-bottom: 3%;
+    margin-top: 4%;
+    padding: 1.5%;
 }
 
 .contenedor_contacto{
