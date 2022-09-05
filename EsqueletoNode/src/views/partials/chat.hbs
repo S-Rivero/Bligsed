@@ -2,8 +2,8 @@
   {{#each this}}
     {{#ifCond user '==' userid}}
       <li class="plantilla_mensaje mensaje_emisor">
-        <div class="creador_mensaje">{{user}}</div>
-        <div class="hora_mensaje">{{time}}</div>
+        <div class="creador_mensaje"><p>{{user}}</p></div>
+        <div class="hora_mensaje"><p>{{time}}</p></div>
         <div class="contenido_mensaje">
           <p>{{text}}</p>
           {{#ifCond file '!=' null}}
@@ -29,8 +29,8 @@
       </li>
     {{else}}
       <li class="plantilla_mensaje mensaje_receptor">
-        <div class="creador_mensaje">{{user}}</div>
-        <div class="hora_mensaje">{{time}}</div>
+        <div class="creador_mensaje"><p>{{user}}</p></div>
+        <div class="hora_mensaje"><p>{{time}}</p></div>
         <div class="contenido_mensaje">
           <p>{{text}}</p>
           {{#ifCond file '!=' null}}

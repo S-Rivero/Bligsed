@@ -56,10 +56,14 @@ exports.pushMsg = function(req, res){
         //notif();
     });
 }
-    /*
-exports.pushMsg = function(req, res){
+exports.pushPub = function(req, res){
+    let sql = "INSERT INTO publicaciones (titulo, descripcion, autor, fecha) VALUES ('"+req.body.title+"', '"+req.body.desc+"', '"+req.body.autName+"', '"+req.body.date+"');";
+    pool.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("Pub subida");
+    });
 }
-*/
+
 exports.elimChat = function(req, res){
     let str = "DELETE FROM chats WHERE id = "+req.body.id+" AND nombre_chat = '"+req.body.nombre_chat+"';";
     const elim = pool.query(str, function(err, result){
@@ -96,13 +100,7 @@ exports.creaChat = function(req, res){
         });
     });
 }
-exports.pushPub = function(req, res){
-    let sql = "INSERT INTO publicaciones (titulo, descripcion, autor, fecha) VALUES ('"+req.body.title+"', '"+req.body.desc+"', '"+req.body.autName+"', '"+req.body.date+"');";
-    pool.query(sql, function (err, result) {
-        if (err) throw err;
-        console.log("Pub subida");
-    });
-}
+
 function notif (req,res){
     fetch('https://api.mynotifier.app', {
         method: 'POST',

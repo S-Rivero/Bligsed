@@ -15,14 +15,10 @@ $(document).ready(function(){
         data: formData,
         processData: false,
         contentType: false,
-        success: function(r){
-        },
-        error: function (e) {
-          console.log("some error", e);
-        }
       }); 
     }
     let f = document.getElementById('form_msg');
+    showMsg(this.name.value, this.time.value, this.text.value, this.file.value);
     f.text.value = null;
     f.file.value = null;
   });
@@ -30,29 +26,46 @@ $(document).ready(function(){
 
 $(document).ready(function(){
   $("form#form_pub").on('submit', function(e){
-      e.preventDefault();
+    e.preventDefault();
+    // let now = getDate();
+    // this.date.value = now.date;
+    // this.time.value = now.time;
+    // this.text.value = cutSpaces(this.text.value);
+    // if(this.text.value != ''){
+    //   var formData = new FormData(this);
+    //   $.ajax({
+    //     type: "POST",
+    //     url: '/msg',
+    //     data: formData,
+    //     processData: false,
+    //     contentType: false,
+    //   }); 
+    // }
+    // let f = document.getElementById('form_msg');
+    // showMsg(this.name.value, this.time.value, this.text.value, this.file.value);
+    // f.text.value = null;
+    // f.file.value = null;
       var form = document.getElementById('form_pub');
-      if (form.title.value != '' && form.desc.value != '')
-      {
-        datos = pubFormat(form);
-        console.log(datos);
-        $.ajax({
-            type: 'post',
-            url: '/pub',
-            data: datos,
-            processData: false,
-            contentType: 'application/x-www-form-urlencoded',
-            beforeSend:function(){
-              return confirm("¿Esta seguro de subir la publicación?");
-            },
-            complete: function () {
-              form.title.value = '';
-              form.desc.value = '';
-            },
-        })
-      }
+    
+      datos = pubFormat(form);
+      console.log(datos);
+      $.ajax({
+          type: 'post',
+          url: '/pub',
+          data: datos,
+          processData: false,
+          contentType: 'application/x-www-form-urlencoded',
+          beforeSend:function(){
+            return confirm("¿Esta seguro de subir la publicación?");
+          },
+          complete: function () {
+            form.title.value = '';
+            form.desc.value = '';
+          },
+      })
   });
 });
+
 function cutSpaces(str){
     let k = 0;
     while (k == 0){
@@ -68,21 +81,25 @@ function cutSpaces(str){
     return str;
 }
 
-function showMsg(name, time, text){
+function showMsg(name, time, text, file){
   let ul = document.getElementById('mensaje_contenedor');
   let li = document.createElement("li");
   let div_name = document.createElement("div");
   let div_time = document.createElement("div");
   let div_text = document.createElement("div");
 
+  
   li.classList.add("plantilla_mensaje","mensaje_emisor");
   div_name.classList.add("creador_mensaje");
   div_time.classList.add("hora_mensaje");
   div_text.classList.add("contenido_mensaje");
-
-  div_name.textContent = name;
-  div_time.textContent = time;
-  div_text.textContent = text;
+  
+  div_name.innerHTML = name;
+  div_time.innerHTML = time;
+  if(file != '')
+    div_text.innerHTML = text + '</br></br></br> <img src="" alt="Para visualizar el archivo se debe refrescar la pantalla."> </br> En la esquina superior derecha se encuentra un botón para facilitar la tarea"';
+  else
+    div_text.innerHTML = text;
 
   li.appendChild(div_name);
   li.appendChild(div_time);

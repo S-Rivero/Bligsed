@@ -5,10 +5,10 @@
         <div class="contenedor_datos">
             <div class="input_publicaciones">
                 <form id="form_pub" action="/pub" method="post">
-                    <input type="text" name="title" placeholder="Título..." class="ingreso_titulo">
+                    <input type="text" name="title" placeholder="Título..." class="ingreso_titulo" required>
                     <textarea class="ingreso_publicacion" name="desc" rows="4" cols="50"
-                        placeholder="Escriba una publicación..."></textarea>
-                    <input type="text" name="autor" value="{{user.user.Nombre}}" style="display: none;">
+                        placeholder="Escriba una publicación..." required></textarea>
+                    <input type="text" name="autor" value="{{user.user.Nombre}}" style="display: none; ">
                     <div class="botones_uwu">
                         <div class="botones">
                             <a href="" class="iconify"><span class="iconify" data-icon="simple-line-icons:paper-clip"
