@@ -45,3 +45,8 @@ td, th {
     background-color: #dddddd;
   }
 
+
+.contenedor_nombre_doc .bx {
+    margin-left: 1vw;
+    cursor: pointer;
+}

@@ -339,3 +339,17 @@ body{
     color: rgba(127,198,213,1);
     font-size: 30px;
 }
+
+.crear_grupo {
+    position: relative;
+    margin-left: 10vw;
+    cursor: pointer;
+    height: auto;
+}
+
+.crear_grupo img {
+    border-radius: 0;
+    width: 30px;
+    height: auto;
+}
+
