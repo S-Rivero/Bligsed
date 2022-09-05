@@ -23,7 +23,7 @@ exports.renderHome = ((req,res) => { //Actualmente muestra publicaciones nada ma
     if(req.session.currentUser){
         delete req.session.currentUser;
     }
-    const rows = pool.query("SELECT * FROM publicaciones p JOIN usuarios u ON p.autor = u.id", function(err, publicaciones){
+    const rows = pool.query("SELECT * FROM publicaciones p JOIN usuarios u ON p.autor = u.id ORDER BY p.Id DESC", function(err, publicaciones){
         res.render('publicaciones.hbs', {pub: publicaciones, links: 'headerLinks/home', user:{user: req.user[0], childs: req.session.childs}});
     });
 });

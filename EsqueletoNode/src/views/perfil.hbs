@@ -29,8 +29,12 @@
 
     var url = window.location.href;
     var trim = url.split("/");
+    console.log(trim);
     console.log(trim.length);
     
+    if(trim[trim.length-1].includes("Boletin")){
+        trim[trim.length-1] = "Boletin";
+    }
     let el = document.getElementById(trim[trim.length-1]);
     el.setAttribute('class','color_fijo');
     document.getElementById(trim[trim.length]).setAttribute('class','color_fijo');

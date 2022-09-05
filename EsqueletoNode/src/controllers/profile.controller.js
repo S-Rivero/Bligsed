@@ -16,9 +16,14 @@ exports.root = ((req,res) => {
 exports.rootId = ((req,res) => {
     let paramsId = req.params.id;
     setCurso(paramsId).then((curso)=>{
-        let childsId = req.session.childs.map((res)=>{
-            return res.ID;
-        });
+        let childsId;
+        if(req.session.childs){
+            childsId = req.session.childs.map((res)=>{
+                return res.ID;
+            });
+        }else{
+            childsId = [];
+        }
         if(autorizadoVerPerfil(req.user[0].Tipo_de_usuario, childsId, paramsId)){
             req.session.uid = paramsId;
             // pool.query("SELECT id, Nombre, Tipo_de_usuario FROM usuarios WHERE id = ?", [paramsId], function(err,a){

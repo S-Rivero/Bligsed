@@ -43,3 +43,10 @@ exports.usedRootDpId = (req, res, next) => {
     }
 };
 
+exports.paramEqualsSession = (req,res, next) => {
+    if(req.session.currentUser.id == req.params.id){
+        return next();
+    }else{
+        res.redirect("/perfil/p/"+req.params.id);
+    }
+}   
