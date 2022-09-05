@@ -32,7 +32,7 @@ USE proyecto;
 
 CREATE TABLE `alumno` (
   `ID` int(11) NOT NULL,
-  `ID Curso` int(11) NOT NULL,
+  `ID_Curso` int(11) NOT NULL,
   `Padre` int(11) NOT NULL
 );
 
@@ -335,7 +335,7 @@ INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono
 INSERT INTO `inasistencias`(`tipo`, `motivo`, `cantidad`, `fecha`, `id_us`, `id_creador`) VALUES (1, "Tarde por ir al medico", 0, "2022-6-4", 6, 3), (0,"Inasistencia total", 1, "2022-5-23", 6, 3);
 INSERT INTO `colegio`(`pago`,`superusuario`) VALUES (1,0);
 INSERT INTO `superusuarios`(`id`,`fecha_creacion`) VALUES (0,"2012-2-15");
-UPDATE `alumno` SET  `ID Curso`= 1, `Padre`=5 WHERE `ID` = 6;  
+UPDATE `alumno` SET  `ID_Curso`= 1, `Padre`=5 WHERE `ID` = 6;  
 UPDATE fichamedica SET `Enfermedad` = "Sida", `Internacion` = "Internacion debido a cirujia por apendicitis", `Alergia` = "Intolerancia a la lactosa", `Tratamiento_medico` = "Antibioticos", `Quirurjico` = "Cirujia por apendicitis. 7 puntos sector inferior izquierdo del abdomen", `Vacunacion` = "1", `Altura` = 145, `Peso` = 93.5, `Hospital` = "Hospital italiano", `Obra_social` = "Osecac", `N_de_afiliado_obra_social` = 112312312312, `Medico_cabeceraln` = "Morbius", `Medico_cabecerafn` = "Michael", `Domiciliomed` = "Antesana 247", `Telefono_medico` = 2133352223;
 
 INSERT INTO `publicaciones` (`titulo`, `descripcion`, `autor`, fecha) VALUES ('Aniversario del Noba', 'Hoy recordamos un tragico accidente que se llevo a uno de los mas prometedores musicos de el siglo 21. Descansa en paz Lautaro.', '2', "2022-7-4"), ('Murio fortnite', 'Fortnite ha tocado fondo con sus usuarios activos este 4 de marzo de 2022 con una gran cantidad de bots por partida y una playerbese simultanea de solo 300 jugadores Fortnite se puede declarar como un juego muerto', '2', "2022-8-4"), ('Tragedia en Florencio Varela', 'Un oso que invocaba rayos asesino a una mujer policia de manera brutal este 4 de septiembre. Segun testigos el oso se nombraba a si mismo Volibear', '2', "2022-9-4"), ('Suicidios masivos en Europá', 'En europa recientemente surgio una ola de suicidios debido a lo que se cree que es el final de las criptomonedas', '2', "2022-10-4");
