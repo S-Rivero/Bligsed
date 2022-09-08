@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="/plantilla_inicial.css">
   <link rel="stylesheet" href="/Alumnos/mensajes_alumnos.css">
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -61,42 +63,139 @@
       </li>
     </ul>
   </div>
+
   <section class="home-section">
     <div class="text">Mensajes</div>
 
-    <div class="contenedor_principal">
-        <div class="contenedor_superior_busqueda">
-            <!-- <div class="contenedor_superior_busqueda_input"><input type="search" placeholder="Buscar..."></div> -->
-        </div>
-        <div class="contenedor_superior">
-           <h4>Lunes 30/05- Actividad en el turno tarde SUSPENDIDA -</h4> 
-            <h6>116 Participantes</h6>
-        </div>
-        <div class="contenedor_medio_lateral">
-            <ul>
-                <li>Lunes 30/05- Actividad en el turno tarde SUSPENDIDA -</li>
-                <li>Documentación pendiente -</li>
-                <li>ACLARACION SOBRE AUSENTE NO COMPUTABLE -</li>
-                <li>NUEVA FECHA DE VACUNACION COVID 19 EN LA PARROQUIA -</li>
-                <li>Vacunación 24 de Mayo -</li>
-                <li>VACUNACIÓN MARTES 24 DE MAYO -</li>
-            </ul>
-        </div>
-        <div class="contenedor_medio">
-            <!-- <img src="/Alumnos/media/user2.png" alt="">
-            <div class="mensaje_recibido">Lorem ipsum dolor sit amet coem lorem</div> -->
-            <ul class="mensaje_contenedor">
-                <li class="plantilla_mensaje mensaje_receptor"><div class="creador_mensaje">Federico Melograna</div><div class="contenido_mensaje"><img src="/media/momo_sad.jpg" alt=""> Checa este momo we :'v</div></li>
-                <li class="plantilla_mensaje mensaje_receptor"><div class="creador_mensaje">Martin Touriño</div><div class="contenido_mensaje"><img src="/media/momo_sad2.jpg" alt=""> Que sad prro :'v xdxdxdxd</div></li>
-                <li class="plantilla_mensaje mensaje_emisor"><div class="contenido_mensaje">Lorem ipsum dolor sit amet coem lorem</div></li>
-            </ul>
-        </div>
-        <div class="contenedor_inferior_lateral">
-        </div>
-        <div class="contenedor_inferior">
-            <div class="contenedor_input"><input type="text" placeholder="Escribí un mensaje..."><a href="">></a></div>
+<div class="container">
+<div class="row clearfix">
+    <div class="col-lg-12">
+        <div class="card chat-app">
+            <div id="plist" class="people-list">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <!-- <span class="input-group-text"></span>
+                        <i class="fa fa-ellipsis-v"></i> -->
+                        <div class="dropdown">
+                          <button onclick="optionslist()" class="dropbtn"><i class="fa fa-ellipsis-v"></i></button>
+                          <div id="myDropdown1" class="dropdown-content">
+                            <a href="#crear_grupo" onclick="crear_grupo()">Crear grupo</a>
+                            <a href="#difusion" onclick="difusion()">Difusión</a>
+                            <a href="#ajustes" onclick="ajustes()">Ajustes</a>
+                          </div>
+                        </div>
+                    </div>
+                    <!-- <div class="crear_grupo">
+                      <a href=""><img src="/media/crear_grupo.svg" alt=""></a>
+                    </div> -->
+                    <!-- <input type="text" class="form-control" placeholder="Search..."> -->
+                </div>
+                <ul class="list-unstyled chat-list mt-2 mb-0">
+                    <li class="clearfix cont">
+                        <img src="/media/user2.png" alt="avatar">
+                        <div class="about">
+                            <div class="name">Documentación pendiente</div>                                           
+                        </div>
+                    </li>
+                    <li class="clearfix active cont">
+                        <img src="/media/user2.png" alt="avatar">
+                        <div class="about">
+                            <div class="name">ACLARACION SOBRE AUSENTE NO COMPUTABLE</div>
+                        </div>
+                    </li>
+                    <li class="clearfix cont">
+                        <img src="/media/user2.png" alt="avatar">
+                        <div class="about">
+                            <div class="name">VACUNACIÓN MARTES 24 DE MAYO</div>
+                        </div>
+                    </li>                                    
+                    <li class="clearfix cont">
+                        <img src="/media/user2.png" alt="avatar">
+                        <div class="about">
+                            <div class="name">Información vacunación Covid</div>
+                        </div>
+                    </li>
+                    <li class="clearfix cont">
+                        <img src="/media/user2.png" alt="avatar">
+                        <div class="about">
+                            <div class="name">Calendario de fechas</div>
+                        </div>
+                    </li>
+                    <li class="clearfix cont">
+                        <img src="/media/user2.png" alt="avatar">
+                        <div class="about">
+                            <div class="name">Arte - TEA</div>
+                        </div>
+                    </li>
+                    <li class="clearfix cont">
+                      <img src="/media/user2.png" alt="avatar">
+                      <div class="about">
+                          <div class="name">IMPORTANTE - Contrato Educativo 2022</div>
+                      </div>
+                  </li>
+                  <li class="clearfix cont">
+                    <img src="/media/user2.png" alt="avatar">
+                    <div class="about">
+                        <div class="name">CIRCULAR ADMINISTRATIVA N 8</div>
+                    </div>
+                </li>
+                </ul>
+            </div>
+            <div class="chat">
+                <div class="chat-header clearfix">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                                <img src="/media/user2.png" alt="avatar">
+                            </a>
+                            <div class="chat-about">
+                                <h6 class="m-b-0">CIRCULAR ADMINISTRATIVA N 8</h6>
+                                <small>324 participantes</small>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 hidden-sm text-right icons_mensajeria">
+                            <a href="javascript:void(0);" class="btn btn-outline-secondary"><i class="fa fa-paperclip"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-history">
+                    <ul class="m-b-0">
+                        <li class="clearfix">
+                            <div class="message-data text-right">
+                                <span class="message-data-time">Yo, 10:10 AM, Hoy</span>
+                                <img src="/media/user2.png" alt="avatar">
+                            </div>
+                            <div class="message other-message float-right"> Lorem ipsum dolor sit amet consectetur adipisicing elit. </div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="message-data">
+                                <span class="message-data-time">Martin Touriño, 10:12 AM, Hoy</span>
+                            </div>
+                            <div class="message my-message">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>                                    
+                        </li>                               
+                        <li class="clearfix">
+                            <div class="message-data">
+                                <span class="message-data-time">Martin Touriño, 10:12 AM, Hoy</span>
+                            </div>
+                            <div class="message my-message">Lorem ipsum dolor sit amet, consectetur adipisicing elit.quam</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="chat-message clearfix">
+                    <div class="input-group mb-0" style="margin: 0;">
+                        <div class="input-group-prepend">
+                          <div class="icono_anashe">
+                            <span class="input-group-text icono_icono"><i class="fa fa-send"></i></span>
+                          </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Enter text here...">                                    
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+</div>
 
   </section>
   <script>
@@ -122,6 +221,31 @@
         closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
       }
     }
+
+
+    /*Este código de abajo es para el dropdown menu*/
+
+    function optionslist() {
+      document.getElementById("myDropdown1").classList.toggle("show");
+      console.log("holaaa");
+    }
+
+    /* Close the dropdown menu if the user clicks outside of it*/
+     window.onclick = function(event) {
+       if (!event.target.matches('.dropbtn')) {
+         var dropdowns = document.getElementsByClassName("dropdown-content");
+         var i;
+         for (i = 0; i < dropdowns.length; i++) {
+           var openDropdown = dropdowns[i];
+           if (openDropdown.classList.contains('show')) {
+             openDropdown.classList.remove('show');
+          }
+         }
+       }
+     }
+
+
+
   </script>
 
 
