@@ -1,33 +1,21 @@
-.contenedor_documentacion{
-    display: grid;
-    grid-template-columns: 19% auto auto;
-    grid-template-rows: 20% 80%;
-    width: 75vw;
-    height: 82vh;
-    background-color:  rgba(4, 83, 63, 0.059);
-    margin-left: 3vw;
-    border-top-left-radius: 17px;
-    border-top-right-radius: 17px;
-}
-
 .contenedor_nombre_doc{
     grid-column: 1 / span 3;
     display: flex;
-    background-color: rgba(97,196,193,10);
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
 }
 
 select{
     background: white;
-    border: none;
+    border-color: rgb(127, 213, 213);
     font-size: 14px;
     height: 30px;
     padding: 5px;
     width: 250px;
-    border-radius: 15px;
+    border-radius: 0.5em;
     margin-top: 3%;
-    margin-left: 3%  
+    margin-left: 1.5%;
+    text-align: initial center;
 }
 
 .lapicito_boliviano{
@@ -44,28 +32,67 @@ select:focus{ outline: none;}
 .home-section table{
     grid-column: 1 / span 3;
     border-collapse: collapse;
-    
     width: 100%;
 }
 
-td, th {
-    text-align: left;
-    padding: 8px;
-  }
-
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
-
-  .bordered { 
-    border: solid #dddddd 1px; 
-    -moz-border-radius: 20px; 
-    -webkit-border-radius: 20px; 
-    border-radius: 20px; 
-    box-shadow: 0 3px #dddddd; 
+.table-wrapper{
+  background-color: rgba(152, 172, 172, 0.305);
+  width: 90%;
+  height: fit-content;
+  border-radius: 0.5em;
+  margin: 1.5%;
 }
- 
 
+.tw-header{
+  content: "";
+  /* background-color: rgb(127, 213, 213); */
+  background-color: transparent;
+  border-radius: 0.5em 0.5em 0 0;
+  width: inherit;
+  height: 3.1rem;
+  position: absolute;
+  border: 1px solid rgb(127, 213, 213);
+}
+table{
+  border: 2px solid rgba(127, 213, 213, 0.456);
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+tr:first-of-type td, tr:first-of-type th{
+  border:1px solid white;
+}
+
+tr{
+  height: 2rem;
+}
+
+
+.bordered {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  /* margin: 1%; */
+}
+
+.bordered td, .bordered th {
+  border:1px solid rgba(152, 172, 172, 0.305);
+  padding: 8px;
+}
+
+.bordered tr:nth-child(even){background-color: #ffffff;}
+
+.bordered tr:hover {background-color: rgba(127, 213, 213, 0.297);}
+
+.bordered th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(127, 213, 213);
+  color: white;
+}
+  
 ::-webkit-scrollbar {
     width: 10px;
   }

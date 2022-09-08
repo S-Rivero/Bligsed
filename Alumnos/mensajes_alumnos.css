@@ -176,13 +176,13 @@ body{
 }
 
 .chat .chat-history .other-message {
-    background: rgba(127,198,213,1);
+    background: rgb(127, 213, 213);
     text-align: right;
     color:white;
 }
 
 .chat .chat-history .other-message:after {
-    border-bottom-color: rgba(127,198,213,1);
+    border-bottom-color: rgb(127, 213, 213);
     left: 93%
 }
 
@@ -232,7 +232,7 @@ body{
 .input-group .icono_anashe {
    display: flex;
    margin-right: 1rem;
-   background-color: rgba(127,198,213,1);
+   background-color: rgb(127, 213, 213);
    height: 100%;
    width: 100%;
    border-radius: 5px 0px 0px 5px;
