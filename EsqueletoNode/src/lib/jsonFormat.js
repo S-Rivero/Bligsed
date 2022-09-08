@@ -30,6 +30,28 @@ module.exports = {
         max['cantidad'] = maxNotas;
         formateado['max'] = max;
         return formateado;
+    },
+
+    JSONListaDeCursos: function(arrJson){
+        let cursos = [];
+        let anio = 0;
+        let curso = {}
+        arrJson.forEach(json => {
+            if(parseInt(json.Curso[0]) > anio){
+                if(anio != 0){
+                    cursos.push(curso);
+                    curso = {division: []};
+                }
+                anio = parseInt(json.Curso[0]);
+                curso['year'] = parseInt(json.Curso[0]);
+                curso['division'].push(json.Curso[1]);
+            }
+        });
+        console.log(cursos);
+
+        return cursos;
+
+        
     }
 }
 

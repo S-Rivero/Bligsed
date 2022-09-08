@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require('path');
 const { isUndefined } = require('util');
 const pool = require('../database');
-const {JSONPromediosAl} = require('../lib/jsonFormat');
+const {JSONPromediosAl, JSONListaDeCursos} = require('../lib/jsonFormat');
 const {setChild} = require('../lib/helpers');
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
 exports.root = ((req,res) => {
@@ -54,6 +54,14 @@ exports.renderChat = ((req,res) => {
 });
 
 exports.renderDocumentos = ((req,res)=>{
-    let a = [];
-    res.render('publicaciones.hbs', {a, links: 'headerLinks/documentos', user:{user: req.user[0], childs: req.session.childs}});
+    // res.render('cursos.hbs', {a, links: 'headerLinks/cursos', user:{user: req.user[0], childs: req.session.childs}});
+    res.send("documentosxd");
+});
+
+
+exports.renderCursos = ((req,res)=>{
+    const rows = pool.query("SELECT c.Nombre_curso as Curso, Mat.ID as IdMateria, Mat.Materia as Materia FROM curso c INNER JOIN (SELECT ID, Materia, IdCurso FROM `materias` WHERE profesor = 4) Mat ON c.ID = Mat.IdCurso GROUP BY Curso ORDER BY Curso ASC", function(err, a){
+        let list = JSONListaDeCursos(a);
+        res.render('cursos.hbs', {list, links: 'headerLinks/cursos', user:{user: req.user[0], childs: req.session.childs}});
+    });
 });

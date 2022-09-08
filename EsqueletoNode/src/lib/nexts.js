@@ -50,3 +50,11 @@ exports.paramEqualsSession = (req,res, next) => {
         res.redirect("/perfil/p/"+req.params.id);
     }
 }   
+
+exports.authLevelCursos = (req,res,next) => {
+    if(req.user[0].Tipo_de_usuario === 4){
+        return next();
+    }else{
+        res.redirect("/home");
+    }
+}
