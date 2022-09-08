@@ -97,8 +97,10 @@ module.exports = {
     },
     selectVacunacion: function(vac){
       switch(vac){
+        case 1:
         case '1':
           return "Completa";
+        case 2:
         case '2':
           return "Incompleta";
         default:

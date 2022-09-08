@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 19% auto auto;
     grid-template-rows: 25% 75%;
+    
     width: 70vw;
     height: 78vh;
     background-color: transparent;
@@ -38,7 +39,7 @@
     background-color: transparent;
     font-size: 25px;
     font-weight: bold;
-    width: fit-content;
+    width: 45%;
     margin-top: 1%;
     margin-bottom: 1%;
     color: #333;
@@ -46,7 +47,7 @@
 
 .profesion_alumno{
     background-color: transparent;
-    width: 45%;
+    width: 100%;
     height: auto;
     font-size: 17px;
     padding: 1% 2%;
@@ -91,6 +92,8 @@
 
 .contenedor_datos{
     background-color: transparent;
+    /* grid-column: 1 -1; */
+    
     height: 100%;
     width: 100%;
     color: #333;

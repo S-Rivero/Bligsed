@@ -1,7 +1,7 @@
 <div class="contenedor_datos">
     <h2>Información de salud</h2>
 
-    <form action="updateFichaMedica" method="POST" name="formFichaMed">
+    <form action="../{{ina.id_us}}/updateFichaMedica" method="POST" name="formFichaMed">
 
 
         <div class="input_fichamedica">
@@ -36,11 +36,9 @@
             <input  name="problemas_salud" type="text" placeholder="Otros problemas de salud..." class="ingreso"
                 value="{{ina.problemas_salud}}">
 
-            
             <br><label for="" id="texto_vac">Elija la opción que corresponda</label>
             <select name="select_vacunacion" id="select_vacunacion">
-                <option value="{{#selectVacunacion Vacunacion}}{{/selectVacunacion}}" hidden="hidden"
-                    selected="selected">{{#selectVacunacion Vacunacion}}{{/selectVacunacion}}</option>
+                <option value="{{ina.Vacunacion}}" hidden="hidden" selected="selected">{{#selectVacunacion ina.Vacunacion}}{{/selectVacunacion}}</option>
                 <option id="vac1" value="1">Completa</option>
                 <option id="vac2" value="2">Incompleta</option>
                 <option id="vac3" value="0">Sin datos</option>
