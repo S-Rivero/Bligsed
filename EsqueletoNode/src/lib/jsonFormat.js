@@ -33,27 +33,39 @@ module.exports = {
     },
 
     JSONListaDeCursos: function(arrJson){
+        let json = arrJson.sort();
         let cursos = [];
-        let anio = 0;
-        let curso = {}
-        arrJson.forEach(json => {
-            if(parseInt(json.Curso[0]) > anio){
-                if(anio != 0){
-                    cursos.push(curso);
-                    curso = {division: []};
-                }
-                anio = parseInt(json.Curso[0]);
-                curso['year'] = parseInt(json.Curso[0]);
-                curso['division'].push(json.Curso[1]);
-            }
-        });
-        console.log(cursos);
+
+        
+        console.log('cursos :>> ', cursos);
 
         return cursos;
 
         
     }
 }
+/*[
+    { Curso: '7C', IdMateria: 1, Materia: 'Matematicas' },
+    { Curso: '6C', IdMateria: 1, Materia: 'Matematicas' },
+    { Curso: '6D', IdMateria: 1, Materia: 'Matematicas' }
+]*/
+
+/*
+    cursos: [
+        {
+            anio: 7,
+            division: [
+                'A', 'C'
+            ]
+        },
+        {
+            anio: 6
+            division: [
+                'A', 'C'
+            ]
+        },
+    ]
+*/
 
 // notas = {
 //     lengua: {
