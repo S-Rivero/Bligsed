@@ -9,68 +9,22 @@
                     </div>
                 </li>
     
-            
+                {{#each list}}
                 <li class="list__item list__item--click">
                     <div class="list__button list__button--click">
-                        <a href="#" class="nav__link">1er año</a>
+                        <a href="#" class="nav__link">{{anio}}</a>
                         <img src="/media/arrow.svg" class="list__arrow">
                     </div>
     
                     <ul class="list__show" style="height: 0px;">
-                        {{#each a}}
+                        {{#each division}}
                         <li class="list__inside">
-                            <a href="/Docentes/tabla_curso_docentes.html" class="nav__link nav__link--inside">{{Curso}}</a>
+                            <a href="/tabla_curso_docentes/{{../anio}}{{this}}" class="nav__link nav__link--inside">{{../anio}}°{{this}}</a>
                         </li>
                         {{/each}}
                     </ul>
                 </li>
-                
-                
-    
-                <li class="list__item">
-                    <div class="list__button">
-                    </div>
-                    <li class="list__item list__item--click">
-                        <div class="list__button list__button--click">
-                            <a href="#" class="nav__link">2do año</a>
-                            <img src="/media/arrow.svg" class="list__arrow">
-                        </div>
-        
-                        <ul class="list__show" style="height: 0px;">
-                            <li class="list__inside">
-                                <a href="#" class="nav__link nav__link--inside">2°A</a>
-                            </li>
-        
-                            <li class="list__inside">
-                                <a href="#" class="nav__link nav__link--inside">2°B</a>
-                            </li>
-                            </li>
-                        </ul>
-                    </li>
-                </li>
-    
-                <li class="list__item list__item--click">
-                    <div class="list__button list__button--click">
-                        <a href="#" class="nav__link">3er año</a>
-                        <img src="/media/arrow.svg" class="list__arrow">
-                    </div>
-    
-                    <ul class="list__show" style="height: 0px;">
-                        <li class="list__inside">
-                        </li>
-                        <li class="list__inside">
-                            <a href="#" class="nav__link nav__link--inside">3°C</a>
-                        </li>
-
-                        <li class="list__inside">
-                            <a href="#" class="nav__link nav__link--inside">3°G</a>
-                        </li>
-                    </ul>
-                </li>
-                    </ul>
-                </li>
-
-                </li>
+                {{/each}}
             </ul>
         </nav>
     </div>
