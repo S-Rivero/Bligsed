@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require('path');
 const { isUndefined } = require('util');
 const pool = require('../database');
-const {JSONPromediosAl, JSONListaDeCursos} = require('../lib/jsonFormat');
+const {JSONPromediosAl, JSONListaDeCursos, JSONListaDeMaterias} = require('../lib/jsonFormat');
 const {setChild} = require('../lib/helpers');
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
 exports.root = ((req,res) => {
@@ -62,6 +62,7 @@ exports.renderDocumentos = ((req,res)=>{
 exports.renderCursos = ((req,res)=>{
     const rows = pool.query("SELECT c.Nombre_curso as Curso, Mat.ID as IdMateria, Mat.Materia as Materia FROM curso c INNER JOIN (SELECT ID, Materia, IdCurso FROM `materias` WHERE profesor = 4) Mat ON c.ID = Mat.IdCurso GROUP BY Curso ORDER BY Curso ASC", function(err, a){
         let list = JSONListaDeCursos(a);
-        res.render('cursos.hbs', {list, links: 'headerLinks/cursos', user:{user: req.user[0], childs: req.session.childs}});
+        let listMat = JSONListaDeMaterias(a);
+        res.render('cursos.hbs', {list, listMat, links: 'headerLinks/cursos', user:{user: req.user[0], childs: req.session.childs}});
     });
 });

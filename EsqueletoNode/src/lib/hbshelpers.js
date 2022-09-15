@@ -106,5 +106,21 @@ module.exports = {
         default:
           return "Sin datos";
       }
+    },
+    anioToString(anio){
+      let anios = {
+        1: "1er año",
+        2: "2do año",
+        3: "3er año",
+        4: "4to año",
+        5: "5to año",
+        6: "6to año",
+        7: "7mo año",
+      }
+      return anios[anio];
+    },
+    
+    cursoToString(curso){
+      return curso.split('').join("°");
     }
   } 

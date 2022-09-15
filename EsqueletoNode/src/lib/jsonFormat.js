@@ -52,6 +52,34 @@ module.exports = {
             return (e.division[0])
         });
         return cursosFinal;
+    },
+
+    JSONListaDeMaterias: function(arrJson){
+        let liMaterias = [];
+        let materiasFinal = [];
+
+        arrJson.forEach(e => {
+            if(!(liMaterias.includes(e.Materia))){
+                liMaterias.push(e.Materia);
+            }
+        });
+
+        materiasFinal = liMaterias.map(li => {
+            let cursos = arrJson.filter(e => {
+                return e.Materia == li;
+            })
+            .map(e => {
+                return e.Curso;
+            });
+
+            return {materia: li, cursos};
+        });
+        return materiasFinal;
     }
+    /*[
+    { Curso: '7C', IdMateria: 1, Materia: 'Matematicas' },
+    { Curso: '6C', IdMateria: 1, Materia: 'Matematicas' },
+    { Curso: '6D', IdMateria: 1, Materia: 'Matematicas' }
+]*/
 }
 //[ { anio: 6, division: [ 'D' ] }, { anio: 7, division: [ 'C', 'D' ] } ]
