@@ -69,7 +69,9 @@ exports.renderCursos = ((req,res)=>{
 
 exports.renderTablaCursos = ((req,res)=>{
     const rows = pool.query("SELECT u.id, u.nombre, u.username, u.Numero_de_telefono FROM alumno a JOIN usuarios u ON a.id = u.id WHERE ID_Curso = ? ORDER BY nombre ASC", req.params.id, function(err, a){
-        res.render('tabla_curso_docente.hbs', {a, links: 'headerLinks/tabla_curso_docente', user:{user: req.user[0], childs: req.session.childs}});
+        const r = pool.query("SELECT * FROM curso ORDER BY Nombre_curso ASC", function(err, b){
+            res.render('tabla_curso_docente.hbs', {a, b, links: 'headerLinks/tabla_curso_docente', user:{user: req.user[0], childs: req.session.childs}});
         // res.send(a);
+        });
     });
 });

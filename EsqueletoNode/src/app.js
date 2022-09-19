@@ -9,7 +9,6 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
 const expressMySQLSession  = require('express-mysql-session');
-const flash = require('connect-flash');
 const morgan = require('morgan');
 require('./lib/passport');
 
@@ -48,7 +47,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
-// app.use(flash());
+
 app.use(passport.initialize());
 app.use(passport.session());
 

@@ -3,10 +3,10 @@
       <div class="contenedor_documentacion">
       <div class="contenedor_nombre_doc">
       
-        <select name="1er año">
-          <option value="constancias">1°A</option>
-          <option value="constancias">1°B</option>
-
+        <select name="selectCurso" id="selectCurso" onchange="updateURL(this)">
+          {{#each b}}
+            <option value="{{id}}">{{#cursoToString Nombre_curso}}{{/cursoToString}}</option>
+          {{/each}}
         </select>
       </div>
       <table class="bordered">
@@ -52,4 +52,11 @@
         closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
       }
     }
+
+    //function updateURL(elem){
+    //  let url = window.location.href.split('/'),
+    //      new_url = document.URL + id;
+    //}
+
+    
   </script>

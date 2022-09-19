@@ -58,3 +58,13 @@ exports.authLevelCursos = (req,res,next) => {
         res.redirect("/home");
     }
 }
+
+exports.authLevelTablaCursos = (req,res,next) => {
+    if(req.user[0].Tipo_de_usuario < 4){
+        return next() //todos los permisos
+    }else if(req.user[0].Tipo_de_usuario === 4){
+        return next();//permisos limitados
+    }else{
+        res.redirect("/home");
+    }
+}

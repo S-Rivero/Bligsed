@@ -9,7 +9,7 @@ exports.renderSignup = (req, res) => {
 exports.signUp = passport.authenticate('local.signup', {
     successRedirect: '/',
     failureRedirect: '/registro',
-    failureFlash: true
+    failureFlash: false
 });
 
 exports.renderSignin = (req, res) => {
@@ -19,7 +19,7 @@ exports.renderSignin = (req, res) => {
 exports.signIn = passport.authenticate('local.signin', {
     successRedirect: '/',
     failureRedirect: '/login',
-    failureFlash: true
+    failureFlash: false
 });
 
 exports.logout = function (req, res, next) {
