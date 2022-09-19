@@ -1,0 +1,55 @@
+
+    <div class="text">Tabla de curso</div>
+      <div class="contenedor_documentacion">
+      <div class="contenedor_nombre_doc">
+      
+        <select name="1er año">
+          <option value="constancias">1°A</option>
+          <option value="constancias">1°B</option>
+
+        </select>
+      </div>
+      <table class="bordered">
+        <tr>
+          <th>Apellido y nombre</th>
+          <th>Tutor1</th>
+          <th>Tutor2</th>
+          <th>E-mail</th>
+          <th>Teléfono</th>
+        </tr>
+        {{#each a}}
+            <tr>
+            <td><a href="../perfil/p/{{id}}">{{nombre}}</a></td>
+            <td>Roberto Perez</td>
+            <td>Rogelia Sanchez</td>
+            <td>{{username}}</td>
+            <td>{{Numero_de_telefono}}</td>
+            </tr>
+        {{/each}}
+      </table>
+    </div>
+
+  <script>
+    let sidebar = document.querySelector(".sidebar");
+    let closeBtn = document.querySelector("#btn");
+    let searchBtn = document.querySelector(".bx-search");
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("open");
+      menuBtnChange();//calling the function(optional)
+    });
+
+    searchBtn.addEventListener("click", () => { // Sidebar open when you click on the search iocn
+      sidebar.classList.toggle("open");
+      menuBtnChange(); //calling the function(optional)
+    });
+
+    // following are the code to change sidebar button(optional)
+    function menuBtnChange() {
+      if (sidebar.classList.contains("open")) {
+        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+      } else {
+        closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
+      }
+    }
+  </script>

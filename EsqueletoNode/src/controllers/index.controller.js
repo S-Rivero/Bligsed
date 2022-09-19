@@ -60,9 +60,16 @@ exports.renderDocumentos = ((req,res)=>{
 
 
 exports.renderCursos = ((req,res)=>{
-    const rows = pool.query("SELECT c.Nombre_curso as Curso, Mat.ID as IdMateria, Mat.Materia as Materia FROM curso c INNER JOIN (SELECT ID, Materia, IdCurso FROM `materias` WHERE profesor = 4) Mat ON c.ID = Mat.IdCurso GROUP BY Curso ORDER BY Curso ASC", function(err, a){
+    const rows = pool.query("SELECT c.ID, c.Nombre_curso as Curso, Mat.ID as IdMateria, Mat.Materia as Materia FROM curso c INNER JOIN (SELECT ID, Materia, IdCurso FROM `materias` WHERE profesor = ?) Mat ON c.ID = Mat.IdCurso GROUP BY Curso ORDER BY Curso ASC", req.user[0].id, function(err, a){
         let list = JSONListaDeCursos(a);
         let listMat = JSONListaDeMaterias(a);
         res.render('cursos.hbs', {list, listMat, links: 'headerLinks/cursos', user:{user: req.user[0], childs: req.session.childs}});
+    });
+});
+
+exports.renderTablaCursos = ((req,res)=>{
+    const rows = pool.query("SELECT u.id, u.nombre, u.username, u.Numero_de_telefono FROM alumno a JOIN usuarios u ON a.id = u.id WHERE ID_Curso = ? ORDER BY nombre ASC", req.params.id, function(err, a){
+        res.render('tabla_curso_docente.hbs', {a, links: 'headerLinks/tabla_curso_docente', user:{user: req.user[0], childs: req.session.childs}});
+        // res.send(a);
     });
 });

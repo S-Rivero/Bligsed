@@ -42,12 +42,11 @@ module.exports = {
                 return regExp.test(e.Curso);
             })
             .map(li => {
-                return li.Curso ? li.Curso[1]:'';
+                return li.Curso ? {curso: li.Curso[1], id: li.ID}:'';
             })
             cursos.push({anio: i, division: anios});
 
         }
-
         let cursosFinal = cursos.filter(e =>{
             return (e.division[0])
         });

@@ -7,7 +7,8 @@ const {
     renderHome,
     renderChat,
     renderDocumentos,
-    renderCursos
+    renderCursos,
+    renderTablaCursos
 } = require('../controllers/index.controller');
 const { 
     pushMsg,
@@ -27,7 +28,11 @@ router.get('/chat', isLoggedIn, renderChat);
 
 router.get('/documentos', isLoggedIn, renderDocumentos);
 
-router.get('/cursos', isLoggedIn, authLevelCursos, renderCursos);
+router.get('/misCursos', isLoggedIn, authLevelCursos, renderCursos);
+
+router.get('/tablaCurso/:id', isLoggedIn, renderTablaCursos);
+
+
 
 router.post('/msg', isLoggedIn, pushMsg);
 router.post('/aban', isLoggedIn, abanChat);
