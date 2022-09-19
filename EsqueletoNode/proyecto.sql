@@ -302,14 +302,18 @@ DELIMITER $$
 CREATE TRIGGER `cargaprofe` AFTER INSERT ON `usuarios`
  FOR EACH ROW IF COALESCE(new.Tipo_de_usuario) = 4 THEN BEGIN
 INSERT INTO profesores (ID) VALUES (concat(new.ID));
-END; END IF
-$$ DELIMITER ;
+END; END IF $$ 
+DELIMITER ;
+
+
+
 --
 -- Índices para tablas volcadas
 --
+
   CREATE TABLE `chats` (
-    id_chat int(11) NOT NULL,
-    id_usuario int(11) NOT NULL
+    `id_chat` int(11) NOT NULL,
+    `id_usuario` int(11) NOT NULL
   );
 
 --
