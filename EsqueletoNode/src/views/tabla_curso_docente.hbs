@@ -3,9 +3,10 @@
       <div class="contenedor_documentacion">
       <div class="contenedor_nombre_doc">
       
-        <select name="selectCurso" id="selectCurso" onchange="updateURL(this)">
+        <select name="selectCurso" id="selectCurso" onchange="updateURL()">
+          <option value="" hidden="hidden" selected="selected" id="optionSelected"></option>
           {{#each b}}
-            <option value="{{id}}">{{#cursoToString Nombre_curso}}{{/cursoToString}}</option>
+            <option value="{{ID}}">{{#cursoToString Nombre_curso}}{{/cursoToString}}</option>
           {{/each}}
         </select>
       </div>
@@ -30,6 +31,10 @@
     </div>
 
   <script>
+    let url = window.location.href;
+    let idCurso = url.match("tablaCurso/(\\d)");
+    document.getElementById("optionSelected").innerHTML = parseInt(idCurso[1]);
+
     let sidebar = document.querySelector(".sidebar");
     let closeBtn = document.querySelector("#btn");
     let searchBtn = document.querySelector(".bx-search");
@@ -53,10 +58,11 @@
       }
     }
 
-    //function updateURL(elem){
-    //  let url = window.location.href.split('/'),
-    //      new_url = document.URL + id;
-    //}
 
-    
+    function updateURL() {
+        var selectBox = document.getElementById("selectCurso");
+        var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+        window.location.replace("/tablaCurso/" + selectedValue);
+    };
+
   </script>

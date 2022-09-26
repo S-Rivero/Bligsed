@@ -46,14 +46,16 @@
                 </a>
                 <span class="tooltip">Mensajes</span>
             </li>
-            <li>
-                {{!-- <a href="../../../documentos"> --}}
-                <a href="../../../misCursos">
-                    <i class='bx bx-folder'></i>
-                    <span class="links_name">Documentos</span>
-                </a>
-                <span class="tooltip">Documentos</span>
-            </li>
+            {{#ifCond user.Tipo_de_usuario '<' 5}}
+                <li>
+                    {{!-- <a href="../../../documentos"> --}}
+                    <a href="../../../Cursos">
+                        <i class='bx bx-folder'></i>
+                        <span class="links_name">Documentos</span>
+                    </a>
+                    <span class="tooltip">Documentos</span>
+                </li>
+            {{/ifCond}}
             <li class="profile">
                 <div class="profile-details">
                     <!--<img src="profile.jpg" alt="profileImg">-->

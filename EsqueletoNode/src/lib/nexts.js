@@ -52,7 +52,9 @@ exports.paramEqualsSession = (req,res, next) => {
 }   
 
 exports.authLevelCursos = (req,res,next) => {
-    if(req.user[0].Tipo_de_usuario === 4){
+    if(req.user[0].Tipo_de_usuario < 4){
+        return next() //todos los permisos
+    }else if(req.user[0].Tipo_de_usuario === 4){
         return next();
     }else{
         res.redirect("/home");
@@ -64,6 +66,14 @@ exports.authLevelTablaCursos = (req,res,next) => {
         return next() //todos los permisos
     }else if(req.user[0].Tipo_de_usuario === 4){
         return next();//permisos limitados
+    }else{
+        res.redirect("/home");
+    }
+}
+
+exports.authLevelCargarNotas = (req,res,next) => {
+if(req.user[0].Tipo_de_usuario === 4){
+        return next();
     }else{
         res.redirect("/home");
     }

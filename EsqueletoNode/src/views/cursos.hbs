@@ -29,7 +29,8 @@
         </nav>
     </div>
 
-    <div class="contenedor_nav">
+    {{#if tdu 4}}
+      <div class="contenedor_nav">
       <ul class="list">
 
           <li class="list__item">
@@ -47,7 +48,7 @@
               <ul class="list__show" style="height: 0px;">
                 {{#each cursos}}
                   <li class="list__inside">
-                      <a href="tabla_notas.html" class="nav__link nav__link--inside">{{../materia}} {{#cursoToString this}}{{/cursoToString}}</a>
+                      <a href="cargarNotas/{{this.idMateria}}" class="nav__link nav__link--inside">{{../materia}} {{#cursoToString this.curso}}{{/cursoToString}}</a>
                   </li>
                 {{/each}}
               </ul>
@@ -56,6 +57,7 @@
       </ul>
   </nav>
 </div>
+    {{/if}}
     
         <script src="../../../js/main.js"></script>
         <script>
