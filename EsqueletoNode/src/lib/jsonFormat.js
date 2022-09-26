@@ -68,7 +68,7 @@ module.exports = {
                 return e.Materia == li;
             })
             .map(e => {
-                return e.Curso;
+                return {curso: e.Curso, idMateria: e.IdMateria};
             });
 
             return {materia: li, cursos};

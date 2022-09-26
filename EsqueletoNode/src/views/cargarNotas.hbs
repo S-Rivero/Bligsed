@@ -1,0 +1,63 @@
+   <div class="text">Tabla de curso</div>
+      <div class="contenedor_documentacion">
+      <div class="contenedor_nombre_doc">
+      
+        <select name="1er año">
+          <option value="constancias">1°A</option>
+          <option value="constancias">1°B</option>
+
+        </select>
+
+        <iconify-icon icon="bx:save" width="30" height="30" class="lapicito_boliviano"></iconify-icon>
+
+      </div>
+      <table class="bordered">
+        <tr>
+          <th>Alumno</th>
+          <th>NPA1</th>
+          <th>NPA2</th>
+          <th>NP3</th>
+          <th>informe Bimestral</th>
+          <th>NP4</th>
+          <th>NP5</th>
+          <th>NP6</th>
+          <th>Final</th>
+        </tr>
+        <tr>
+          <td><a href="cuenta_del_alumno.html">Juan Perez</a></td>
+          <td><input type="number" name="nota_parcial" min="1" max="10" class="input_notas"></td>
+          <td><input type="number" name="nota_parcial" min="1" max="10" class="input_notas"></td>
+          <td><input type="number" name="nota_parcial" min="1" max="10" class="input_notas"></td>
+          <td><input type="text" name="informe_bimestral" placeholder="Ingrese el informe.." class="informe_bimestral"></td>
+          <td><input type="number" name="nota_parcial" min="1" max="10" class="input_notas"></td>
+          <td><input type="number" name="nota_parcial" min="1" max="10" class="input_notas"></td>
+          <td><input type="number" name="nota_parcial" min="1" max="10" class="input_notas"></td>
+          <td>6</td>
+        </tr>
+ 
+      </table>
+    </div>
+  <script>
+    let sidebar = document.querySelector(".sidebar");
+    let closeBtn = document.querySelector("#btn");
+    let searchBtn = document.querySelector(".bx-search");
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("open");
+      menuBtnChange();//calling the function(optional)
+    });
+
+    searchBtn.addEventListener("click", () => { // Sidebar open when you click on the search iocn
+      sidebar.classList.toggle("open");
+      menuBtnChange(); //calling the function(optional)
+    });
+
+    // following are the code to change sidebar button(optional)
+    function menuBtnChange() {
+      if (sidebar.classList.contains("open")) {
+        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+      } else {
+        closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
+      }
+    }
+  </script>
