@@ -12,28 +12,25 @@
 
       </div>
       <table class="bordered">
+        <h2>Trimestre 1 XD</h2>
         <tr>
           <th>Alumno</th>
-          <th>NPA1</th>
-          <th>NPA2</th>
-          <th>NP3</th>
-          <th>informe Bimestral</th>
-          <th>NP4</th>
-          <th>NP5</th>
-          <th>NP6</th>
+          {{#each b}}
+            <th>NPA{{@index}}</th>
+          {{/each}}
           <th>Final</th>
         </tr>
-        <tr>
-          <td><a href="cuenta_del_alumno.html">Juan Perez</a></td>
-          <td><input type="number" name="nota_parcial" min="1" max="10" class="input_notas"></td>
-          <td><input type="number" name="nota_parcial" min="1" max="10" class="input_notas"></td>
-          <td><input type="number" name="nota_parcial" min="1" max="10" class="input_notas"></td>
-          <td><input type="text" name="informe_bimestral" placeholder="Ingrese el informe.." class="informe_bimestral"></td>
-          <td><input type="number" name="nota_parcial" min="1" max="10" class="input_notas"></td>
-          <td><input type="number" name="nota_parcial" min="1" max="10" class="input_notas"></td>
-          <td><input type="number" name="nota_parcial" min="1" max="10" class="input_notas"></td>
-          <td>6</td>
-        </tr>
+        <form action="">
+          {{#each a}}
+          <tr>
+            <td><a href="/perfil/p/{{id}}">{{Nombre}}</a></td>
+            {{#each ../b}}
+              <td><input type="number" name="{{@../index}}nota_parcial{{@index}}" min="1" max="10" class="input_notas"></td>
+            {{/each}}
+            <td><input type="number" name="1nota_final" min="1" max="10" class="input_notas"></td>
+          </tr>
+          {{/each}}
+        </form>
  
       </table>
     </div>

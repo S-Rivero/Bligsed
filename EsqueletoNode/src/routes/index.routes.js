@@ -33,7 +33,9 @@ router.get('/Cursos', isLoggedIn, authLevelCursos, renderCursos);
 
 router.get('/tablaCurso/:id', isLoggedIn, authLevelTablaCursos, renderTablaCursos);
 
-router.get('/cargarNotas/:id', isLoggedIn, authLevelCargarNotas, cargarNotasDocente);
+//Id es la id de materia
+//t es el numero de trimestre. Por defecto, desde cursos, te manda al t=1
+router.get('/cargarNotas/:id/:t', isLoggedIn, authLevelCargarNotas, cargarNotasDocente);
 
 
 

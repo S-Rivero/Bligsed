@@ -87,7 +87,24 @@ exports.renderTablaCursos = ((req,res)=>{
 });
 
 exports.cargarNotasDocente = ((req,res)=>{
-    // const rows = pool.query("", [], function(err, a){
-        res.render('cargarNotas.hbs', {links: 'headerLinks/cargarNotas', user:{user: req.user[0], childs: req.session.childs}});
-    // });
+    let idMat = req.params.id;
+    let trim = req.params.t;
+    
+    pool.query("SELECT D.id, Nombre FROM usuarios D JOIN (SELECT ID FROM alumno B JOIN (SELECT idCurso FROM materias WHERE id = ?)A ON a.idCurso = B.ID_Curso)C ON D.id = C.ID", idMat, function(err, a){
+        pool.query("SELECT id_alum, nota FROM notas WHERE id_materia = ? AND trimestre = ? GROUP BY numnota", [idMat,trim], function(err, b){
+            res.render('cargarNotas.hbs', {a, b, links: 'headerLinks/cargarNotas', user:{user: req.user[0], childs: req.session.childs}});
+        });    
+    });
 });
+
+
+
+
+/* Calcula maximo de notas de un trimestre
+
+SELECT max(numnota)
+FROM notas
+WHERE id_materia = 1 AND trimestre = 1
+GROUP BY trimestre;
+
+*/
