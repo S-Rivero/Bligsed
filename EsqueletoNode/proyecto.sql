@@ -326,7 +326,7 @@ DELIMITER ;
 
 
 INSERT INTO `curso` (`Nombre_curso`) VALUES ( '7C'), ('6D'), ('1A'), ('5D');
-INSERT INTO `materias` (`Materia`, `IdCurso`, `profesor`) VALUES ( 'Matematicas', 1, 4), ( 'Lengua', 1, 4), ( 'Computacion', 3, 7), ( 'Naturales', 2, 4), ( 'Quimica', 3, 4), ( 'Redes', 2, 7);
+INSERT INTO `materias` (`Materia`, `IdCurso`, `profesor`) VALUES ( 'Matematicas', 1, 4), ( 'Lengua', 1, 4), ( 'Computacion', 3, 7), ( 'Naturales', 2, 4), ( 'Quimica', 3, 4), ( 'Redes', 4, 7);
 
 INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 6, 1, 1, 1, 1), ( 6, 1, 10, 1, 2), (6, 1, 9, 1, 3), (6, 1, 5, 1, 4), (6, 2, 4, 1, 5), (6, 2, 7, 1, 6), (6, 2, 8, 1, 7), (6, 2, 9, 1, 8);
 INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 6, 1, 1, 2, 1), ( 6, 1, 10, 2, 2), (6, 1, 9, 2, 3), (6, 1, 5, 2, 4), (6, 2, 4, 2, 5), (6, 2, 7, 2, 6), (6, 2, 8, 2, 7), (6, 2, 9, 2, 8);
