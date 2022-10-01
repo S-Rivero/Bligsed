@@ -343,3 +343,29 @@ UPDATE fichamedica SET `Enfermedad` = "Sida", `Internacion` = "Internacion debid
 INSERT INTO `publicaciones` (`titulo`, `descripcion`, `autor`, fecha) VALUES ('Aniversario del Noba', 'Hoy recordamos un tragico accidente que se llevo a uno de los mas prometedores musicos de el siglo 21. Descansa en paz Lautaro.', '2', "2022-7-4"), ('Murio fortnite', 'Fortnite ha tocado fondo con sus usuarios activos este 4 de marzo de 2022 con una gran cantidad de bots por partida y una playerbese simultanea de solo 300 jugadores Fortnite se puede declarar como un juego muerto', '2', "2022-8-4"), ('Tragedia en Florencio Varela', 'Un oso que invocaba rayos asesino a una mujer policia de manera brutal este 4 de septiembre. Segun testigos el oso se nombraba a si mismo Volibear', '2', "2022-9-4"), ('Suicidios masivos en Europá', 'En europa recientemente surgio una ola de suicidios debido a lo que se cree que es el final de las criptomonedas', '2', "2022-10-4");
 
 INSERT INTO `chats` (id_chat, id_usuario) VALUES('1', '6'), ('1', '3'), ('1', '4'), ('1', '8'), ('2', '6'), ('2', '5'), ('3', '6'), ('3', '2'), ('3', '1');
+
+INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`) VALUES(4636463, 'Juan Ignacio Perez De Barradas', 'Juan', 'M', 00000000, 6, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '2003-8-10', 0);
+INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`) VALUES(5532463, 'Goblin', 'goblino', 'M', 00000001, 6, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '2000-2-10', 0);
+INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`) VALUES(2036463, 'Amonger3296', 'Mogus', 'M', 00003296, 6, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '2001-3-10', 0);
+INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`) VALUES(0036463, 'Buzardo', 'BZC', 'M', 00041246, 6, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '2006-5-10', 0);
+
+UPDATE `alumno` SET  `ID_Curso`= 1, `Padre`=5 WHERE `ID` = 8;  
+UPDATE `alumno` SET  `ID_Curso`= 1, `Padre`=5 WHERE `ID` = 9;  
+UPDATE `alumno` SET  `ID_Curso`= 1, `Padre`=5 WHERE `ID` = 10;  
+UPDATE `alumno` SET  `ID_Curso`= 1, `Padre`=5 WHERE `ID` = 11;  
+
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 8, 1, 1, 1, 10), ( 8, 1, 10, 1, 2), (8, 1, 9, 1, 3), (8, 1, 5, 1, 4), (8, 2, 4, 1, 5), (8, 2, 7, 1, 6), (8, 2, 8, 1, 7), (8, 2, 9, 1, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 8, 1, 1, 2, 8), ( 8, 1, 10, 2, 2), (8, 1, 9, 2, 3), (8, 1, 5, 2, 4), (8, 2, 4, 2, 5), (8, 2, 7, 2, 6), (8, 2, 8, 2, 7), (8, 2, 9, 2, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 8, 1, 1, 3, 9), ( 8, 1, 10, 3, 2), (8, 1, 9, 3, 3), (8, 1, 5, 3, 4), (8, 2, 4, 3, 5), (8, 2, 7, 3, 6), (8, 2, 8, 3, 7), (8, 2, 9, 3, 8);
+
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 9, 1, 1, 1, 7), ( 9, 1, 10, 1, 2), (9, 1, 9, 1, 3), (9, 1, 5, 1, 4), (9, 2, 4, 1, 5), (9, 2, 7, 1, 6), (9, 2, 8, 1, 7), (9, 2, 9, 1, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 9, 1, 1, 2, 6), ( 9, 1, 10, 2, 2), (9, 1, 9, 2, 3), (9, 1, 5, 2, 4), (9, 2, 4, 2, 5), (9, 2, 7, 2, 6), (9, 2, 8, 2, 7), (9, 2, 9, 2, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 9, 1, 1, 3, 5), ( 9, 1, 10, 3, 2), (9, 1, 9, 3, 3), (9, 1, 5, 3, 4), (9, 2, 4, 3, 5), (9, 2, 7, 3, 6), (9, 2, 8, 3, 7), (9, 2, 9, 3, 8);
+
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 10, 1, 1, 1, 5), ( 10, 1, 10, 1, 2), (10, 1, 9, 1, 3), (10, 1, 5, 1, 4), (10, 2, 4, 1, 5), (10, 2, 7, 1, 6), (10, 2, 8, 1, 7), (10, 2, 9, 1, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 10, 1, 1, 2, 6), ( 10, 1, 10, 2, 2), (10, 1, 9, 2, 3), (10, 1, 5, 2, 4), (10, 2, 4, 2, 5), (10, 2, 7, 2, 6), (10, 2, 8, 2, 7), (10, 2, 9, 2, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 10, 1, 1, 3, 1), ( 10, 1, 10, 3, 2), (10, 1, 9, 3, 3), (10, 1, 5, 3, 4), (10, 2, 4, 3, 5), (10, 2, 7, 3, 6), (10, 2, 8, 3, 7), (10, 2, 9, 3, 8);
+
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 10, 1, 1, 1, 3), ( 11, 1, 10, 1, 2), (11, 1, 9, 1, 3), (11, 1, 5, 1, 4), (11, 2, 4, 1, 5), (11, 2, 7, 1, 6), (11, 2, 8, 1, 7), (11, 2, 9, 1, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 10, 1, 1, 2, 7), ( 11, 1, 10, 2, 2), (11, 1, 9, 2, 3), (11, 1, 5, 2, 4), (11, 2, 4, 2, 5), (11, 2, 7, 2, 6), (11, 2, 8, 2, 7), (11, 2, 9, 2, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 10, 1, 1, 3, 10), ( 11, 1, 10, 3, 2), (11, 1, 9, 3, 3), (11, 1, 5, 3, 4), (11, 2, 4, 3, 5), (11, 2, 7, 3, 6), (11, 2, 8, 3, 7), (11, 2, 9, 3, 8);
