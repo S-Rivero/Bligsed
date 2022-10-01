@@ -366,6 +366,6 @@ INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUE
 INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 10, 1, 1, 2, 1), ( 10, 1, 10, 2, 2), (10, 1, 9, 2, 3), (10, 1, 5, 2, 4), (10, 2, 4, 2, 5), (10, 2, 7, 2, 6), (10, 2, 8, 2, 7), (10, 2, 9, 2, 8);
 INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 10, 1, 1, 3, 1), ( 10, 1, 10, 3, 2), (10, 1, 9, 3, 3), (10, 1, 5, 3, 4), (10, 2, 4, 3, 5), (10, 2, 7, 3, 6), (10, 2, 8, 3, 7), (10, 2, 9, 3, 8);
 
-INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 10, 1, 1, 1, 1), ( 11, 1, 10, 1, 2), (11, 1, 9, 1, 3), (11, 1, 5, 1, 4), (11, 2, 4, 1, 5), (11, 2, 7, 1, 6), (11, 2, 8, 1, 7), (11, 2, 9, 1, 8);
-INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 10, 1, 1, 2, 1), ( 11, 1, 10, 2, 2), (11, 1, 9, 2, 3), (11, 1, 5, 2, 4), (11, 2, 4, 2, 5), (11, 2, 7, 2, 6), (11, 2, 8, 2, 7), (11, 2, 9, 2, 8);
-INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 10, 1, 1, 3, 1), ( 11, 1, 10, 3, 2), (11, 1, 9, 3, 3), (11, 1, 5, 3, 4), (11, 2, 4, 3, 5), (11, 2, 7, 3, 6), (11, 2, 8, 3, 7), (11, 2, 9, 3, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 11, 1, 1, 1, 1), ( 11, 1, 10, 1, 2), (11, 1, 9, 1, 3), (11, 1, 5, 1, 4), (11, 2, 4, 1, 5), (11, 2, 7, 1, 6), (11, 2, 8, 1, 7), (11, 2, 9, 1, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 11, 1, 1, 2, 1), ( 11, 1, 10, 2, 2), (11, 1, 9, 2, 3), (11, 1, 5, 2, 4), (11, 2, 4, 2, 5), (11, 2, 7, 2, 6), (11, 2, 8, 2, 7), (11, 2, 9, 2, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 11, 1, 1, 3, 1), ( 11, 1, 10, 3, 2), (11, 1, 9, 3, 3), (11, 1, 5, 3, 4), (11, 2, 4, 3, 5), (11, 2, 7, 3, 6), (11, 2, 8, 3, 7), (11, 2, 9, 3, 8);
