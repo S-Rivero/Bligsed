@@ -1,40 +1,88 @@
    <div class="text">Tabla de curso</div>
       <div class="contenedor_documentacion">
       <div class="contenedor_nombre_doc">
-      
-        <select name="1er año">
-          <option value="constancias">1°A</option>
-          <option value="constancias">1°B</option>
+        <select name="1er año" id="select_curso" onchange="updateURL()">
+          <option value="" hidden="hidden" selected="selected" id="optionSelected"></option>
+          {{#each a}}
+            <option value="{{ID}}">{{#cursoToString Nombre_curso}}{{/cursoToString}} - {{Materia}}</option>
+          {{/each}}
 
         </select>
 
         <iconify-icon icon="bx:save" width="30" height="30" class="lapicito_boliviano"></iconify-icon>
 
       </div>
+      <input type="SUBMIT" form="form" value="TEST"/>
+      <form action="" id="form" method="POST">
       <table class="bordered">
-        <h2>Trimestre 1 XD</h2>
-        <tr>
+        <tr id="th">
           <th>Alumno</th>
-          {{#each b}}
-            <th>NPA{{@index}}</th>
-          {{/each}}
-          <th>Final</th>
+          
+          
         </tr>
-        <form action="">
-          {{#each a}}
-          <tr>
-            <td><a href="/perfil/p/{{id}}">{{Nombre}}</a></td>
-            {{#each ../b}}
-              <td><input type="number" name="{{@../index}}nota_parcial{{@index}}" min="1" max="10" class="input_notas"></td>
-            {{/each}}
-            <td><input type="number" name="1nota_final" min="1" max="10" class="input_notas"></td>
-          </tr>
-          {{/each}}
-        </form>
- 
       </table>
+      </form>
     </div>
+    
   <script>
+    let [mat,trim] = window.location.href.split("/").slice(-2);
+    $('#form').attr('action', `/cargarNotas/${mat}/${trim}`);
+    fetch(`/api/ListaAlumnosNotas/${mat}/${trim}`)
+    .then((response) => response.json())
+    .then((data) => {
+      let numCols = getNumCols(data);
+      insertTh(numCols);
+      data.forEach(e => {insertRow(e)});
+    });
+
+    fetch(`/api/idMateriaToCurso/${mat}`)
+    .then((response) => response.json())
+    .then((data) => document.getElementById("optionSelected").innerHTML = data['C'].split('').join('°') + ' - ' + data['B']);
+
+    function insertTh(n){
+      for(let i = 0 ; i < n ; i++){
+        $('#th').append(`<th>NPA${i+1}</th>`);
+      }
+      $('#th').append(`<th>Final</th>`);
+    }
+
+    function getNumCols(data){
+      let maxLen = 0;
+      data.forEach(e => {
+        if(e.notas.length > maxLen){
+          maxLen = e.notas.length;
+        }
+      })
+      return maxLen;
+    }
+
+    function insertRow(e){
+      $('tbody').append(`
+          <tr>
+            <input type="hidden" name="alumno" value="${e.id}">
+            <td><a href="/perfil/p/${e.id}">${e.nombre}</a></td>
+            ${e.notas.map((n,i) => {
+                //<td><input value="${n.nota}" type="number" name="${e.id}" id="nota_parcial" min="1" max="10" class="input_notas"></td>
+              return `
+                <td><input value="${n.nota}" type="number" name="nota_${i+1}" id="nota_parcial" min="1" max="10" class="input_notas"></td>
+              `
+            }).join('')}
+            <td><input type="number" name="final" id="nota_final" min="1" max="10" class="input_notas" style="background: red"></td>
+          </tr>
+      `);
+    }
+
+    
+    function updateURL() {
+        var selectBox = document.getElementById("select_curso");
+        var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+        window.location.replace("/cargarNotas/" + selectedValue+"/1");
+    };
+
+
+
+
+
     let sidebar = document.querySelector(".sidebar");
     let closeBtn = document.querySelector("#btn");
     let searchBtn = document.querySelector(".bx-search");

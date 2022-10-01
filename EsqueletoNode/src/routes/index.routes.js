@@ -9,7 +9,8 @@ const {
     renderDocumentos,
     renderCursos,
     renderTablaCursos,
-    cargarNotasDocente
+    cargarNotasDocente,
+    POSTcargarNotasDocente
 } = require('../controllers/index.controller');
 const { 
     pushMsg,
@@ -33,9 +34,11 @@ router.get('/Cursos', isLoggedIn, authLevelCursos, renderCursos);
 
 router.get('/tablaCurso/:id', isLoggedIn, authLevelTablaCursos, renderTablaCursos);
 
+
 //Id es la id de materia
 //t es el numero de trimestre. Por defecto, desde cursos, te manda al t=1
 router.get('/cargarNotas/:id/:t', isLoggedIn, authLevelCargarNotas, cargarNotasDocente);
+router.post('/cargarNotas/:id/:t', isLoggedIn, authLevelCargarNotas, POSTcargarNotasDocente);
 
 
 

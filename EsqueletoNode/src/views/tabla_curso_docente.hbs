@@ -29,11 +29,15 @@
         {{/each}}
       </table>
     </div>
-
   <script>
     let url = window.location.href;
-    let idCurso = url.match("tablaCurso/(\\d)");
-    document.getElementById("optionSelected").innerHTML = parseInt(idCurso[1]);
+    let idCurso = url.split("tablaCurso/");
+ 
+
+    fetch('/api/idCursoToName/'+parseInt(idCurso[1]))
+    .then((response) => response.json())
+    .then((data) => document.getElementById("optionSelected").innerHTML = data['C'].split('').join('°'));
+
 
     let sidebar = document.querySelector(".sidebar");
     let closeBtn = document.querySelector("#btn");

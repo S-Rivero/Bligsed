@@ -1,3 +1,5 @@
+const e = require("connect-flash");
+
 module.exports = {
     JSONPromediosAl: function(json){
         let formateado = {};
@@ -74,11 +76,69 @@ module.exports = {
             return {materia: li, cursos};
         });
         return materiasFinal;
+    },
+
+    JSONListaAlumnosNotas: function(a,n){
+        return a.map(e => {
+            let notasArr = n.filter(r => r.id_alum == e.id_alum).map(j => {
+                return {
+                    num: j.numnota,
+                    nota: j.nota
+                }
+            });
+            return {
+                id: e.id_alum,
+                nombre: e.Nombre,
+                notas: notasArr
+            };
+        })
     }
-    /*[
-    { Curso: '7C', IdMateria: 1, Materia: 'Matematicas' },
-    { Curso: '6C', IdMateria: 1, Materia: 'Matematicas' },
-    { Curso: '6D', IdMateria: 1, Materia: 'Matematicas' }
-]*/
+    
 }
-//[ { anio: 6, division: [ 'D' ] }, { anio: 7, division: [ 'C', 'D' ] } ]
+
+// [
+//     {
+//         id: 6,
+//         nombre: "juan",
+//         notas: [1,2,3,4]
+//     },
+//     {
+
+//     }
+// ]
+
+//A:
+/*
+[
+  {
+    "id_alum": 6,
+    "Nombre": "6"
+  }
+]
+*/
+
+//N:
+/*
+[
+  {
+    "id_alum": 6,
+    "nota": 1,
+    "numnota": 1
+  },
+  {
+    "id_alum": 6,
+    "nota": 10,
+    "numnota": 2
+  },
+  {
+    "id_alum": 6,
+    "nota": 9,
+    "numnota": 3
+  },
+  {
+    "id_alum": 6,
+    "nota": 5,
+    "numnota": 4
+  }
+]
+*/

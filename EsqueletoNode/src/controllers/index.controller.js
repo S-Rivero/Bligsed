@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require('path');
 const { isUndefined } = require('util');
 const pool = require('../database');
-const {JSONPromediosAl, JSONListaDeCursos, JSONListaDeMaterias} = require('../lib/jsonFormat');
+const {JSONPromediosAl, JSONListaDeCursos, JSONListaDeMaterias, JSONListaAlumnosNotas} = require('../lib/jsonFormat');
 const {setChild} = require('../lib/helpers');
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
 exports.root = ((req,res) => {
@@ -15,7 +15,8 @@ exports.root = ((req,res) => {
         // req.session['childNames'] = r.map((res)=>{
         //     return res.Nombre;
         // });
-        res.redirect('/home');
+        // res.redirect('/home');
+        res.redirect('/cargarNotas/1/1');
     });
 });
 
@@ -77,34 +78,79 @@ exports.renderCursos = ((req,res)=>{
     // [{"materia":"Quimica","cursos":[{"cuso":"1A","idMateria":5}]},{"materia":"Naturales","cursos":[{"cuso":"6D","idMateria":4}]},{"materia":"Matematicas","cursos":[{"cuso":"7C","idMateria":1}]}]
 });
 exports.renderTablaCursos = ((req,res)=>{
-    const rows = pool.query("SELECT u.id, u.nombre, u.username, u.Numero_de_telefono FROM alumno a JOIN usuarios u ON a.id = u.id WHERE ID_Curso = ? ORDER BY nombre ASC", req.params.id, function(err, a){
-        const r = pool.query("SELECT * FROM curso ORDER BY Nombre_curso ASC", function(err, b){
-            // res.send(b);
-            res.render('tabla_curso_docente.hbs', {a, b, links: 'headerLinks/tabla_curso_docente', user:{user: req.user[0], childs: req.session.childs}});
-        // res.send(a);
-        });
+    pool.query("SELECT ID FROM curso WHERE ID = ?", req.params.id, function(err, test){
+        if(!(test[0])){
+            res.redirect('/');
+        }else{   
+            const rows = pool.query("SELECT u.id, u.nombre, u.username, u.Numero_de_telefono FROM alumno a JOIN usuarios u ON a.id = u.id WHERE ID_Curso = ? ORDER BY nombre ASC", req.params.id, function(err, a){
+                const r = pool.query("SELECT * FROM curso ORDER BY Nombre_curso ASC", function(err, b){
+                    res.render('tabla_curso_docente.hbs', {a, b, links: 'headerLinks/tabla_curso_docente', user:{user: req.user[0], childs: req.session.childs}});
+                    // res.send(a);
+                });
+            });
+        }
     });
 });
 
 exports.cargarNotasDocente = ((req,res)=>{
+    //Solamente el docente titular puede acceder a la modificaicon de notas
     let idMat = req.params.id;
     let trim = req.params.t;
     
-    pool.query("SELECT D.id, Nombre FROM usuarios D JOIN (SELECT ID FROM alumno B JOIN (SELECT idCurso FROM materias WHERE id = ?)A ON a.idCurso = B.ID_Curso)C ON D.id = C.ID", idMat, function(err, a){
-        pool.query("SELECT id_alum, nota FROM notas WHERE id_materia = ? AND trimestre = ? GROUP BY numnota", [idMat,trim], function(err, b){
-            res.render('cargarNotas.hbs', {a, b, links: 'headerLinks/cargarNotas', user:{user: req.user[0], childs: req.session.childs}});
-        });    
+    pool.query(`
+        SELECT IdCurso, Nombre_curso, Materia, A.ID
+        FROM materias A
+        JOIN curso B
+        ON A.IdCurso = B.ID
+        WHERE profesor = ?;
+    `, [req.user[0].id], function(err, a){
+        if(!(a[0])){
+            res.redirect('/');
+        }else{ 
+            res.render('cargarNotas.hbs', {a, links: 'headerLinks/cargarNotas', user:{user: req.user[0], childs: req.session.childs}});
+        }
     });
 });
 
+exports.POSTcargarNotasDocente = ((req,res) => {
+    let {id, t} = req.params;
+    let body = req.body;
+    for(let k in body){
+        if(k != "final" && k != "alumno"){
+            let numnota = k.substring(5);
+            if(typeof body[k] == 'object'){
+                body[k].forEach((e,i) => {
+                    pool.query(`
+                        UPDATE notas 
+                        SET nota = ?
+                        WHERE trimestre = ? 
+                            AND id_materia = ? 
+                            AND numnota = ? 
+                            AND id_alum = ? 
+                            `
+                            ,[e,t,id, numnota, body.alumno[i], e], function(err, a){
+                               
+                        });
+                });
+            }else{
+                pool.query(`
+                    UPDATE notas 
+                    SET nota = ?
+                    WHERE trimestre = ? 
+                        AND id_materia = ? 
+                        AND numnota = ? 
+                        AND id_alum = ? 
+                        `
+                        ,[body[k],t,id, numnota, body.alumno, body[k]], function(err, a){
+                            
+                    });
+            }     
+        }
+    }
 
+    setTimeout(function(){
+        res.redirect(`/cargarNotas/${id}/${t}`);
+    }, 2000)
+    
+});
 
-
-/* Calcula maximo de notas de un trimestre
-
-SELECT max(numnota)
-FROM notas
-WHERE id_materia = 1 AND trimestre = 1
-GROUP BY trimestre;
-
-*/
