@@ -113,9 +113,11 @@ exports.cargarNotasDocente = ((req,res)=>{
 });
 
 exports.POSTcargarNotasDocente = ((req,res) => {
+
     let {id, t} = req.params;
     let body = req.body;
-    for(let k in body){
+    
+     for(let k in body){
         if(k != "final" && k != "alumno"){
             let numnota = k.substring(5);
             if(typeof body[k] == 'object'){
@@ -129,7 +131,7 @@ exports.POSTcargarNotasDocente = ((req,res) => {
                             AND id_alum = ? 
                             `
                             ,[e,t,id, numnota, body.alumno[i], e], function(err, a){
-                               
+                                
                         });
                 });
             }else{
@@ -147,10 +149,41 @@ exports.POSTcargarNotasDocente = ((req,res) => {
             }     
         }
     }
+    if(body.button == "Eliminar Nota"){
+            pool.query(`
+            DELETE FROM notas WHERE
+            id_materia = ? AND
+            trimestre = ? AND
+            numnota = (
+                SELECT MAX(numnota)
+                FROM notas
+                WHERE id_materia = ? AND trimestre = ? AND numnota != 1)
+                `
+                ,[id, t, id, t], function(err, a){
+                    
+        });
+    }else if(body.button == "Agregar Nota"){
+        pool.query(`SELECT MAX(numnota) as a
+                    FROM notas
+                    WHERE id_materia = ? AND trimestre = ?`
+                    ,[id, t], function(err, a){
 
+            body.alumno.forEach(e => {
+                pool.query(`
+                INSERT INTO notas
+                (id_alum, id_materia, trimestre, numnota)
+                VALUES
+                (?,?,?,?)
+                    `
+                    ,[e, id, t, a[0]['a'] + 1], function(err, a){
+                        
+                });
+            });
+        });
+    }else{
+
+    }
     setTimeout(function(){
         res.redirect(`/cargarNotas/${id}/${t}`);
-    }, 2000)
-    
+    }, 2000);  
 });
-

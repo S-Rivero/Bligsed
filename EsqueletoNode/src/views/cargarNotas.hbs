@@ -12,7 +12,10 @@
         <iconify-icon icon="bx:save" width="30" height="30" class="lapicito_boliviano"></iconify-icon>
 
       </div>
-      <input type="SUBMIT" form="form" value="TEST"/>
+ 
+      <input class="inputBtnBlock" type="SUBMIT" form="form" value="Agregar Nota" name="button">
+      <input class="inputBtnBlock" type="SUBMIT" form="form" value="Eliminar Nota" name="button">
+      <input class="inputBtnBlock" type="SUBMIT" form="form" value="Guardar" name="button"/>
       <form action="" id="form" method="POST">
       <table class="bordered">
         <tr id="th">
@@ -64,7 +67,7 @@
             ${e.notas.map((n,i) => {
                 //<td><input value="${n.nota}" type="number" name="${e.id}" id="nota_parcial" min="1" max="10" class="input_notas"></td>
               return `
-                <td><input value="${n.nota}" type="number" name="nota_${i+1}" id="nota_parcial" min="1" max="10" class="input_notas"></td>
+                <td><input value="${n.nota}" type="number" name="nota_${i+1}" id="nota_parcial" min="0" max="10" class="input_notas"></td>
               `
             }).join('')}
             <td><input type="number" name="final" id="nota_final" min="1" max="10" class="input_notas" style="background: red"></td>
@@ -79,7 +82,13 @@
         window.location.replace("/cargarNotas/" + selectedValue+"/1");
     };
 
-
+    $('#form').submit(function(){
+        $('.inputBtnBlock').each(function (index) {
+          $(this).clone(false).removeAttr('id').prop('disabled', true).insertBefore($(this));
+          $(this).hide();
+          $('#form').prepend($(this));
+      });
+    });
 
 
 
