@@ -200,22 +200,6 @@ CREATE TABLE `profesores` (
   `ID` int(11) NOT NULL
 );
 
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `publicaciones`
---
-
-CREATE TABLE `publicaciones` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `titulo` varchar(50) NOT NULL,
-  `descripcion` varchar(255) NOT NULL,
-  `autor` int(11) NOT NULL COMMENT 'relacionar con id usuario',
-   fecha DATE NOT NULL,
-    PRIMARY KEY (`id`)
-);
-
 -- --------------------------------------------------------
 
 --
@@ -306,20 +290,6 @@ END; END IF $$
 DELIMITER ;
 
 
-
---
--- Índices para tablas volcadas
---
-
-  CREATE TABLE `chats` (
-    `id_chat` int(11) NOT NULL,
-    `id_usuario` int(11) NOT NULL
-  );
-
---
-
-
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
@@ -339,10 +309,6 @@ INSERT INTO `colegio`(`pago`,`superusuario`) VALUES (1,0);
 INSERT INTO `superusuarios`(`id`,`fecha_creacion`) VALUES (0,"2012-2-15");
 UPDATE `alumno` SET  `ID_Curso`= 1, `Padre`=5 WHERE `ID` = 6;  
 UPDATE fichamedica SET `Enfermedad` = "Sida", `Internacion` = "Internacion debido a cirujia por apendicitis", `Alergia` = "Intolerancia a la lactosa", `Tratamiento_medico` = "Antibioticos", `Quirurjico` = "Cirujia por apendicitis. 7 puntos sector inferior izquierdo del abdomen", `Vacunacion` = "1", `Altura` = 145, `Peso` = 93.5, `Hospital` = "Hospital italiano", `Obra_social` = "Osecac", `N_de_afiliado_obra_social` = 112312312312, `Medico_cabeceraln` = "Morbius", `Medico_cabecerafn` = "Michael", `Domiciliomed` = "Antesana 247", `Telefono_medico` = 2133352223;
-
-INSERT INTO `publicaciones` (`titulo`, `descripcion`, `autor`, fecha) VALUES ('Aniversario del Noba', 'Hoy recordamos un tragico accidente que se llevo a uno de los mas prometedores musicos de el siglo 21. Descansa en paz Lautaro.', '2', "2022-7-4"), ('Murio fortnite', 'Fortnite ha tocado fondo con sus usuarios activos este 4 de marzo de 2022 con una gran cantidad de bots por partida y una playerbese simultanea de solo 300 jugadores Fortnite se puede declarar como un juego muerto', '2', "2022-8-4"), ('Tragedia en Florencio Varela', 'Un oso que invocaba rayos asesino a una mujer policia de manera brutal este 4 de septiembre. Segun testigos el oso se nombraba a si mismo Volibear', '2', "2022-9-4"), ('Suicidios masivos en Europá', 'En europa recientemente surgio una ola de suicidios debido a lo que se cree que es el final de las criptomonedas', '2', "2022-10-4");
-
-INSERT INTO `chats` (id_chat, id_usuario) VALUES('1', '6'), ('1', '3'), ('1', '4'), ('1', '8'), ('2', '6'), ('2', '5'), ('3', '6'), ('3', '2'), ('3', '1');
 
 INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`) VALUES(4636463, 'Juan Ignacio Perez De Barradas', 'Juan', 'M', 00000000, 6, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '2003-8-10', 0);
 INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`) VALUES(5532463, 'Goblin', 'goblino', 'M', 00000001, 6, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', '2000-2-10', 0);
