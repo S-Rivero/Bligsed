@@ -30,6 +30,26 @@
       else
         ul.style.setProperty('height', '0px');
     }
+
+    /*Este código de abajo es para el dropdown menu*/
+
+    function optionslist() {
+      document.getElementById("myDropdown1").classList.toggle("show");
+    }
+
+    /* Close the dropdown menu if the user clicks outside of it*/
+    window.onclick = function (event) {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
 </script>
 <script>
     let listElements = document.querySelectorAll('.list__button--click');

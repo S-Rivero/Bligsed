@@ -14,10 +14,11 @@ exports.io_init = app => {
     io.on('connection', socket => {
         // Envia al client los rooms en los que esta el usuario
         socket.on('loadPage', (user, cb) => {
+            console.log(fs.readdirSync('./src/local_database/rooms'));
             cb(
-                fs.readdirSync('./local_database/rooms/')
+                fs.readdirSync('./src/local_database/rooms')
                     .map(e => {
-                        let data = fs.readFileSync(`./local_database/rooms/${e}`)
+                        let data = fs.readFileSync(`./src/local_database/rooms/${e}`)
                             .toString()
                             .split('\n')
                             .map(e => e.replace('\r', ''));
@@ -74,7 +75,7 @@ exports.io_init = app => {
             // ******************************************************************
 
             let arr = [],
-                data = fs.readFileSync(`./local_database/messages/${newroom}.txt`)
+                data = fs.readFileSync(`./src/local_database/messages/${newroom}.txt`)
                     .toString()
                     .split('\n')
                     .map(e => e.replace('\r', ''));
@@ -111,19 +112,19 @@ exports.io_init = app => {
                 switch (checkMime(o.fileType)) {
                     case 0:
                         o.fileName = "BligsedDocs_" + Date.now() + path.extname(o.fileName);
-                        fileDir = `./public/media/docs/${o.fileName}`;
+                        fileDir = `./src/public/media/docs/${o.fileName}`;
                         break;
                     case 1:
                         o.fileName = "BligsedImages_" + Date.now() + path.extname(o.fileName);
-                        fileDir = `./public/media/images/${o.fileName}`;
+                        fileDir = `./src/public/media/images/${o.fileName}`;
                         break;
                     case 2:
                         o.fileName = "BligsedAudios_" + Date.now() + path.extname(o.fileName);
-                        fileDir = `./public/media/audios/${o.fileName}`;
+                        fileDir = `./src/public/media/audios/${o.fileName}`;
                         break;
                     case 3:
                         o.fileName = "BligsedVideos_" + Date.now() + path.extname(o.fileName);
-                        fileDir = `./public/media/videos/${o.fileName}`;
+                        fileDir = `./src/public/media/videos/${o.fileName}`;
                         break;
                 }
                 //-------------Guarda el archivo--------------
@@ -144,7 +145,7 @@ exports.io_init = app => {
             }
 
             //-------------Guarda content en local_database --------------
-            fs.appendFileSync(`./local_database/messages/${socket.room}.txt`, content);
+            fs.appendFileSync(`./src/local_database/messages/${socket.room}.txt`, content);
 
             delete content;
             delete fileDir;
@@ -156,17 +157,17 @@ exports.io_init = app => {
         // ******************************************************************
 
         socket.on('crearGrupo', (o, cb) => {
-            let files = fs.readdirSync('./local_database/rooms/').length;
+            let files = fs.readdirSync('./src/local_database/rooms/').length;
             content = `${o.name}\n${o.this_user}\n`;
             if (o.other_users) {
                 o.other_users.forEach(elem => {
                     content += `${elem}\n`;
                 });
             }
-            fs.writeFileSync(`./local_database/rooms/${files}.txt`, content);
+            fs.writeFileSync(`./src/local_database/rooms/${files}.txt`, content);
             cb(true);
             delete content;
-            fs.writeFileSync(`./local_database/messages/${files}.txt`, '');
+            fs.writeFileSync(`./src/local_database/messages/${files}.txt`, '');
             delete files;
         });
 
@@ -176,12 +177,12 @@ exports.io_init = app => {
         // ******************************************************************
 
         socket.on('crearChatP2P', (o, cb) => {
-            let files = fs.readdirSync('./local_database/rooms/').length;
+            let files = fs.readdirSync('./src/local_database/rooms/').length;
             content = `${o.this_name}«¯§¦Æ×þ®©©»${o.other_name}\n${o.this_user}\n${o.other_user}\n`;
-            fs.writeFileSync(`./local_database/rooms/${files}.txt`, content);
+            fs.writeFileSync(`./src/local_database/rooms/${files}.txt`, content);
             cb(true);
             delete content;
-            fs.writeFileSync(`./local_database/messages/${files}.txt`, '');
+            fs.writeFileSync(`./src/local_database/messages/${files}.txt`, '');
             delete files;
         });
 
@@ -192,7 +193,7 @@ exports.io_init = app => {
 
         socket.on('abanRoom', (id, cb) => {
             let updateContent = [];
-            fs.readFileSync(`./local_database/rooms/${socket.room}.txt`)
+            fs.readFileSync(`./src/local_database/rooms/${socket.room}.txt`)
                 .toString()
                 .split('\n')
                 .map(e => e.replace('\r', ''))
@@ -200,9 +201,10 @@ exports.io_init = app => {
                     if (elem != id)
                         updateContent.push(elem);
                 });
-            fs.writeFileSync(`./local_database/rooms/${socket.room}.txt`, updateContent.join('\n'));
+            fs.writeFileSync(`./src/local_database/rooms/${socket.room}.txt`, updateContent.join('\n'));
+            console.log(fs.readFileSync(`./src/local_database/rooms/${socket.room}.txt`));
             if (updateContent[1] === '')
-                fs.unlinkSync(`./local_database/messages/${socket.room}.txt`);
+                fs.unlinkSync(`./src/local_database/messages/${socket.room}.txt`);
             cb(true)
         });
 
@@ -244,9 +246,9 @@ exports.io_init = app => {
             socket.join('/publicaciones');
             socket.room = '/publicaciones';
             cb(
-                fs.readdirSync('./local_database/pubs/')
+                fs.readdirSync('./src/local_database/pubs/')
                     .map(e => {
-                        let data = fs.readFileSync(`./local_database/pubs/${e}`)
+                        let data = fs.readFileSync(`./src/local_database/pubs/${e}`)
                             .toString()
                             .split('«¯§¦Æ×þ®©©»');
                         if (data[4] != 'no') {
@@ -259,17 +261,17 @@ exports.io_init = app => {
         });
 
         socket.on('newPub', o => {
-            p = fs.readdirSync('./local_database/pubs/').length;
+            p = fs.readdirSync('./src/local_database/pubs/').length;
             strp = `${o.title}«¯§¦Æ×þ®©©»${o.desc}«¯§¦Æ×þ®©©»${o.user}«¯§¦Æ×þ®©©»${o.date}«¯§¦Æ×þ®©©»`;
             filesArr = 'no';
 
             if(o.file != 'no'){
                 filesArr = [];
-                pf = fs.readdirSync('./public/media/pubDocs').length;
+                pf = fs.readdirSync('./src/public/media/pubDocs').length;
                 console.log(pf);
                 for(let i = 0; i < o.file.length; i++ ){
                     o.file[i].name = `Bl${pf+i}_${o.file[i].name}`;
-                    fs.writeFileSync(`./public/media/pubDocs/${o.file[i].name}`, o.file[i].file);
+                    fs.writeFileSync(`./src/public/media/pubDocs/${o.file[i].name}`, o.file[i].file);
                     filesArr.push(o.file[i].name);
                     strp += o.file[i].name+',';
                 };
@@ -278,7 +280,7 @@ exports.io_init = app => {
             else
                 strp += o.file;
 
-            fs.writeFileSync(`./local_database/pubs/${p}.txt`, strp);
+            fs.writeFileSync(`./src/local_database/pubs/${p}.txt`, strp);
             io.sockets.in(socket.room).emit('newPub', [o.title, o.desc, o.user, o.date, filesArr]);            
             delete i, p, pf, filesArr, strp;
         });

@@ -14,9 +14,10 @@ var actual_room = null;
 // ******************************************************************
 
 window.onload = (e) => {
+
    socket.emit('loadPage', user, arr => {
       if (arr == [])
-         console.log('No se encontraron chats');
+         ulChats.insertAdjacentHTML('beforeend', `<li class="clearfix cont"><img src="/media/user2.png" alt="avatar"><div class="about"><div class="name">No perteneces a ningún chat</div></div></li>`);
       else {
          arr.forEach(elem => {
             ulChats.insertAdjacentHTML('beforeend', `<li class="clearfix cont" onclick="switchChat(this)"><img src="/media/user2.png" alt="avatar"><div class="about"><div class="name">${elem.name}</div><div class="hid">${elem.id}</div></div></li>`);
@@ -37,7 +38,7 @@ function switchChat(elem) {
    }
    if (actual_room != room) {
       actual_room = room;
-      document.getElementById('div_chat_container').classList.remove('hid');
+      document.getElementById('divChatContainer').classList.remove('hid');
       ul.innerHTML = "";
       socket.emit('switchRoom', actual_room.id, arr => {
          arr.forEach(elem => { printMessage(elem) });
@@ -125,6 +126,12 @@ document.getElementById('fcGrupo').addEventListener("submit", (e) => {
 // ******************************************************************
 // *********************** Salir de Grupo ***************************
 // ******************************************************************
+function abanGrupo() {
+   if (confirm(`¿Esta seguro de abandonar el grupo "${actual_room.name}"?`))
+      socket.emit('abanRoom', user.id, res => {
+         if (res) window.location.reload();
+      });
+}
 
 document.getElementById('abanGrupo').addEventListener("click", (e) => {
    e.preventDefault();
