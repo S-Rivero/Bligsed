@@ -7,6 +7,11 @@
     width: 60vw;
 }
 
+.contenedor_creacioncuenta h1 {
+    margin-bottom: 5vh;
+}
+
+
 .contenedor_creacioncuenta h4{
     position: relative;
     top: 14%;

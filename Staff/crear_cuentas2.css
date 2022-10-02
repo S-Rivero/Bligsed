@@ -7,6 +7,12 @@
     width: 60vw;
 }
 
+
+.contenedor_creacioncuenta2 h1 {
+    font-size: 1%;
+    margin-bottom: 5vh;
+}
+
 .contenedor_creacioncuenta2 h4{
     margin-left: 2%;
     margin-top: 2%;
