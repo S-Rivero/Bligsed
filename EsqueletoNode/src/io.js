@@ -14,7 +14,6 @@ exports.io_init = app => {
     io.on('connection', socket => {
         // Envia al client los rooms en los que esta el usuario
         socket.on('loadPage', (user, cb) => {
-            console.log(fs.readdirSync('./src/local_database/rooms'));
             cb(
                 fs.readdirSync('./src/local_database/rooms')
                     .map(e => {
@@ -35,6 +34,8 @@ exports.io_init = app => {
                                 return { id: e.replace('.txt', ''), name: data[0] };
                             }
                         }
+                        if(e = '0.txt')
+                            return { id: null, name: null };
                     })
             );
         });

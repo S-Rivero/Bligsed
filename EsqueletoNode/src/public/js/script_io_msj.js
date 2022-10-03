@@ -19,6 +19,8 @@ window.onload = (e) => {
       if (arr == [])
          ulChats.insertAdjacentHTML('beforeend', `<li class="clearfix cont"><img src="/media/user2.png" alt="avatar"><div class="about"><div class="name">No perteneces a ningún chat</div></div></li>`);
       else {
+         if(arr[0].id == null)
+            arr.shift();
          arr.forEach(elem => {
             ulChats.insertAdjacentHTML('beforeend', `<li class="clearfix cont" onclick="switchChat(this)"><img src="/media/user2.png" alt="avatar"><div class="about"><div class="name">${elem.name}</div><div class="hid">${elem.id}</div></div></li>`);
          });
