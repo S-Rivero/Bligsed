@@ -91,7 +91,7 @@ exports.renderTablaCursos = ((req,res)=>{
                 ON A.Padre = P.id;
             `, req.params.id, function(err, a){
                 const r = pool.query("SELECT * FROM curso ORDER BY Nombre_curso ASC", function(err, b){
-                    res.render('tabla_curso.hbs', {a, b, links: 'headerLinks/tabla_curso_docente', user:{user: req.user[0], childs: req.session.childs}});
+                    res.render('tabla_curso.hbs', {a, b, tdu: req.user[0].Tipo_de_usuario, links: 'headerLinks/tabla_curso_docente', user:{user: req.user[0], childs: req.session.childs}});
                     // res.send(a);
                 });
             });
@@ -193,4 +193,17 @@ exports.POSTcargarNotasDocente = ((req,res) => {
     setTimeout(function(){
         res.redirect(`/cargarNotas/${id}/${t}`);
     }, 2000);  
+});
+
+
+exports.renderCargarInasistencias = ((req,res) => {
+    // res.send(req.body);
+    pool.query(`
+        SELECT id, nombre
+        FROM usuarios
+        WHERE id = ?`, req.body.alumnos, function(err, a){
+            res.send(a);
+        });
+    // res.render('cargarInasistencias.hbs', {a: req.body, links: 'headerLinks/cargarNotas', user:{user: req.user[0], childs: req.session.childs}});
+
 });

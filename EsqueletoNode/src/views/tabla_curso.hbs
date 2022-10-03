@@ -9,23 +9,33 @@
             <option value="{{ID}}">{{#cursoToString Nombre_curso}}{{/cursoToString}}</option>
           {{/each}}
         </select>
+        {{#if tdu 3}}
+          <input type="submit" value="Cargar Inasistencias" form="tabla">
+        {{/if}}
       </div>
-      <table class="bordered">
-        <tr>
-          <th>Apellido y nombre</th>
-          <th>Tutor</th>
-          <th>E-mail</th>
-          <th>Teléfono</th>
-        </tr>
-        {{#each a}}
-            <tr>
-            <td><a href="../perfil/p/{{id}}">{{nombre}}</a></td>
-            <td><a href="../perfil/p/{{Padre}}">{{nombre_tutor}}</a></td>
-            <td>{{username}}</td>
-            <td>{{Numero_de_telefono}}</td>
-            </tr>
-        {{/each}}
-      </table>
+      <form action="../cargar_inasistencias_render" method="post" name="tabla" id="tabla">
+        <table class="bordered">
+          <tr>
+            <th>Apellido y nombre</th>
+            <th>Tutor</th>
+            <th>E-mail</th>
+            <th>Teléfono</th>
+          </tr>
+          {{#each a}}
+              <tr>
+                <td>
+                  {{#if ../tdu 3}}
+                  <input type="checkbox" name="alumnos" id="al{{id}}" value="{{id}}">
+                  {{/if}}
+                  <a href="../perfil/p/{{id}}">{{nombre}}</a>
+                </td>
+                <td><a href="../perfil/p/{{Padre}}">{{nombre_tutor}}</a></td>
+                <td>{{username}}</td>
+                <td>{{Numero_de_telefono}}</td>
+              </tr>
+          {{/each}}
+        </table>
+      </form>
     </div>
   <script>
     let url = window.location.href;
