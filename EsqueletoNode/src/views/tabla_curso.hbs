@@ -25,9 +25,11 @@
               <tr>
                 <td>
                   {{#if ../tdu 3}}
-                  <input type="checkbox" name="alumnos" id="al{{id}}" value="{{id}}">
+                  <input type="checkbox" name="idSeleccionados" id="al{{id}}" value="{{id}}">
                   {{/if}}
                   <a href="../perfil/p/{{id}}">{{nombre}}</a>
+                  <input type="hidden" name="idAlumnos" id="al{{id}}" value="{{id}}">
+                  <input type="hidden" name="nombreAlumnos" id="Nal{{id}}" value="{{nombre}}">
                 </td>
                 <td><a href="../perfil/p/{{Padre}}">{{nombre_tutor}}</a></td>
                 <td>{{username}}</td>

@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require('path');
 const { isUndefined } = require('util');
 const pool = require('../database');
-const {JSONPromediosAl, JSONListaDeCursos, JSONListaDeMaterias, JSONListaAlumnosNotas} = require('../lib/jsonFormat');
+const {JSONPromediosAl, JSONListaDeCursos, JSONListaDeMaterias, JSONListaAlumnosNotas, JSONrenderCargarInasistencias} = require('../lib/jsonFormat');
 const {setChild} = require('../lib/helpers');
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
 exports.root = ((req,res) => {
@@ -197,13 +197,8 @@ exports.POSTcargarNotasDocente = ((req,res) => {
 
 
 exports.renderCargarInasistencias = ((req,res) => {
-    // res.send(req.body);
-    pool.query(`
-        SELECT id, nombre
-        FROM usuarios
-        WHERE id = ?`, req.body.alumnos, function(err, a){
-            res.send(a);
-        });
-    // res.render('cargarInasistencias.hbs', {a: req.body, links: 'headerLinks/cargarNotas', user:{user: req.user[0], childs: req.session.childs}});
+    let a = JSONrenderCargarInasistencias(req.body)
+  
+    res.render('cargarInasistencias.hbs', {a, links: 'headerLinks/cargarNotas', user:{user: req.user[0], childs: req.session.childs}});
 
 });

@@ -81,6 +81,14 @@ module.exports = {
                 notas: notasArr
             };
         })
+    },
+
+    JSONrenderCargarInasistencias: function({idSeleccionados, idAlumnos, nombreAlumnos}){
+        let newArr = [];
+        for(let i = 0 ; i < idAlumnos.length ; i++){
+            newArr.push({id: idAlumnos[i], nombre: nombreAlumnos[i]});
+        }
+        return newArr.filter(e => idSeleccionados.includes(e.id));
     }
     
 }
