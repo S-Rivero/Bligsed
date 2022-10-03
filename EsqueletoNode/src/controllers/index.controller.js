@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require('path');
 const { isUndefined } = require('util');
 const pool = require('../database');
-const {JSONPromediosAl, JSONListaDeCursos, JSONListaDeMaterias, JSONListaAlumnosNotas, JSONrenderCargarInasistencias} = require('../lib/jsonFormat');
+const {JSONPromediosAl, JSONListaDeCursos, JSONListaDeMaterias, JSONListaAlumnosNotas, JSONrenderCargarInasistencias, JSONcargarInasistencias} = require('../lib/jsonFormat');
 const {setChild} = require('../lib/helpers');
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
 exports.root = ((req,res) => {
@@ -201,4 +201,25 @@ exports.renderCargarInasistencias = ((req,res) => {
   
     res.render('cargarInasistencias.hbs', {a, links: 'headerLinks/cargarNotas', user:{user: req.user[0], childs: req.session.childs}});
 
+});
+
+exports.PostCargarInasistencias = ((req,res) => {
+    let a = JSONcargarInasistencias(req.body);
+    res.send(a);
+    /*
+        {
+        "id": [
+            "6",
+            "9"
+        ],
+        "fecha": [
+            "2022-05-04",
+            "2022-05-04"
+        ],
+        "inasistencia": [
+            "1",
+            "0"
+        ]
+        }
+    */
 });

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {isLoggedIn, isNotLoggedIn} = require('../lib/auth');
-const {authLevelCursos, authLevelTablaCursos, authLevelCargarNotas} = require('../lib/nexts');
+const {authLevelCursos, authLevelTablaCursos, authLevelCargarNotas, authLevelCargarInasistencias} = require('../lib/nexts');
 const {
     root,
     renderHome,
@@ -11,7 +11,8 @@ const {
     renderTablaCursos,
     cargarNotasDocente,
     POSTcargarNotasDocente,
-    renderCargarInasistencias
+    renderCargarInasistencias,
+    PostCargarInasistencias
 } = require('../controllers/index.controller');
 const { 
     pushMsg,
@@ -41,7 +42,8 @@ router.get('/tablaCurso/:id', isLoggedIn, authLevelTablaCursos, renderTablaCurso
 router.get('/cargarNotas/:id/:t', isLoggedIn, authLevelCargarNotas, cargarNotasDocente);
 router.post('/cargarNotas/:id/:t', isLoggedIn, authLevelCargarNotas, POSTcargarNotasDocente);
 
-router.post('/cargar_inasistencias_render', isLoggedIn, renderCargarInasistencias);
+router.post('/cargar_inasistencias_render', isLoggedIn, authLevelCargarInasistencias, renderCargarInasistencias);
+router.post('/cargar_inasistencias', isLoggedIn, authLevelCargarInasistencias, PostCargarInasistencias);
 
 
 

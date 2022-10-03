@@ -11,6 +11,7 @@
         </select>
         {{#if tdu 3}}
           <input type="submit" value="Cargar Inasistencias" form="tabla">
+          <label for="selectTodos">Seleccionar todos</label><input type="checkbox" value="" id="selectTodos">
         {{/if}}
       </div>
       <form action="../cargar_inasistencias_render" method="post" name="tabla" id="tabla">

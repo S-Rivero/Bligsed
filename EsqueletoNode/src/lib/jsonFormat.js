@@ -89,8 +89,32 @@ module.exports = {
             newArr.push({id: idAlumnos[i], nombre: nombreAlumnos[i]});
         }
         return newArr.filter(e => idSeleccionados.includes(e.id));
+    },
+
+    JSONcargarInasistencias: function({id, fecha, inasistencia}){
+        let arr = [];
+        for(let i = 0 ; i < id.length ; i++){
+            arr.push({
+                idAlumno: id[0],
+                fecha: fecha[0],
+                inasistencia: inasistencia[0]
+                //SEPARAR INASISTENCIA DE TIPO DE INASISTENCIA
+            })
+        }
     }
-    
+    /*
+        0 vale 0
+        1 y 2 valen 1
+        3 y 4 valen 0.5
+        5 y 6 valen 0.25
+        <option value="0">0 - Ausente no computable</option>
+        <option value="1">1 - Ausente TM (Jornada simple)</option>
+        <option value="2">1 - Ausente TT (Jornada simple)</option>
+        <option value="3">0.5 - Ausente TM</option>
+        <option value="4">0.5 - Ausente TT</option>
+        <option value="5">0.25 - Tarde TM</option>
+        <option value="6">0.25 - Tarde TT</option>
+    */
 }
 
 // [
