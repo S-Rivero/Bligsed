@@ -101,6 +101,7 @@
           $(this).clone(false).removeAttr('id').prop('disabled', true).insertBefore($(this));
           $(this).hide();
           $('#form').prepend($(this));
+          $('select').prop('disabled', true);
       });
     });
 

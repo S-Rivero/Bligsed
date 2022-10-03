@@ -13,16 +13,14 @@
       <table class="bordered">
         <tr>
           <th>Apellido y nombre</th>
-          <th>Tutor1</th>
-          <th>Tutor2</th>
+          <th>Tutor</th>
           <th>E-mail</th>
           <th>Teléfono</th>
         </tr>
         {{#each a}}
             <tr>
             <td><a href="../perfil/p/{{id}}">{{nombre}}</a></td>
-            <td>Roberto Perez</td>
-            <td>Rogelia Sanchez</td>
+            <td><a href="../perfil/p/{{Padre}}">{{nombre_tutor}}</a></td>
             <td>{{username}}</td>
             <td>{{Numero_de_telefono}}</td>
             </tr>
