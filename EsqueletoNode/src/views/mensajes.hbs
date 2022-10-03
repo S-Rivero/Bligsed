@@ -16,7 +16,23 @@
                            <a href="#" id="crearGrupo">Crear grupo</a>
                            <a href="#" id="añadirMiembro">Añadir miembro</a>
                            {{!-- <a href="#" id="abanGrupo">Abandonar grupo</a> --}}
-                           <a onclick="abanGrupo()">Abandonar grupo</a>
+                           <a href="#" id="abanGrupo">Abandonar grupo</a>
+
+                           <form id="fGrupo">
+                              <input type="text" name="name" placeholder="Escriba el nombre del grupo" class="form-control" required>
+                              <button class="btn btn-primary">Enviar</button>
+                           </form>
+                           
+                           <form id="f2P2">
+                              <input type="text" name="name" placeholder="Con quien quiere hablar?" class="form-control" required>
+                              <input type="text" name="id" class="hid" value="6" required>
+                              <button class="btn btn-primary">Enviar</button>
+                           </form>
+
+                           <form id="añadirMiembro" class="hid">
+                              <input type="text" name="id" placeholder="A quien queres meter" class="form-control" required>
+                              <button class="btn btn-primary">Enviar</button>
+                           </form>
                         </div>
                      </div>
                   </div>
@@ -26,7 +42,7 @@
                </ul>
             </div>
 
-            <div class="chat" id="divChatContainer">
+            <div class="chat " id="divChatContainer">
                <div class="chat-header clearfix">
                   <div class="row">
                      <div class="col-lg-6">
@@ -34,7 +50,7 @@
                            <img src="/media/user2.png" alt="avatar">
                         </a>
                         <div class="chat-about">
-                           <h6 id="chatName" class="m-b-0"></h6>
+                           <h6 id="chatName" class="m-b-0">Aun no hay un chat seleccionado</h6>
                            <small id="members"></small>
                         </div>
                      </div>
@@ -49,7 +65,7 @@
                      
                   </ul>
                </div>
-               <div class="chat-message clearfix">
+               <div class="chat-message clearfix ">
                   <div class="input-group mb-0" style="margin: 0;">
                      <div class="input-group-prepend">
                         <div class="icono_anashe">

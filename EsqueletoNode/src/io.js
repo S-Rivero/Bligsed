@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-exports.io_init = app => {
+exports.io_init = function (app) {
 
     // Initializations
     const server = app.listen(app.get('port'), () => { console.log('Server on port:', app.get('port')); }),
@@ -12,35 +12,33 @@ exports.io_init = app => {
 
     // namespace == default == '/'
     io.on('connection', socket => {
-        // Envia al client los rooms en los que esta el usuario
-        socket.on('loadPage', (user, cb) => {
-            cb(
-                fs.readdirSync('./src/local_database/rooms')
-                    .map(e => {
-                        let data = fs.readFileSync(`./src/local_database/rooms/${e}`)
-                            .toString()
-                            .split('\n')
-                            .map(e => e.replace('\r', ''));
-                        data.pop();
-                        for (let i in data) {
-                            if (data[i] == user.id) {
-                                if (/«¯§¦Æ×þ®©©»/.test(data[0])) {
-                                    data[0] = data[0].split('«¯§¦Æ×þ®©©»');
-                                    if (data[0][0] == user.name)
-                                        data[0] = data[0][1];
-                                    else
-                                        data[0] = data[0][0];
-                                }
-                                return { id: e.replace('.txt', ''), name: data[0] };
-                            }
-                        }
-                        if(e = '0.txt')
-                            return { id: null, name: null };
-                    })
-            );
-        });
-
         socket.room = 'default';
+
+        socket.on('loadPage', (user, cb) => {
+                fs.readFile(`./src/local_database/users/${user.id}.txt`, (err, data) => {
+                    if(err){
+                        fs.writeFileSync(`./src/local_database/users/${user.id}.txt`, '');
+                        socket.chats = false;
+                        cb (null);
+                    }
+                    else {
+                        data = data.toString()
+                        if(data == ''){
+                            socket.chats = false;
+                            cb (null);
+                        }
+                        else{
+                            socket.chats = true;
+                            cb(
+                                data.split('-')
+                                .map(e => {
+                                    return {id:e, name: fs.readFileSync(`./src/local_database/rooms/${e}.txt`).toString()};
+                                })
+                            );
+                        }
+                    }  
+                })
+        });
 
         socket.on('switchRoom', (newroom, cb) => {
             socket.leave(socket.room);
@@ -103,8 +101,7 @@ exports.io_init = app => {
                     io.sockets.in(socket.room).emit('updateMembers', clients[socket.room]);
             }
         });
-
-        // Messages
+        
         socket.on('sendMessage', o => {
             let content,
                 fileDir;
@@ -151,68 +148,56 @@ exports.io_init = app => {
             delete content;
             delete fileDir;
         });
-
-
-        // ******************************************************************
-        // ************************ Crear Grupo *****************************
-        // ******************************************************************
-
-        socket.on('crearGrupo', (o, cb) => {
+        
+        socket.on('crearGrupo', (o, user, cb) => {
             let files = fs.readdirSync('./src/local_database/rooms/').length;
-            content = `${o.name}\n${o.this_user}\n`;
-            if (o.other_users) {
-                o.other_users.forEach(elem => {
-                    content += `${elem}\n`;
+            
+            if(socket.chats)
+                fs.appendFileSync(`./src/local_database/users/${user.id}.txt`, `-${files}`);
+            else
+                fs.appendFileSync(`./src/local_database/users/${user.id}.txt`, `${files}`);
+                
+                if(o.priv){ // Es un booleano q da true si es un chat 2p2
+                fs.writeFileSync(`./src/local_database/rooms/${files}.txt`, `${user.name}\n${o.name}`);
+                fs.readFile(`./src/local_database/users/${o.id}.txt`, (err, data) => {
+                    if(err)
+                        fs.writeFileSync(`./src/local_database/users/${o.id}.txt`, `${files}`);
+                    else{
+                        if(data.toString() == '')            
+                            fs.appendFileSync(`./src/local_database/users/${o.id}.txt`, `${files}`);
+                        else
+                            fs.appendFileSync(`./src/local_database/users/${o.id}.txt`, `-${files}`);
+                    }
                 });
             }
-            fs.writeFileSync(`./src/local_database/rooms/${files}.txt`, content);
-            cb(true);
-            delete content;
+            else
+                fs.writeFileSync(`./src/local_database/rooms/${files}.txt`, `${o.name}`);
+
             fs.writeFileSync(`./src/local_database/messages/${files}.txt`, '');
+
+            cb(true);
             delete files;
         });
 
-
-        // ******************************************************************
-        // ************************ Crear Chat Individual *******************
-        // ******************************************************************
-
-        socket.on('crearChatP2P', (o, cb) => {
-            let files = fs.readdirSync('./src/local_database/rooms/').length;
-            content = `${o.this_name}«¯§¦Æ×þ®©©»${o.other_name}\n${o.this_user}\n${o.other_user}\n`;
-            fs.writeFileSync(`./src/local_database/rooms/${files}.txt`, content);
-            cb(true);
-            delete content;
-            fs.writeFileSync(`./src/local_database/messages/${files}.txt`, '');
-            delete files;
-        });
-
-
-        // ******************************************************************
-        // ************************ Abandonar Grupo *************************
-        // ******************************************************************
-
-        socket.on('abanRoom', (id, cb) => {
-            let updateContent = [];
-            fs.readFileSync(`./src/local_database/rooms/${socket.room}.txt`)
-                .toString()
-                .split('\n')
-                .map(e => e.replace('\r', ''))
-                .forEach(elem => {
-                    if (elem != id)
-                        updateContent.push(elem);
-                });
-            fs.writeFileSync(`./src/local_database/rooms/${socket.room}.txt`, updateContent.join('\n'));
-            console.log(fs.readFileSync(`./src/local_database/rooms/${socket.room}.txt`));
-            if (updateContent[1] === '')
-                fs.unlinkSync(`./src/local_database/messages/${socket.room}.txt`);
+        socket.on('abanGrupo', (id, cb) => {
+            let data = fs.readFileSync(`./src/local_database/users/${id}.txt`)
+                        .toString(),
+                content = [];
+            if(/-/.test(data)){
+                data.split('-')
+                    .forEach(e => {
+                        if (e != socket.room)
+                            content.push(e);
+                    });
+                if(content.length >= 2)
+                    fs.writeFileSync(`./src/local_database/users/${id}.txt`, content.join('-'));
+                else
+                    fs.writeFileSync(`./src/local_database/users/${id}.txt`, content[0]);
+            }
+            else
+                fs.writeFileSync(`./src/local_database/users/${id}.txt`, '');
             cb(true)
         });
-
-
-        // ******************************************************************
-        // ***************** Añadir Participante a Grupo ********************
-        // ******************************************************************
 
         socket.on('añadirMiembro', ids => {
             let content = '';
@@ -221,27 +206,6 @@ exports.io_init = app => {
             })
             fs.appendFileSync(`.local_database/rooms/${socket.room}.txt`, content);
         });
-
-
-        //************************************************************************\\
-        //******************************ACA SIGO TESTEANDO************************\\
-        //************************************************************************\\
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // ******************************************************************
-        // ************************* PUBLICACIONES **************************
-        // ******************************************************************
 
         socket.on('loadPub', cb => {
             socket.join('/publicaciones');
