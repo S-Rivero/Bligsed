@@ -275,7 +275,6 @@ function checkMime(mime) {
         case 'image/x-xpixmap':
         case 'image/x-xwindowdump':
             return 1;
-            break;
         case 'audio/basic':
         case 'auido/L24':
         case 'audio/mid':
@@ -288,7 +287,6 @@ function checkMime(mime) {
         case 'audio/vorbis':
         case 'audio/vnd.wav':
             return 2;
-            break;
         case 'video/mpeg':
         case 'video/mp4':
         case 'video/quicktime':
@@ -297,9 +295,7 @@ function checkMime(mime) {
         case 'video/x-msvideo':
         case 'video/x-sgi-movie':
             return 3;
-            break;
         default:
             return 0;
-            break;
     }
 }
