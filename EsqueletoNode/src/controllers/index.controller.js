@@ -204,22 +204,16 @@ exports.renderCargarInasistencias = ((req,res) => {
 });
 
 exports.PostCargarInasistencias = ((req,res) => {
-    let a = JSONcargarInasistencias(req.body);
-    res.send(a);
-    /*
-        {
-        "id": [
-            "6",
-            "9"
-        ],
-        "fecha": [
-            "2022-05-04",
-            "2022-05-04"
-        ],
-        "inasistencia": [
-            "1",
-            "0"
-        ]
-        }
-    */
+   
+    let inas = JSONcargarInasistencias(req.user[0].id,req.body);
+    pool.query(`
+        INSERT INTO inasistencias
+                (tipo, motivo, cantidad, fecha, id_us, id_creador)
+        VALUES  ?`
+        ,[inas], function(err, a){
+            if(err)
+                res.send(err)
+            else
+                res.redirect('perfil/p/6');
+        });
 });

@@ -91,30 +91,64 @@ module.exports = {
         return newArr.filter(e => idSeleccionados.includes(e.id));
     },
 
-    JSONcargarInasistencias: function({id, fecha, inasistencia}){
+    JSONcargarInasistencias: function(id_creador, {id, fecha, inasistencia, justificado}){
+        console.log('id :>> ', id);
+        console.log('fecha :>> ', fecha);
+        console.log('inasistencia :>> ', inasistencia);
+        let tiposInasistencia = {
+            '0': {
+                "cantidad": 0,
+                "motivo": "Ausente no computable"
+            },
+            '1': {
+                "cantidad": 1,
+                "motivo": "Ausente TM (Jornada simple)"
+            },
+            '2': {
+                "cantidad": 1,
+                "motivo": "Ausente TT (Jornada simple)"
+            },
+            '3': {
+                "cantidad": 0.5,
+                "motivo": "Ausente TM"
+            },
+            '4': {
+                "cantidad": 0.5,
+                "motivo": "Ausente TT"
+            },
+            '5': {
+                "cantidad": 0.25,
+                "motivo": "Tarde TM"
+            },
+            '6': {
+                "cantidad": 0.25,
+                "motivo": "Tarde TT"
+            }
+        }
         let arr = [];
         for(let i = 0 ; i < id.length ; i++){
-            arr.push({
-                idAlumno: id[0],
-                fecha: fecha[0],
-                inasistencia: inasistencia[0]
-                //SEPARAR INASISTENCIA DE TIPO DE INASISTENCIA
-            })
+            let just = 0;
+            if(justificado){
+                just = justificado.includes(id[i]) ? 1:0;
+            }
+            let {cantidad, motivo} = tiposInasistencia[inasistencia[i]];
+            arr.push(
+                [
+                    just, motivo, cantidad, fecha[i], id[i],id_creador
+                ]
+            );
+            // arr.push({
+            //     tipo: just,
+            //     motivo,
+            //     cantidad,
+            //     fecha: fecha[i],
+            //     id_us: id[i],
+            //     id_creador
+            // });
         }
+
+        return arr;
     }
-    /*
-        0 vale 0
-        1 y 2 valen 1
-        3 y 4 valen 0.5
-        5 y 6 valen 0.25
-        <option value="0">0 - Ausente no computable</option>
-        <option value="1">1 - Ausente TM (Jornada simple)</option>
-        <option value="2">1 - Ausente TT (Jornada simple)</option>
-        <option value="3">0.5 - Ausente TM</option>
-        <option value="4">0.5 - Ausente TT</option>
-        <option value="5">0.25 - Tarde TM</option>
-        <option value="6">0.25 - Tarde TT</option>
-    */
 }
 
 // [
