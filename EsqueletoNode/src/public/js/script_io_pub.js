@@ -37,43 +37,69 @@ socket.on('newPub', arr => {
 
 function printPub(e) {
     // title1 «¯§¦Æ×þ®©©» desc1 «¯§¦Æ×þ®©©» name «¯§¦Æ×þ®©©» date «¯§¦Æ×þ®©©» file1,file2,no
+    console.log(e);
+    let pub       = document.createElement('li'),
+        autor     = document.createElement('div'),
+        aNombre   = document.createElement('div'),
+        aFecha    = document.createElement('div'),
+        contenido = document.createElement('div'),
+        cTitle    = document.createElement('div'),
+        cText     = document.createElement('div'),
+        cVer      = document.createElement('div'),
+        caVer     = document.createElement('a'  );
 
-    str =
-        `<li style="list-style: none;">
-        <div class="publicaciones_autor">
-            <div class="autor_nombre">
-                ${e[2]}
-            </div>
-            <div class="autor_fecha">
-                ${e[3]}
-            </div>
-        </div>
-        <div class="publicaciones_contenido">
-            <div class="contenido_titulo">
-                ${e[0]}
-            </div>
-            <div class="contenido_texto">
-                ${e[1]}
-            </div>`;
-    if (e[4] != 'no') {
-        str += `<div class="contenido_archivos">
-        `;
-        e[4].forEach(e => {
-            str += `<a href="/media/pubDocs/${e}" download>${e}</a>
-            </br>`;
+    pub       .style     = "list-style: none";
+    autor     .className = 'publicaciones_autor';
+    aNombre   .className = 'autor_nombre';
+    aFecha    .className = 'autor_fecha';
+    contenido .className = 'publicaciones_contenido';
+    cTitle    .className = 'contenido_titulo';
+    cText     .className = 'contenido_texto';
+    cVer      .className = 'contenido_vermas';
+    caVer     .className = 'boton_vermas';
+    
+    if('/\n/'.test(e[1])){
+        e[1] = e[1].split('\n');
+        e[1].forEach(e => {
+            p = document.createElement('p');
+            br = document.createElement('br');
+            p.textContent = e;
+            cText.appendChild(p);
+            cText.appendChild(br);
         })
-        str += `
-        </div>`;
+        //document.createElement('br')
     }
-    str +=
-        `<div class="contenido_vermas">
-                <a class="boton_vermas">Ver Mas</a>
-            </div>
-        </div>
-    </li>`;
 
-    ul.insertAdjacentHTML('afterbegin', str);
-    delete str;
+    caVer.textContent   = 'Ver más';
+    aFecha.textContent  = e[3];
+    aNombre.textContent = e[2];
+    cTitle.textContent  = e[0];
+
+    
+    // if (e[4] != 'no') {
+    //     str += `<div class="contenido_archivos">
+    //     `;
+    //     e[4].forEach(e => {
+    //         str += `<a href="/media/pubDocs/${e}" download>${e}</a>
+    //         </br>`;
+    //     })
+    //     str += `
+    //         </div>
+    //     </div>`;
+    // }
+
+
+
+    autor.appendChild(aNombre);
+    autor.appendChild(aFecha);
+    cVer.appendChild(caVer);
+    contenido.appendChild(cTitle);
+    contenido.appendChild(cText);
+    contenido.appendChild(cVer);
+    
+    pub.appendChild(autor);
+    pub.appendChild(contenido);
+    ul.insertAdjacentElement("afterbegin", pub);
 }
 
 

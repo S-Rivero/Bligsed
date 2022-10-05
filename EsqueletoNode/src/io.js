@@ -241,13 +241,14 @@ exports.io_init = function (app) {
                     strp += o.file[i].name+',';
                 };
                 strp += 'no';
+                delete pf;
             }
             else
                 strp += o.file;
 
             fs.writeFileSync(`./src/local_database/pubs/${p}.txt`, strp);
             io.sockets.in(socket.room).emit('newPub', [o.title, o.desc, o.user, o.date, filesArr]);            
-            delete i, p, pf, filesArr, strp;
+            delete i, p, filesArr, strp;
         });
     });
 }

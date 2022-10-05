@@ -4,11 +4,12 @@
         {{#if user.user.Tipo_de_usuario 2}}
         <div class="contenedor_datos">
             <div class="input_publicaciones">
-                <form id="form_pub" action="/pub" method="post">
+                <form id="formPub" action="/pub" method="post">
                     <input type="text" name="title" placeholder="Título..." class="ingreso_titulo">
                     <textarea class="ingreso_publicacion" name="desc" rows="4" cols="50"
                         placeholder="Escriba una publicación..."></textarea>
-                    <input type="text" name="autor" value="{{user.user.Nombre}}" style="display: none;">
+                    <input type="text" name="user" value="{{user.user.Nombre}}" style="display: none;">
+                    <input type="file" name="file" multiple>
                     <div class="botones_uwu">
                         <div class="botones">
                             <a href="" class="iconify"><span class="iconify" data-icon="simple-line-icons:paper-clip"
@@ -20,16 +21,15 @@
                             <a href="" class="iconify"><span class="iconify" data-icon="akar-icons:calendar"
                                     data-width="25"></span></a>
                         </div>
-                        {{!-- <a href="" class="enviar_publicacion">
-                            <p>Enviar</p>
-                        </a> --}}
                         <input type="submit" class="enviar_publicacion" value="Enviar">
                     </div>
                 </form>
             </div>
         </div>
         {{/if}}
-        {{#each pub}}
+
+        <ul id="contenedorPub"></ul>
+        {{!-- {{#each pub}}
         <div class="publicaciones_autor">
             <div class="autor_nombre">
                 {{Nombre}}
@@ -49,7 +49,7 @@
                 <a class="boton_vermas">Ver Mas</a>
             </div>
         </div>
-        {{/each}}
+        {{/each}} --}}
     </div>
 
     <div class="contenedor_lateral">
@@ -57,23 +57,23 @@
         <br>
         <div class="texto_infocolegio">Instituto Juan XXIII / Colegio Parroquial Juan XXIII </div>
         <ul class="info_colegio">
-          <li>
-            <i class='bx bx-phone'></i>
-            <span>4464-3255</span>
-          </li>
+            <li>
+                <i class='bx bx-phone'></i>
+                <span>4464-3255</span>
+            </li>
 
-          <li>
-            <i class='bx bx-envelope'></i>
-            <span>colparroquial23@hotmail.com</span>
-          </li>
+            <li>
+                <i class='bx bx-envelope'></i>
+                <span>colparroquial23@hotmail.com</span>
+            </li>
 
-          <li>
-            <i class='bx bx-home'></i>
-            <span>9 de Julio - 125</span>
-          </li>
+            <li>
+                <i class='bx bx-home'></i>
+                <span>9 de Julio - 125</span>
+            </li>
         </ul>
-      </div>
+    </div>
 </div>
 
-<script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
-<script src="/js/posts.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/script_io_pub.js"></script>
