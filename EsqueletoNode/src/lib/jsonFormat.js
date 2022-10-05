@@ -126,27 +126,40 @@ module.exports = {
             }
         }
         let arr = [];
-        for(let i = 0 ; i < id.length ; i++){
+        let idlen = id.length;
+        if(idlen == 1){
             let just = 0;
             if(justificado){
-                just = justificado.includes(id[i]) ? 1:0;
+                just = justificado.includes(id) ? 1:0;
             }
-            let {cantidad, motivo} = tiposInasistencia[inasistencia[i]];
-            arr.push(
-                [
-                    just, motivo, cantidad, fecha[i], id[i],id_creador
-                ]
-            );
-            // arr.push({
-            //     tipo: just,
-            //     motivo,
-            //     cantidad,
-            //     fecha: fecha[i],
-            //     id_us: id[i],
-            //     id_creador
-            // });
+            let {cantidad, motivo} = tiposInasistencia[inasistencia];
+                arr.push(
+                    [
+                        just, motivo, cantidad, fecha, id,id_creador
+                    ]
+                );
+        }else{
+            for(let i = 0 ; i < idlen ; i++){
+                let just = 0;
+                if(justificado){
+                    just = justificado.includes(id[i]) ? 1:0;
+                }
+                let {cantidad, motivo} = tiposInasistencia[inasistencia[i]];
+                arr.push(
+                    [
+                        just, motivo, cantidad, fecha[i], id[i],id_creador
+                    ]
+                );
+                // arr.push({
+                //     tipo: just,
+                //     motivo,
+                //     cantidad,
+                //     fecha: fecha[i],
+                //     id_us: id[i],
+                //     id_creador
+                // });
+            }
         }
-
         return arr;
     }
 }

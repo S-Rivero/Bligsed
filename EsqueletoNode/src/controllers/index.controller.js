@@ -214,6 +214,6 @@ exports.PostCargarInasistencias = ((req,res) => {
             if(err)
                 res.send(err)
             else
-                res.redirect('perfil/p/6');
+                res.redirect('/Cursos');
         });
 });
