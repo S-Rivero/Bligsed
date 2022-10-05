@@ -33,7 +33,6 @@ select:focus{ outline: none;}
 .home-section table{
     grid-column: 1 / span 3;
     border-collapse: collapse;
-    width: 100%;
 }
 
 .table-wrapper{
@@ -73,7 +72,7 @@ tr{
 .bordered {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  width: 97.5%;
   /* margin: 1%; */
   margin-left: 1vw;
   margin-right: 1vw;
@@ -163,4 +162,11 @@ input::-webkit-inner-spin-button {
     height: 30px;
     padding: 5px;
   }
+
   
+.checkbox_alumnos {
+  margin-top: 1%;
+  margin-right: 1%;
+  width: 25px;
+  height:25px;
+}
