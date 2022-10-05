@@ -39,7 +39,7 @@
     background-color: transparent;
     font-size: 25px;
     font-weight: bold;
-    width: 45%;
+    width: fit-content;
     margin-top: 1%;
     margin-bottom: 1%;
     color: #333;

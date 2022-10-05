@@ -10,8 +10,8 @@
           {{/each}}
         </select>
         {{#if tdu 3}}
-          <input disabled type="submit" value="Cargar Inasistencias" form="tabla" id="cargarBtn">
           <button id="selectTodos" onclick="selectTodos()">Seleccionar todos</button>
+          <input disabled type="submit" class="input_cargar_inasistencias"  value="Cargar Inasistencias" form="tabla" id="cargarBtn">
         {{/if}}
       </div>
       <form action="../cargar_inasistencias_render" method="post" name="tabla" id="tabla">

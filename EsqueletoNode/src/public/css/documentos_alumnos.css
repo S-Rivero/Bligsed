@@ -3,6 +3,7 @@
     display: flex;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+    margin-bottom: 1vh;
 }
 
 select{
@@ -74,6 +75,8 @@ tr{
   border-collapse: collapse;
   width: 100%;
   /* margin: 1%; */
+  margin-left: 1vw;
+  margin-right: 1vw;
 }
 
 .bordered td, .bordered th {
@@ -117,7 +120,13 @@ tr{
 
   .bordered a {
     text-decoration: none;
+    color: black;
   }
+
+.bordered a:hover {
+  color: rgb(83, 83, 83);
+  transition: .1s;
+}
 
 
   .input_notas {
@@ -142,5 +151,16 @@ input::-webkit-inner-spin-button {
 
   input[type=number] {
     -moz-appearance: textfield;
+  }
+
+
+  .input_cargar_inasistencias {
+    margin-top: 3%;
+    margin-left: 1.5%;
+    background-color: lightgray;
+    border-color: rgb(127, 213, 213);
+    border-radius: 10px;
+    height: 30px;
+    padding: 5px;
   }
   
