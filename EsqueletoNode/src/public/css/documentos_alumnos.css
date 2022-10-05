@@ -154,9 +154,12 @@ input::-webkit-inner-spin-button {
 
 
   .input_cargar_inasistencias {
+    background: none;
+    outline: none;
+    font: inherit;
+    font-size: 14px;
     margin-top: 3%;
     margin-left: 1.5%;
-    background-color: lightgray;
     border-color: rgb(127, 213, 213);
     border-radius: 10px;
     height: 30px;
