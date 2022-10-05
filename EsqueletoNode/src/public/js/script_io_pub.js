@@ -67,8 +67,9 @@ function printPub(e) {
             cText.appendChild(p);
             cText.appendChild(br);
         })
-        //document.createElement('br')
     }
+    else
+        cText.textContent  = e[1];
 
     caVer.textContent   = 'Ver más';
     aFecha.textContent  = e[3];
@@ -76,26 +77,27 @@ function printPub(e) {
     cTitle.textContent  = e[0];
 
     
-    // if (e[4] != 'no') {
-    //     str += `<div class="contenido_archivos">
-    //     `;
-    //     e[4].forEach(e => {
-    //         str += `<a href="/media/pubDocs/${e}" download>${e}</a>
-    //         </br>`;
-    //     })
-    //     str += `
-    //         </div>
-    //     </div>`;
-    // }
-
-
-
     autor.appendChild(aNombre);
     autor.appendChild(aFecha);
     cVer.appendChild(caVer);
     contenido.appendChild(cTitle);
     contenido.appendChild(cText);
     contenido.appendChild(cVer);
+    
+    if (e[4] != 'no') {
+        cFiles = document.createElement('div');
+        cFiles.className = 'contenido_archivos';
+        e[4].forEach(e => {
+            a = document.createElement('a');
+            a.href = `/media/pubDocs/${e}`;
+            a.setAttribute('download',"download");
+            a.textContent = e;
+            br = document.createElement('br');
+            cFiles.appendChild(a);
+            cFiles.appendChild(br);
+        })
+        contenido.appendChild(cFiles);
+    }
     
     pub.appendChild(autor);
     pub.appendChild(contenido);
