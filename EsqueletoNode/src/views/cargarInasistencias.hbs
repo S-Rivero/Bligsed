@@ -4,6 +4,7 @@
   </div>
   <form action="/cargar_inasistencias" id="form" method="POST">
   <input type="submit" value="AAAAAAA" form="form">
+  <label for="fechaTodos">Cambiar fecha de todos: </label><input id="fechaTodos" type="date" onchange="cambiarFechaTodos(this)">
     <table class="bordered">
       <tr id="th">
         <th>Alumno</th>
@@ -65,5 +66,9 @@
     } else {
       closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
     }
+  }
+
+  function cambiarFechaTodos(element){
+    $('input[type=date]').val(element.value);
   }
 </script>

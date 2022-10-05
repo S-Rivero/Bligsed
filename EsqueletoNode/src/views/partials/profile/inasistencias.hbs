@@ -5,14 +5,27 @@
         <th>Motivo</th>
         <th>Cantidad</th>
         <th>Tipo</th>
+        {{#if tdu 3}}
+        <th></th>
+        {{/if}}
     </tr>
-    {{#each this}}
-        <tr>
-            <td>{{#dateTimeToDate fecha}}{{/dateTimeToDate}}</td>
-            <td>{{motivo}}</td>
-            <td>{{cantidad}}</td>
-            <td>{{#tipoInasistenciaToString tipo}}{{/tipoInasistenciaToString}}</td>
+    {{#each in}}
+        <tr id="{{@index}}">
+            <td id="id" hidden>{{id}}</td>
+            <td id="fecha">{{#dateTimeToDate fecha}}{{/dateTimeToDate}}</td>
+            <td id="motivo">{{motivo}}</td>
+            <td id="cantidad">{{cantidad}}</td>
+            <td id="tipo">{{#tipoInasistenciaToString tipo}}{{/tipoInasistenciaToString}}</td>
+            {{#if ../tdu 3}}
+            <td id="button"><input type="button" value="editar" onclick="activarEdicion(this.parentElement.parentElement)"></td>
+            {{/if}}
         </tr>
     {{/each}}
 </table>
 </div>
+
+<script>
+    function activarEdicion(parent){
+        console.log(parent);
+    }
+</script>

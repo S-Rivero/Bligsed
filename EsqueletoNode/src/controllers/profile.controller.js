@@ -111,8 +111,8 @@ exports.updateFichaMedica = ((req,res) => { //USA CURRENT USER. NADIE PUEDE PERS
 
 function inasistencias(req, res, cu){
     cu['curso'] = req.session.curso;
-    const rows = pool.query("SELECT * FROM inasistencias WHERE id_us = ?", [cu.id], function(err, inasistencias){
-        res.render('perfil.hbs', {cu, in: inasistencias, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileInasistencias', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/inasistencias'});
+    const rows = pool.query("SELECT * FROM inasistencias WHERE id_us = ? ORDER BY fecha DESC", [cu.id], function(err, inasistencias){
+        res.render('perfil.hbs', {cu, in:{in: inasistencias, tdu: req.user[0].Tipo_de_usuario}, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileInasistencias', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/inasistencias'});
     });
 };
 
