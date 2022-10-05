@@ -10,8 +10,8 @@
           {{/each}}
         </select>
         {{#if tdu 3}}
-          <input type="submit" value="Cargar Inasistencias" form="tabla">
-          <label for="selectTodos">Seleccionar todos</label><input type="checkbox" value="" id="selectTodos">
+          <input disabled type="submit" value="Cargar Inasistencias" form="tabla" id="cargarBtn">
+          <button id="selectTodos" onclick="selectTodos()">Seleccionar todos</button>
         {{/if}}
       </div>
       <form action="../cargar_inasistencias_render" method="post" name="tabla" id="tabla">
@@ -26,7 +26,7 @@
               <tr>
                 <td>
                   {{#if ../tdu 3}}
-                  <input type="checkbox" name="idSeleccionados" id="al{{id}}" value="{{id}}">
+                  <input type="checkbox" name="idSeleccionados" id="al{{id}}" value="{{id}}" onchange="verif()">
                   {{/if}}
                   <a href="../perfil/p/{{id}}">{{nombre}}</a>
                   <input type="hidden" name="idAlumnos" id="al{{id}}" value="{{id}}">
@@ -80,4 +80,26 @@
         window.location.replace("/tablaCurso/" + selectedValue);
     };
 
+    function selectTodos(){
+      if($("input[type=checkbox]:checked").length == $("input[type=checkbox]").length){
+        $("input[type=checkbox]").prop('checked', false);
+      }else{
+        $("input[type=checkbox]").prop('checked', true);
+      }
+      if($("input[type=checkbox]:checked").length == 0){
+        $('#cargarBtn').prop('disabled',true)
+      }else{
+        $('#cargarBtn').prop('disabled',false)
+      }
+    }
+
+    function verif(){
+      if($("input[type=checkbox]:checked").length == 0){
+        $('#cargarBtn').prop('disabled',true)
+      }else{
+        $('#cargarBtn').prop('disabled',false)
+      }
+    }
+
+    
   </script>

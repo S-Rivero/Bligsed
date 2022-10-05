@@ -197,9 +197,12 @@ exports.POSTcargarNotasDocente = ((req,res) => {
 
 
 exports.renderCargarInasistencias = ((req,res) => {
-    let a = JSONrenderCargarInasistencias(req.body)
-  
-    res.render('cargarInasistencias.hbs', {a, links: 'headerLinks/cargarNotas', user:{user: req.user[0], childs: req.session.childs}});
+    if(req.body.idSeleccionados){
+        let a = JSONrenderCargarInasistencias(req.body)
+        res.render('cargarInasistencias.hbs', {a, links: 'headerLinks/cargarNotas', user:{user: req.user[0], childs: req.session.childs}});
+    }else{
+        res.redirect('/Cursos');
+    }
 
 });
 
