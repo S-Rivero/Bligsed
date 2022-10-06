@@ -16,7 +16,7 @@
             <td id="cantidad{{id}}" class="{{id}} A">{{cantidad}}</td>
             <td id="justificado{{id}}" class="{{id}} A">{{#tipoInasistenciaToString tipo}}{{/tipoInasistenciaToString}}</td>
             {{#if ../tdu 3}}
-            <td class="{{id}} A"><input type="button" value="editar" onclick="alternarEdicion({{id}})"></td>
+            <td class="{{id}} A"> <label class="label_boton_editar" for="boton_editar{{id}}"><i class='bx bx-edit'></i> </label><input hidden id="boton_editar{{id}}" type="button" value="Editar" onclick="alternarEdicion({{id}})"></td>
             {{/if}}
 
             <td hidden class="{{id}} B" style="display: none;">{{id}}</td>

@@ -79,13 +79,13 @@ tr{
 }
 
 .bordered td, .bordered th {
-  border:1px solid rgba(152, 172, 172, 0.305);
+  border:1px solid rgba(190, 201, 201, 0.305);
   padding: 8px;
 }
 
 .bordered tr:nth-child(even){background-color: #ffffff;}
 
-.bordered tr:hover {background-color: rgba(127, 213, 213, 0.297);}
+.bordered tr:hover {background-color: rgba(127, 213, 213, 0.226);}
 
 .bordered th {
   padding-top: 12px;
