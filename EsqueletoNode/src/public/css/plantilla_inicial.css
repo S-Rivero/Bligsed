@@ -71,6 +71,8 @@
   margin-top: 20px;
   height: 82%;
   overflow: scroll;
+  scrollbar-width: none;
+
 }
 
 .sidebar .nav-list::-webkit-scrollbar {

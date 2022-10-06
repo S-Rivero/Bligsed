@@ -340,3 +340,8 @@ transition: 0.5s;
 .text {
 width: 100%;
 }
+
+
+.publicaciones {
+  margin-bottom: 15vh;
+}
