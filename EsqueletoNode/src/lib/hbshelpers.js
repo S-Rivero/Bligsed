@@ -90,7 +90,8 @@ module.exports = {
       }
     },
     dateTimeToDate: function(dateTime){
-      return dateTime.toLocaleDateString();
+      let d = dateTime.toLocaleDateString().split('/');
+      return [d[1],d[0],d[2]].join('/');
     },
     textToDate: function(text){
       return new Date(text).toLocaleDateString();
@@ -134,5 +135,17 @@ module.exports = {
         return 'checked';
       else
         return '';
+    },
+    motivoATipoInasistencia(motivo){
+      let tiposInasistencia = {
+        'Ausente no computable': 0,
+        'Tarde TM': 5,
+        'Tarde TT': 6,
+        'Ausente TT': 4,
+        'Ausente TM': 3,
+        'Ausente TM (Jornada simple)': 1,
+        'Ausente TT (Jornada simple)': 2
+     }
+     return tiposInasistencia[motivo];
     }
   } 

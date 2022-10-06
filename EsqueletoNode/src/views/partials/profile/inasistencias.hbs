@@ -23,7 +23,7 @@
             <td hidden class="{{id}} B"><input id="{{id}}date" type="date" name="date" value="{{#dateDbToCorrectFormat fecha}}{{/dateDbToCorrectFormat}}"></td>
             <td hidden class="{{id}} B">
                 <select id="{{id}}select" name="inasistencia" onchange="changeCantidad({{id}})">
-                    <option value="{{cantidad}}" disabled selected hidden>{{cantidad}} - {{motivo}}</option>
+                    <option value="{{#motivoATipoInasistencia motivo}}{{/motivoATipoInasistencia}}" disabled selected hidden>{{cantidad}} - {{motivo}}</option>
                     <option value="0">0 - Ausente no computable</option>
                     <option value="5">0.25 - Tarde TM</option>
                     <option value="6">0.25 - Tarde TT</option>
@@ -73,7 +73,42 @@
         fetch(`/api/actualizarInasistencia/${id}/${date}/${checkbox}/${select}`)
         .then((response) => response.json())
         .then((data) => {
-            let test = $(`#${id}`).find(`#fecha${id}`)[0].innerHTML = date;
+            let tiposInasistencia = {
+                '0': {
+                    "cantidad": 0,
+                    "motivo": "Ausente no computable"
+                },
+                '1': {
+                    "cantidad": 1,
+                    "motivo": "Ausente TM (Jornada simple)"
+                },
+                '2': {
+                    "cantidad": 1,
+                    "motivo": "Ausente TT (Jornada simple)"
+                },
+                '3': {
+                    "cantidad": 0.5,
+                    "motivo": "Ausente TM"
+                },
+                '4': {
+                    "cantidad": 0.5,
+                    "motivo": "Ausente TT"
+                },
+                '5': {
+                    "cantidad": 0.25,
+                    "motivo": "Tarde TM"
+                },
+                '6': {
+                    "cantidad": 0.25,
+                    "motivo": "Tarde TT"
+                }
+            }
+            let dateformat = date.split('-').reverse().join('/');
+            $(`#${id}`).find(`#fecha${id}`)[0].innerHTML = dateformat;
+            let {cantidad, motivo} = tiposInasistencia[select];
+            $(`#${id}`).find(`#motivo${id}`)[0].innerHTML = motivo;
+            $(`#${id}`).find(`#cantidad${id}`)[0].innerHTML = cantidad;
+            $(`#${id}`).find(`#justificado${id}`)[0].innerHTML = checkbox ? "Justificada":"No justificada";
             alternarEdicion(id)
         });
         /*
