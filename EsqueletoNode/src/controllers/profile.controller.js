@@ -111,8 +111,8 @@ exports.updateFichaMedica = ((req,res) => { //USA CURRENT USER. NADIE PUEDE PERS
 
 function inasistencias(req, res, cu){
     cu['curso'] = req.session.curso;
-    const rows = pool.query("SELECT * FROM inasistencias WHERE id_us = ?", [cu.id], function(err, inasistencias){
-        res.render('perfil.hbs', {cu, in: inasistencias, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileInasistencias', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/inasistencias'});
+    const rows = pool.query("SELECT * FROM inasistencias WHERE id_us = ? ORDER BY fecha DESC", [cu.id], function(err, inasistencias){
+        res.render('perfil.hbs', {cu, in:{in: inasistencias, tdu: req.user[0].Tipo_de_usuario}, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileInasistencias', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/inasistencias'});
     });
 };
 
@@ -130,9 +130,24 @@ function boletin(req, res, cu){
     cu['curso'] = req.session.curso;
     const trimestre = queTrimestre(req.params.t);
     if(trimestre != 0){
-        const rows = pool.query("SELECT `nota`, `Materia` FROM usuarios u JOIN notas n ON u.id = n.id_alum JOIN materias m ON m.ID = n.id_materia WHERE u.id = ? AND n.trimestre = ? ORDER BY m.Materia ASC;", [cu.id,trimestre], function(err, materias){
+        const rows = pool.query(`
+            SELECT A.id_materia, B.Materia, A.nota, A.numnota
+            FROM materias B
+            JOIN(	SELECT id_materia, nota, numnota
+                    FROM notas
+                    WHERE 
+                        id_alum = ? AND
+                        trimestre = ?) A
+            ON A.id_materia = B.ID;
+        `, [cu.id,trimestre], function(err, materias){
             const formateado = JSONPromediosAl(materias);
-            res.render('perfil.hbs', {cu, in:{ma: formateado['materias'], cant: formateado.materias[formateado.max['materia']]}, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileBoletin', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/boletin'});
+            
+            let max = formateado.reduce((max, e)=>
+                e.notas.length > max ? e.notas.length : max
+            ,0)
+            res.render('perfil.hbs', {cu, in: {ma: formateado, cant: max}, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileBoletin', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/boletin'});
+
+   
         });
     }else{
         res.send("todavia no esta hecho xd");

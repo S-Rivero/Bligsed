@@ -3,6 +3,7 @@
     display: flex;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+    margin-bottom: 1vh;
 }
 
 select{
@@ -32,7 +33,6 @@ select:focus{ outline: none;}
 .home-section table{
     grid-column: 1 / span 3;
     border-collapse: collapse;
-    width: 100%;
 }
 
 .table-wrapper{
@@ -72,18 +72,20 @@ tr{
 .bordered {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  width: 97.5%;
   /* margin: 1%; */
+  margin-left: 1vw;
+  margin-right: 1vw;
 }
 
 .bordered td, .bordered th {
-  border:1px solid rgba(152, 172, 172, 0.305);
+  border:1px solid rgba(190, 201, 201, 0.305);
   padding: 8px;
 }
 
 .bordered tr:nth-child(even){background-color: #ffffff;}
 
-.bordered tr:hover {background-color: rgba(127, 213, 213, 0.297);}
+.bordered tr:hover {background-color: rgba(127, 213, 213, 0.226);}
 
 .bordered th {
   padding-top: 12px;
@@ -117,7 +119,13 @@ tr{
 
   .bordered a {
     text-decoration: none;
+    color: black;
   }
+
+.bordered a:hover {
+  color: rgb(83, 83, 83);
+  transition: .1s;
+}
 
 
   .input_notas {
@@ -143,4 +151,38 @@ input::-webkit-inner-spin-button {
   input[type=number] {
     -moz-appearance: textfield;
   }
+
+
+  .input_cargar_inasistencias {
+    background: none;
+    padding: 0;
+    outline: inherit;
+    font: inherit;
+    font-size: 14px;
+    margin-top: 3%;
+    margin-left: 1.5%;
+    border-color: rgb(127, 213, 213);
+    border-radius: 10px;
+    height: 30px;
+    padding: 5px;
+    cursor: pointer;
+  }
+
   
+.checkbox_alumnos {
+  
+  margin-top: 1%;
+  margin-right: 1%;
+  width: 25px;
+  height:25px;
+}
+
+
+.bordered label {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  width: 100px;
+  height: 100px;
+}

@@ -78,3 +78,12 @@ if(req.user[0].Tipo_de_usuario === 4){
         res.redirect("/home");
     }
 }
+
+
+exports.authLevelCargarInasistencias = (req,res,next) => {
+    if(req.user[0].Tipo_de_usuario === 3){
+        return next();
+    }else{
+        res.redirect("/home");
+    }
+}

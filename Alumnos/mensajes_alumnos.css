@@ -2,7 +2,8 @@ body{
     background-color: #f4f7f6;
 }
 .card {
-    background: #fff;
+    /* background: #fff; */
+    background-color: fff;
     transition: .5s;
     border: 0;
     margin-bottom: 30px;
@@ -187,7 +188,7 @@ body{
 }
 
 .chat .chat-message {
-    padding: 20px
+    padding: 20px;
 }
 
 .online,
@@ -236,6 +237,8 @@ body{
    height: 100%;
    width: 100%;
    border-radius: 5px 0px 0px 5px;
+   cursor: pointer;
+
 }
 
 .input-group >div{
@@ -396,3 +399,7 @@ body{
     display: block;
   }
   
+
+  .fa-send {
+    cursor: pointer;
+  }

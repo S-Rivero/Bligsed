@@ -1,0 +1,74 @@
+<div class="text">Cargar inasistencias</div>
+<div class="contenedor_documentacion">
+  <div class="contenedor_nombre_doc">
+  </div>
+  <form action="/cargar_inasistencias" id="form" method="POST">
+  <input type="submit" value="AAAAAAA" form="form">
+  <label for="fechaTodos">Cambiar fecha de todos: </label><input id="fechaTodos" type="date" onchange="cambiarFechaTodos(this)">
+    <table class="bordered">
+      <tr id="th">
+        <th>Alumno</th>
+        <th>Fecha</th>
+        <th>Motivo</th>
+        <th>Justificada</th>
+      </tr>
+      {{#each a}}
+        <tr>
+          <input type="hidden" name="id" value="{{id}}">
+          <td>{{nombre}}</td>
+          <td><input type="date" name="fecha" id="" class="inputDate"></td>
+          <td>
+            <select name="inasistencia">
+              <option value="0">0 - Ausente no computable</option>
+              <option value="5">0.25 - Tarde TM</option>
+              <option value="6">0.25 - Tarde TT</option>
+              <option value="4">0.5 - Ausente TT</option>
+              <option value="3">0.5 - Ausente TM</option>
+              <option value="1">1 - Ausente TM (Jornada simple)</option>
+              <option value="2">1 - Ausente TT (Jornada simple)</option>
+            </select>
+          </td>
+          <td><input type="checkbox" name="justificado" id="" class="input_notas" value="{{id}}"></td>
+        </tr>
+      {{/each}}
+    </table>
+  </form>
+</div>
+<script>
+  let date = new Date();
+
+  let year = date.toLocaleString("default", { year: "numeric" });
+  let month = date.toLocaleString("default", { month: "2-digit" });
+  let day = date.toLocaleString("default", { day: "2-digit" });
+
+  let formattedDate = year + "-" + month + "-" + day;
+  $('.inputDate').val(formattedDate);
+  console.log($('.inputDate'));
+
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+
+  closeBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
+
+  searchBtn.addEventListener("click", () => { // Sidebar open when you click on the search iocn
+    sidebar.classList.toggle("open");
+    menuBtnChange(); //calling the function(optional)
+  });
+
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+    if (sidebar.classList.contains("open")) {
+      closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+    } else {
+      closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
+    }
+  }
+
+  function cambiarFechaTodos(element){
+    $('input[type=date]').val(element.value);
+  }
+</script>

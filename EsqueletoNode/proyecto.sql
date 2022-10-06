@@ -91,9 +91,9 @@ CREATE TABLE `fichamedica` (
 
 CREATE TABLE `historial_inasistencias` (
   `id_original` int(11) NOT NULL,
-  `tipo` tinyint(1) NOT NULL,
+  `tipo` tinyint(1) ,
   `motivo` varchar(255) NOT NULL,
-  `cantidad` int(11) NOT NULL,
+  `cantidad` double NOT NULL,
   `fecha` date NOT NULL,
   `id_us` int(11) NOT NULL,
   `fecha_cambio` date NOT NULL,
@@ -122,9 +122,9 @@ CREATE TABLE `historial_notas` (
 
 CREATE TABLE `inasistencias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tipo` tinyint(1) NOT NULL,
+  `tipo` tinyint(1) ,
   `motivo` varchar(255) NOT NULL,
-  `cantidad` int(11) NOT NULL,
+  `cantidad` double NOT NULL,
   `fecha` date NOT NULL,
   `id_us` int(11) NOT NULL,
   `id_creador` int(11) NOT NULL,

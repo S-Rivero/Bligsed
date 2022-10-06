@@ -10,17 +10,14 @@
             <option id="op0" value="0">Final</option>
         </select>
         <table>
-        <tr>
+        <tr id="th">
             <th></th>
-            {{#each cant}}
-            <th>Npa{{#unoMas @index}}{{/unoMas}}</th>
-            {{/each}}
         </tr>
         {{#each ma}}
         <tr>
-            <td>{{@key}}</td>
-            {{#each this}}
-            <td>{{this}}</td>
+            <td>{{materia}}</td>
+            {{#each notas}}
+                <td>{{this}}</td>
             {{/each}}
         </tr>
         {{/each}}
@@ -28,8 +25,14 @@
     </div>
 </div>
 </div>
-
-<script type="text/javascript"> //POSIBLE FALLA DE SEGURIDAD AGUANTE BOCA JUNIORS
+<input type="hidden" id="cant" name="cant" value={{cant}}>
+<script type="text/javascript">
+    
+    let cant = $('#cant').val();
+    console.log(cant);
+    for(let i = 0 ; i < cant ; i++){
+        $('#th').append(`<th>NPA${i+1}</th>`);
+    }
     function changeFunc() {
         var selectBox = document.getElementById("selectBox");
         var selectedValue = selectBox.options[selectBox.selectedIndex].value;

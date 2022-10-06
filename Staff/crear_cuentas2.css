@@ -3,8 +3,14 @@
     background-color: rgba(4, 83, 63, 0.059);
     margin-top: 1%;
     margin-left: 7%;
-    height: 85vh;
+    height: 85*3vh;
     width: 60vw;
+}
+
+
+.contenedor_creacioncuenta2 h1 {
+    font-size: 1%;
+    margin-bottom: 5vh;
 }
 
 .contenedor_creacioncuenta2 h4{

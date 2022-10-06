@@ -1,3 +1,4 @@
+
 .home_section .text {
   height: 10vh;
 }
@@ -343,4 +344,7 @@ width: 100%;
 
 #contenedorPub{
   width: 100%;
+
+.publicaciones {
+  margin-bottom: 15vh;
 }

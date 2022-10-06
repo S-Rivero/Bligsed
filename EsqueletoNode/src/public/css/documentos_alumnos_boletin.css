@@ -41,7 +41,26 @@ td, th {
     padding: 8px;
   }
 
+
+  
   tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: #f7f7f7;
   }
 
+
+  .label_boton_editar {
+    cursor: pointer;
+    width: auto;
+    height: auto;
+}
+
+.bx-edit {
+    position: relative;
+    font-size: 30px;
+}
+
+
+.bx-edit:hover {
+    color: rgb(87,196,193);
+    transition: 0.2s;
+}   

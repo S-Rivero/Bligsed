@@ -90,10 +90,18 @@ module.exports = {
       }
     },
     dateTimeToDate: function(dateTime){
-      return dateTime.toLocaleDateString();
+      let d = dateTime.toLocaleDateString().split('/');
+      return [d[1],d[0],d[2]].join('/');
     },
     textToDate: function(text){
       return new Date(text).toLocaleDateString();
+    },
+    dateDbToCorrectFormat: function(dbDate){
+        let year = dbDate.toLocaleString("default", { year: "numeric" });
+        let month = dbDate.toLocaleString("default", { month: "2-digit" });
+        let day = dbDate.toLocaleString("default", { day: "2-digit" });
+
+        return year + "-" + month + "-" + day;
     },
     selectVacunacion: function(vac){
       switch(vac){
@@ -119,8 +127,25 @@ module.exports = {
       }
       return anios[anio];
     },
-    
     cursoToString(curso){
       return curso.split('').join("°");
+    },
+    tipoInasistenciaToCheck(tipo){
+      if(tipo == 1)
+        return 'checked';
+      else
+        return '';
+    },
+    motivoATipoInasistencia(motivo){
+      let tiposInasistencia = {
+        'Ausente no computable': 0,
+        'Tarde TM': 5,
+        'Tarde TT': 6,
+        'Ausente TT': 4,
+        'Ausente TM': 3,
+        'Ausente TM (Jornada simple)': 1,
+        'Ausente TT (Jornada simple)': 2
+     }
+     return tiposInasistencia[motivo];
     }
   } 

@@ -2,38 +2,27 @@ const e = require("connect-flash");
 
 module.exports = {
     JSONPromediosAl: function(json){
-        let formateado = {};
-        let materias = {};
-        let max = {};
-        let maxNotas = 0;
-        let contNotas = 0;
-        let maxMateria = '';
-        let band = 0;
-        json.forEach(j => {
-            if(!(j.Materia in materias)){
-                contNotas = 0;
-                materias[j.Materia] = [];
-                band++;
+        let materias = [];
+        json.forEach(e =>{
+            if(!(materias.includes(e.Materia))){
+                materias.push(e.Materia);
             }
-            contNotas++;
-            materias[j.Materia].push(j.nota);
-            if(band == 1){
-                maxMateria = j.Materia;
-                maxNotas = contNotas;
-            }else{
-                if(contNotas > maxNotas){
-                    maxNotas = contNotas;
-                    maxMateria = j.Materia;
-                }
-            }
-        });
-        formateado['materias'] = materias;
-        max['materia'] = maxMateria;
-        max['cantidad'] = maxNotas;
-        formateado['max'] = max;
-        return formateado;
-    },
+        })
+        
+        return materias.map(m => {
+            let notas = [];
+            json.forEach(e => {
+                if(e.Materia == m)
+                    notas.push(e.nota);
+            });
+            return{
+                "materia": m,
+                "notas": notas
+            };
+        })
 
+    },
+    
     JSONListaDeCursos: function(arrJson){
         let cursos = []; 
         let anios = [];
@@ -92,8 +81,87 @@ module.exports = {
                 notas: notasArr
             };
         })
+    },
+
+    JSONrenderCargarInasistencias: function({idSeleccionados, idAlumnos, nombreAlumnos}){
+        let newArr = [];
+        for(let i = 0 ; i < idAlumnos.length ; i++){
+            newArr.push({id: idAlumnos[i], nombre: nombreAlumnos[i]});
+        }
+        return newArr.filter(e => idSeleccionados.includes(e.id));
+    },
+
+    JSONcargarInasistencias: function(id_creador, {id, fecha, inasistencia, justificado}){
+        console.log('id :>> ', id);
+        console.log('fecha :>> ', fecha);
+        console.log('inasistencia :>> ', inasistencia);
+        let tiposInasistencia = {
+            '0': {
+                "cantidad": 0,
+                "motivo": "Ausente no computable"
+            },
+            '1': {
+                "cantidad": 1,
+                "motivo": "Ausente TM (Jornada simple)"
+            },
+            '2': {
+                "cantidad": 1,
+                "motivo": "Ausente TT (Jornada simple)"
+            },
+            '3': {
+                "cantidad": 0.5,
+                "motivo": "Ausente TM"
+            },
+            '4': {
+                "cantidad": 0.5,
+                "motivo": "Ausente TT"
+            },
+            '5': {
+                "cantidad": 0.25,
+                "motivo": "Tarde TM"
+            },
+            '6': {
+                "cantidad": 0.25,
+                "motivo": "Tarde TT"
+            }
+        }
+        let arr = [];
+        let idlen = id.length;
+        if(idlen == 1){
+            let just = 0;
+            if(justificado){
+                just = justificado.includes(id) ? 1:0;
+            }
+            let {cantidad, motivo} = tiposInasistencia[inasistencia];
+                arr.push(
+                    [
+                        just, motivo, cantidad, fecha, id,id_creador
+                    ]
+                );
+        }else{
+            for(let i = 0 ; i < idlen ; i++){
+                let just = 0;
+                if(justificado){
+                    just = justificado.includes(id[i]) ? 1:0;
+                }
+                let {cantidad, motivo} = tiposInasistencia[inasistencia[i]];
+                arr.push(
+                    [
+                        just, motivo, cantidad, fecha[i], id[i],id_creador
+                    ]
+                );
+                // arr.push({
+                //     tipo: just,
+                //     motivo,
+                //     cantidad,
+                //     fecha: fecha[i],
+                //     id_us: id[i],
+                //     id_creador
+                // });
+            }
+        }
+        return arr;
     }
-    
 }
 
 // [

@@ -1,14 +1,18 @@
    <div class="text">Tabla de curso</div>
       <div class="contenedor_documentacion">
       <div class="contenedor_nombre_doc">
-        <select name="1er año" id="select_curso" onchange="updateURL()">
+        <select id="select_curso" onchange="updateURLCurso()">
           <option value="" hidden="hidden" selected="selected" id="optionSelected"></option>
           {{#each a}}
             <option value="{{ID}}">{{#cursoToString Nombre_curso}}{{/cursoToString}} - {{Materia}}</option>
           {{/each}}
-
         </select>
-
+        <select id="select_trim" onchange="updateURLTrim()">
+          <option value="" hidden="hidden" selected="selected" id="optionTrimSelected"></option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
         <iconify-icon icon="bx:save" width="30" height="30" class="lapicito_boliviano"></iconify-icon>
 
       </div>
@@ -30,6 +34,8 @@
   <script>
     let [mat,trim] = window.location.href.split("/").slice(-2);
     $('#form').attr('action', `/cargarNotas/${mat}/${trim}`);
+    $('#optionTrimSelected').html("Trimestre - "+trim);
+
     fetch(`/api/ListaAlumnosNotas/${mat}/${trim}`)
     .then((response) => response.json())
     .then((data) => {
@@ -40,7 +46,9 @@
 
     fetch(`/api/idMateriaToCurso/${mat}`)
     .then((response) => response.json())
-    .then((data) => document.getElementById("optionSelected").innerHTML = data['C'].split('').join('°') + ' - ' + data['B']);
+    .then((data) => {
+      document.getElementById("optionSelected").innerHTML = data['C'].split('').join('°') + ' - ' + data['B']
+      });
 
     function insertTh(n){
       for(let i = 0 ; i < n ; i++){
@@ -76,10 +84,16 @@
     }
 
     
-    function updateURL() {
-        var selectBox = document.getElementById("select_curso");
-        var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-        window.location.replace("/cargarNotas/" + selectedValue+"/1");
+    function updateURLCurso() {
+        let selectBoxCurso = document.getElementById("select_curso");
+        let selectedValueCurso = selectBoxCurso.options[selectBoxCurso.selectedIndex].value;
+        window.location.replace("/cargarNotas/" + selectedValueCurso+"/"+trim);
+    };
+
+    function updateURLTrim(){
+      let selectBoxTrim = document.getElementById("select_trim");
+      let selectedValueTrim = selectBoxTrim.options[selectBoxTrim.selectedIndex].value;
+      window.location.replace("/cargarNotas/" + mat+"/"+selectedValueTrim);
     };
 
     $('#form').submit(function(){
@@ -87,6 +101,7 @@
           $(this).clone(false).removeAttr('id').prop('disabled', true).insertBefore($(this));
           $(this).hide();
           $('#form').prepend($(this));
+          $('select').prop('disabled', true);
       });
     });
 

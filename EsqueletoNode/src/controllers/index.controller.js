@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require('path');
 const { isUndefined } = require('util');
 const pool = require('../database');
-const {JSONPromediosAl, JSONListaDeCursos, JSONListaDeMaterias, JSONListaAlumnosNotas} = require('../lib/jsonFormat');
+const {JSONPromediosAl, JSONListaDeCursos, JSONListaDeMaterias, JSONListaAlumnosNotas, JSONrenderCargarInasistencias, JSONcargarInasistencias} = require('../lib/jsonFormat');
 const {setChild} = require('../lib/helpers');
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
 exports.root = ((req,res) => {
@@ -15,8 +15,8 @@ exports.root = ((req,res) => {
         // req.session['childNames'] = r.map((res)=>{
         //     return res.Nombre;
         // });
-        // res.redirect('/home');
-        res.redirect('/cargarNotas/1/1');
+        res.redirect('/home');
+        // res.redirect('/cargarNotas/1/1');
     });
 });
 
@@ -44,14 +44,12 @@ exports.renderCursos = ((req,res)=>{
         const rows = pool.query("SELECT c.ID, c.Nombre_curso as Curso, Mat.ID as IdMateria, Mat.Materia as Materia FROM curso c INNER JOIN (SELECT ID, Materia, IdCurso FROM `materias` WHERE profesor = ?) Mat ON c.ID = Mat.IdCurso GROUP BY Curso ORDER BY Curso ASC", req.user[0].id, function(err, a){
             let list = JSONListaDeCursos(a);
             let listMat = JSONListaDeMaterias(a);
-            // res.send(listMat)
             res.render('cursos.hbs', {tdu: req.user[0].Tipo_de_usuario, list, listMat, links: 'headerLinks/cursos', user:{user: req.user[0], childs: req.session.childs}});
         });
     }else{
-        const rows = pool.query("SELECT c.ID, c.Nombre_curso as Curso, Mat.ID as IdMateria, Mat.Materia as Materia FROM curso c INNER JOIN (SELECT ID, Materia, IdCurso FROM `materias`) Mat ON c.ID = Mat.IdCurso GROUP BY Curso ORDER BY Curso ASC", function(err, a){
+        const rows = pool.query("SELECT ID, Nombre_curso as Curso FROM curso GROUP BY Curso ORDER BY Curso ASC", function(err, a){
             let list = JSONListaDeCursos(a);
-            let listMat = JSONListaDeMaterias(a);
-            res.render('cursos.hbs', {tdu: req.user[0].Tipo_de_usuario, list, listMat, links: 'headerLinks/cursos', user:{user: req.user[0], childs: req.session.childs}});
+            res.render('cursos.hbs', {tdu: req.user[0].Tipo_de_usuario, list, links: 'headerLinks/cursos', user:{user: req.user[0], childs: req.session.childs}});
         });
     }
     // [{"materia":"Quimica","cursos":[{"cuso":"1A","idMateria":5}]},{"materia":"Naturales","cursos":[{"cuso":"6D","idMateria":4}]},{"materia":"Matematicas","cursos":[{"cuso":"7C","idMateria":1}]}]
@@ -59,11 +57,20 @@ exports.renderCursos = ((req,res)=>{
 exports.renderTablaCursos = ((req,res)=>{
     pool.query("SELECT ID FROM curso WHERE ID = ?", req.params.id, function(err, test){
         if(!(test[0])){
-            res.redirect('/');
+            res.redirect('/Cursos');
         }else{   
-            const rows = pool.query("SELECT u.id, u.nombre, u.username, u.Numero_de_telefono FROM alumno a JOIN usuarios u ON a.id = u.id WHERE ID_Curso = ? ORDER BY nombre ASC", req.params.id, function(err, a){
+            const rows = pool.query(`
+                SELECT p.nombre as nombre_tutor, A.id, A.nombre, A.username, A.Numero_de_telefono, A.Padre
+                FROM usuarios p
+                JOIN	(SELECT u.id, u.nombre, u.username, u.Numero_de_telefono, a.Padre 
+                        FROM alumno a 
+                        JOIN usuarios u 
+                        ON a.id = u.id 
+                        WHERE ID_Curso = ? ORDER BY nombre ASC) A
+                ON A.Padre = P.id;
+            `, req.params.id, function(err, a){
                 const r = pool.query("SELECT * FROM curso ORDER BY Nombre_curso ASC", function(err, b){
-                    res.render('tabla_curso_docente.hbs', {a, b, links: 'headerLinks/tabla_curso_docente', user:{user: req.user[0], childs: req.session.childs}});
+                    res.render('tabla_curso.hbs', {a, b, tdu: req.user[0].Tipo_de_usuario, links: 'headerLinks/tabla_curso_docente', user:{user: req.user[0], childs: req.session.childs}});
                     // res.send(a);
                 });
             });
@@ -165,4 +172,30 @@ exports.POSTcargarNotasDocente = ((req,res) => {
     setTimeout(function(){
         res.redirect(`/cargarNotas/${id}/${t}`);
     }, 2000);  
+});
+
+
+exports.renderCargarInasistencias = ((req,res) => {
+    if(req.body.idSeleccionados){
+        let a = JSONrenderCargarInasistencias(req.body)
+        res.render('cargarInasistencias.hbs', {a, links: 'headerLinks/cargarNotas', user:{user: req.user[0], childs: req.session.childs}});
+    }else{
+        res.redirect('/Cursos');
+    }
+
+});
+
+exports.PostCargarInasistencias = ((req,res) => {
+   
+    let inas = JSONcargarInasistencias(req.user[0].id,req.body);
+    pool.query(`
+        INSERT INTO inasistencias
+                (tipo, motivo, cantidad, fecha, id_us, id_creador)
+        VALUES  ?`
+        ,[inas], function(err, a){
+            if(err)
+                res.send(err)
+            else
+                res.redirect('/Cursos');
+        });
 });

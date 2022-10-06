@@ -5,14 +5,135 @@
         <th>Motivo</th>
         <th>Cantidad</th>
         <th>Tipo</th>
+        {{#if tdu 3}}
+        <th></th>
+        {{/if}}
     </tr>
-    {{#each this}}
-        <tr>
-            <td>{{#dateTimeToDate fecha}}{{/dateTimeToDate}}</td>
-            <td>{{motivo}}</td>
-            <td>{{cantidad}}</td>
-            <td>{{#tipoInasistenciaToString tipo}}{{/tipoInasistenciaToString}}</td>
+    {{#each in}}
+        <tr id="{{id}}">
+            <td id="fecha{{id}}" class="{{id}} A">{{#dateTimeToDate fecha}}{{/dateTimeToDate}}</td>
+            <td id="motivo{{id}}" class="{{id}} A">{{motivo}}</td>
+            <td id="cantidad{{id}}" class="{{id}} A">{{cantidad}}</td>
+            <td id="justificado{{id}}" class="{{id}} A">{{#tipoInasistenciaToString tipo}}{{/tipoInasistenciaToString}}</td>
+            {{#if ../tdu 3}}
+            <td class="{{id}} A"> <label class="label_boton_editar" for="boton_editar{{id}}"><i class='bx bx-edit'></i> </label><input hidden id="boton_editar{{id}}" type="button" value="Editar" onclick="alternarEdicion({{id}})"></td>
+            {{/if}}
+
+            <td hidden class="{{id}} B" style="display: none;">{{id}}</td>
+            <td hidden class="{{id}} B"><input id="{{id}}date" type="date" name="date" value="{{#dateDbToCorrectFormat fecha}}{{/dateDbToCorrectFormat}}"></td>
+            <td hidden class="{{id}} B">
+                <select id="{{id}}select" name="inasistencia" onchange="changeCantidad({{id}})">
+                    <option value="{{#motivoATipoInasistencia motivo}}{{/motivoATipoInasistencia}}" disabled selected hidden>{{cantidad}} - {{motivo}}</option>
+                    <option value="0">0 - Ausente no computable</option>
+                    <option value="5">0.25 - Tarde TM</option>
+                    <option value="6">0.25 - Tarde TT</option>
+                    <option value="4">0.5 - Ausente TT</option>
+                    <option value="3">0.5 - Ausente TM</option>
+                    <option value="1">1 - Ausente TM (Jornada simple)</option>
+                    <option value="2">1 - Ausente TT (Jornada simple)</option>
+                </select>
+            </td>
+            <td hidden class="{{id}} B" id="{{id}}cantidad">{{cantidad}}</td>
+            <td hidden class="{{id}} B"><input id="{{id}}checkbox" type="checkbox" name="justificado" {{#tipoInasistenciaToCheck tipo}}{{/tipoInasistenciaToCheck}}></td>
+            {{#if ../tdu 3}}
+            <td hidden class="{{id}} A">
+                <input type="button" value="cancelar" onclick="alternarEdicion({{id}})">
+                <input type="button" value="eliminar" onclick="eliminar({{id}})">
+                <input type="button" value="guardar" onclick="actualizar({{id}})">
+            </td>
+            {{/if}}
         </tr>
     {{/each}}
 </table>
 </div>
+
+<script>
+    function alternarEdicion(id){
+        let hid = $(`.${id}:hidden`);
+        let show = $(`.${id}:not(:hidden)`);
+
+        hid.prop('hidden', false);
+        show.prop('hidden', true);
+    }
+
+    function eliminar(id){
+        fetch('/api/eliminarInasistencia/'+id)
+        .then((response) => response.json())
+        .then((data) => $(`#${id}`).remove());
+    }
+
+    function actualizar(id){
+        let checkbox = $(`#${id}`).children().find(`#${id}checkbox`)[0].checked;
+        let date = $(`#${id}`).children().find(`#${id}date`)[0].value;
+        let select =  $(`#${id}`).children().find('select')[0].value;
+
+        if(!date)
+            date = setToday();
+  
+        fetch(`/api/actualizarInasistencia/${id}/${date}/${checkbox}/${select}`)
+        .then((response) => response.json())
+        .then((data) => {
+            let tiposInasistencia = {
+                '0': {
+                    "cantidad": 0,
+                    "motivo": "Ausente no computable"
+                },
+                '1': {
+                    "cantidad": 1,
+                    "motivo": "Ausente TM (Jornada simple)"
+                },
+                '2': {
+                    "cantidad": 1,
+                    "motivo": "Ausente TT (Jornada simple)"
+                },
+                '3': {
+                    "cantidad": 0.5,
+                    "motivo": "Ausente TM"
+                },
+                '4': {
+                    "cantidad": 0.5,
+                    "motivo": "Ausente TT"
+                },
+                '5': {
+                    "cantidad": 0.25,
+                    "motivo": "Tarde TM"
+                },
+                '6': {
+                    "cantidad": 0.25,
+                    "motivo": "Tarde TT"
+                }
+            }
+            let dateformat = date.split('-').reverse().join('/');
+            $(`#${id}`).find(`#fecha${id}`)[0].innerHTML = dateformat;
+            let {cantidad, motivo} = tiposInasistencia[select];
+            $(`#${id}`).find(`#motivo${id}`)[0].innerHTML = motivo;
+            $(`#${id}`).find(`#cantidad${id}`)[0].innerHTML = cantidad;
+            $(`#${id}`).find(`#justificado${id}`)[0].innerHTML = checkbox ? "Justificada":"No justificada";
+            alternarEdicion(id)
+        });
+        /*
+        id="fecha{{id}}" 
+        id="motivo{{id}}" 
+        id="cantidad{{id}}" 
+        id="justificado{{id}}"
+        */
+    }
+
+    function setToday(){
+        let date = new Date();
+
+        let year = date.toLocaleString("default", { year: "numeric" });
+        let month = date.toLocaleString("default", { month: "2-digit" });
+        let day = date.toLocaleString("default", { day: "2-digit" });
+
+        return year + "-" + month + "-" + day;
+    }
+
+    function changeCantidad(id){
+        
+        let text = $(`#${id}`).children().find('select option:selected').text();
+        let arr = text.split(' - ');
+        $(`#${id}`).find(`#${id}cantidad`)[0].innerHTML = arr[0];
+    }
+    
+</script>
