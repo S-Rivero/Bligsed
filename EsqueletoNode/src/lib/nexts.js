@@ -87,3 +87,11 @@ exports.authLevelCargarInasistencias = (req,res,next) => {
         res.redirect("/home");
     }
 }
+
+exports.authLevelAdministrador = (req,res,next) => {
+    if(req.user[0].Tipo_de_usuario === 1 || req.user[0].Tipo_de_usuario === 0){
+        return next();
+    }else{
+        res.redirect("/home");
+    }
+}

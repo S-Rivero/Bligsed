@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {isLoggedIn, isNotLoggedIn} = require('../lib/auth');
-const {authLevelCursos, authLevelTablaCursos, authLevelCargarNotas, authLevelCargarInasistencias} = require('../lib/nexts');
+const {authLevelCursos, authLevelTablaCursos, authLevelCargarNotas, authLevelCargarInasistencias, authLevelAdministrador} = require('../lib/nexts');
 const {
     root,
     renderHome,
@@ -12,7 +12,9 @@ const {
     cargarNotasDocente,
     POSTcargarNotasDocente,
     renderCargarInasistencias,
-    PostCargarInasistencias
+    PostCargarInasistencias,
+    homeCrearCuentas,
+    crearCuentas
 } = require('../controllers/index.controller');
 
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
@@ -37,5 +39,9 @@ router.post('/cargarNotas/:id/:t', isLoggedIn, authLevelCargarNotas, POSTcargarN
 
 router.post('/cargar_inasistencias_render', isLoggedIn, authLevelCargarInasistencias, renderCargarInasistencias);
 router.post('/cargar_inasistencias', isLoggedIn, authLevelCargarInasistencias, PostCargarInasistencias);
+
+router.get('/crear_cuentas', isLoggedIn, authLevelAdministrador, homeCrearCuentas);
+router.get('/crear_cuentas/:tipo', isLoggedIn, authLevelAdministrador, crearCuentas);
+
 
 module.exports = router;

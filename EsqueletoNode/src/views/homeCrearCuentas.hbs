@@ -1,0 +1,24 @@
+<div class="text">Crear Cuentas</div>
+
+<div class="contenedor_creacioncuenta"> 
+    <h1>Creación de usuarios</h1>
+
+    <h4>¿Qué tipo de usuario desea crear?</h4>
+    <select name="select_crearcuenta" id="select">
+        <option value="1">Administracion</option>
+        <option value="2">Directivo</option>
+        <option value="3">Preceptor</option>
+        <option value="4">Profesor</option>
+        <option value="5">Padre</option>
+        <option selected value="6">Padre/Alumno</option>
+    </select>
+
+    <a class="boton_siguiente" href="crear_cuentas/6" id="link">Siguiente</a>
+</div>
+
+<script>
+    $('#select').change(function(){
+        let text = "crear_cuentas/" + $("#select option:selected").val();
+        $('#link').attr("href", text);
+    });
+</script>

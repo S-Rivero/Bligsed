@@ -197,3 +197,12 @@ exports.PostCargarInasistencias = ((req,res) => {
                 res.redirect('/Cursos');
         });
 });
+
+
+exports.homeCrearCuentas = ((req, res) => {
+    res.render('homeCrearCuentas.hbs', {links: 'headerLinks/homeCrearCuentas', user:{user: req.user[0], childs: req.session.childs}});
+});
+
+exports.crearCuentas = ((req, res) => {
+    res.render('crearCuentas.hbs', {links: 'headerLinks/crearCuentas', user:{user: req.user[0], childs: req.session.childs}});
+});
