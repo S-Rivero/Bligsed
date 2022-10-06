@@ -155,7 +155,8 @@ input::-webkit-inner-spin-button {
 
   .input_cargar_inasistencias {
     background: none;
-    outline: none;
+    padding: 0;
+    outline: inherit;
     font: inherit;
     font-size: 14px;
     margin-top: 3%;
@@ -164,10 +165,12 @@ input::-webkit-inner-spin-button {
     border-radius: 10px;
     height: 30px;
     padding: 5px;
+    cursor: pointer;
   }
 
   
 .checkbox_alumnos {
+  
   margin-top: 1%;
   margin-right: 1%;
   width: 25px;
