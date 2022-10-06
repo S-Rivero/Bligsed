@@ -64,3 +64,14 @@ td, th {
     color: rgb(87,196,193);
     transition: 0.2s;
 }   
+
+
+.date_inasistencias {
+    border: 1px solid rgb(87,196,193);
+    cursor: pointer;
+}
+
+.date_inasistencias:hover {
+    background-color: aquamarine;
+    transition: 0.2s;
+}
