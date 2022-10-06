@@ -29,32 +29,27 @@
         {{/if}}
 
         <ul id="contenedorPub"></ul>
-        {{!-- 
-          {{#each pub}}
-          <div class="publicaciones">
-              <div class="publicaciones_autor">
-                          <div class="autor_nombre">
-                              {{Nombre}}
-                          </div>
-                          <div class="autor_fecha">
-                              12/3/2022
-                          </div>
-                      </div>
-                      <div class="publicaciones_contenido">
-                          <div class="contenido_titulo">
-                              {{titulo}}
-                          </div>
-                          <div class="contenido_texto">
-                              {{descripcion}}
-                          </div>
-                          <div class="contenido_vermas">
-                              <a class="boton_vermas">Ver Mas</a>
-                          </div>
-              </div>
-          </div>
-
-          {{/each}}
-        --}}
+        {{!-- {{#each pub}}
+        <div class="publicaciones_autor">
+            <div class="autor_nombre">
+                {{Nombre}}
+            </div>
+            <div class="autor_fecha">
+                12/3/2022
+            </div>
+        </div>
+        <div class="publicaciones_contenido">
+            <div class="contenido_titulo">
+                {{titulo}}
+            </div>
+            <div class="contenido_texto">
+                {{descripcion}}
+            </div>
+            <div class="contenido_vermas">
+                <a class="boton_vermas">Ver Mas</a>
+            </div>
+        </div>
+        {{/each}} --}}
     </div>
 
     <div class="contenedor_lateral">
@@ -83,5 +78,5 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/script_io_pub.js"></script>
 {{#if user.user.Tipo_de_usuario 2}}
-<script src="/js/script_io_direc.js"></script>
+    <script src="/js/script_io_direc.js"></script>
 {{/if}}

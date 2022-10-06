@@ -10,6 +10,7 @@ const passport = require('passport');
 const session = require('express-session');
 const expressMySQLSession  = require('express-mysql-session');
 const morgan = require('morgan');
+const {io_init} = require('./io');
 require('./lib/passport');
 
 
@@ -68,5 +69,7 @@ app.use(require('./routes'));
 //static files
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Ejecuta todo lo de sockets
+io_init(app);
 
 module.exports = app;
