@@ -6,7 +6,7 @@ exports.io_init = function (app) {
     const server = app.listen(app.get('port'), () => { console.log('Server on port:', app.get('port')); }),
         { Server } = require('socket.io'),
         io = new Server(server, {
-            maxHttpBufferSize: 1e8 // 100 MB
+            maxHttpBufferSize: 1e9 // 1 GB
         });
     const clients = {};
 
@@ -233,9 +233,8 @@ exports.io_init = function (app) {
             if(o.file != 'no'){
                 filesArr = [];
                 pf = fs.readdirSync('./src/public/media/pubDocs').length;
-                console.log(pf);
                 for(let i = 0; i < o.file.length; i++ ){
-                    o.file[i].name = `Bl${pf+i}_${o.file[i].name}`;
+                    o.file[i].name = `B${pf+i}_${o.file[i].name}`;
                     fs.writeFileSync(`./src/public/media/pubDocs/${o.file[i].name}`, o.file[i].file);
                     filesArr.push(o.file[i].name);
                     strp += o.file[i].name+',';
