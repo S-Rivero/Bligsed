@@ -1,3 +1,4 @@
+const { reset } = require('colors');
 const express = require('express');
 const router = express.Router();
 const path = require('path');
@@ -45,3 +46,62 @@ exports.ListaAlumnosNotas = ((req,res) => {
     });
 });
 
+
+exports.eliminarInasistencias = ((req, res) => {
+    let id = req.params.id;
+    pool.query(`DELETE FROM inasistencias WHERE id = ?`,id, function(err, n){
+        if(err){
+            res.send({'res': 'error', err});
+        }else{
+            res.send({'res': 'eliminar', n});
+        }
+    });
+});
+
+exports.actualizarInasistencias = ((req, res) => {
+    let {id, date, checkbox, select} = req.params;
+    let tiposInasistencia = {
+        '0': {
+            "cantidad": 0,
+            "motivo": "Ausente no computable"
+        },
+        '1': {
+            "cantidad": 1,
+            "motivo": "Ausente TM (Jornada simple)"
+        },
+        '2': {
+            "cantidad": 1,
+            "motivo": "Ausente TT (Jornada simple)"
+        },
+        '3': {
+            "cantidad": 0.5,
+            "motivo": "Ausente TM"
+        },
+        '4': {
+            "cantidad": 0.5,
+            "motivo": "Ausente TT"
+        },
+        '5': {
+            "cantidad": 0.25,
+            "motivo": "Tarde TM"
+        },
+        '6': {
+            "cantidad": 0.25,
+            "motivo": "Tarde TT"
+        }
+    }
+    let {cantidad, motivo} = tiposInasistencia[select];
+    let tipo = checkbox == 'true' ? 1:0;
+    pool.query(`    UPDATE inasistencias
+                    SET     tipo = ?,
+                            motivo = ?,
+                            cantidad = ?,
+                            fecha = ?
+                    WHERE id = ?`,[tipo, motivo, cantidad, date, parseInt(id)], function(err, n){
+        if(err){
+            res.send({'res': 'error', err});
+        }else{
+            res.send({'res': 'update', n});
+        }
+    });
+});

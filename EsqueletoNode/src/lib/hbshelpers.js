@@ -95,6 +95,13 @@ module.exports = {
     textToDate: function(text){
       return new Date(text).toLocaleDateString();
     },
+    dateDbToCorrectFormat: function(dbDate){
+        let year = dbDate.toLocaleString("default", { year: "numeric" });
+        let month = dbDate.toLocaleString("default", { month: "2-digit" });
+        let day = dbDate.toLocaleString("default", { day: "2-digit" });
+
+        return year + "-" + month + "-" + day;
+    },
     selectVacunacion: function(vac){
       switch(vac){
         case 1:
@@ -119,8 +126,13 @@ module.exports = {
       }
       return anios[anio];
     },
-    
     cursoToString(curso){
       return curso.split('').join("°");
+    },
+    tipoInasistenciaToCheck(tipo){
+      if(tipo == 1)
+        return 'checked';
+      else
+        return '';
     }
   } 
