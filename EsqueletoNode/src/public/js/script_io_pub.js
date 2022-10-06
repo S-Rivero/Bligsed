@@ -69,5 +69,4 @@ function printPub(e) {
     pub.appendChild(autor);
     pub.appendChild(contenido);
     ul.insertAdjacentElement("afterbegin", pub);
-    z++;
 }
