@@ -105,3 +105,17 @@ exports.actualizarInasistencias = ((req, res) => {
         }
     });
 });
+
+
+exports.checkUser = ((req, res)=>{
+    let username = req.body.username;
+    pool.query(`
+        SELECT id, Nombre, Tipo_de_usuario, Sexo, DNI, username, Numero_de_telefono, domicilio, Fecha_de_nacimiento FROM usuarios WHERE username = ?
+    `, username, function(err, a){
+        if(err){
+            res.send({err});
+        }else{
+            res.send({"res": a[0]});
+        }
+    });
+});
