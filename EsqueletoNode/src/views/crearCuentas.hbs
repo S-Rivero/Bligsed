@@ -1,57 +1,65 @@
 <div class="text">Crear Cuentas</div>
+<form action="" method="POST">
+  <div class="contenedor_creacioncuenta2">
+    <h1>Creación de Cuentas - {{#tipoUsuarioToString tipoCuenta}}{{/tipoUsuarioToString}}</h1>
 
-        <div class="contenedor_creacioncuenta2"> 
-          <h1>Creación de Cuentas - Usuario N</h1>
+    <h4>Correo Electrónico</h4>
+    <input type="mail" name="username" placeholder="Escriba un correo electrónico..." class="ingreso2" value="test2"></input>
 
-          <h4>Correo Electrónico</h4>
-          <input type="text" placeholder="Escriba un correo electrónico..." class="ingreso2"></input>
+    <h4>Nombre y Apellido</h4>
+    <input type="text" name="Nombre" placeholder="Escriba un nombre y apellido..." class="ingreso2" value="test2"></input>
 
-          <h4>DNI</h4>
-          <input type="text" placeholder="Escriba un numero..." class="ingreso2"></input>
+    <h4>DNI</h4>
+    <input type="text" name="DNI" placeholder="Escriba un numero..." class="ingreso2" value="2345"></input>
 
-          <select name="select_sexo" id="">
-            <option value="1">Femenino</option>
-            <option value="2">Masculino</option>
-            <option value="3">No binario</option>
-         </select>
+    <select name="Sexo" id="">
+      <option value="M" selected>Masculino</option>
+      <option value="F">Femenino</option>
+      <option value="N">No binario</option>
+    </select>
 
-          <h4>Nombre y Apellido</h4>
-          <input type="text" placeholder="Escriba un nombre y apellido..." class="ingreso2"></input>
+    <h4>Fecha de nacimiento</h4>
+    <input type="date" name="Fecha_de_nacimiento" class="ingreso2" value="2022-10-10"></input>
 
-          <h4>Fecha de nacimiento</h4>
-          <input type="date" class="ingreso2"></input>
+    <h4>Teléfono</h4>
+    <input type="text" name="Numero_de_telefono" placeholder="Escriba un teléfono..." class="ingreso2" value="23452"></input>
 
-          
-          <h4>Teléfono</h4>
-          <input type="text" placeholder="Escriba un teléfono..." class="ingreso2"></input>
+    <h4>Domicilio</h4>
+    <input type="text" name="domicilio" placeholder="Escriba un domicilio..." class="ingreso2" value="test2"></input>
 
-          <h4>Domicilio</h4>
-          <input type="text" placeholder="Escriba un domicilio..." class="ingreso2"></input>
-         <br><br><br>
-         <!--Datos del Padre 2-->
-         <h4>DNI del Padre 1</h4>
-         <input type="text" placeholder="Escriba un numero..." class="ingreso2"></input>
+    <input type="hidden" name="tdu" value="{{tipoCuenta}}">
+    <br><br><br>
 
-         <select name="select_sexo" id="">
-           <option value="1">Femenino</option>
-           <option value="2">Maculino</option>
-           <option value="3">No binario</option>
-        </select>
+    {{#if tipoCuenta 6}}
+    <!--Datos del Tutor-->
+    <h4>Correo Electrónico tutor</h4>
+    <input type="mail" name="username" placeholder="Escriba un correo electrónico..." class="ingreso2"></input>
 
-         <h4>Nombre y Apellido del Padre 1</h4>
-         <input type="text" placeholder="Escriba un nombre y apellido..." class="ingreso2"></input>
+    <h4>Nombre y Apellido tutor</h4>
+    <input type="text" name="Nombre" placeholder="Escriba un nombre y apellido..." class="ingreso2"></input>
 
-         <h4>Fecha de nacimiento del Padre 1</h4>
-         <input type="date" class="ingreso2"></input>
+    <h4>DNI del tutor</h4>
+    <input type="text" name="DNI" placeholder="Escriba un numero..." class="ingreso2"></input>
+    
+    <select name="Sexo" id="">
+      <option value="M" selected>Masculino</option>
+      <option value="F">Femenino</option>
+      <option value="N">No binario</option>
+    </select>
+    
+    
+    <h4>Fecha de nacimiento tutor</h4>
+    <input type="date" name="Fecha_de_nacimiento" class="ingreso2"></input>
 
-         <h4>Correo Electrónico del Padre 1</h4>
-         <input type="text" placeholder="Escriba un correo electrónico..." class="ingreso2"></input>
+    <h4>Teléfono tutor</h4>
+    <input type="text" name="Numero_de_telefono" placeholder="Escriba un teléfono..." class="ingreso2"></input>
 
-         <h4>Teléfono del Padre 1</h4>
-         <input type="text" placeholder="Escriba un teléfono..." class="ingreso2"></input>
+    <h4>Domicilio tutor</h4>
+    <input type="text" name="domicilio" placeholder="Escriba un domicilio..." class="ingreso2"></input>
 
-         <h4>Domicilio del Padre 1</h4>
-         <input type="text" placeholder="Escriba un domicilio..." class="ingreso2"></input>
+    <input type="hidden" name="tdu" value="5">
+    {{/if}}
+    <input type="submit" class="boton_siguiente2" value="Completar">
+  </form>
 
-         <a class="boton_siguiente2" href="">Completar</a>
-        </div>
+</div>
