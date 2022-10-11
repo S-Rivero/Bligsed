@@ -139,6 +139,7 @@ fMsg.addEventListener("submit", e => {
 
    socket.emit('sendMessage', o);
    fMsg.text.value = '';
+   fMsg.file.value = '';
 });
 
 socket.on('newMessage', arr => {
@@ -185,72 +186,76 @@ function getDate() {
 }
 
 function printMessage(arr) {
+   
+   let li = document.createElement('li'),
+      divName = document.createElement('div'),
+      spanName = document.createElement('span'),
+      divMsg = document.createElement('div'),
+      spanMsg = document.createElement('span');
 
-   let str = '';
-   if (arr[1] == user.name)
-      str =
-         `
-      <li class="clearfix">
-         <div class="message-data text-right">
-            <span class="message-data-time">Yo, ${arr[3]}, ${arr[2]}</span>
-         </div>
-         <div class="message other-message float-right">
-      `;
-   else
-      str =
-         `
-      <li class="clearfix">
-         <div class="message-data">
-            <span class="message-data-time">${arr[1]}, ${arr[3]}, ${arr[2]}</span>
-         </div>
-         <div class="message my-message">
-      `;
 
-   if (arr[4] == '0')
-      str += `${arr[0]}</div>
-         </li>`;
+   li.className = 'clearfix';
+   spanName.className = 'message-data-time';
+   if (arr[1] == user.name) {
+      divName.className = 'message-data text-right';
+      divMsg.className = 'message other-message float-right';
+      spanName.textContent = `Yo, ${arr[3]}, ${arr[2]}`;
+   }
    else {
+      divName.className = 'message-data';
+      divMsg.className = 'message my-message';
+      spanName.textContent = `${arr[1]}, ${arr[3]}, ${arr[2]}`;
+   }
+   spanMsg.textContent = arr[0];
+
+   if (arr[4] != '0') {
+      let file;
+      let str = 'No se ha encontrado el archivo';
+      let br = document.createElement('br');
       switch (checkMime(arr[5])) {
          case 0:
-            str += `
-            <a href="/media/docs/${arr[4]}" download>${arr[4]}</a>
-            </br>
-            ${arr[0]}</div>
-            </li>`;
+            file = document.createElement('a');
+            file.href = `/media/docs/${arr[4]}`;
+            file.setAttribute('download', arr[4]);
+            file.textContent = arr[4];
+            divMsg.appendChild(file);
+            divMsg.appendChild(br);
             break;
          case 1:
-            str += `
-            <img style="max-height: 480px; max-width:720px;" src="/media/images/${arr[4]}" alt="No se ha encontrado el archivo">
-            </br>
-            ${arr[0]}</div>
-         </li>`;
+            file = document.createElement('img');
+            file, className = 'img-msg'
+            file.src = `/media/images/${arr[4]}`;
+            file.alt = "No se ha encontrado el archivo";
+            divMsg.appendChild(file);
+            divMsg.appendChild(br);
             break;
          case 2:
-            str += `
-            <audio controls>
-               <source src="/media/audios/${arr[4]}" type="audio/mpeg">
-               <source src="/media/audios/${arr[4]}" type="audio/wav">
-               Tu navegador no es compatible con el formato de audio
-            </audio>
-            </br>
-            ${arr[0]}</div>
-         </li>`;
+            file = document.createElement('audio');
+            file.className = 'audio-msg';
+            file.controls = true;
+            let srca1 = document.createElement('source'); srca1.src = `/media/audios/${arr[4]}`; srca1.type = "audio/mpeg";
+            let srca2 = document.createElement('source'); srca2.src = `/media/audios/${arr[4]}`; srca2.type = "audio/wav";
+            file.appendChild(srca1); file.appendChild(srca2);
+            divMsg.appendChild(file);
+            divMsg.appendChild(br);
             break;
          case 3:
-            str += `
-            <video style="max-height: 480px; max-width:720px;" controls>
-               <source src="/media/videos/${arr[4]}" type="video/mp4">
-               <source src="/media/videos/${arr[4]}" type="video/webm">
-               Tu navegador no es compatible con el formato de audio
-            </video>
-            </br>
-            ${arr[0]}</div>
-         </li>`;
+            file = document.createElement('video');
+            file, className = 'video-msg';
+            file, controls = true;
+            let srcv1 = document.createElement('source'); srcv1.src = `/media/videos/${arr[4]}`; srcv1.type = "video/mp4";
+            let srcv2 = document.createElement('source'); srcv2.src = `/media/videos/${arr[4]}`; srcv2.type = "video/webm";
+            file.appendChild(srcv1); file.appendChild(srcv2);
+            divMsg.appendChild(file);
+            divMsg.appendChild(br);
             break;
       }
    }
-   ul.insertAdjacentHTML('beforeend', str);
-   delete str;
+   divMsg.appendChild(spanMsg);
+   divName.appendChild(spanName);
+   li.appendChild(divName);
+   li.appendChild(divMsg);
+   ul.appendChild(li);
 }
 
 function checkMime(mime) {
