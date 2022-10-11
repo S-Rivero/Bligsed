@@ -236,18 +236,21 @@ exports.insertCuentas = (async(req, res) => {
         FROM usuarios
         WHERE username = ?`
         , [usernames], function(err, a){
-            res.send(a);
-            pool.query(`
-                INSERT INTO usuarios
-                (username, nombre, dni, Sexo, Fecha_de_nacimiento, Numero_de_telefono, domicilio, Tipo_de_usuario, password)
-                VALUES (?)`
-                ,[arr], function(err, a){
-                    if(err)
-                        res.send(err)
-                    else
-                        res.redirect('/crear_cuentas');
-            });
-        });
+            if(!(a[0])){
+
+                pool.query(`
+                    INSERT INTO usuarios
+                    (username, nombre, dni, Sexo, Fecha_de_nacimiento, Numero_de_telefono, domicilio, Tipo_de_usuario, password)
+                    VALUES (?)`
+                    ,[arr], function(err, b){
+                        if(err)
+                            res.send(err)
+                        else
+                         res.redirect('/crear_cuentas');
+                    }
+                )
+            }}
+        );
     
 });
 
