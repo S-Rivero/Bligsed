@@ -33,15 +33,15 @@
     {{#if tipoCuenta 6}}
     <!--Datos del Tutor-->
     <h4>Correo Electrónico tutor</h4>
-    <input id="mailTutor" type="mail" name="username" placeholder="Escriba un correo electrónico..." class="ingreso2" onblur="blurPadre(this.value)"></input>
+    <input id="mailTutor" type="mail" name="tutorusername" placeholder="Escriba un correo electrónico..." class="ingreso2" onblur="blurPadre(this.value)"></input>
 
     <h4>Nombre y Apellido tutor</h4>
-    <input id="nombreTutor" type="text" name="Nombre" placeholder="Escriba un nombre y apellido..." class="ingreso2"></input>
+    <input id="nombreTutor" type="text" name="tutorNombre" placeholder="Escriba un nombre y apellido..." class="ingreso2"></input>
 
     <h4>DNI del tutor</h4>
-    <input id="dniTutor" type="text" name="DNI" placeholder="Escriba un numero..." class="ingreso2"></input>
+    <input id="dniTutor" type="text" name="tutorDNI" placeholder="Escriba un numero..." class="ingreso2"></input>
     
-    <select name="Sexo" id="sexoTutor">
+    <select name="tutorSexo" id="sexoTutor">
       <option value="M" selected>Masculino</option>
       <option value="F">Femenino</option>
       <option value="N">No binario</option>
@@ -49,15 +49,15 @@
     
     
     <h4>Fecha de nacimiento tutor</h4>
-    <input id="nacimientoTutor" type="date" name="Fecha_de_nacimiento" class="ingreso2"></input>
+    <input id="nacimientoTutor" type="date" name="tutorFecha_de_nacimiento" class="ingreso2"></input>
 
     <h4>Teléfono tutor</h4>
-    <input id="telefonoTutor" type="text" name="Numero_de_telefono" placeholder="Escriba un teléfono..." class="ingreso2"></input>
+    <input id="telefonoTutor" type="text" name="tutorNumero_de_telefono" placeholder="Escriba un teléfono..." class="ingreso2"></input>
 
     <h4>Domicilio tutor</h4>
-    <input id="domicilioTutor" type="text" name="domicilio" placeholder="Escriba un domicilio..." class="ingreso2"></input>
+    <input id="domicilioTutor" type="text" name="tutordomicilio" placeholder="Escriba un domicilio..." class="ingreso2"></input>
 
-    <input type="hidden" name="tdu" value="5">
+    <input type="hidden" name="tutortdu" value="5">
     {{/if}}
     <input type="submit" class="boton_siguiente2" value="Completar">
   </form>
@@ -71,11 +71,30 @@
         let {id, Nombre, Tipo_de_usuario, Sexo, DNI, username, Numero_de_telefono, domicilio, Fecha_de_nacimiento} = data.res;
 
         $(`#nombreTutor`).val(Nombre);
+        $(`#nombreTutor`).prop("disabled",true);
         $(`#dniTutor`).val(DNI);
+        $(`#dniTutor`).prop("disabled",true);
         $(`#sexoTutor`).val(Sexo);
+        $(`#sexoTutor`).prop("disabled",true);
         $(`#nacimientoTutor`).val(validDate(Fecha_de_nacimiento));
+        $(`#nacimientoTutor`).prop("disabled",true);
         $(`#telefonoTutor`).val(Numero_de_telefono);
+        $(`#telefonoTutor`).prop("disabled",true);
         $(`#domicilioTutor`).val(domicilio);
+        $(`#domicilioTutor`).prop("disabled",true);
+      }else{
+        $(`#nombreTutor`).val("");
+        $(`#nombreTutor`).prop("disabled",false);
+        $(`#dniTutor`).val("");
+        $(`#dniTutor`).prop("disabled",false);
+        $(`#sexoTutor`).val("M");
+        $(`#sexoTutor`).prop("disabled",false);
+        $(`#nacimientoTutor`).val("");
+        $(`#nacimientoTutor`).prop("disabled",false);
+        $(`#telefonoTutor`).val("");
+        $(`#telefonoTutor`).prop("disabled",false);
+        $(`#domicilioTutor`).val("");
+        $(`#domicilioTutor`).prop("disabled",false);
       }
     }, "json");
   }
