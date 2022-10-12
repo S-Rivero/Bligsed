@@ -10,7 +10,7 @@
                   <div class="input-group-prepend">
                      <!-- <span class="input-group-text"></span>
                         <i class="fa fa-ellipsis-v"></i> -->
-                     <div class="dropdown">
+                     <div class="dropdown">  
                         <button onclick="optionslist()" class="dropbtn"><i class="fa fa-ellipsis-v"></i></button>
                         <div id="myDropdown1" class="dropdown-content">
                            <a href="#" id="crearGrupo">Crear grupo</a>
@@ -55,8 +55,7 @@
                         </div>
                      </div>
                      <div class="col-lg-6 hidden-sm text-right icons_mensajeria">
-                        <a href="javascript:void(0);" class="btn btn-outline-secondary"><i
-                              class="fa fa-paperclip"></i></a>
+                        <label style="cursor: pointer;" for="subir_archivo"><i class="fa fa-paperclip"></i></label>
                      </div>
                   </div>
                </div>
@@ -68,14 +67,16 @@
                <div class="chat-message clearfix ">
                   <div class="input-group mb-0" style="margin: 0;">
                      <div class="input-group-prepend">
-                        <div class="icono_anashe">
+                        <label for="boton_enviar">
+                        <div class="icono_anashe" title="Enviar">
                            <span class="input-group-text icono_icono"><i class="fa fa-send"></i></span>
                         </div>
+                        </label>
                      </div>
                      <form id="formMsg">
-                        <input type="text" name="text" class="form-control" placeholder="Enter text here..." required>
-                        <input type="file" name="file">
-                        <button class="btn btn-primary">Enviar</button>
+                        <input type="text" name="text" autocomplete="off" class="form-control" placeholder="Enter text here..." required>
+                        <input hidden id="subir_archivo" type="file" name="file">
+                        <button hidden id="boton_enviar" class="btn btn-primary">Enviar</button>
                      </form>
                   </div>
                </div>
