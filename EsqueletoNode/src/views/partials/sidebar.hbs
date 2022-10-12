@@ -56,6 +56,15 @@
                     <span class="tooltip">Cursos</span>
                 </li>
             {{/ifCond}}
+            {{#if user.Tipo_de_usuario 1}}
+            <li>
+                <a href="../../../crear_cuentas">
+                    <i class='bx bx-folder'></i>
+                    <span class="links_name">Crear cuentas</span>
+                </a>
+                <span class="tooltip">Crear cuentas</span>  
+            </li>
+            {{/if}}
             <li class="profile">
                 <div class="profile-details">
                     <!--<img src="profile.jpg" alt="profileImg">-->

@@ -1,0 +1,86 @@
+<div class="text">Crear Cuentas</div>
+<form action="" method="POST">
+  <div class="contenedor_creacioncuenta2">
+    <h1>Creación de Cuentas - {{#tipoUsuarioToString tipoCuenta}}{{/tipoUsuarioToString}}</h1>
+
+    <h4>Correo Electrónico</h4>
+    <input type="mail" name="username" placeholder="Escriba un correo electrónico..." class="ingreso2" value="test2"></input>
+
+    <h4>Nombre y Apellido</h4>
+    <input type="text" name="Nombre" placeholder="Escriba un nombre y apellido..." class="ingreso2" value="test2"></input>
+
+    <h4>DNI</h4>
+    <input type="text" name="DNI" placeholder="Escriba un numero..." class="ingreso2" value="2345"></input>
+
+    <select name="Sexo" id="">
+      <option value="M" selected>Masculino</option>
+      <option value="F">Femenino</option>
+      <option value="N">No binario</option>
+    </select>
+
+    <h4>Fecha de nacimiento</h4>
+    <input type="date" name="Fecha_de_nacimiento" class="ingreso2" value="2022-10-10"></input>
+
+    <h4>Teléfono</h4>
+    <input type="text" name="Numero_de_telefono" placeholder="Escriba un teléfono..." class="ingreso2" value="23452"></input>
+
+    <h4>Domicilio</h4>
+    <input type="text" name="domicilio" placeholder="Escriba un domicilio..." class="ingreso2" value="test2"></input>
+
+    <input type="hidden" name="tdu" value="{{tipoCuenta}}">
+    <br><br><br>
+
+    {{#if tipoCuenta 6}}
+    <!--Datos del Tutor-->
+    <h4>Correo Electrónico tutor</h4>
+    <input id="mailTutor" type="mail" name="username" placeholder="Escriba un correo electrónico..." class="ingreso2" onblur="blurPadre(this.value)"></input>
+
+    <h4>Nombre y Apellido tutor</h4>
+    <input id="nombreTutor" type="text" name="Nombre" placeholder="Escriba un nombre y apellido..." class="ingreso2"></input>
+
+    <h4>DNI del tutor</h4>
+    <input id="dniTutor" type="text" name="DNI" placeholder="Escriba un numero..." class="ingreso2"></input>
+    
+    <select name="Sexo" id="sexoTutor">
+      <option value="M" selected>Masculino</option>
+      <option value="F">Femenino</option>
+      <option value="N">No binario</option>
+    </select>
+    
+    
+    <h4>Fecha de nacimiento tutor</h4>
+    <input id="nacimientoTutor" type="date" name="Fecha_de_nacimiento" class="ingreso2"></input>
+
+    <h4>Teléfono tutor</h4>
+    <input id="telefonoTutor" type="text" name="Numero_de_telefono" placeholder="Escriba un teléfono..." class="ingreso2"></input>
+
+    <h4>Domicilio tutor</h4>
+    <input id="domicilioTutor" type="text" name="domicilio" placeholder="Escriba un domicilio..." class="ingreso2"></input>
+
+    <input type="hidden" name="tdu" value="5">
+    {{/if}}
+    <input type="submit" class="boton_siguiente2" value="Completar">
+  </form>
+
+</div>
+
+<script>
+  function blurPadre(value){
+    $.post( "/api/checkUser", {"username": value}, function( data ) {
+      if(!(data.err) && data.res){
+        let {id, Nombre, Tipo_de_usuario, Sexo, DNI, username, Numero_de_telefono, domicilio, Fecha_de_nacimiento} = data.res;
+
+        $(`#nombreTutor`).val(Nombre);
+        $(`#dniTutor`).val(DNI);
+        $(`#sexoTutor`).val(Sexo);
+        $(`#nacimientoTutor`).val(validDate(Fecha_de_nacimiento));
+        $(`#telefonoTutor`).val(Numero_de_telefono);
+        $(`#domicilioTutor`).val(domicilio);
+      }
+    }, "json");
+  }
+
+  function validDate(d){
+    return d.split('').slice(0,10).join('');
+  }
+</script>

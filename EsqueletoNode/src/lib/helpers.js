@@ -87,3 +87,14 @@ exports.setCurso = function(idUs){
 exports.autorizadoVerPerfil = function(tipo, childsId, id){
     return [0,1,2,3,4].includes(tipo) || childsId.includes(parseInt(id));
 }
+
+
+exports.RandomString = function(length){
+    let characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+-=[]{}';
+    let randArr = [];
+    let charactersLength = characters.length - 1;
+    for (let i = 0; i < length; i++) {
+        randArr.push(characters[Math.floor(Math.random() * charactersLength)]);
+    }
+    return randArr.join('');
+}

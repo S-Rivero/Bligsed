@@ -92,9 +92,6 @@ module.exports = {
     },
 
     JSONcargarInasistencias: function(id_creador, {id, fecha, inasistencia, justificado}){
-        console.log('id :>> ', id);
-        console.log('fecha :>> ', fecha);
-        console.log('inasistencia :>> ', inasistencia);
         let tiposInasistencia = {
             '0': {
                 "cantidad": 0,

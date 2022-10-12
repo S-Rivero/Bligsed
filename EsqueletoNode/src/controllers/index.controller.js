@@ -4,7 +4,8 @@ const path = require('path');
 const { isUndefined } = require('util');
 const pool = require('../database');
 const {JSONPromediosAl, JSONListaDeCursos, JSONListaDeMaterias, JSONListaAlumnosNotas, JSONrenderCargarInasistencias, JSONcargarInasistencias} = require('../lib/jsonFormat');
-const {setChild} = require('../lib/helpers');
+const {setChild, RandomString, encryptPassword} = require('../lib/helpers');
+
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
 exports.root = ((req,res) => {
     setChild(req.user[0]).then((r)=>{
@@ -24,9 +25,7 @@ exports.renderHome = ((req,res) => { //Actualmente muestra publicaciones nada ma
     if(req.session.currentUser){
         delete req.session.currentUser;
     }
-    const rows = pool.query("SELECT * FROM publicaciones p JOIN usuarios u ON p.autor = u.id ORDER BY p.Id DESC", function(err, publicaciones){
-        res.render('publicaciones.hbs', {pub: publicaciones, links: 'headerLinks/home', user:{user: req.user[0], childs: req.session.childs}});
-    });
+    res.render('publicaciones.hbs', {links: 'headerLinks/home', user:{user: req.user[0], childs: req.session.childs}});
 });
 
 exports.renderChat = ((req,res) => {
@@ -199,3 +198,70 @@ exports.PostCargarInasistencias = ((req,res) => {
                 res.redirect('/Cursos');
         });
 });
+
+
+exports.homeCrearCuentas = ((req, res) => {
+    res.render('homeCrearCuentas.hbs', {links: 'headerLinks/homeCrearCuentas', user:{user: req.user[0], childs: req.session.childs}});
+});
+
+exports.crearCuentas = ((req, res) => {
+    let tipoCuenta = req.params.tipo;
+    res.render('crearCuentas.hbs', {tipoCuenta, links: 'headerLinks/crearCuentas', user:{user: req.user[0], childs: req.session.childs}});
+});
+
+exports.insertCuentas = (async(req, res) => {
+    let tdu = req.params.tipo;
+    let arr = [];
+    let usernames = req.body.username;
+    if(tdu == 6){
+        for(let i = 0 ; i < req.body.username.length ; i++){
+            let aux = [];
+            Object.values(req.body).forEach(e => {
+                aux.push(e[i]);
+            });
+            let passNoHash = RandomString(8);
+            let hashPass = await encryptPassword(passNoHash);
+            aux.push(hashPass);
+            
+            arr.push(aux);
+        }
+    }else{
+        arr = Object.values(req.body);
+        let passNoHash = RandomString(8);
+        let hashPass = await encryptPassword(passNoHash);
+        arr.push(hashPass);
+    }
+    pool.query(`
+        SELECT username
+        FROM usuarios
+        WHERE username = ?`
+        , [usernames], function(err, a){
+            if(!(a[0])){
+
+                pool.query(`
+                    INSERT INTO usuarios
+                    (username, nombre, dni, Sexo, Fecha_de_nacimiento, Numero_de_telefono, domicilio, Tipo_de_usuario, password)
+                    VALUES (?)`
+                    ,[arr], function(err, b){
+                        if(err)
+                            res.send(err)
+                        else
+                         res.redirect('/crear_cuentas');
+                    }
+                )
+            }}
+        );
+    
+});
+
+
+/*
+username",
+"nombre",
+"dni",
+"M",
+"2022-10-08",
+"01163651299",
+"domicilio"
+tdu
+*/
