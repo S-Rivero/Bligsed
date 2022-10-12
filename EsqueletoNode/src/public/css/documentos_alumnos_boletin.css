@@ -18,14 +18,19 @@
 
 select{
     background: white;
-    border: none;
+    border-color: rgb(127, 213, 213);
     font-size: 14px;
     height: 30px;
     padding: 5px;
     width: 250px;
-    border-radius: 15px;
+    border-radius: 0.5em;
     margin-top: 3%;
-    margin-left: 3%  
+    margin-left: 1.5%;
+    text-align: initial center;
+}
+
+.select_actualizarInasistencias {
+    width: 50%;
 }
 
 select:focus{ outline: none;}
@@ -48,22 +53,39 @@ td, th {
   }
 
 
-  .label_boton_editar {
+  .label_boton_editar, .label_boton_actualizar, .label_boton_cancelar, .label_boton_eliminar {
     cursor: pointer;
     width: auto;
     height: auto;
 }
 
-.bx-edit {
+.bx-edit, .bx-trash, .bx-x, .bx-save {
     position: relative;
     font-size: 30px;
 }
 
 
-.bx-edit:hover {
+.bx-edit:hover{
     color: rgb(87,196,193);
     transition: 0.2s;
-}   
+}
+
+.bx-save:hover {
+    color: dodgerblue;
+    transition: 0.2s;
+}
+
+
+
+.bx-trash:hover {
+    color: red;
+    transition: 0.2s;
+}
+
+.bx-x:hover {
+    color: #ff4343;
+    transition: 0.2s;
+}
 
 
 .date_inasistencias {

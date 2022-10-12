@@ -16,13 +16,13 @@
             <td id="cantidad{{id}}" class="{{id}} A">{{cantidad}}</td>
             <td id="justificado{{id}}" class="{{id}} A">{{#tipoInasistenciaToString tipo}}{{/tipoInasistenciaToString}}</td>
             {{#if ../tdu 3}}
-            <td class="{{id}} A"><label class="label_boton_editar" for="boton_editar{{id}}"><i class='bx bx-edit'></i> </label><input hidden id="boton_editar{{id}}" type="button" value="Editar" onclick="alternarEdicion({{id}})"></td>
+            <td class="{{id}} A"><label title="Editar Inasistencia" class="label_boton_editar" for="boton_editar{{id}}"><i class='bx bx-edit'></i> </label><input hidden id="boton_editar{{id}}" type="button" value="Editar" onclick="alternarEdicion({{id}})"></td>
             {{/if}}
 
             <td hidden class="{{id}} B" style="display: none;">{{id}}</td>
             <td hidden class="{{id}} B"><input class="date_inasistencias" id="{{id}}date" type="date" name="date" value="{{#dateDbToCorrectFormat fecha}}{{/dateDbToCorrectFormat}}"></td>
             <td hidden class="{{id}} B">
-                <select id="{{id}}select" name="inasistencia" onchange="changeCantidad({{id}})">
+                <select class="select_actualizarInasistencias" id="{{id}}select" name="inasistencia" onchange="changeCantidad({{id}})">
                     <option value="{{#motivoATipoInasistencia motivo}}{{/motivoATipoInasistencia}}" disabled selected hidden>{{cantidad}} - {{motivo}}</option>
                     <option value="0">0 - Ausente no computable</option>
                     <option value="5">0.25 - Tarde TM</option>
@@ -37,9 +37,9 @@
             <td hidden class="{{id}} B"><input id="{{id}}checkbox" type="checkbox" name="justificado" {{#tipoInasistenciaToCheck tipo}}{{/tipoInasistenciaToCheck}}></td>
             {{#if ../tdu 3}}
             <td hidden class="{{id}} A">
-                <input type="button" value="cancelar" onclick="alternarEdicion({{id}})">
-                <input type="button" value="eliminar" onclick="eliminar({{id}})">
-                <input type="button" value="guardar" onclick="actualizar({{id}})">
+                <label title="Cancelar" for="boton_cancelar{{id}}" class="label_boton_cancelar"><i class='bx bx-x'></i></label><input hidden  id="boton_cancelar{{id}}" type="button" value="cancelar" onclick="alternarEdicion({{id}})">
+                <label title="Guardar Cambios" for="boton_actualizar{{id}}" class="label_boton_actualizar"><i class='bx bx-save'></i></label><input hidden  id="boton_actualizar{{id}}" type="button" value="guardar" onclick="actualizar({{id}})">
+                <label title="Eliminar Inasistencia" for="boton_eliminar{{id}}" class="label_boton_eliminar"><i class='bx bx-trash bx-tada-hover'></i></label><input  hidden id="boton_eliminar{{id}}" type="button" value="eliminar" onclick="eliminar({{id}})">
             </td>
             {{/if}}
         </tr>

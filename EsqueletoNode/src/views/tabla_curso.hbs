@@ -26,9 +26,9 @@
               <tr>
                 <td>
                   {{#if ../tdu 3}}
-                  <label style="width: 100%; height:fit-content;" class="label_checkbox" for="al{{id}}"><input class="checkbox_alumnos" type="checkbox" name="idSeleccionados" id="al{{id}}" value="{{id}}" onchange="verif()">
+                  <label class="label_checkbox" for="al{{id}}"><input class="checkbox_alumnos" type="checkbox" name="idSeleccionados" id="al{{id}}" value="{{id}}" onchange="verif()">
                   {{/if}}
-                  <a href="../perfil/p/{{id}}">{{nombre}}</a>
+                  <a class="nombre_alumnos" href="../perfil/p/{{id}}">{{nombre}}</a>
                   </label>
                   <input type="hidden" name="idAlumnos" id="al{{id}}" value="{{id}}">
                   <input type="hidden" name="nombreAlumnos" id="Nal{{id}}" value="{{nombre}}">

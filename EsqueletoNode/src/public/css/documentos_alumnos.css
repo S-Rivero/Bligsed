@@ -1,3 +1,13 @@
+
+.bordered label {
+  display: inline-block;
+  width: 100%;
+  height: fit-content !important;
+  background-color: transparent;
+  height: 100px;
+}
+
+
 .contenedor_nombre_doc{
     grid-column: 1 / span 3;
     display: flex;
@@ -178,11 +188,8 @@ input::-webkit-inner-spin-button {
 }
 
 
-.bordered label {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-  background-color: transparent;
-  width: 100px;
-  height: 100px;
+
+.nombre_alumnos{
+  
 }
+
