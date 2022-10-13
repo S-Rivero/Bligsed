@@ -212,8 +212,69 @@ exports.crearCuentas = ((req, res) => {
 exports.insertCuentas = (async(req, res) => {
     let tdu = req.params.tipo;
     let arr = [];
-    let usernames = req.body.username;
-    
+    let {
+        username,
+        Nombre,
+        DNI,
+        Sexo,
+        Fecha_de_nacimiento,
+        Numero_de_telefono,
+        domicilio
+    } = req.body;
+    let passNoHash = RandomString(8);
+    console.log(passNoHash);
+    let hashPass = await encryptPassword(passNoHash);
+    if(tdu != 6){
+        
+        pool.query(
+            `INSERT INTO usuarios
+            (Tipo_de_usuario, username, Nombre, DNI, Sexo, Fecha_de_nacimiento, Numero_de_telefono, domicilio, password) VALUES
+            (?,?,?,?,?,?,?,?,?);`
+            ,[tdu, username,Nombre,DNI,Sexo,Fecha_de_nacimiento,Numero_de_telefono,domicilio, hashPass],function(err, a){
+                res.send(req.body);  
+        });
+    }else{
+        let idTutor = req.body.idTutor;
+        if(idTutor){ //No hace falta insertar el tutor xq ya existe
+            pool.query(
+                `INSERT INTO usuarios
+                (Tipo_de_usuario, username, Nombre, DNI, Sexo, Fecha_de_nacimiento, Numero_de_telefono, domicilio, password) VALUES
+                (?,?,?,?,?,?,?,?,?);`
+                ,[tdu, username,Nombre,DNI,Sexo,Fecha_de_nacimiento,Numero_de_telefono,domicilio, hashPass],function(err, a){
+                let insertId = a.insertId;
+                pool.query(`
+                    UPDATE alumno SET Padre = ? WHERE ID = ?;
+                `,[idTutor,insertId], function(err, b){
+                    res.send("boca")
+                });   
+            });
+        }else{//Hay que crear el usuario padre tb xd
+            let {tutorusername, tutorNombre, tutorDNI, tutorSexo, tutorFecha_de_nacimiento, tutorNumero_de_telefono, tutordomicilio} = req.body;
+            let passNoHashTutor = RandomString(8);
+            console.log(passNoHash);
+            let hashPassTutor = await encryptPassword(passNoHashTutor);
+            pool.query(
+                `INSERT INTO usuarios
+                (Tipo_de_usuario, username, Nombre, DNI, Sexo, Fecha_de_nacimiento, Numero_de_telefono, domicilio, password) VALUES
+                (?,?,?,?,?,?,?,?,?);`
+                ,[5,tutorusername, tutorNombre, tutorDNI, tutorSexo, tutorFecha_de_nacimiento, tutorNumero_de_telefono, tutordomicilio, hashPassTutor],function(err, z){
+                    var tutorId = z.insertId;
+                    pool.query(
+                        `INSERT INTO usuarios
+                        (Tipo_de_usuario, username, Nombre, DNI, Sexo, Fecha_de_nacimiento, Numero_de_telefono, domicilio, password) VALUES
+                        (?,?,?,?,?,?,?,?,?);`
+                        ,[tdu, username,Nombre,DNI,Sexo,Fecha_de_nacimiento,Numero_de_telefono,domicilio, hashPass],function(err, a){
+                        let insertId = a.insertId;
+                        pool.query(`
+                            UPDATE alumno SET Padre = ? WHERE ID = ?;
+                        `,[tutorId,insertId], function(err, b){
+                            res.send("boca")
+                        });   
+                    });
+            });
+        }
+    }
+      
 });
 
 

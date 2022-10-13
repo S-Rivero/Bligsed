@@ -4,28 +4,29 @@
     <h1>Creación de Cuentas - {{#tipoUsuarioToString tipoCuenta}}{{/tipoUsuarioToString}}</h1>
 
     <h4>Correo Electrónico</h4>
-    <input type="mail" name="username" placeholder="Escriba un correo electrónico..." class="ingreso2" value="test2"></input>
+    <input required onblur="blurCuenta(this.value)" type="mail" name="username" placeholder="Escriba un correo electrónico..." class="ingreso2"></input>
+    <label id="userLabel" hidden>Esta cuenta ya existe</label>
 
     <h4>Nombre y Apellido</h4>
-    <input type="text" name="Nombre" placeholder="Escriba un nombre y apellido..." class="ingreso2" value="test2"></input>
+    <input required id="nombre" type="text" name="Nombre" placeholder="Escriba un nombre y apellido..." class="ingreso2"></input>
 
     <h4>DNI</h4>
-    <input type="text" name="DNI" placeholder="Escriba un numero..." class="ingreso2" value="2345"></input>
+    <input required id="dni" type="text" name="DNI" placeholder="Escriba un numero..." class="ingreso2"></input>
 
-    <select name="Sexo" id="">
+    <select required name="Sexo" id="sexo">
       <option value="M" selected>Masculino</option>
       <option value="F">Femenino</option>
       <option value="N">No binario</option>
     </select>
 
     <h4>Fecha de nacimiento</h4>
-    <input type="date" name="Fecha_de_nacimiento" class="ingreso2" value="2022-10-10"></input>
+    <input required id="nacimiento" type="date" name="Fecha_de_nacimiento" class="ingreso2"></input>
 
     <h4>Teléfono</h4>
-    <input type="text" name="Numero_de_telefono" placeholder="Escriba un teléfono..." class="ingreso2" value="23452"></input>
+    <input required id="telefono" type="text" name="Numero_de_telefono" placeholder="Escriba un teléfono..." class="ingreso2"></input>
 
     <h4>Domicilio</h4>
-    <input type="text" name="domicilio" placeholder="Escriba un domicilio..." class="ingreso2" value="test2"></input>
+    <input required id="domicilio" type="text" name="domicilio" placeholder="Escriba un domicilio..." class="ingreso2"></input>
 
     <input type="hidden" name="tdu" value="{{tipoCuenta}}">
     <br><br><br>
@@ -33,15 +34,16 @@
     {{#if tipoCuenta 6}}
     <!--Datos del Tutor-->
     <h4>Correo Electrónico tutor</h4>
-    <input id="mailTutor" type="mail" name="tutorusername" placeholder="Escriba un correo electrónico..." class="ingreso2" onblur="blurPadre(this.value)"></input>
+    <input type="hidden" value="" id="idTutor" name="idTutor">
+    <input required id="mailTutor" type="mail" name="tutorusername" placeholder="Escriba un correo electrónico..." class="ingreso2" onblur="blurPadre(this.value)"></input>
 
     <h4>Nombre y Apellido tutor</h4>
-    <input id="nombreTutor" type="text" name="tutorNombre" placeholder="Escriba un nombre y apellido..." class="ingreso2"></input>
+    <input required id="nombreTutor" type="text" name="tutorNombre" placeholder="Escriba un nombre y apellido..." class="ingreso2"></input>
 
     <h4>DNI del tutor</h4>
-    <input id="dniTutor" type="text" name="tutorDNI" placeholder="Escriba un numero..." class="ingreso2"></input>
+    <input required id="dniTutor" type="text" name="tutorDNI" placeholder="Escriba un numero..." class="ingreso2"></input>
     
-    <select name="tutorSexo" id="sexoTutor">
+    <select required name="tutorSexo" id="sexoTutor">
       <option value="M" selected>Masculino</option>
       <option value="F">Femenino</option>
       <option value="N">No binario</option>
@@ -49,42 +51,103 @@
     
     
     <h4>Fecha de nacimiento tutor</h4>
-    <input id="nacimientoTutor" type="date" name="tutorFecha_de_nacimiento" class="ingreso2"></input>
+    <input required id="nacimientoTutor" type="date" name="tutorFecha_de_nacimiento" class="ingreso2"></input>
 
     <h4>Teléfono tutor</h4>
-    <input id="telefonoTutor" type="text" name="tutorNumero_de_telefono" placeholder="Escriba un teléfono..." class="ingreso2"></input>
+    <input required id="telefonoTutor" type="text" name="tutorNumero_de_telefono" placeholder="Escriba un teléfono..." class="ingreso2"></input>
 
     <h4>Domicilio tutor</h4>
-    <input id="domicilioTutor" type="text" name="tutordomicilio" placeholder="Escriba un domicilio..." class="ingreso2"></input>
+    <input required id="domicilioTutor" type="text" name="tutordomicilio" placeholder="Escriba un domicilio..." class="ingreso2"></input>
 
     <input type="hidden" name="tutortdu" value="5">
     {{/if}}
     <input type="submit" class="boton_siguiente2" value="Completar">
+    <input type="submit" class="boton_siguiente2" value="Completar y continuar">
   </form>
 
 </div>
 
 <script>
-  function blurPadre(value){
+  function blurCuenta(value){
     $.post( "/api/checkUser", {"username": value}, function( data ) {
       if(!(data.err) && data.res){
         let {id, Nombre, Tipo_de_usuario, Sexo, DNI, username, Numero_de_telefono, domicilio, Fecha_de_nacimiento} = data.res;
 
-        $(`#nombreTutor`).val(Nombre);
-        $(`#nombreTutor`).prop("disabled",true);
-        $(`#dniTutor`).val(DNI);
-        $(`#dniTutor`).prop("disabled",true);
-        $(`#sexoTutor`).val(Sexo);
-        $(`#sexoTutor`).prop("disabled",true);
-        $(`#nacimientoTutor`).val(validDate(Fecha_de_nacimiento));
-        $(`#nacimientoTutor`).prop("disabled",true);
-        $(`#telefonoTutor`).val(Numero_de_telefono);
-        $(`#telefonoTutor`).prop("disabled",true);
-        $(`#domicilioTutor`).val(domicilio);
-        $(`#domicilioTutor`).prop("disabled",true);
+        $(`#nombre`).val(Nombre);
+        $(`#nombre`).prop("disabled",true);
+        $(`#dni`).val(DNI);
+        $(`#dni`).prop("disabled",true);
+        $(`#sexo`).val(Sexo);
+        $(`#sexo`).prop("disabled",true);
+        $(`#nacimiento`).val(validDate(Fecha_de_nacimiento));
+        $(`#nacimiento`).prop("disabled",true);
+        $(`#telefono`).val(Numero_de_telefono);
+        $(`#telefono`).prop("disabled",true);
+        $(`#domicilio`).val(domicilio);
+        $(`#domicilio`).prop("disabled",true);
+        $(`#userLabel`).prop("hidden",false);
+        
+        $("input[type=submit]").prop("hidden",true);
+      }else{
+        $(`#nombre`).val("");
+        $(`#nombre`).prop("disabled",false);
+        $(`#dni`).val("");
+        $(`#dni`).prop("disabled",false);
+        $(`#sexo`).val("M");
+        $(`#sexo`).prop("disabled",false);
+        $(`#nacimiento`).val("");
+        $(`#nacimiento`).prop("disabled",false);
+        $(`#telefono`).val("");
+        $(`#telefono`).prop("disabled",false);
+        $(`#domicilio`).val("");
+        $(`#domicilio`).prop("disabled",false);
+        $("input[type=submit]").prop("hidden",false);
+        $(`#userLabel`).prop("hidden",true);
+
+      }
+    }, "json");
+  }
+
+  function blurPadre(value){
+    $.post( "/api/checkUser", {"username": value}, function( data ) {
+      if(!(data.err) && data.res){
+        let {id, Nombre, Tipo_de_usuario, Sexo, DNI, username, Numero_de_telefono, domicilio, Fecha_de_nacimiento} = data.res;
+        if(Tipo_de_usuario != 5){
+          alert("Este usuario no es del tipo tutor");
+          $(`#mailTutor`).val("");
+          $(`#nombreTutor`).val("");
+          $(`#nombreTutor`).prop("disabled",false);
+          $(`#idTutor`).val("");
+          $(`#dniTutor`).val("");
+          $(`#dniTutor`).prop("disabled",false);
+          $(`#sexoTutor`).val("M");
+          $(`#sexoTutor`).prop("disabled",false);
+          $(`#nacimientoTutor`).val("");
+          $(`#nacimientoTutor`).prop("disabled",false);
+          $(`#telefonoTutor`).val("");
+          $(`#telefonoTutor`).prop("disabled",false);
+          $(`#domicilioTutor`).val("");
+          $(`#domicilioTutor`).prop("disabled",false);
+        }else{
+          $(`#nombreTutor`).val(Nombre);
+          $(`#nombreTutor`).prop("disabled",true);
+          $(`#idTutor`).val(id);
+          $(`#dniTutor`).val(DNI);
+          $(`#dniTutor`).prop("disabled",true);
+          $(`#sexoTutor`).val(Sexo);
+          $(`#sexoTutor`).prop("disabled",true);
+          $(`#nacimientoTutor`).val(validDate(Fecha_de_nacimiento));
+          $(`#nacimientoTutor`).prop("disabled",true);
+          $(`#telefonoTutor`).val(Numero_de_telefono);
+          $(`#telefonoTutor`).prop("disabled",true);
+          $(`#domicilioTutor`).val(domicilio);
+          $(`#domicilioTutor`).prop("disabled",true);
+        }
+        
       }else{
         $(`#nombreTutor`).val("");
         $(`#nombreTutor`).prop("disabled",false);
+        $(`#idTutor`).val("");
         $(`#dniTutor`).val("");
         $(`#dniTutor`).prop("disabled",false);
         $(`#sexoTutor`).val("M");
@@ -95,6 +158,7 @@
         $(`#telefonoTutor`).prop("disabled",false);
         $(`#domicilioTutor`).val("");
         $(`#domicilioTutor`).prop("disabled",false);
+
       }
     }, "json");
   }
