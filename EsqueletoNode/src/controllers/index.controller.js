@@ -5,7 +5,6 @@ const { isUndefined } = require('util');
 const pool = require('../database');
 const {JSONPromediosAl, JSONListaDeCursos, JSONListaDeMaterias, JSONListaAlumnosNotas, JSONrenderCargarInasistencias, JSONcargarInasistencias} = require('../lib/jsonFormat');
 const {setChild, RandomString, encryptPassword} = require('../lib/helpers');
-
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
 exports.root = ((req,res) => {
     setChild(req.user[0]).then((r)=>{
@@ -204,13 +203,34 @@ exports.homeCrearCuentas = ((req, res) => {
     res.render('homeCrearCuentas.hbs', {links: 'headerLinks/homeCrearCuentas', user:{user: req.user[0], childs: req.session.childs}});
 });
 
-exports.crearCuentas = ((req, res) => {
+const nodemailer = require("nodemailer");
+
+var transporter = nodemailer.createTransport({
+    host: "smtp-mail.outlook.com", // hostname
+    port: 587, // port for secure SMTP
+    secureConnection: false,
+    tls: {
+       ciphers:'SSLv3'
+    },
+    auth: {
+        user: 'bligsed@hotmail.com',
+        pass: 'pipaBenedetto09'
+    }
+});
+
+
+
+
+exports.crearCuentas = (async (req, res) => {
     let tipoCuenta = req.params.tipo;
     res.render('crearCuentas.hbs', {tipoCuenta, links: 'headerLinks/crearCuentas', user:{user: req.user[0], childs: req.session.childs}});
 });
 
 exports.insertCuentas = (async(req, res) => {
+
     let tdu = req.params.tipo;
+    let btn = req.body.btn;
+    let redirect = btn != "Completar" ? "../crear_cuentas/"+tdu : "../crear_cuentas";
     let arr = [];
     let {
         username,
@@ -222,7 +242,6 @@ exports.insertCuentas = (async(req, res) => {
         domicilio
     } = req.body;
     let passNoHash = RandomString(8);
-    console.log(passNoHash);
     let hashPass = await encryptPassword(passNoHash);
     if(tdu != 6){
         
@@ -231,7 +250,13 @@ exports.insertCuentas = (async(req, res) => {
             (Tipo_de_usuario, username, Nombre, DNI, Sexo, Fecha_de_nacimiento, Numero_de_telefono, domicilio, password) VALUES
             (?,?,?,?,?,?,?,?,?);`
             ,[tdu, username,Nombre,DNI,Sexo,Fecha_de_nacimiento,Numero_de_telefono,domicilio, hashPass],function(err, a){
-                res.send(req.body);  
+                transporter.sendMail({
+                    from: 'bligsed@hotmail.com', // sender address
+                    to: username, // list of receivers
+                    subject: "Bienvenido a Bligsed", // Subject line
+                    html: `<b>Usuario: ${username} Contraseña: ${passNoHash}</b>`, // html body
+                  });
+                res.redirect(redirect);  
         });
     }else{
         let idTutor = req.body.idTutor;
@@ -245,19 +270,30 @@ exports.insertCuentas = (async(req, res) => {
                 pool.query(`
                     UPDATE alumno SET Padre = ? WHERE ID = ?;
                 `,[idTutor,insertId], function(err, b){
-                    res.send("boca")
+                    transporter.sendMail({
+                        from: 'bligsed@hotmail.com', // sender address
+                        to: username, // list of receivers
+                        subject: "Bienvenido a Bligsed", // Subject line
+                        html: `<b>Usuario: ${username} Contraseña: ${passNoHash}</b>`, // html body
+                      });
+                    res.redirect(redirect);
                 });   
             });
         }else{//Hay que crear el usuario padre tb xd
             let {tutorusername, tutorNombre, tutorDNI, tutorSexo, tutorFecha_de_nacimiento, tutorNumero_de_telefono, tutordomicilio} = req.body;
             let passNoHashTutor = RandomString(8);
-            console.log(passNoHash);
             let hashPassTutor = await encryptPassword(passNoHashTutor);
             pool.query(
                 `INSERT INTO usuarios
                 (Tipo_de_usuario, username, Nombre, DNI, Sexo, Fecha_de_nacimiento, Numero_de_telefono, domicilio, password) VALUES
                 (?,?,?,?,?,?,?,?,?);`
                 ,[5,tutorusername, tutorNombre, tutorDNI, tutorSexo, tutorFecha_de_nacimiento, tutorNumero_de_telefono, tutordomicilio, hashPassTutor],function(err, z){
+                    transporter.sendMail({
+                        from: 'bligsed@hotmail.com', // sender address
+                        to: username, // list of receivers
+                        subject: "Bienvenido a Bligsed", // Subject line
+                        html: `<b>Usuario: ${tutorusername} Contraseña: ${passNoHashTutor}</b>`, // html body
+                      });
                     var tutorId = z.insertId;
                     pool.query(
                         `INSERT INTO usuarios
@@ -268,7 +304,13 @@ exports.insertCuentas = (async(req, res) => {
                         pool.query(`
                             UPDATE alumno SET Padre = ? WHERE ID = ?;
                         `,[tutorId,insertId], function(err, b){
-                            res.send("boca")
+                            transporter.sendMail({
+                                from: 'bligsed@hotmail.com', // sender address
+                                to: username, // list of receivers
+                                subject: "Bienvenido a Bligsed", // Subject line
+                                html: `<b>Usuario: ${username} Contraseña: ${passNoHash}</b>`, // html body
+                              });
+                            res.redirect(redirect);
                         });   
                     });
             });
