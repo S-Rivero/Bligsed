@@ -33,7 +33,7 @@
 
     {{#if tipoCuenta 6}}
     <h4>Curso</h4>
-    <select class="ingreso2">
+    <select name="idCurso" class="ingreso2">
       {{#each cursos}}
         <option value="{{ID}}">{{#cursoToString Nombre_curso}}{{/cursoToString}}</option>
       {{/each}}

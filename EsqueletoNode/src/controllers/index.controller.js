@@ -267,6 +267,7 @@ exports.insertCuentas = (async(req, res) => {
         });
     }else{
         let idTutor = req.body.idTutor;
+        let idCurso = req.body.idCurso;
         if(idTutor){ //No hace falta insertar el tutor xq ya existe
             pool.query(
                 `INSERT INTO usuarios
@@ -275,8 +276,8 @@ exports.insertCuentas = (async(req, res) => {
                 ,[tdu, username,Nombre,DNI,Sexo,Fecha_de_nacimiento,Numero_de_telefono,domicilio, hashPass],function(err, a){
                 let insertId = a.insertId;
                 pool.query(`
-                    UPDATE alumno SET Padre = ? WHERE ID = ?;
-                `,[idTutor,insertId], function(err, b){
+                    UPDATE alumno SET Padre = ?, ID_Curso = ? WHERE ID = ?;
+                `,[idTutor, idCurso, insertId], function(err, b){
                     transporter.sendMail({
                         from: 'bligsed@hotmail.com', // sender address
                         to: username, // list of receivers
@@ -309,8 +310,8 @@ exports.insertCuentas = (async(req, res) => {
                         ,[tdu, username,Nombre,DNI,Sexo,Fecha_de_nacimiento,Numero_de_telefono,domicilio, hashPass],function(err, a){
                         let insertId = a.insertId;
                         pool.query(`
-                            UPDATE alumno SET Padre = ? WHERE ID = ?;
-                        `,[tutorId,insertId], function(err, b){
+                            UPDATE alumno SET Padre = ?, ID_Curso = ? WHERE ID = ?;
+                            `,[tutorId, idCurso, insertId], function(err, b){
                             transporter.sendMail({
                                 from: 'bligsed@hotmail.com', // sender address
                                 to: username, // list of receivers
