@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const pool = require('./database');
 exports.io_init = function (app) {
 
     // Initializations
@@ -199,12 +200,28 @@ exports.io_init = function (app) {
             cb(true)
         });
 
-        socket.on('añadirMiembro', ids => {
-            let content = '';
-            ids.forEach(id => {
-                content += `${id}\n`;
-            })
-            fs.appendFileSync(`.local_database/rooms/${socket.room}.txt`, content);
+        socket.on('añadirMiembro', (email,room,cb) => {
+            pool.query("SELECT id FROM usuarios WHERE username = ?", email, function(err, id){
+                console.log('Hizo consulta');
+                if(err) cb(false)
+                else cb(true);
+                console.log(id);
+                // let list = JSONListaDeCursos(a);
+                // let listMat = JSONListaDeMaterias(a);
+            });
+            // if(ids.length > 1)
+                        
+            //Consulta a la base de datos buscando en base al nombre
+            // fs.readFile(`./src/local_database/users/${o.id}.txt`, (err, data) => {
+            //     if(err)
+            //         fs.writeFileSync(`./src/local_database/users/${o.id}.txt`, `${files}`);
+            //     else{
+            //         if(data.toString() == '')            
+            //             fs.appendFileSync(`./src/local_database/users/${o.id}.txt`, `${files}`);
+            //         else
+            //             fs.appendFileSync(`./src/local_database/users/${o.id}.txt`, `-${files}`);
+            //     }
+            // });
         });
 
         socket.on('loadPub', cb => {

@@ -24,10 +24,10 @@ window.onload = (e) => {
                   elem.name = elem.name[1];
                else
                   elem.name = elem.name[0];
-               ulChats.insertAdjacentHTML('beforeend', `<li class="clearfix cont" onclick="switchChat(this)"><img src="/media/user2.png" alt="avatar"><div class="about"><div class="name">${elem.name}</div><div class="hid">${elem.id}</div><div class="hid">true</div></div></li>`);
+               ulChats.insertAdjacentHTML('beforeend', `<li class="clearfix cont" id="${elem.id}" onclick="switchChat(this)"><img src="/media/user2.png" alt="avatar"><div class="about"><div class="name">${elem.name}</div><div class="hid">${elem.id}</div><div class="hid">true</div></div></li>`);
             }
             else
-               ulChats.insertAdjacentHTML('beforeend', `<li class="clearfix cont" onclick="switchChat(this)"><img src="/media/user2.png" alt="avatar"><div class="about"><div class="name">${elem.name}</div><div class="hid">${elem.id}</div><div class="hid">false</div></div></li>`);
+               ulChats.insertAdjacentHTML('beforeend', `<li class="clearfix cont" id="${elem.id}" onclick="switchChat(this)"><img src="/media/user2.png" alt="avatar"><div class="about"><div class="name">${elem.name}</div><div class="hid">${elem.id}</div><div class="hid">false</div></div></li>`);
          });
       }
       delete arr;
@@ -41,18 +41,18 @@ function switchChat(elem) {
       priv: elem.children[1].children[2].innerHTML,
    }
    if (actual_room != room) {
+      if(actual_room)
+         document.getElementById(actual_room.id).classList.remove('active');
+      elem.classList.add('active');
+      
       actual_room = room;
 
-      /*  Estoy viendo como ocultar el form
-      if(actual_room.priv == 'true')
-         document.getElementById('añadirMiembro').classList.add("hid");
+      if(actual_room.priv == "true")
+         document.getElementById("añadirMiembro").classList.add('hid');
       else
-         document.getElementById('añadirMiembro').classList.remove("hid");
-      console.log(document.getElementById('añadirMiembro').classList.value);
-      console.log(document.getElementById('añadirMiembro').classList.values());
-      */
+         document.getElementById("añadirMiembro").classList.remove('hid');
 
-      document.getElementById('divChatContainer').classList.remove('hid');
+      
       ul.innerHTML = "";
       socket.emit('switchRoom', actual_room.id, arr => {
          arr.forEach(elem => { printMessage(elem) });
@@ -110,9 +110,15 @@ document.getElementById('abanGrupo').addEventListener("click", (e) => {
       });
 });
 
-document.getElementById('añadirMiembro').addEventListener("click", (e) => {
+document.getElementById("añadirMiembro").addEventListener("submit", (e) => {
    e.preventDefault();
-   console.log('añadir_Miembro');
+   socket.emit('añadirMiembro', e.target.username.value, actual_room.id, res => {
+      if(!res)
+         alert('No se encontro al usuario seleccionado');
+      else
+         alert('Hizo Consulta');
+   });
+   document.getElementById("añadirMiembro").username.value = '';
 });
 
 
