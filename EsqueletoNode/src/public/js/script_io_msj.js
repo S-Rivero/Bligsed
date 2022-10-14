@@ -59,6 +59,7 @@ function switchChat(elem) {
       });
       window.scrollTo(0, document.body.scrollHeight);
       document.getElementById('chatName').innerHTML = actual_room.name;
+      elem.classList.add('active');
    }
 }
 

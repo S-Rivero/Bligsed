@@ -34,7 +34,10 @@
                 </select>
             </td>
             <td hidden class="{{id}} B" id="{{id}}cantidad">{{cantidad}}</td>
-            <td hidden class="{{id}} B"><input id="{{id}}checkbox" type="checkbox" name="justificado" {{#tipoInasistenciaToCheck tipo}}{{/tipoInasistenciaToCheck}}></td>
+            <td hidden class="{{id}} B">
+                <label class="label_checkbox" for="{{id}}checkbox"></label>
+                <input id="{{id}}checkbox" type="checkbox" name="justificado" {{#tipoInasistenciaToCheck tipo}}{{/tipoInasistenciaToCheck}}>
+            </td>
             {{#if ../tdu 3}}
             <td hidden class="{{id}} A">
                 <label title="Cancelar" for="boton_cancelar{{id}}" class="label_boton_cancelar"><i class='bx bx-x'></i></label><input hidden  id="boton_cancelar{{id}}" type="button" value="cancelar" onclick="alternarEdicion({{id}})">

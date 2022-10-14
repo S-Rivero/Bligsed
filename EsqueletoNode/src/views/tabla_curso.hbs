@@ -3,12 +3,13 @@
       <div class="contenedor_documentacion">
       <div class="contenedor_nombre_doc">
       
-        <select name="selectCurso" id="selectCurso" onchange="updateURL()">
+        <div class="select"><select name="selectCurso" id="selectCurso" onchange="updateURL()">
           <option value="" hidden="hidden" selected="selected" id="optionSelected"></option>
           {{#each b}}
             <option value="{{ID}}">{{#cursoToString Nombre_curso}}{{/cursoToString}}</option>
           {{/each}}
         </select>
+        </div>
         {{#if tdu 3}}
           <button class="input_cargar_inasistencias" id="selectTodos" onclick="selectTodos()">Seleccionar todos</button>
           <input disabled type="submit" class="input_cargar_inasistencias"  value="Cargar Inasistencias" form="tabla" id="cargarBtn">
