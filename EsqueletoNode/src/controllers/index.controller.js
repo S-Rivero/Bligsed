@@ -207,7 +207,7 @@ const nodemailer = require("nodemailer");
 
 var transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com", // hostname
-    port: 587, // port for secure SMTP
+    port: 25, // port for secure SMTP
     secureConnection: false,
     tls: {
        ciphers:'SSLv3'
@@ -223,7 +223,14 @@ var transporter = nodemailer.createTransport({
 
 exports.crearCuentas = (async (req, res) => {
     let tipoCuenta = req.params.tipo;
-    res.render('crearCuentas.hbs', {tipoCuenta, links: 'headerLinks/crearCuentas', user:{user: req.user[0], childs: req.session.childs}});
+    if(tipoCuenta == 6){
+        pool.query("SELECT * FROM `curso` ORDER BY Nombre_curso", function(err,a){
+            res.render('crearCuentas.hbs', {cursos: a, tipoCuenta, links: 'headerLinks/crearCuentas', user:{user: req.user[0], childs: req.session.childs}});
+            // res.send(a);
+        })
+    }else{
+        res.render('crearCuentas.hbs', {tipoCuenta, links: 'headerLinks/crearCuentas', user:{user: req.user[0], childs: req.session.childs}});
+    }
 });
 
 exports.insertCuentas = (async(req, res) => {
@@ -287,10 +294,10 @@ exports.insertCuentas = (async(req, res) => {
                 `INSERT INTO usuarios
                 (Tipo_de_usuario, username, Nombre, DNI, Sexo, Fecha_de_nacimiento, Numero_de_telefono, domicilio, password) VALUES
                 (?,?,?,?,?,?,?,?,?);`
-                ,[5,tutorusername, tutorNombre, tutorDNI, tutorSexo, tutorFecha_de_nacimiento, tutorNumero_de_telefono, tutordomicilio, hashPassTutor],function(err, z){
-                    transporter.sendMail({
+                ,[5,tutorusername, tutorNombre, tutorDNI, tutorSexo, tutorFecha_de_nacimiento, tutorNumero_de_telefono, tutordomicilio, hashPassTutor], async function(err, z){
+                    await transporter.sendMail({
                         from: 'bligsed@hotmail.com', // sender address
-                        to: username, // list of receivers
+                        to: tutorusername, // list of receivers
                         subject: "Bienvenido a Bligsed", // Subject line
                         html: `<b>Usuario: ${tutorusername} Contraseña: ${passNoHashTutor}</b>`, // html body
                       });

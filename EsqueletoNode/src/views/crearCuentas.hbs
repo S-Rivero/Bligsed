@@ -29,9 +29,16 @@
     <input required id="domicilio" type="text" name="domicilio" placeholder="Escriba un domicilio..." class="ingreso2"></input>
 
     <input type="hidden" name="tdu" value="{{tipoCuenta}}">
-    <br><br><br>
+    
 
     {{#if tipoCuenta 6}}
+    <h4>Curso</h4>
+    <select class="ingreso2">
+      {{#each cursos}}
+        <option value="{{ID}}">{{#cursoToString Nombre_curso}}{{/cursoToString}}</option>
+      {{/each}}
+    </select>
+    <br><br><br>
     <!--Datos del Tutor-->
     <h4>Correo Electrónico tutor</h4>
     <input type="hidden" value="" id="idTutor" name="idTutor">
