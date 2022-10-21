@@ -1,0 +1,66 @@
+.contenedor_creacion_materia {
+    border-radius: 15px;
+    background-color: rgba(4, 83, 63, 0.059);
+    margin-top: 5%;
+    margin-left: 7%;
+    height: 45vh;
+    width: 60vw;
+}
+
+.contenedor_creacion_materia h1 {
+    margin-bottom: 5vh;
+}
+
+
+.contenedor_creacion_materia h4{
+    position: relative;
+    left: 4%;
+}
+
+.ingreso{
+    border: 1px solid rgb(161, 160, 160);
+    border-radius: 15px;
+    padding: 0.5%;
+    outline: none;
+    margin-top: 6%;
+    margin-left: 4%;
+    width: 30%;
+}
+
+select, input{
+    background: white;
+    font-size: 14px;
+    height: 30px;
+    padding: 5px;
+    width: 250px;
+    border-radius: 15px;
+    margin-left: 4%;
+    outline: none;
+    border: 1px solid rgb(161, 160, 160);
+}
+
+.contenedor_creacion_materia h1{
+    font-size: 6vh;
+    text-align: center;
+    position: relative;
+    top: 9%;
+}
+
+.boton_siguiente{
+    background:transparent;
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 1%;
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+    position: relative;
+    float: right;
+    margin-right: 3%;
+}
+
+.boton_siguiente:hover{
+    background-color: #333;
+    color: white;
+    transition: 0.2s;
+}

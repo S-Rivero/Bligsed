@@ -15,7 +15,9 @@ const {
     PostCargarInasistencias,
     homeCrearCuentas,
     crearCuentas,
-    insertCuentas
+    insertCuentas,
+    crearMaterias,
+    insertMaterias
 } = require('../controllers/index.controller');
 
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
@@ -45,5 +47,7 @@ router.get('/crear_cuentas', isLoggedIn, authLevelAdministrador, homeCrearCuenta
 router.get('/crear_cuentas/:tipo', isLoggedIn, authLevelAdministrador, crearCuentas);
 router.post('/crear_cuentas/:tipo', isLoggedIn, authLevelAdministrador, insertCuentas);
 
+router.get( '/crear_materias', isLoggedIn, authLevelAdministrador, crearMaterias);
+router.post('/crear_materias', isLoggedIn, authLevelAdministrador, insertMaterias);
 
 module.exports = router;

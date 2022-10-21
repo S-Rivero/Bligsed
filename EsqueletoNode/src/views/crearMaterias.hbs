@@ -1,0 +1,47 @@
+<div class="contenedor_creacion_materia"> 
+    <form id="form" method="post">
+    <h1>Creación de Materia</h1>
+    <br>
+    <h4>¿Cual es el nombre de la materia?</h4>
+    <input type="text" name="name" id="name" required> 
+
+    <br> <br> <br>
+
+    <h4>¿Quien es el docente a cargo?</h4>
+    <select name="select" id="select">
+        <option selected value="0">Seleccione un docente</option>
+        {{#each docs}}
+            <option value="{{id}}">{{name}},"{{email}}"</option>
+        {{/each}}
+    </select>
+
+    <br> <br> <br>
+    
+    <button 
+        type="submit"
+        class="boton_siguiente"
+        > Crear Materia
+    </button>
+    
+    </form>
+</div>
+
+<script>
+    $('#form').submit(e => {
+        e.preventDefault();
+        console.log(e.target.name.value);
+        console.log(e.target.select.value);
+        if(e.target.select.value == 0){
+            alert('Debes seleccionar un docente para la materia');
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "../../../../../../../../../../crear_materias",
+                data: {
+                    name: e.target.name.value, 
+                    doc: e.target.select.value
+                },
+            });
+        }
+    });
+</script>
