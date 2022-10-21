@@ -7,41 +7,57 @@
 
     <br> <br> <br>
 
+    <h4>¿A qué curso pertenece esta materia?</h4>
+    <select name="curso">
+        <option selected value="-1">Seleccione un curso</option>
+        {{#each cursos}}
+            <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select>
+    
+    <br> <br> <br>
+
     <h4>¿Quien es el docente a cargo?</h4>
-    <select name="select" id="select">
-        <option selected value="0">Seleccione un docente</option>
+    <select name="doc">
+        <option selected value="-1">Seleccione un docente</option>
         {{#each docs}}
             <option value="{{id}}">{{name}},"{{email}}"</option>
         {{/each}}
     </select>
 
-    <br> <br> <br>
-    
     <button 
         type="submit"
         class="boton_siguiente"
         > Crear Materia
     </button>
-    
+
     </form>
 </div>
 
 <script>
     $('#form').submit(e => {
         e.preventDefault();
-        console.log(e.target.name.value);
-        console.log(e.target.select.value);
-        if(e.target.select.value == 0){
+        
+        // HACER UN REGEX PARA EVITAR LOS CARACTERES QUE PUEDEN MATAR A LA BDD TIPO ; < > / \ ? { } [ ]( ) ` ' "'
+
+        if(e.target.doc.value == -1){
             alert('Debes seleccionar un docente para la materia');
+        } else if(e.target.curso.value == -1){
+            alert('Debes seleccionar un curso para la materia');
         } else {
             $.ajax({
                 type: "POST",
                 url: "../../../../../../../../../../crear_materias",
                 data: {
                     name: e.target.name.value, 
-                    doc: e.target.select.value
-                },
+                    doc: e.target.doc.value,
+                    curso: e.target.curso.value
+                }
             });
+            alert('Se creo la materia correctamente');
+            e.target.name.value = '';
+            e.target.doc.value = -1;
+            e.target.curso.value = -1;
         }
     });
 </script>

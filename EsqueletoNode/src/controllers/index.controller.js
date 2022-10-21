@@ -342,16 +342,21 @@ tdu
 exports.crearMaterias = (async (req, res) => {
     // res.render('homeCrearMaterias.hbs', {links: 'headerLinks/homeCrearCuentas', user:{user: req.user[0], childs: req.session.childs}});
     pool.query(`
-    SELECT id, Nombre as name, username as email FROM usuarios WHERE Tipo_de_usuario = 4;` 
-    , function(err, doc){
-        res.render('crearMaterias.hbs', {links: 'headerLinks/crearMaterias', user:{user: req.user[0], childs: req.session.childs}, docs: doc});
-    });   
+    SELECT ID as id, Nombre_curso as name FROM curso;` 
+    , function(err, cursos){
+        pool.query(`
+        SELECT id, Nombre as name, username as email FROM usuarios WHERE Tipo_de_usuario = 4;` 
+        , function(err, doc){
+            res.render('crearMaterias.hbs', {links: 'headerLinks/crearMaterias', user:{user: req.user[0], childs: req.session.childs}, docs: doc, cursos });
+        });   
+    });
 });
 exports.insertMaterias = (async(req, res) => {
     req.body.doc = parseInt(req.body.doc);
+    req.body.curso = parseInt(req.body.curso);
     console.log(req.body)
     pool.query(
-        "INSERT INTO `materias`(`Materia`, `IdCurso`, `profesor`) VALUES ('"+req.body.name+"', 1, "+req.body.doc+");"
+        "INSERT INTO `materias`(`Materia`, `IdCurso`, `profesor`) VALUES ('"+req.body.name+"', "+req.body.curso+", "+req.body.doc+");"
         ,(err, e) => {
             if(err) console.log(err); else console.log('Funco');
     });
