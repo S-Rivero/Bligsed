@@ -1,0 +1,88 @@
+<div class="contenedor_creacion_materia"> 
+    <form id="form" method="post">
+    <h1>Creación de Curso</h1>
+    <br>
+    <h4>Seleccione el año del curso</h4>
+    <select name="a">
+        <option selected value="-1">Seleccione un año</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+    </select>
+    
+    <br> <br> <br>
+
+    <h4>Seleccione la división del curso</h4>
+    <select name="d">
+        <option selected value="-1">Seleccione una división</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">D</option>
+        <option value="E">E</option>
+        <option value="F">F</option>
+        <option value="G">G</option>
+        <option value="H">H</option>
+    </select>
+
+    <button 
+        type="submit"
+        class="boton_siguiente"
+        > Crear Materia
+    </button>
+
+
+    </form>
+</div>
+
+<div id="cursosHid" style="display: none;">
+    {{#each cursos}}
+        <p>{{name}}</p>
+    {{/each}}
+</div>
+<script>
+    var c;
+    window.onload = e => {
+        let cursos = document.getElementById('cursosHid');
+        c = [];
+        for(let i = 0; i < cursos.childElementCount; i++){
+            c.push(cursos.children[i].innerHTML);
+        }
+    }
+    $('#form').submit(e => {
+        e.preventDefault();
+        
+        // HACER UN REGEX PARA EVITAR LOS CARACTERES QUE PUEDEN MATAR A LA BDD TIPO ; < > / \ ? { } [ ]( ) ` ' "'
+        
+        let curso = e.target.a.value + e.target.d.value,
+            x = false;
+        c.forEach(e => {
+            if(e === curso)
+                x = true;
+        })
+
+        if(e.target.a.value == -1){
+            alert('Debes seleccionar un año para el curso');
+        } else if(e.target.d.value == -1){
+            alert('Debes seleccionar una división para el curso');
+        } else if(!x) {
+            $.ajax({
+                type: "POST",
+                url: "../../../../../../../../../../crear_curso",
+                data: {c: curso}
+            });
+            alert('Se creo el curso correctamente.');
+            e.target.a.value = -1; 
+            e.target.d.value = -1;
+        } else{
+            alert('El curso seleccionado ya existe.')
+            e.target.a.value = -1; 
+            e.target.d.value = -1;
+        }
+    });
+</script>

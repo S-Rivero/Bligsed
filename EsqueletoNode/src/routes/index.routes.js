@@ -9,18 +9,24 @@ const {
     renderDocumentos,
     renderCursos,
     renderTablaCursos,
+
     cargarNotasDocente,
     POSTcargarNotasDocente,
     renderCargarInasistencias,
     PostCargarInasistencias,
+    
     homeCrearCuentas,
     crearCuentas,
     insertCuentas,
+    crearCurso,
+    insertCurso,
     crearMaterias,
     insertMaterias,
+    
     homeBuscarCuenta,
     buscarCuenta,
     buscarCuentaId
+
 } = require('../controllers/index.controller');
 
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
@@ -52,6 +58,9 @@ router.post('/crear_cuentas/:tipo', isLoggedIn, authLevelAdministrador, insertCu
 
 router.get( '/crear_materias', isLoggedIn, authLevelAdministrador, crearMaterias);
 router.post('/crear_materias', isLoggedIn, authLevelAdministrador, insertMaterias);
+
+router.get( '/crear_curso', isLoggedIn, authLevelAdministrador, crearCurso);
+router.post('/crear_curso', isLoggedIn, authLevelAdministrador, insertCurso);
 
 router.get('/buscarCuenta', isLoggedIn, authLevelVerUsuarios, buscarCuenta);
 router.get('/buscarCuenta/:id', isLoggedIn, authLevelVerUsuarios, buscarCuentaId);
