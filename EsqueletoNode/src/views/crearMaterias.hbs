@@ -38,9 +38,12 @@
     $('#form').submit(e => {
         e.preventDefault();
         
-        // HACER UN REGEX PARA EVITAR LOS CARACTERES QUE PUEDEN MATAR A LA BDD TIPO ; < > / \ ? { } [ ]( ) ` ' "'
-
-        if(e.target.doc.value == -1){
+        if(/(<|>|\?|\\|=|\+|-|_|$|;|`|'|"|\/|\(|\)|\{|\}|\[|\])/g.test(e.target.name.value)){
+            alert('El nombre de la materia tiene caracteres no disponibles');
+            e.target.name.value = '';
+            e.target.doc.value = -1;
+            e.target.curso.value = -1;
+        } else if(e.target.doc.value == -1){
             alert('Debes seleccionar un docente para la materia');
         } else if(e.target.curso.value == -1){
             alert('Debes seleccionar un curso para la materia');

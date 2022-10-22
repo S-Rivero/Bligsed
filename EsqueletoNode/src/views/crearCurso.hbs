@@ -56,9 +56,7 @@
     }
     $('#form').submit(e => {
         e.preventDefault();
-        
-        // HACER UN REGEX PARA EVITAR LOS CARACTERES QUE PUEDEN MATAR A LA BDD TIPO ; < > / \ ? { } [ ]( ) ` ' "'
-        
+
         let curso = e.target.a.value + e.target.d.value,
             x = false;
         c.forEach(e => {
