@@ -1,0 +1,127 @@
+
+    <div class="text" id="editarUsuario">Editar usuario</div>
+      <div class="contenedor_documentacion">
+        <div class="contenedor_nombre_doc">
+        <input type="text" name="buscador" id="buscador" placeholder="Mail" value="{{username}}">
+        <input type="submit" onclick="buscarCuenta()">
+        </div>
+      </div>
+      <div id="contenedor_tablas">
+
+        <form id="form" action="../api/actualizarUsuario" method="POST">
+
+          <table class="bordered">
+            
+          </table>
+        </form>
+      </div>
+    </div>
+  <script>
+    function buscarCuenta(){
+        let buscador = $('#buscador').val();
+        if (buscador == ""){
+            $('table').html();
+            return;
+        }
+        fetch('../api/buscarCuenta/'+buscador)
+        .then((response) => response.json())
+        .then((data) => {
+            if(!data.res){
+                $('table').html(generarTabla(data));
+                $(`#sexo option[value="${data.Sexo}"]`).attr('selected',true);
+                if(data.Tipo_de_usuario == 6){
+                  $(`#contenedor_tablas`).append(usuarioAlumno(data));
+                }
+                console.log(data.Sexo);
+            }else{
+                $('table').html("No se encontraron coincidencias. Revise el dato buscado")
+            }
+        });
+    }
+
+    function usuarioAlumno(d){
+      return `
+        <form id="formAlumno" action="../api/actualizarAlumno" method="POST">
+          <table class="bordered">
+            <tr>
+            <th>Curso</th>
+            <th>Tutor</th>
+        </tr>
+        <tr>
+          <input type="hidden" value="${d.id}" name="id">
+          <td><input type="text" value="${d.Nombre_curso}" name="curso"></td>
+          <td><input type="text" value="${d.padremail}" name="tutor"></td>
+        </tr>
+        <tr>
+          <td><input type="submit" name="btn" value="Actualizar Curso"></td>
+          <td><input type="submit" name="btn" value="Actualizar Tutor"></td>
+        </tr>
+          </table>
+        </form>
+      `;
+    }
+
+    function generarTabla(d){
+        return `
+        <tr>
+            <th>ID</th>
+            <th>Apellido y nombre</th>
+            <th>E-mail</th>
+            <th>TDU</th>
+            <th>DNI</th>
+            <th>Teléfono</th>
+            <th>Domicilio</th>
+            <th>Nacimiento</th>
+            <th>Sexo</th>
+        </tr>
+        <tr>
+          <input type="hidden" value="${d.Tipo_de_usuario}" name="tdu">
+          <input type="hidden" value="${d.password}" name="pass">
+          <input type="hidden" value="${d.username}" name="oldUsername">
+          <input type="hidden" value="${d.id}" name="id">
+          <td><a href="../perfil/p/${d.id}">${d.id}</a></td>
+          <td><input type="text" value="${d.Nombre}" name="nombre"></td>
+          <td><input type="mail" value="${d.username}" name="username"></td>
+          <td>${d.Tipo_de_usuario}</td>
+          <td><input type="text" value="${d.DNI}" name="DNI"></td>
+          <td><input type="text" value="${d.Numero_de_telefono}" name="telefono"></td>
+          <td><input type="text" value="${d.domicilio}" name="domicilio"></td>
+          <td><input type="date" value="${d.Fecha_de_nacimiento.slice(0,10)}" name="nacimiento"></td>
+          <td><select name="Sexo" id="sexo">
+            <option value="F">Femenino</option>
+            <option value="M">Masculino</option>
+            <option value="N">No binario</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td><input type="submit" name="btn" value="Guardar"></td>
+          <td><input type="submit" name="btn" value="Eliminar usuario"></td>
+        </tr>
+        `
+    }
+
+
+
+    let sidebar = document.querySelector(".sidebar");
+    let closeBtn = document.querySelector("#btn");
+    let searchBtn = document.querySelector(".bx-search");
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("open");
+      menuBtnChange();//calling the function(optional)
+    });
+
+    searchBtn.addEventListener("click", () => { // Sidebar open when you click on the search iocn
+      sidebar.classList.toggle("open");
+      menuBtnChange(); //calling the function(optional)
+    });
+
+    // following are the code to change sidebar button(optional)
+    function menuBtnChange() {
+      if (sidebar.classList.contains("open")) {
+        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+      } else {
+        closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
+      }
+    }
+  </script>

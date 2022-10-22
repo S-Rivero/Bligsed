@@ -1,14 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const {isLoggedIn, isNotLoggedIn} = require('../lib/auth');
-const {authLevelCursos, authLevelTablaCursos, authLevelCargarNotas, authLevelCargarInasistencias, authLevelAdministrador} = require('../lib/nexts');
+const {authLevelCursos, authLevelTablaCursos, authLevelCargarNotas, authLevelCargarInasistencias, authLevelAdministrador, authLevelVerUsuarios} = require('../lib/nexts');
 const {
     idCursoToName,
     idMateriaToCurso,
     ListaAlumnosNotas,
     eliminarInasistencias,
     actualizarInasistencias,
-    checkUser
+    checkUser,
+    buscarCuenta,
+    actualizarUsuario,
+    actualizarAlumno
 } = require('../controllers/api.controller');
 
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
@@ -21,5 +24,9 @@ router.get('/api/eliminarInasistencia/:id',isLoggedIn, authLevelCargarInasistenc
 router.get('/api/actualizarInasistencia/:id/:date/:checkbox/:select',isLoggedIn, authLevelCargarInasistencias, actualizarInasistencias);
 
 router.post('/api/checkUser',isLoggedIn, authLevelAdministrador, checkUser);
+
+router.get('/api/buscarCuenta/:username', isLoggedIn, authLevelVerUsuarios, buscarCuenta);
+router.post('/api/actualizarUsuario', isLoggedIn, authLevelVerUsuarios, actualizarUsuario);
+router.post('/api/actualizarAlumno', isLoggedIn, authLevelVerUsuarios, actualizarAlumno);
 
 module.exports = router;

@@ -328,6 +328,24 @@ exports.insertCuentas = (async(req, res) => {
 });
 
 
+exports.buscarCuenta = ((req, res) => { 
+    res.render('buscarCuenta.hbs', {links: 'headerLinks/buscarCuenta', user:{user: req.user[0], childs: req.session.childs}});
+});
+
+exports.buscarCuentaId = ((req, res) => { 
+    let id = req.params.id;
+    let username = "";
+    pool.query(`SELECT username FROM usuarios WHERE id = ?`, id, function(err, a){
+        if(a[0]){
+            username = a[0].username;
+        }
+        res.render('buscarCuenta.hbs', {username: username, links: 'headerLinks/buscarCuenta', user:{user: req.user[0], childs: req.session.childs}});
+    });
+});
+//res.render('tabla_curso.hbs', {a, b, tdu: req.user[0].Tipo_de_usuario, links: 'headerLinks/tabla_curso_docente', user:{user: req.user[0], childs: req.session.childs}});
+
+
+
 /*
 username",
 "nombre",

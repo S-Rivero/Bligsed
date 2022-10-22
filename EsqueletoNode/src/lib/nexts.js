@@ -95,3 +95,11 @@ exports.authLevelAdministrador = (req,res,next) => {
         res.redirect("/home");
     }
 }
+
+exports.authLevelVerUsuarios = (req,res,next) => {
+    if(req.user[0].Tipo_de_usuario <= 3){
+        return next();
+    }else{
+        res.redirect("/home");
+    }
+};

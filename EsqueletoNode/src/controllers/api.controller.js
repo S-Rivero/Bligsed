@@ -4,6 +4,8 @@ const router = express.Router();
 const path = require('path');
 const pool = require('../database');
 const {JSONListaAlumnosNotas} = require('../lib/jsonFormat');
+const {RandomString, encryptPassword} = require('../lib/helpers');
+
 
 exports.idCursoToName = ((req,res) => {
     let id = req.params.id;
@@ -118,4 +120,89 @@ exports.checkUser = ((req, res)=>{
             res.send({"res": a[0]});
         }
     });
+});
+
+
+exports.buscarCuenta = (async(req, res) => { 
+    //username or id
+    let {username} = req.params;
+    pool.query("SELECT usuarios.*, curso.ID as idCurso, curso.Nombre_curso as Nombre_curso, B.username as padremail FROM usuarios LEFT JOIN alumno ON usuarios.id = alumno.id LEFT JOIN usuarios B ON Padre = B.id LEFT JOIN curso ON curso.ID = alumno.ID_Curso WHERE usuarios.username = ?;",[username], function(err,a){
+        if(a[0]){
+            res.send(a[0]);
+        }else{
+            res.send({"res":"nao nao"});
+        }
+    })
+});
+
+const nodemailer = require("nodemailer");
+
+var transporter = nodemailer.createTransport({
+    host: "smtp-mail.outlook.com", // hostname
+    port: 25, // port for secure SMTP
+    secureConnection: false,
+    tls: {
+       ciphers:'SSLv3'
+    },
+    auth: {
+        user: 'bligsed@hotmail.com',
+        pass: 'pipaBenedetto09'
+    }
+});
+
+exports.actualizarUsuario = (async(req, res) => { 
+    if(req.body.btn == "Guardar"){
+        let {nombre, username, DNI, Sexo, telefono, nacimiento, domicilio, id, oldUsername, pass, tdu} = req.body;
+
+        if(oldUsername != username){
+            let passNoHash = RandomString(8);
+            pass = await encryptPassword(passNoHash);
+            transporter.sendMail({
+                from: 'bligsed@hotmail.com', // sender address
+                to: username, // list of receivers
+                subject: "Actualizacion en tu usuario", // Subject line
+                html: `<b>Nuevo usuario: ${username} Contraseña: ${passNoHash}</b>`, // html body
+              });
+        }
+        pool.query(`
+        UPDATE usuarios SET password = ?, Nombre = ?, username = ?, DNI = ?, Sexo = ?, Numero_de_telefono = ?, Fecha_de_nacimiento = ? , domicilio = ?
+        WHERE id = ?;
+        `,[pass, nombre, username, DNI, Sexo, telefono, nacimiento, domicilio, id], function(err,a){
+            res.redirect('/buscarCuenta');
+        })
+    }else{
+        let {id} = req.body;
+        pool.query(`
+            DELETE FROM usuarios WHERE id = ?
+        `, id, function(err,a){
+            res.redirect('/buscarCuenta');
+        });
+    }
+});
+
+exports.actualizarAlumno = (async(req, res) => { 
+    let {curso, tutor, btn} = req.body;
+    if(btn == "Actualizar Curso"){
+        pool.query(`SELECT ID from CURSO WHERE Nombre_curso = ?`,curso,function(err,a){
+            console.log(a);
+            if(a[0]){
+                pool.query(`UPDATE alumno SET ID_Curso = ?`,a[0].ID,function(err,b){
+                    res.redirect('/buscarCuenta');
+                });
+            }else{
+                res.redirect('/buscarCuenta');
+            }
+        });
+    }else{
+        pool.query(`SELECT id from usuarios WHERE username = ? AND Tipo_de_usuario = 5`,tutor,function(err,a){
+            console.log(a);
+            if(a[0]){
+                pool.query(`UPDATE alumno SET Padre = ?`,a[0].id,function(err,b){
+                    res.redirect('/buscarCuenta');
+                });
+            }else{
+                res.redirect('/buscarCuenta');
+            }
+        });
+    }
 });

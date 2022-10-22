@@ -3,6 +3,7 @@ config();
 
 module.exports = {
     database: {
+      multipleStatements: true,
       connectionLimit: 15,
       host: "localhost",
       user:  "root",

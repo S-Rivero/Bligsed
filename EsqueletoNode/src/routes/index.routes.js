@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {isLoggedIn, isNotLoggedIn} = require('../lib/auth');
-const {authLevelCursos, authLevelTablaCursos, authLevelCargarNotas, authLevelCargarInasistencias, authLevelAdministrador} = require('../lib/nexts');
+const {authLevelCursos, authLevelTablaCursos, authLevelCargarNotas, authLevelCargarInasistencias, authLevelAdministrador, authLevelVerUsuarios} = require('../lib/nexts');
 const {
     root,
     renderHome,
@@ -17,7 +17,10 @@ const {
     crearCuentas,
     insertCuentas,
     crearMaterias,
-    insertMaterias
+    insertMaterias,
+    homeBuscarCuenta,
+    buscarCuenta,
+    buscarCuentaId
 } = require('../controllers/index.controller');
 
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
@@ -49,5 +52,8 @@ router.post('/crear_cuentas/:tipo', isLoggedIn, authLevelAdministrador, insertCu
 
 router.get( '/crear_materias', isLoggedIn, authLevelAdministrador, crearMaterias);
 router.post('/crear_materias', isLoggedIn, authLevelAdministrador, insertMaterias);
+
+router.get('/buscarCuenta', isLoggedIn, authLevelVerUsuarios, buscarCuenta);
+router.get('/buscarCuenta/:id', isLoggedIn, authLevelVerUsuarios, buscarCuentaId);
 
 module.exports = router;
