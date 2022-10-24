@@ -1,0 +1,44 @@
+
+    <div class="text">Tabla de curso</div>
+      <div class="contenedor_documentacion">
+      <div class="contenedor_nombre_doc">
+          <button class="input_cargar_inasistencias" id="selectTodos" onclick="selectTodos()">Seleccionar todos</button>
+          <input disabled type="submit" class="input_cargar_inasistencias"  value="Eliminar" form="tabla" id="eliminarBtn">
+      </div>
+      <form action="../api/eliminarCursos" method="post" name="tabla" id="tabla">
+        <table class="bordered">
+          <tr>
+            <th>Curso</th>
+            <th></th>   
+          </tr>
+          {{#each a}}
+              <tr>
+                <td><a href="../tablaCurso/{{ID}}">{{Nombre_curso}}</a></td>
+                <td><input type="checkbox" name="{{ID}}" id="" onchange="verif()"></td>
+              </tr>
+          {{/each}}
+        </table>
+      </form>
+    </div>
+<script>
+    function selectTodos(){
+      if($("input[type=checkbox]:checked").length == $("input[type=checkbox]").length){
+        $("input[type=checkbox]").prop('checked', false);
+      }else{
+        $("input[type=checkbox]").prop('checked', true);
+      }
+      if($("input[type=checkbox]:checked").length == 0){
+        $('#eliminarBtn').prop('disabled',true)
+      }else{
+        $('#eliminarBtn').prop('disabled',false)
+      }
+    }
+
+    function verif(){
+      if($("input[type=checkbox]:checked").length == 0){
+        $('#eliminarBtn').prop('disabled',true)
+      }else{
+        $('#eliminarBtn').prop('disabled',false)
+      }
+    }
+</script>

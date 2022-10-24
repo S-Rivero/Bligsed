@@ -405,7 +405,9 @@ exports.buscar = ((req,res) => {
 });
 
 exports.buscarCurso = ((req,res) => {
-    
+    pool.query('SELECT * FROM curso', function(err,a){
+        res.render('buscarCurso.hbs', {a, links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs }});
+    })
 });
 
 

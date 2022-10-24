@@ -11,7 +11,8 @@ const {
     checkUser,
     buscarCuenta,
     actualizarUsuario,
-    actualizarAlumno
+    actualizarAlumno,
+    eliminarCursos
 } = require('../controllers/api.controller');
 
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
@@ -29,4 +30,5 @@ router.get('/api/buscarCuenta/:username', isLoggedIn, authLevelVerUsuarios, busc
 router.post('/api/actualizarUsuario', isLoggedIn, authLevelVerUsuarios, actualizarUsuario);
 router.post('/api/actualizarAlumno', isLoggedIn, authLevelVerUsuarios, actualizarAlumno);
 
+router.post('/api/eliminarCursos', isLoggedIn, authLevelAdministrador, eliminarCursos)
 module.exports = router;
