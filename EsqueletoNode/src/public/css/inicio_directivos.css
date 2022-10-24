@@ -216,7 +216,7 @@ padding: 3%;
 }
 
 #log_out:hover{
-color: #525072;
+color: red;
 }
 
 /* width */
@@ -344,7 +344,7 @@ width: 100%;
 
 #contenedorPub{
   width: 100%;
-
+}
 .publicaciones {
   margin-bottom: 15vh;
 }

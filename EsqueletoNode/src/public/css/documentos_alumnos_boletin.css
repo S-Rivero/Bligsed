@@ -16,6 +16,11 @@
     border-top-right-radius: 15px;
 }
 
+.contenedor_nombre_doc select {
+    margin-top: 1vh;
+    margin-left: 3%;
+}
+
 select{
     background: white;
     border-color: rgb(127, 213, 213);
@@ -97,13 +102,29 @@ td, th {
 }
 
 
+
 .fecha {
-    width: 19%;
+    width: 10.8vw;
 }
 
 .motivo {
-    width: 32.8%;
+    width: 20vw;
 }
 .cantidad {
-    width: 10%;
+    width: 8vw;
+}
+
+.justificado {
+    width: 9.5vw;
+}
+
+.checkbox {
+    width: 25px;
+    height: 25px;
+}
+
+.label_checkbox {
+    width: 8vw;
+    height: 100%;
+    background-color: red;
 }
