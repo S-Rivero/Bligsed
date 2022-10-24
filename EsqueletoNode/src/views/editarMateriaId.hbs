@@ -3,6 +3,7 @@
   <div class="contenedor_nombre_doc">
   </div>
   <form action="" method="" name="tabla" id="tabla">
+    <input type="submit" value="Guardar">
     <table class="bordered">
       <tr>
         <th>Id</th>
@@ -28,3 +29,21 @@
     </table>
   </form>
 </div>
+
+<script>
+
+  fetch('/api/listarCursos')
+  .then((response) => response.json())
+  .then((data) => data.forEach(d => {
+    $('#curso').append(cursoToHtml(d));
+  }));
+
+  function cursoToHtml(c){
+    return `<option value="${c.ID}">${c.Nombre_curso}</option>`;
+  }
+  
+ // fetch('/api/listarDocentes)
+ // .then((response) => response.json())
+ // .then((data) => );
+
+</script>

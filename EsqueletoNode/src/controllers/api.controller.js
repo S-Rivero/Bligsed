@@ -214,3 +214,16 @@ exports.eliminarCursos = ((req,res) => {
         res.redirect('/editarCurso');
     });
 });
+
+exports.listarDocentes = ((req,res) => {
+    pool.query('SELECT id, nombre FROM usuarios WHERE Tipo_de_usuario = 5 ORDER BY nombre',
+    function(err,a){
+        res.send(a);
+    });
+});
+
+exports.listarCursos = ((req,res) => {
+    pool.query('SELECT * FROM curso ORDER BY Nombre_curso', function(err,a){
+        res.send(a);
+    });
+});
