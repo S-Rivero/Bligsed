@@ -1,0 +1,25 @@
+<div class="text">Tabla de materias</div>
+<div class="contenedor_documentacion">
+  <div class="contenedor_nombre_doc">
+  </div>
+  <form action="" method="" name="tabla" id="tabla">
+    <table class="bordered">
+      <tr>
+        <th></th>
+        <th>Id</th>
+        <th>Materia</th>
+        <th>Curso</th>
+        <th>Profesor</th>
+      </tr>
+      {{#each a}}
+      <tr>
+        <td><a href="../editarMateria/{{ID}}"><i class="bx bx-edit"></i></a></td>
+        <td>{{ID}}</td>
+        <td>{{Materia}}</td>
+        <td>{{Nombre_curso}}</td>
+        <td>{{nombre}}</td>
+      </tr>
+      {{/each}}
+    </table>
+  </form>
+</div>

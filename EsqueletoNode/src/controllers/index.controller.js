@@ -400,17 +400,28 @@ exports.crear = ((req,res) => {
     res.render('crear.hbs', { links: 'headerLinks/crear', user: { user: req.user[0], childs: req.session.childs }});
 }); 
 
-exports.buscar = ((req,res) => {
-    res.render('buscar.hbs', { links: 'headerLinks/crear', user: { user: req.user[0], childs: req.session.childs }});
+exports.editar = ((req,res) => {
+    res.render('editar.hbs', { links: 'headerLinks/crear', user: { user: req.user[0], childs: req.session.childs }});
 });
 
-exports.buscarCurso = ((req,res) => {
-    pool.query('SELECT * FROM curso', function(err,a){
-        res.render('buscarCurso.hbs', {a, links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs }});
+exports.editarCurso = ((req,res) => {
+    pool.query('SELECT * FROM curso ORDER BY Nombre_curso', function(err,a){
+        res.render('editarCurso.hbs', {a, links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs }});
     })
 });
 
 
-exports.buscarMateria = ((req,res) => {
+exports.editarMateria = ((req,res) => {
+    pool.query(`
+        SELECT m.ID, c.Nombre_curso, m.Materia, m.IdCurso, u.nombre, m.profesor from materias m
+        JOIN usuarios u  
+        ON u.id = m.profesor
+        JOIN curso c
+        ON c.ID = m.IdCurso
+        ;
+    `,function(err,a){
+        // res.send(a);
+        res.render('editarMateria.hbs', {a, links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs }});
+    });
     
 });
