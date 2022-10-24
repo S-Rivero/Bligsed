@@ -120,6 +120,15 @@ CREATE TABLE `historial_notas` (
 -- Estructura de tabla para la tabla `inasistencias`
 --
 
+CREATE TABLE `finales` (
+  `id` int(11) NOT NULL,
+  `id_alumno` int(11) NOT NULL,
+  `id_materia` int(11) NOT NULL,
+  `trimestre` int(11) NOT NULL COMMENT '1,2,3 son para el valor de trimestre si no es ninguna de eso asumis que es final',
+  `valor` int(11) NOT NULL
+);
+
+
 CREATE TABLE `inasistencias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tipo` tinyint(1) ,
