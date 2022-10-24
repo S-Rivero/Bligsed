@@ -418,10 +418,25 @@ exports.editarMateria = ((req,res) => {
         ON u.id = m.profesor
         JOIN curso c
         ON c.ID = m.IdCurso
+        ORDER BY c.Nombre_curso, m.Materia
         ;
     `,function(err,a){
         // res.send(a);
         res.render('editarMateria.hbs', {a, links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs }});
+    }); 
+});
+
+exports.editarMateriaId = ((req,res) => {
+    pool.query(`
+        SELECT m.ID, c.Nombre_curso, m.Materia, m.IdCurso, u.nombre, m.profesor from materias m
+        JOIN usuarios u  
+        ON u.id = m.profesor
+        JOIN curso c
+        ON c.ID = m.IdCurso
+        ORDER BY c.Nombre_curso, m.Materia
+        ;
+    `,req.params.id,function(err,a){
+        res.render('editarMateriaId.hbs', {a: a[0], links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs }});
     });
     
 });

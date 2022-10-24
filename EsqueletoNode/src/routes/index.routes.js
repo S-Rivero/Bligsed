@@ -30,6 +30,7 @@ const {
     crear,
     editar,
     editarMateria,
+    editarMateriaId,
     editarCurso
 
 } = require('../controllers/index.controller');
@@ -52,6 +53,7 @@ router.get('/crear', isLoggedIn, authLevelAdministrador, crear);
 router.get('/editar', isLoggedIn, authLevelAdministrador, editar);
 router.get('/editarCurso', isLoggedIn, authLevelAdministrador, editarCurso);
 router.get('/editarMateria', isLoggedIn, authLevelAdministrador, editarMateria);
+router.get('/editarMateria/:id', isLoggedIn, authLevelAdministrador, editarMateriaId);
 
 //Id es la id de materia
 //t es el numero de trimestre. Por defecto, desde cursos, te manda al t=1

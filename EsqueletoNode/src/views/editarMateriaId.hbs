@@ -1,0 +1,30 @@
+<div class="text">Tabla de materias</div>
+<div class="contenedor_documentacion">
+  <div class="contenedor_nombre_doc">
+  </div>
+  <form action="" method="" name="tabla" id="tabla">
+    <table class="bordered">
+      <tr>
+        <th>Id</th>
+        <th>Materia</th>
+        <th>Curso</th>
+        <th>Profesor</th>
+      </tr>
+      <tr>
+        <td>{{a.ID}}</td>
+        <td>
+          <input type="text" name="materia" id="mateira" value="{{a.Materia}}"></td>
+        <td>
+          <select name="curso" id="curso">
+            <option value="{{a.IdCurso}}" hidden selected>{{a.Nombre_curso}}</option>
+          </select>
+        </td>
+        <td>
+          <select name="profesor" id="profesor">
+            <option value="{{a.profesor}}" hidden selected>{{a.nombre}}</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
