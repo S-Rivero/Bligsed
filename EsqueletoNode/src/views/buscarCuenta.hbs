@@ -14,6 +14,9 @@
             
           </table>
         </form>
+        <form id="formAlumno" action="../api/actualizarAlumno" method="POST">
+        </form>
+
       </div>
     </div>
   <script>
@@ -30,7 +33,9 @@
                 $('table').html(generarTabla(data));
                 $(`#sexo option[value="${data.Sexo}"]`).attr('selected',true);
                 if(data.Tipo_de_usuario == 6){
-                  $(`#contenedor_tablas`).append(usuarioAlumno(data));
+                  $(`#formAlumno`).html(usuarioAlumno(data));
+                }else{
+                  $(`#formAlumno`).html("");
                 }
                 console.log(data.Sexo);
             }else{
@@ -41,7 +46,6 @@
 
     function usuarioAlumno(d){
       return `
-        <form id="formAlumno" action="../api/actualizarAlumno" method="POST">
           <table class="bordered">
             <tr>
             <th>Curso</th>
@@ -57,7 +61,6 @@
           <td><input type="submit" name="btn" value="Actualizar Tutor"></td>
         </tr>
           </table>
-        </form>
       `;
     }
 
