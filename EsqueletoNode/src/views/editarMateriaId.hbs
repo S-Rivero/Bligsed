@@ -2,8 +2,9 @@
 <div class="contenedor_documentacion">
   <div class="contenedor_nombre_doc">
   </div>
-  <form action="" method="" name="tabla" id="tabla">
+  <form action="/api/actualizarCurso" method="POST" name="tabla" id="tabla">
     <input type="submit" value="Guardar">
+    <input type="submit" value="Eliminar materia">
     <table class="bordered">
       <tr>
         <th>Id</th>
@@ -12,6 +13,7 @@
         <th>Profesor</th>
       </tr>
       <tr>
+        <input type="hidden" name="id" value="{{a.ID}}">
         <td>{{a.ID}}</td>
         <td>
           <input type="text" name="materia" id="mateira" value="{{a.Materia}}"></td>
@@ -42,8 +44,13 @@
     return `<option value="${c.ID}">${c.Nombre_curso}</option>`;
   }
   
- // fetch('/api/listarDocentes)
- // .then((response) => response.json())
- // .then((data) => );
+ fetch('/api/listarDocentes')
+  .then((response) => response.json())
+  .then((data) => data.forEach(d => {
+    $('#profesor').append(profesorToHtml(d));
+  }));
 
+  function profesorToHtml(c){
+    return `<option value="${c.id}">${c.nombre}</option>`;
+  }
 </script>
