@@ -25,7 +25,10 @@ const {
     
     homeBuscarCuenta,
     buscarCuenta,
-    buscarCuentaId
+    buscarCuentaId,
+
+    crear,
+    buscar
 
 } = require('../controllers/index.controller');
 
@@ -43,6 +46,8 @@ router.get('/Cursos', isLoggedIn, authLevelCursos, renderCursos);
 
 router.get('/tablaCurso/:id', isLoggedIn, authLevelTablaCursos, renderTablaCursos);
 
+router.get('/crear', isLoggedIn, authLevelAdministrador, crear);
+router.get('/buscar', isLoggedIn, authLevelAdministrador, buscar);
 
 //Id es la id de materia
 //t es el numero de trimestre. Por defecto, desde cursos, te manda al t=1

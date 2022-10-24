@@ -394,3 +394,12 @@ exports.insertMaterias = (async (req, res) => {
             if (err) console.log(err); else console.log('Se creo la materia '+req.body.name);
         });
 });
+
+
+exports.crear = ((req,res) => {
+    res.render('crear.hbs', { links: 'headerLinks/crear', user: { user: req.user[0], childs: req.session.childs }});
+}); 
+
+exports.buscar = ((req,res) => {
+    res.render('buscar.hbs', { links: 'headerLinks/crear', user: { user: req.user[0], childs: req.session.childs }});
+});
