@@ -188,3 +188,7 @@ input::-webkit-inner-spin-button {
   position: relative;
   bottom: 1vh;
 }
+
+.fecha {
+  width: 100%;
+}

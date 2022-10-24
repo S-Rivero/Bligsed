@@ -11,10 +11,10 @@
     </tr>
     {{#each in}}
         <tr id="{{id}}">
-            <td id="fecha{{id}}" class="{{id}} A">{{#dateTimeToDate fecha}}{{/dateTimeToDate}}</td>
-            <td id="motivo{{id}}" class="{{id}} A">{{motivo}}</td>
-            <td id="cantidad{{id}}" class="{{id}} A">{{cantidad}}</td>
-            <td id="justificado{{id}}" class="{{id}} A">{{#tipoInasistenciaToString tipo}}{{/tipoInasistenciaToString}}</td>
+            <td id="fecha{{id}}" class="{{id}} A fecha">{{#dateTimeToDate fecha}}{{/dateTimeToDate}}</td>
+            <td id="motivo{{id}}" class="{{id}} A motivo">{{motivo}}</td>
+            <td id="cantidad{{id}}" class="{{id}} A cantidad">{{cantidad}}</td>
+            <td id="justificado{{id}}" class="{{id}} A justificado">{{#tipoInasistenciaToString tipo}}{{/tipoInasistenciaToString}}</td>
             {{#if ../tdu 3}}
             <td class="{{id}} A"><label title="Editar Inasistencia" class="label_boton_editar" for="boton_editar{{id}}"><i class='bx bx-edit'></i> </label><input hidden id="boton_editar{{id}}" type="button" value="Editar" onclick="alternarEdicion({{id}})"></td>
             {{/if}}

@@ -24,8 +24,6 @@ select{
     padding: 5px;
     width: 250px;
     border-radius: 0.5em;
-    margin-top: 3%;
-    margin-left: 1.5%;
     text-align: initial center;
 }
 
@@ -99,6 +97,13 @@ td, th {
 }
 
 
-.label_checkbox {
-    
+.fecha {
+    width: 19%;
+}
+
+.motivo {
+    width: 32.8%;
+}
+.cantidad {
+    width: 10%;
 }
