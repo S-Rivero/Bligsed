@@ -5,7 +5,7 @@
           <button class="input_cargar_inasistencias" id="selectTodos" onclick="selectTodos()">Seleccionar todos</button>
           <input disabled type="submit" class="input_cargar_inasistencias"  value="Eliminar" form="tabla" id="eliminarBtn">
       </div>
-      <form name="tabla" id="tabla">
+      <form action="../api/eliminarCursos" method="post" name="tabla" id="tabla">
         <table class="bordered">
           <tr>
             <th>Curso</th>
@@ -14,7 +14,7 @@
           {{#each a}}
               <tr>
                 <td><a href="../tablaCurso/{{ID}}">{{Nombre_curso}}</a></td>
-                <td><input type="checkbox" name="chkbx" id="" onchange="verif()"></td>
+                <td><input type="checkbox" name="{{ID}}" id="" onchange="verif()"></td>
               </tr>
           {{/each}}
         </table>

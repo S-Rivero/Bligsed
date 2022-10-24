@@ -206,3 +206,11 @@ exports.actualizarAlumno = (async(req, res) => {
         });
     }
 });
+
+
+exports.eliminarCursos = ((req,res) => {
+    let cursos = Object.keys(req.body);
+    pool.query(`DELETE FROM curso WHERE ID IN (?);`, cursos, function(err,a){
+        res.redirect('/buscarCurso');
+    });
+});
