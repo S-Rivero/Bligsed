@@ -18,13 +18,19 @@
       <form action="../cargar_inasistencias_render" method="post" name="tabla" id="tabla">
         <table class="bordered">
           <tr>
+            {{#if tdu 1}}
+              <th>Editar</th>
+            {{/if}}
             <th>Apellido y nombre</th>
             <th>Tutor</th>
             <th>E-mail</th>
-            <th>Teléfono</th>
+            <th>Teléfono</th>   
           </tr>
           {{#each a}}
               <tr>
+                {{#if ../tdu 1}}
+                  <td><a href="../buscarCuenta/{{id}}"><i class="bx bx-edit"></i></a></th>
+                {{/if}}
                 <td>
                   {{#if ../tdu 3}}
                   <label class="label_checkbox" for="al{{id}}"><input class="checkbox_alumnos" type="checkbox" name="idSeleccionados" id="al{{id}}" value="{{id}}" onchange="verif()">

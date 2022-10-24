@@ -403,3 +403,12 @@ exports.crear = ((req,res) => {
 exports.buscar = ((req,res) => {
     res.render('buscar.hbs', { links: 'headerLinks/crear', user: { user: req.user[0], childs: req.session.childs }});
 });
+
+exports.buscarCurso = ((req,res) => {
+    
+});
+
+
+exports.buscarMateria = ((req,res) => {
+    
+});
