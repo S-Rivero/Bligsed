@@ -1,0 +1,35 @@
+
+    <div class="text">Tabla de curso</div>
+      <div class="contenedor_documentacion">
+      <div class="contenedor_nombre_doc">
+      
+      </div>
+      <form action="../cargar_inasistencias_render" method="post" name="tabla" id="tabla">
+        <table class="bordered">
+          <tr>
+            {{#if tdu 1}}
+              <th>Editar</th>
+            {{/if}}
+            <th>ID|</th>
+            <th>Apellido y nombre</th>
+            <th>E-mail</th>
+            <th>Teléfono</th>   
+            <th>Tipo de usuario</th>
+          </tr>
+          {{#each a}}
+              <tr>
+                {{#if ../tdu 1}}
+                  <td><a href="../buscarCuenta/{{id}}"><i class="bx bx-edit"></i></a></th>
+                {{/if}}
+                <td>{{id}}</td>
+                <td>
+                  <a class="nombre_alumnos" href="../perfil/p/{{id}}">{{nombre}}</a>
+                </td>
+                <td>{{username}}</td>
+                <td>{{Numero_de_telefono}}</td>
+                <td>{{#tipoUsuarioToString Tipo_de_usuario}}{{/tipoUsuarioToString}}</td>
+              </tr>
+          {{/each}}
+        </table>
+      </form>
+    </div>

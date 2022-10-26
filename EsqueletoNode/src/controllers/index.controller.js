@@ -76,6 +76,14 @@ exports.renderTablaCursos = ((req, res) => {
     });
 });
 
+exports.renderTablaTodos = ((req, res) => {
+    const rows = pool.query(`
+        SELECT nombre, username, id, Numero_de_telefono, Tipo_de_usuario FROM usuarios ORDER BY nombre, username;
+    `, function (err, a) {
+        res.render('tabla_todos.hbs', { a, tdu: req.user[0].Tipo_de_usuario, links: 'headerLinks/tabla_curso_docente', user: { user: req.user[0], childs: req.session.childs } });  
+    });
+});
+
 exports.cargarNotasDocente = ((req, res) => {
     //Solamente el docente titular puede acceder a la modificaicon de notas
     let idMat = req.params.id;

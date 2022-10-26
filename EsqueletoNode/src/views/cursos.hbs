@@ -1,66 +1,78 @@
 <div class="text">Buscar</div>
-  <section class="home-section">
-          <div class="contenedor_nav">
-            <ul class="list">
+<section class="home-section">
+  {{#if tdu 1}}
+      <a href="/tablaTodos" class="nav__link nav__link--inside">Todos los usuarios</a>
+  {{/if}}
+  {{#if tdu 2}}
+      <a href="/tablaTodos" class="nav__link nav__link--inside">Todos los usuarios</a>
+  {{/if}}
+  {{#if tdu 3}}
+      <a href="/tablaTodos" class="nav__link nav__link--inside">Todos los usuarios</a>
+  {{/if}}
+  <div class="contenedor_nav">
+    <ul class="list">
 
-                <li class="list__item">
-                    <div class="list__button">
-                        <h2>Cursos</h2>
-                    </div>
-                </li>
-    
-                {{#each list}}
-                <li class="list__item list__item--click">
-                    <div class="list__button list__button--click">
-                        <a href="#" class="nav__link">{{#anioToString anio}}{{/anioToString}}</a>
-                        <img src="/media/arrow.svg" class="list__arrow">
-                    </div>
-    
-                    <ul class="list__show" style="height: 0px;">
-                        {{#each division}}
-                        <li class="list__inside">
-                            <a href="/tablaCurso/{{id}}" class="nav__link nav__link--inside">{{../anio}}°{{curso}}</a>
-                        </li>
-                        {{/each}}
-                    </ul>
-                </li>
-                {{/each}}
-            </ul>
-        </nav>
-    </div>
+      <li class="list__item">
+        <div class="list__button">
+          <h2>Cursos</h2>
+        </div>
+      </li>
 
-    {{#if tdu 4}}
-      <div class="contenedor_nav">
-      <ul class="list">
+      {{#each list}}
+      <li class="list__item list__item--click">
+        <div class="list__button list__button--click">
+          <a href="#" class="nav__link">{{#anioToString anio}}{{/anioToString}}</a>
+          <img src="/media/arrow.svg" class="list__arrow">
+        </div>
 
-          <li class="list__item">
-              <div class="list__button">
-                  <h2>Materias</h2>
-              </div>
+        <ul class="list__show" style="height: 0px;">
+          {{#each division}}
+          <li class="list__inside">
+            <a href="/tablaCurso/{{id}}" class="nav__link nav__link--inside">{{../anio}}°{{curso}}</a>
           </li>
-        {{#each listMat}}
-          <li class="list__item list__item--click">
-              <div class="list__button list__button--click">
-                  <a href="#" class="nav__link">{{materia}}</a>
-                  <img src="/media/arrow.svg" class="list__arrow">
-              </div>
+          {{/each}}
+        </ul>
+      </li>
+      {{/each}}
+    </ul>
+    </nav>
+  </div>
 
-              <ul class="list__show" style="height: 0px;">
-                {{#each cursos}}
-                  <li class="list__inside">
-                      <a href="cargarNotas/{{this.idMateria}}/1" class="nav__link nav__link--inside">{{../materia}} {{#cursoToString this.curso}}{{/cursoToString}}</a>
-                  </li>
-                {{/each}}
-              </ul>
+  
+
+  {{#if tdu 4}}
+  <div class="contenedor_nav">
+    <ul class="list">
+
+      <li class="list__item">
+        <div class="list__button">
+          <h2>Materias</h2>
+        </div>
+      </li>
+      {{#each listMat}}
+      <li class="list__item list__item--click">
+        <div class="list__button list__button--click">
+          <a href="#" class="nav__link">{{materia}}</a>
+          <img src="/media/arrow.svg" class="list__arrow">
+        </div>
+
+        <ul class="list__show" style="height: 0px;">
+          {{#each cursos}}
+          <li class="list__inside">
+            <a href="cargarNotas/{{this.idMateria}}/1" class="nav__link nav__link--inside">{{../materia}}
+              {{#cursoToString this.curso}}{{/cursoToString}}</a>
           </li>
-        {{/each}}
-      </ul>
-  </nav>
-</div>
-    {{/if}}
-    
-        <script src="../../../js/main.js"></script>
-        <script>
+          {{/each}}
+        </ul>
+      </li>
+      {{/each}}
+    </ul>
+    </nav>
+  </div>
+  {{/if}}
+
+  <script src="../../../js/main.js"></script>
+  <script>
     let sidebar = document.querySelector(".sidebar");
     let closeBtn = document.querySelector("#btn");
     let searchBtn = document.querySelector(".bx-search");
@@ -85,4 +97,4 @@
     }
   </script>
 
-    </section>
+</section>
