@@ -165,7 +165,7 @@ border-bottom: 1px solid rgba(92, 102, 100, 0.295);
 
 .contenido_titulo {
   margin-top: 3%;
-  height: 15%;
+  height: auto;
   font-size: 26px;
   border: 2px solid transparent;
   font-weight: bold;
@@ -183,10 +183,13 @@ border-bottom: 1px solid rgba(92, 102, 100, 0.295);
 /* color: white; */
 padding: 15px;
 width: 100%;
-height: 40vh;
+height: auto;
 overflow: hidden;
 background-color:  rgba(4, 83, 63, 0.059);
 padding: 3%;
+border-bottom-right-radius: 20px;
+border-bottom-left-radius: 20px;
+padding-bottom: 5%;
 }
 
 .contenido_vermas {
