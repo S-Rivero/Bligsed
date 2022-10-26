@@ -9,6 +9,7 @@ const {
     renderDocumentos,
     renderCursos,
     renderTablaCursos,
+    renderTablaTodos,
 
     cargarNotasDocente,
     POSTcargarNotasDocente,
@@ -48,6 +49,7 @@ router.get('/documentos', isLoggedIn, renderDocumentos);
 router.get('/Cursos', isLoggedIn, authLevelCursos, renderCursos);
 
 router.get('/tablaCurso/:id', isLoggedIn, authLevelTablaCursos, renderTablaCursos);
+router.get('/tablaTodos', isLoggedIn, authLevelVerUsuarios, renderTablaTodos);
 
 router.get('/crear', isLoggedIn, authLevelAdministrador, crear);
 router.get('/editar', isLoggedIn, authLevelAdministrador, editar);
