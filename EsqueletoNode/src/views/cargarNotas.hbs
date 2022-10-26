@@ -36,6 +36,13 @@
     $('#form').attr('action', `/cargarNotas/${mat}/${trim}`);
     $('#optionTrimSelected').html("Trimestre - "+trim);
 
+    fetch(`/api/listarAlumnosMateria/${mat}`)
+    .then((response) => response.json())
+    .then((data) => {
+      
+    });
+
+
     fetch(`/api/ListaAlumnosNotas/${mat}/${trim}`)
     .then((response) => response.json())
     .then((data) => {

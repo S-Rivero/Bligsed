@@ -248,3 +248,47 @@ exports.actualizarCurso = ((req,res) => {
         res.redirect('../editarMateria/'+id);
     });
 });
+
+/*
+SELECT A.ID, U.Nombre
+FROM alumno A
+JOIN (	SELECT IdCurso 
+      	FROM `materias` 
+      	WHERE ID = 1) Z
+ON Z.IdCurso = A.ID_Curso
+JOIN usuarios U 
+ON A.ID = U.ID ;
+*/
+
+
+exports.listarAlumnosMateria = ((req,res) => {
+    let {idMat} = req.params;
+    pool.query(`
+        SELECT A.ID, U.Nombre
+        FROM alumno A
+        JOIN (	SELECT IdCurso 
+                FROM materias 
+                WHERE ID = ?) Z
+        ON Z.IdCurso = A.ID_Curso
+        JOIN usuarios U 
+        ON A.ID = U.ID ;
+    `,idMat , function(err,a){
+        res.send(a);
+    });
+});
+
+exports.insertNotasVacias = ((req,res) => {
+    let {idMat, trim} = req.params;
+    pool.query(`
+        SELECT A.ID, U.Nombre
+        FROM alumno A
+        JOIN (	SELECT IdCurso 
+                FROM materias 
+                WHERE ID = ?) Z
+        ON Z.IdCurso = A.ID_Curso
+        JOIN usuarios U 
+        ON A.ID = U.ID ;
+    `,idMat , function(err,a){
+        res.send(a);
+    });
+})
