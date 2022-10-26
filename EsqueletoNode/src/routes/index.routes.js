@@ -75,7 +75,7 @@ router.post('/crear_materias', isLoggedIn, authLevelAdministrador, insertMateria
 router.get( '/crear_curso', isLoggedIn, authLevelAdministrador, crearCurso);
 router.post('/crear_curso', isLoggedIn, authLevelAdministrador, insertCurso);
 
-router.get('/buscarCuenta', isLoggedIn, authLevelVerUsuarios, buscarCuenta);
-router.get('/buscarCuenta/:id', isLoggedIn, authLevelVerUsuarios, buscarCuentaId);
+router.get('/buscarCuenta', isLoggedIn, authLevelAdministrador, buscarCuenta);
+router.get('/buscarCuenta/:id', isLoggedIn, authLevelAdministrador, buscarCuentaId);
 
 module.exports = router;
