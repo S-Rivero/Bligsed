@@ -179,13 +179,12 @@ CREATE TABLE `materias` (
 --
 
 CREATE TABLE `notas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_alum` int(11) NOT NULL COMMENT 'foranea tabla alumnos',
   `id_materia` int(11) NOT NULL COMMENT 'foranea tabla alumno',
   `nota` int(11) NOT NULL,
   trimestre int(11) NOT NULL,
   numnota int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (id_alum, id_materia, numnota, trimestre)
 ) ;
 
 -- --------------------------------------------------------
@@ -372,9 +371,9 @@ INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono
 
 INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`, `domicilio`) VALUES(60264312, 'alumno3', 'alumno3', 'M', 47392742, 6, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', 2002-05-22, 0, 'Caballito');
 
+UPDATE `alumno` SET  `ID_Curso`= 1, `Padre`=17 WHERE `ID` = 18;  
 UPDATE `alumno` SET  `ID_Curso`= 1, `Padre`=17 WHERE `ID` = 19;  
-UPDATE `alumno` SET  `ID_Curso`= 1, `Padre`=17 WHERE `ID` = 20;  
-UPDATE `alumno` SET  `ID_Curso`= 1, `Padre`=18 WHERE `ID` = 21;
+UPDATE `alumno` SET  `ID_Curso`= 1, `Padre`=18 WHERE `ID` = 20;
 
 
 UPDATE fichamedica SET `Enfermedad` = "Asma",  `Alergia` = "Intolerancia a la lactosa", `Tratamiento_medico` = "Antibioticos", `Vacunacion` = "1", `Altura` = 170, `Peso` = 60.5, `Hospital` = "Hospital italiano", `Obra_social` = "Osecac", `N_de_afiliado_obra_social` = 112312312312, `Medico_cabeceraln` = "Morbius", `Medico_cabecerafn` = "Michael", `Domiciliomed` = "Antesana 247", `Telefono_medico` = 10293847 WHERE DNI = 68526783;
