@@ -276,7 +276,7 @@ CREATE TRIGGER `borrar fichamedica` BEFORE DELETE ON `usuarios`
  DELIMITER $$
  CREATE TRIGGER `cargadnionlyalum` AFTER INSERT ON `usuarios`
  FOR EACH ROW IF COALESCE(new.Tipo_de_usuario) = 6 THEN BEGIN
-INSERT INTO fichamedica (DNI, id_us) VALUES (concat(new.DNI), concat(new.id));
+INSERT INTO fichamedica (DNI, id_us, localidad) VALUES (concat(new.DNI), concat(new.id), concat(new.domicilio));
 INSERT INTO alumno (id) VALUES (new.id);
 END; END IF
 $$
@@ -344,3 +344,55 @@ INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUE
 INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 11, 1, 1, 1, 1), ( 11, 1, 10, 1, 2), (11, 1, 9, 1, 3), (11, 1, 5, 1, 4), (11, 2, 4, 1, 5), (11, 2, 7, 1, 6), (11, 2, 8, 1, 7), (11, 2, 9, 1, 8);
 INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 11, 1, 1, 2, 1), ( 11, 1, 10, 2, 2), (11, 1, 9, 2, 3), (11, 1, 5, 2, 4), (11, 2, 4, 2, 5), (11, 2, 7, 2, 6), (11, 2, 8, 2, 7), (11, 2, 9, 2, 8);
 INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 11, 1, 1, 3, 1), ( 11, 1, 10, 3, 2), (11, 1, 9, 3, 3), (11, 1, 5, 3, 4), (11, 2, 4, 3, 5), (11, 2, 7, 3, 6), (11, 2, 8, 3, 7), (11, 2, 9, 3, 8);
+
+
+
+
+
+
+
+
+
+
+INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`, `domicilio`) VALUES(10000000, 'administrador1', 'admin', 'M', 43377237, 1, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', 1962-05-22, 0, 'Ramos Mejia');
+
+INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`, `domicilio`) VALUES(20000000, 'directivo1', 'director', 'M', 21235466, 2, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', 1965-01-15, 0, 'Haedo');
+
+INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`, `domicilio`) VALUES(30000000, 'preceptor1', 'preceptor', 'M', 4449968, 3, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', 1982-07-27, 0, 'Quilmes');
+
+INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`, `domicilio`) VALUES(40000000, 'profesor1', 'profesor', 'M', 72377237, 4, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', 1992-03-10, 0, 'La Matanza');
+
+INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`, `domicilio`) VALUES(50000000, 'padre1', 'padre1', 'M', 12345678, 5, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', 1978-05-22, 0, 'La Boca');
+
+INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`, `domicilio`) VALUES(55435555, 'padre2', 'padre2', 'M', 59083546, 5, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', 1942-12-10, 0, 'Caballito');
+
+INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`, `domicilio`) VALUES(60660686, 'alumno1', 'alumno1', 'M', 15849876, 6, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', 2004-03-26, 0, 'La Boca');
+
+INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`, `domicilio`) VALUES(68526783, 'alumno2', 'alumno2', 'M', 10293847, 6, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', 2006-05-22, 0, 'La Boca');
+
+INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`, `domicilio`) VALUES(60264312, 'alumno3', 'alumno3', 'M', 47392742, 6, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', 2002-05-22, 0, 'Caballito');
+
+UPDATE `alumno` SET  `ID_Curso`= 1, `Padre`=17 WHERE `ID` = 19;  
+UPDATE `alumno` SET  `ID_Curso`= 1, `Padre`=17 WHERE `ID` = 20;  
+UPDATE `alumno` SET  `ID_Curso`= 1, `Padre`=18 WHERE `ID` = 21;
+
+
+UPDATE fichamedica SET `Enfermedad` = "Asma",  `Alergia` = "Intolerancia a la lactosa", `Tratamiento_medico` = "Antibioticos", `Vacunacion` = "1", `Altura` = 170, `Peso` = 60.5, `Hospital` = "Hospital italiano", `Obra_social` = "Osecac", `N_de_afiliado_obra_social` = 112312312312, `Medico_cabeceraln` = "Morbius", `Medico_cabecerafn` = "Michael", `Domiciliomed` = "Antesana 247", `Telefono_medico` = 10293847 WHERE DNI = 68526783;
+
+UPDATE fichamedica SET  `Internacion` = "Internacion debido a cirujia por apendicitis", `Alergia` = "Alergia a las nueces", manifestalergia = "inflamacion y fiebre general", `Tratamiento_medico` = "Antibioticos", `Quirurjico` = "Cirujia por apendicitis.", edad_quirurjico = 15, `Vacunacion` = "1", `Altura` = 140, `Peso` = 35, `Hospital` = "Hospital italiano", `Obra_social` = "Osecac", `N_de_afiliado_obra_social` = 7459353842, `Medico_cabeceraln` = "Morbius", `Medico_cabecerafn` = "Michael", `Domiciliomed` = "Antesana 247", `Telefono_medico` = 2133352223 WHERE DNI = 60660686;
+
+UPDATE fichamedica SET  `Internacion` = "Internacion debido a Traqueotomia", `Quirurjico` = "Traqueotomia", `Vacunacion` = "1", `Altura` = 196, `Peso` = 118, `Hospital` = "Hospital italiano", edad_quirurjico = 12, `Obra_social` = "Osecac", `N_de_afiliado_obra_social` = 8364923648, `Medico_cabeceraln` = "Ford", `Medico_cabecerafn` = "Harrison", `Domiciliomed` = "Antesana 246", `Telefono_medico` = 21333522 WHERE DNI = 60264312;
+
+
+
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 18, 1, 1, 1, 1), ( 18, 1, 10, 1, 2), (18, 1, 9, 1, 3), (18, 1, 5, 1, 4), (18, 2, 4, 1, 5), (18, 2, 7, 1, 6), (18, 2, 8, 1, 7), (18, 2, 9, 1, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 18, 1, 1, 2, 1), ( 18, 1, 10, 2, 2), (18, 1, 9, 2, 3), (18, 1, 5, 2, 4), (18, 2, 4, 2, 5), (18, 2, 7, 2, 6), (18, 2, 8, 2, 7), (18, 2, 9, 2, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 18, 1, 1, 3, 1), ( 18, 1, 10, 3, 2), (18, 1, 9, 3, 3), (18, 1, 5, 3, 4), (18, 2, 4, 3, 5), (18, 2, 7, 3, 6), (18, 2, 8, 3, 7), (18, 2, 9, 3, 8);
+
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 19, 1, 1, 1, 1), ( 19, 1, 10, 1, 2), (19, 1, 9, 1, 3), (19, 1, 5, 1, 4), (19, 2, 4, 1, 5), (19, 2, 7, 1, 6), (19, 2, 8, 1, 7), (19, 2, 9, 1, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 19, 1, 1, 2, 1), ( 19, 1, 10, 2, 2), (19, 1, 9, 2, 3), (19, 1, 5, 2, 4), (19, 2, 4, 2, 5), (19, 2, 7, 2, 6), (19, 2, 8, 2, 7), (19, 2, 9, 2, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 19, 1, 1, 3, 1), ( 19, 1, 10, 3, 2), (19, 1, 9, 3, 3), (19, 1, 5, 3, 4), (19, 2, 4, 3, 5), (19, 2, 7, 3, 6), (19, 2, 8, 3, 7), (19, 2, 9, 3, 8);
+
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 20, 1, 1, 1, 1), ( 20, 1, 10, 1, 2), (20, 1, 9, 1, 3), (20, 1, 5, 1, 4), (20, 2, 4, 1, 5), (20, 2, 7, 1, 6), (20, 2, 8, 1, 7), (20, 2, 9, 1, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 20, 1, 1, 2, 1), ( 20, 1, 10, 2, 2), (20, 1, 9, 2, 3), (20, 1, 5, 2, 4), (20, 2, 4, 2, 5), (20, 2, 7, 2, 6), (20, 2, 8, 2, 7), (20, 2, 9, 2, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 20, 1, 1, 3, 1), ( 20, 1, 10, 3, 2), (20, 1, 9, 3, 3), (20, 1, 5, 3, 4), (20, 2, 4, 3, 5), (20, 2, 7, 3, 6), (20, 2, 8, 3, 7), (20, 2, 9, 3, 8);
