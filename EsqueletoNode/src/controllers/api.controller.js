@@ -181,6 +181,13 @@ exports.actualizarUsuario = (async(req, res) => {
                         res.redirect('/buscarCuenta');
                     })
             });
+        }else{
+            pool.query(`
+                    UPDATE usuarios SET password = ?, Nombre = ?, username = ?, DNI = ?, Sexo = ?, Numero_de_telefono = ?, Fecha_de_nacimiento = ? , domicilio = ?
+                    WHERE id = ?;
+                    `,[pass, nombre, username, DNI, Sexo, telefono, nacimiento, domicilio, id], function(err,a){
+                        res.redirect('/buscarCuenta');
+                    })
         }
         
     }else{

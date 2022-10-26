@@ -57,8 +57,9 @@
           <td><input type="text" value="${d.padremail}" name="tutor"></td>
         </tr>
         <tr>
-          <td><input type="submit" name="btn" value="Actualizar Curso"></td>
-          <td><input type="submit" name="btn" value="Actualizar Tutor"></td>
+          <td><input type="button" value="Actualizar Curso" onclick="confirmSubmit('formAlumno', this)"></td>
+          <td><input type="button" value="Actualizar Tutor" onclick="confirmSubmit('formAlumno', this)"></td>
+          <input type="hidden" id="btnhidalum" name="btn">
         </tr>
           </table>
       `;
@@ -97,8 +98,9 @@
           </select></td>
         </tr>
         <tr>
-          <td><input type="submit" name="btn" value="Guardar"></td>
-          <td><input type="submit" name="btn" value="Eliminar usuario"></td>
+          <td><input type="button" value="Guardar" onclick="confirmSubmit('form', this)"></td>
+          <td><input type="button" value="Eliminar usuario" onclick="confirmSubmit('form', this)"></td>
+          <input type="hidden" id="btnhidform" name="btn" value="">
         </tr>
         `
     }
@@ -125,6 +127,21 @@
         closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
       } else {
         closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
+      }
+    }
+
+    function confirmSubmit(id, e) {
+      if(id == 'form'){
+        if(confirm('¿Esta seguro de modificar los datos de este usuario?')){
+          $('#btnhidform').val(e.value);
+          $('#form').submit();
+        }
+      }
+      else{
+        if(confirm('¿Esta seguro de modificar los datos de este usuario?')){
+          $('#btnhidalum').val(e.value);
+          $('#formAlumno').submit();
+        } 
       }
     }
   </script>
