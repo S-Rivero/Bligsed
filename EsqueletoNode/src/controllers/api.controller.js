@@ -155,21 +155,28 @@ exports.actualizarUsuario = (async(req, res) => {
         let {nombre, username, DNI, Sexo, telefono, nacimiento, domicilio, id, oldUsername, pass, tdu} = req.body;
 
         if(oldUsername != username){
-            let passNoHash = RandomString(8);
-            pass = await encryptPassword(passNoHash);
-            transporter.sendMail({
-                from: 'bligsed@hotmail.com', // sender address
-                to: username, // list of receivers
-                subject: "Actualizacion en tu usuario", // Subject line
-                html: `<b>Nuevo usuario: ${username} Contraseña: ${passNoHash}</b>`, // html body
-              });
+            pool.query("SELECT username FROM usuarios WHERE username = ?", username, async function(err,z){
+                if(!z[0]){
+                    let passNoHash = RandomString(8);
+                    pass = await encryptPassword(passNoHash);
+                    transporter.sendMail({
+                        from: 'bligsed@hotmail.com', // sender address
+                        to: username, // list of receivers
+                        subject: "Actualizacion en tu usuario", // Subject line
+                        html: `<b>Nuevo usuario: ${username} Contraseña: ${passNoHash}</b>`, // html body
+                    });
+                }else{
+                    username = oldUsername;
+                }
+                pool.query(`
+                    UPDATE usuarios SET password = ?, Nombre = ?, username = ?, DNI = ?, Sexo = ?, Numero_de_telefono = ?, Fecha_de_nacimiento = ? , domicilio = ?
+                    WHERE id = ?;
+                    `,[pass, nombre, username, DNI, Sexo, telefono, nacimiento, domicilio, id], function(err,a){
+                        res.redirect('/buscarCuenta');
+                    })
+            });
         }
-        pool.query(`
-        UPDATE usuarios SET password = ?, Nombre = ?, username = ?, DNI = ?, Sexo = ?, Numero_de_telefono = ?, Fecha_de_nacimiento = ? , domicilio = ?
-        WHERE id = ?;
-        `,[pass, nombre, username, DNI, Sexo, telefono, nacimiento, domicilio, id], function(err,a){
-            res.redirect('/buscarCuenta');
-        })
+        
     }else{
         let {id} = req.body;
         pool.query(`
