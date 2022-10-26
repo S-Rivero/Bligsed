@@ -157,14 +157,20 @@ exports.actualizarUsuario = (async(req, res) => {
         if(oldUsername != username){
             pool.query("SELECT username FROM usuarios WHERE username = ?", username, async function(err,z){
                 if(!z[0]){
-                    let passNoHash = RandomString(8);
-                    pass = await encryptPassword(passNoHash);
-                    transporter.sendMail({
-                        from: 'bligsed@hotmail.com', // sender address
-                        to: username, // list of receivers
-                        subject: "Actualizacion en tu usuario", // Subject line
-                        html: `<b>Nuevo usuario: ${username} Contraseña: ${passNoHash}</b>`, // html body
-                    });
+                    try {
+                        let passNoHash = RandomString(8);
+                        pass = await encryptPassword(passNoHash);
+                        transporter.sendMail({
+                            from: 'bligsed@hotmail.com', // sender address
+                            to: username, // list of receivers
+                            subject: "Actualizacion en tu usuario", // Subject line
+                            html: `<b>Nuevo usuario: ${username} Contraseña: ${passNoHash}</b>`, // html body
+                        });
+                     } catch (err) {
+                        res.redirect('/buscarCuenta/'+id);
+                        return;
+                     }
+                    
                 }else{
                     username = oldUsername;
                 }
