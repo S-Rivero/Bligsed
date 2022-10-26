@@ -91,6 +91,7 @@ tr{
 .bordered td, .bordered th {
   border:1px solid rgba(152, 172, 172, 0.305);
   padding-left: 8px;
+  cursor: context-menu;
 }
 
 .bordered tr:nth-child(even){background-color: #ffffff;}
@@ -164,14 +165,11 @@ input::-webkit-inner-spin-button {
 
 
   .input_cargar_inasistencias {
-    background: none;
-    padding: 0;
     outline: inherit;
     font: inherit;
     font-size: 14px;
     border-color: rgb(127, 213, 213);
     border-radius: 10px;
-    height: 30px;
     padding: 5px;
     cursor: pointer;
     margin-left: 1vw;
@@ -186,9 +184,13 @@ input::-webkit-inner-spin-button {
 
 .nombre_alumnos {
   position: relative;
-  bottom: 1vh;
+  bottom: 0.5vh;
 }
 
 .fecha {
   width: 100%;
+}
+
+.tr_cargarInasistencias {
+  
 }

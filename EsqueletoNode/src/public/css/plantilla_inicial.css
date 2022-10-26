@@ -281,3 +281,29 @@
 .nav__link--inside {
   height: auto;
 }
+
+
+
+.layout_boton1 {
+  background-color: rgb(167, 243, 243);
+  border: none;
+  padding: 10%;
+  cursor: pointer;
+  border-radius: 15px;
+  width: 10%;
+  height: auto;
+}
+
+.layout_boton1:hover {
+  background-color: rgb(128, 192, 192);
+  transition: .2s;
+}
+
+
+.layout_boton1:disabled {
+  visibility: hidden;
+}
+
+.layout_boton1:enabled {
+  transition: .2s;
+}

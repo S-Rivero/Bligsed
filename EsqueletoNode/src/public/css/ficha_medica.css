@@ -202,9 +202,7 @@ input{
     padding: 1%;
     cursor: pointer;
     border-radius: 15px;
-    width: 20%;
+    width: fit-content;
     height: auto;
     margin-bottom: 1%;
-    position: relative;
-    left: 35%;
 }
