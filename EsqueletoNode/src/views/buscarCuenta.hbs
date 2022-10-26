@@ -84,7 +84,7 @@
           <input type="hidden" value="${d.id}" name="id">
           <td><a href="../perfil/p/${d.id}">${d.id}</a></td>
           <td><input type="text" value="${d.Nombre}" name="nombre"></td>
-          <td><input type="mail" value="${d.username}" name="username"></td>
+          <td><input type="mail" value="${d.username}" name="username" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required></td>
           <td>${d.Tipo_de_usuario}</td>
           <td><input type="text" value="${d.DNI}" name="DNI"></td>
           <td><input type="text" value="${d.Numero_de_telefono}" name="telefono"></td>
