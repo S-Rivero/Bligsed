@@ -96,7 +96,7 @@ exports.cargarNotasDocente = ((req, res) => {
         ON A.IdCurso = B.ID
         WHERE profesor = ?;
     `, [req.user[0].id], function (err, a) {
-        if (!(a[0])) {
+        if (!(a.some(e => e.ID == idMat))){
             res.redirect('/');
         } else {
             res.render('cargarNotas.hbs', { a, links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs } });
