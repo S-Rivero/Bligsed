@@ -80,7 +80,7 @@ exports.renderTablaTodos = ((req, res) => {
     const rows = pool.query(`
         SELECT nombre, username, id, Numero_de_telefono, Tipo_de_usuario FROM usuarios ORDER BY nombre, username;
     `, function (err, a) {
-        res.render('tabla_todos.hbs', { a, tdu: req.user[0].Tipo_de_usuario, links: 'headerLinks/tabla_curso_docente', user: { user: req.user[0], childs: req.session.childs } });  
+        res.render('tabla_todos.hbs', { a, tdu: req.user[0].Tipo_de_usuario, links: 'headerLinks/tabla_curso_docente', user: { user: req.user[0], childs: req.session.childs } });
     });
 });
 
@@ -95,14 +95,97 @@ exports.cargarNotasDocente = ((req, res) => {
         JOIN curso B
         ON A.IdCurso = B.ID
         WHERE profesor = ?;
-    `, [req.user[0].id], function (err, a) {
-        if (!(a.some(e => e.ID == idMat))){
+    `, [req.user[0].id], function (err, y) {
+        if (!(y.some(e => e.ID == idMat))) {
             res.redirect('/');
         } else {
-            res.render('cargarNotas.hbs', { a, links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs } });
+            pool.query(`
+            SELECT A.ID, U.Nombre
+            FROM alumno A
+            JOIN (	SELECT IdCurso 
+                    FROM materias 
+                    WHERE ID = ?) Z
+            ON Z.IdCurso = A.ID_Curso
+            JOIN usuarios U 
+            ON A.ID = U.ID;
+    
+            SELECT A.ID, N.nota, N.numnota
+            FROM alumno A
+            JOIN (	SELECT IdCurso 
+                  FROM materias 
+                  WHERE ID = ?) Z
+            ON Z.IdCurso = A.ID_Curso
+            LEFT JOIN(	SELECT nota, id_alum, numnota
+                          FROM notas
+                        WHERE trimestre = ? AND id_materia = ?) N
+            ON N.id_alum = A.ID
+            ORDER BY A.ID, N.numnota;
+    
+            SELECT max(N.numnota) as maxNumNota
+            FROM alumno A
+            JOIN (	SELECT IdCurso 
+                  FROM materias 
+                  WHERE ID = ?) Z
+            ON Z.IdCurso = A.ID_Curso
+            LEFT JOIN(	SELECT nota, id_alum, numnota
+                          FROM notas
+                        WHERE trimestre = ? AND id_materia = ?) N
+            ON N.id_alum = A.ID
+            ORDER BY A.ID, N.numnota;
+    
+        `, [idMat, idMat, trim, idMat, idMat, trim, idMat], function (err, a) {
+                let [listaAlumnos, notas, maxNumNota] = a;
+                let max = maxNumNota[0]['maxNumNota'];
+                let toInsert = [];
+                if (max) {
+                    listaAlumnos.forEach(e => {
+                        for (let i = 1; i < max + 1; i++) {
+                            if (!(notas.some(x => x.numnota == i && x.ID == e.ID))) {
+                                toInsert.push({
+                                    id_alum: e.ID,
+                                    id_materia: idMat,
+                                    nota: 0,
+                                    trimestre: trim,
+                                    numnota: i
+                                });
+                            }
+                        }
+                    });
+                } else {
+                    listaAlumnos.forEach(e => {
+                        toInsert.push({
+                            id_alum: e.ID,
+                            id_materia: idMat,
+                            nota: 0,
+                            trimestre: trim,
+                            numnota: 1
+                        });
+                    })
+                }
+                let insert = prepareInsert(toInsert);
+
+                pool.query(insert, function (err, d) {
+                    res.render('cargarNotas.hbs', { y, links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs } });
+                })
+            });
         }
     });
 });
+
+
+
+function prepareInsert(arr) {
+    console.log(arr);
+
+    return `
+    INSERT INTO notas (id_alum, id_materia, nota, trimestre, numnota) 
+    VALUES 
+    ` + arr.map(e => {
+        return '(' + e.id_alum + ',' + e.id_materia + ',' + e.nota + ',' + e.trimestre + ',' + e.numnota + ')'
+    }).join(',');
+}
+
+
 
 exports.POSTcargarNotasDocente = ((req, res) => {
 
@@ -336,18 +419,18 @@ exports.insertCuentas = (async (req, res) => {
 });
 
 
-exports.buscarCuenta = ((req, res) => { 
-    res.render('buscarCuenta.hbs', {links: 'headerLinks/buscarCuenta', user:{user: req.user[0], childs: req.session.childs}});
+exports.buscarCuenta = ((req, res) => {
+    res.render('buscarCuenta.hbs', { links: 'headerLinks/buscarCuenta', user: { user: req.user[0], childs: req.session.childs } });
 });
 
-exports.buscarCuentaId = ((req, res) => { 
+exports.buscarCuentaId = ((req, res) => {
     let id = req.params.id;
     let username = "";
-    pool.query(`SELECT username FROM usuarios WHERE id = ?`, id, function(err, a){
-        if(a[0]){
+    pool.query(`SELECT username FROM usuarios WHERE id = ?`, id, function (err, a) {
+        if (a[0]) {
             username = a[0].username;
         }
-        res.render('buscarCuenta.hbs', {username: username, links: 'headerLinks/buscarCuenta', user:{user: req.user[0], childs: req.session.childs}});
+        res.render('buscarCuenta.hbs', { username: username, links: 'headerLinks/buscarCuenta', user: { user: req.user[0], childs: req.session.childs } });
     });
 });
 //res.render('tabla_curso.hbs', {a, b, tdu: req.user[0].Tipo_de_usuario, links: 'headerLinks/tabla_curso_docente', user:{user: req.user[0], childs: req.session.childs}});
@@ -375,9 +458,9 @@ exports.crearCurso = (async (req, res) => {
 });
 exports.insertCurso = (async (req, res) => {
     pool.query(
-        "INSERT INTO `curso`(`Nombre_curso`) VALUES ('"+req.body.c+"');"
+        "INSERT INTO `curso`(`Nombre_curso`) VALUES ('" + req.body.c + "');"
         , (err, e) => {
-            if (err) console.log(err); else console.log('Se creo el curso '+req.body.c);
+            if (err) console.log(err); else console.log('Se creo el curso ' + req.body.c);
         });
 });
 
@@ -399,27 +482,27 @@ exports.insertMaterias = (async (req, res) => {
     pool.query(
         "INSERT INTO `materias`(`Materia`, `IdCurso`, `profesor`) VALUES ('" + req.body.name + "', " + req.body.curso + ", " + req.body.doc + ");"
         , (err, e) => {
-            if (err) console.log(err); else console.log('Se creo la materia '+req.body.name);
+            if (err) console.log(err); else console.log('Se creo la materia ' + req.body.name);
         });
 });
 
 
-exports.crear = ((req,res) => {
-    res.render('crear.hbs', { links: 'headerLinks/crear', user: { user: req.user[0], childs: req.session.childs }});
-}); 
-
-exports.editar = ((req,res) => {
-    res.render('editar.hbs', { links: 'headerLinks/crear', user: { user: req.user[0], childs: req.session.childs }});
+exports.crear = ((req, res) => {
+    res.render('crear.hbs', { links: 'headerLinks/crear', user: { user: req.user[0], childs: req.session.childs } });
 });
 
-exports.editarCurso = ((req,res) => {
-    pool.query('SELECT * FROM curso ORDER BY Nombre_curso', function(err,a){
-        res.render('editarCurso.hbs', {a, links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs }});
+exports.editar = ((req, res) => {
+    res.render('editar.hbs', { links: 'headerLinks/crear', user: { user: req.user[0], childs: req.session.childs } });
+});
+
+exports.editarCurso = ((req, res) => {
+    pool.query('SELECT * FROM curso ORDER BY Nombre_curso', function (err, a) {
+        res.render('editarCurso.hbs', { a, links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs } });
     })
 });
 
 
-exports.editarMateria = ((req,res) => {
+exports.editarMateria = ((req, res) => {
     pool.query(`
         SELECT m.ID, c.Nombre_curso, m.Materia, m.IdCurso, u.nombre, m.profesor from materias m
         JOIN usuarios u  
@@ -428,13 +511,13 @@ exports.editarMateria = ((req,res) => {
         ON c.ID = m.IdCurso
         ORDER BY c.Nombre_curso, m.Materia
         ;
-    `,function(err,a){
+    `, function (err, a) {
         // res.send(a);
-        res.render('editarMateria.hbs', {a, links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs }});
-    }); 
+        res.render('editarMateria.hbs', { a, links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs } });
+    });
 });
 
-exports.editarMateriaId = ((req,res) => {
+exports.editarMateriaId = ((req, res) => {
     pool.query(`
         SELECT m.ID, c.Nombre_curso, m.Materia, m.IdCurso, u.nombre, m.profesor from materias m
         JOIN usuarios u  
@@ -443,8 +526,8 @@ exports.editarMateriaId = ((req,res) => {
         ON c.ID = m.IdCurso
         ORDER BY c.Nombre_curso, m.Materia
         ;
-    `,req.params.id,function(err,a){
-        res.render('editarMateriaId.hbs', {a: a[0], links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs }});
+    `, req.params.id, function (err, a) {
+        res.render('editarMateriaId.hbs', { a: a[0], links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs } });
     });
-    
+
 });

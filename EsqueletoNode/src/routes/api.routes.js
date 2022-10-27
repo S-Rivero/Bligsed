@@ -15,7 +15,8 @@ const {
     eliminarCursos,
     listarDocentes,
     listarCursos,
-    actualizarCurso
+    actualizarCurso,
+    insertNotasVacias
 } = require('../controllers/api.controller');
 
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
@@ -23,6 +24,7 @@ const {
 router.get('/api/idCursoToName/:id',isLoggedIn, idCursoToName);
 router.get('/api/idMateriaToCurso/:id',isLoggedIn, idMateriaToCurso);
 router.get('/api/ListaAlumnosNotas/:id/:t',isLoggedIn, authLevelCargarNotas, ListaAlumnosNotas);
+router.get('/api/insertNotasVacias/:idMat/:trim',isLoggedIn, authLevelCargarNotas, insertNotasVacias);
 
 router.get('/api/eliminarInasistencia/:id',isLoggedIn, authLevelCargarInasistencias, eliminarInasistencias);
 router.get('/api/actualizarInasistencia/:id/:date/:checkbox/:select',isLoggedIn, authLevelCargarInasistencias, actualizarInasistencias);
