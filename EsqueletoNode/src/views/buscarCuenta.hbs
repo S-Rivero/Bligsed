@@ -1,51 +1,50 @@
+<div class="text" id="editarUsuario">Editar usuario</div>
+<div class="contenedor_documentacion">
+  <div class="contenedor_nombre_doc">
+    <input type="text" name="buscador" id="buscador" placeholder="Mail" value="{{username}}">
+    <input id="enviar_consulta" type="submit" onclick="buscarCuenta()">
+  </div>
+</div>
+<div id="contenedor_tablas">
 
-    <div class="text" id="editarUsuario">Editar usuario</div>
-      <div class="contenedor_documentacion">
-        <div class="contenedor_nombre_doc">
-        <input type="text" name="buscador" id="buscador" placeholder="Mail" value="{{username}}">
-        <input  id="enviar_consulta"  type="submit" onclick="buscarCuenta()">
-        </div>
-      </div>
-      <div id="contenedor_tablas">
+  <form id="form" action="../api/actualizarUsuario" method="POST">
 
-        <form id="form" action="../api/actualizarUsuario" method="POST">
+    <table class="bordered" id="tabla_buscarCuenta">
 
-          <table class="bordered" id="tabla_buscarCuenta">
-            
-          </table>
-        </form>
-        <form id="formAlumno" action="../api/actualizarAlumno" method="POST">
-        </form>
+    </table>
+  </form>
+  <form id="formAlumno" action="../api/actualizarAlumno" method="POST">
+  </form>
 
-      </div>
-    </div>
-  <script>
-    function buscarCuenta(){
-        let buscador = $('#buscador').val();
-        if (buscador == ""){
-            $('table').html();
-            return;
-        }
-        fetch('../api/buscarCuenta/'+buscador)
-        .then((response) => response.json())
-        .then((data) => {
-            if(!data.res){
-                $('table').html(generarTabla(data));
-                $(`#sexo option[value="${data.Sexo}"]`).attr('selected',true);
-                if(data.Tipo_de_usuario == 6){
-                  $(`#formAlumno`).html(usuarioAlumno(data));
-                }else{
-                  $(`#formAlumno`).html("");
-                }
-                console.log(data.Sexo);
-            }else{
-                $('table').html("No se encontraron coincidencias. Revise el dato buscado")
-            }
-        });
+</div>
+</div>
+<script>
+  function buscarCuenta() {
+    let buscador = $('#buscador').val();
+    if (buscador == "") {
+      $('table').html();
+      return;
     }
+    fetch('../api/buscarCuenta/' + buscador)
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.res) {
+          $('table').html(generarTabla(data));
+          $(`#sexo option[value="${data.Sexo}"]`).attr('selected', true);
+          if (data.Tipo_de_usuario == 6) {
+            $(`#formAlumno`).html(usuarioAlumno(data));
+          } else {
+            $(`#formAlumno`).html("");
+          }
+          console.log(data.Sexo);
+        } else {
+          $('table').html("No se encontraron coincidencias. Revise el dato buscado")
+        }
+      });
+  }
 
-    function usuarioAlumno(d){
-      return `
+  function usuarioAlumno(d) {
+    return `
           <table class="bordered" id="tabla_buscarCuenta">
             <tr>
             <th>Curso</th>
@@ -59,14 +58,14 @@
         <tr>
           <td><input type="button" value="Actualizar Curso" onclick="confirmSubmit('formAlumno', this)"></td>
           <td><input type="button" value="Actualizar Tutor" onclick="confirmSubmit('formAlumno', this)"></td>
-          <input type="hidden" id="btnhidalum" name="btn">
+          <input type="hidden" id="btnhidformAlumno" name="btn">
         </tr>
           </table>
       `;
-    }
+  }
 
-    function generarTabla(d){
-        return `
+  function generarTabla(d) {
+    return `
         <tr>
             <th>ID</th>
             <th>Apellido y nombre</th>
@@ -90,7 +89,7 @@
           <td><input type="text" value="${d.DNI}" name="DNI"></td>
           <td><input type="text" value="${d.Numero_de_telefono}" name="telefono"></td>
           <td><input type="text" value="${d.domicilio}" name="domicilio"></td>
-          <td><input type="date" value="${d.Fecha_de_nacimiento.slice(0,10)}" name="nacimiento"></td>
+          <td><input type="date" value="${d.Fecha_de_nacimiento.slice(0, 10)}" name="nacimiento"></td>
           <td><select name="Sexo" id="sexo">
             <option value="F">Femenino</option>
             <option value="M">Masculino</option>
@@ -103,45 +102,40 @@
           <input type="hidden" id="btnhidform" name="btn" value="">
         </tr>
         `
+  }
+
+
+
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+
+  closeBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
+
+  searchBtn.addEventListener("click", () => { // Sidebar open when you click on the search iocn
+    sidebar.classList.toggle("open");
+    menuBtnChange(); //calling the function(optional)
+  });
+
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+    if (sidebar.classList.contains("open")) {
+      closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+    } else {
+      closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
     }
+  }
 
-
-
-    let sidebar = document.querySelector(".sidebar");
-    let closeBtn = document.querySelector("#btn");
-    let searchBtn = document.querySelector(".bx-search");
-
-    closeBtn.addEventListener("click", () => {
-      sidebar.classList.toggle("open");
-      menuBtnChange();//calling the function(optional)
-    });
-
-    searchBtn.addEventListener("click", () => { // Sidebar open when you click on the search iocn
-      sidebar.classList.toggle("open");
-      menuBtnChange(); //calling the function(optional)
-    });
-
-    // following are the code to change sidebar button(optional)
-    function menuBtnChange() {
-      if (sidebar.classList.contains("open")) {
-        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
-      } else {
-        closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
+  function confirmSubmit(id, e) {
+    if (document.getElementById(id).checkValidity()) {
+      if (confirm('¿Esta seguro de modificar los datos de este usuario?')) {
+        $('#btnhid' + id).val(e.value);
+        $(id).submit();
       }
-    }
-
-    function confirmSubmit(id, e) {
-      if(id == 'form'){
-        if(confirm('¿Esta seguro de modificar los datos de este usuario?')){
-          $('#btnhidform').val(e.value);
-          $('#form').submit();
-        }
-      }
-      else{
-        if(confirm('¿Esta seguro de modificar los datos de este usuario?')){
-          $('#btnhidalum').val(e.value);
-          $('#formAlumno').submit();
-        } 
-      }
-    }
-  </script>
+    } else
+      alert('Se ha ingresado un campo erroneamente');
+  }
+</script>
