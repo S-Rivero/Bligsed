@@ -3,7 +3,7 @@
       <div class="contenedor_documentacion">
       <div class="contenedor_nombre_doc">
           <button class="input_cargar_inasistencias" id="selectTodos" onclick="selectTodos()">Seleccionar todos</button>
-          <input disabled type="submit" class="input_cargar_inasistencias"  value="Eliminar" form="tabla" id="eliminarBtn">
+          <input disabled type="button" class="input_cargar_inasistencias"  value="Eliminar"  id="eliminarBtn" onclick="submitForm()">
       </div>
       <form action="../api/eliminarCursos" method="post" name="tabla" id="tabla">
         <table class="bordered">
@@ -40,5 +40,12 @@
       }else{
         $('#eliminarBtn').prop('disabled',false)
       }
+    }
+
+    function submitForm(){
+      let s;
+      $("input[type=checkbox]:checked").length == 1 ? s = 'Esta seguro de eliminar el curso seleccionado' : s = 'Esta seguro de eliminar los cursos seleccionados'
+      if(confirm(s))
+        $('#tabla').submit();
     }
 </script>
