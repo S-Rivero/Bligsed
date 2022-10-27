@@ -3,7 +3,7 @@
       <div class="contenedor_nombre_doc">
         <select id="select_curso" onchange="updateURLCurso()">
           <option value="" hidden="hidden" selected="selected" id="optionSelected"></option>
-          {{#each a}}
+          {{#each y}}
             <option value="{{ID}}">{{#cursoToString Nombre_curso}}{{/cursoToString}} - {{Materia}}</option>
           {{/each}}
         </select>
@@ -38,18 +38,6 @@
     $('#form').attr('action', `/cargarNotas/${mat}/${trim}`);
     $('#optionTrimSelected').html("Trimestre - "+trim);
 
-    fetch(`/api/listarAlumnosMateria/${mat}/${trim}`)
-    .then((response) => response.json())
-    .then((data) => {
-
-      
-    });
-
-    
-
-  /*
-    listaAlumnos
-  */
 
     fetch(`/api/ListaAlumnosNotas/${mat}/${trim}`)
     .then((response) => response.json())
