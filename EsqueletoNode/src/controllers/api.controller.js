@@ -236,7 +236,7 @@ exports.eliminarCursos = ((req, res) => {
 });
 
 exports.listarDocentes = ((req, res) => {
-    pool.query('SELECT id, nombre FROM usuarios WHERE Tipo_de_usuario = 5 ORDER BY nombre',
+    pool.query('SELECT id, nombre FROM usuarios WHERE Tipo_de_usuario = 4 ORDER BY nombre',
         function (err, a) {
             res.send(a);
         });
@@ -250,7 +250,8 @@ exports.listarCursos = ((req, res) => {
 
 exports.actualizarCurso = ((req, res) => {
     let { id, materia, curso, profesor } = req.body;
-    pool.query('UPDATE materias SET Materia = ?, IdCurso = ?, profesor = ?, WHERE ID = ?',
+    console.log(id, materia, curso, profesor);
+    pool.query('UPDATE materias SET Materia = ?, IdCurso = ?, profesor = ? WHERE ID = ?',
         [materia, curso, profesor, id], function (err, a) {
             res.redirect('../editarMateria/' + id);
         });

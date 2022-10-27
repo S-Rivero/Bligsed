@@ -524,6 +524,7 @@ exports.editarMateriaId = ((req, res) => {
         ON u.id = m.profesor
         JOIN curso c
         ON c.ID = m.IdCurso
+        WHERE m.ID = ?
         ORDER BY c.Nombre_curso, m.Materia
         ;
     `, req.params.id, function (err, a) {
