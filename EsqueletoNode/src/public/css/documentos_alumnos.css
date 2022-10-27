@@ -95,6 +95,7 @@ tr{
 .bordered td, .bordered th {
   border:1px solid rgba(152, 172, 172, 0.305);
   padding-left: 8px;
+  padding-right: 8px;
   cursor: context-menu; 
   height: 5vh;
 }
@@ -222,4 +223,15 @@ table input {
 #enviar_consulta {
   margin-left: 1vw;
   height: 5vh;
+}
+
+
+.bx-pencil {
+  margin-top: 1vh;
+  font-size: 25px;
+}
+
+.bx-pencil:hover {
+  color: darkcyan;
+  transition: .2s;
 }

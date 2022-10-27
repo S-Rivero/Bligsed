@@ -4,25 +4,25 @@ function tipoUsuarioToString(tipo){
   
   switch(parseInt(tipo)){
     case 0:
-      return 'superusuario';
+      return 'Superusuario';
       break;
     case 1:
-      return 'administracion';
+      return 'Administracion';
       break;
     case 2:
-      return 'directivo';
+      return 'Directivo';
       break;
     case 3:
-      return 'preceptor';
+      return 'Preceptor';
       break;
     case 4:
-      return 'docente';
+      return 'Docente';
       break;
     case 5:
-      return 'tutor';
+      return 'Tutor';
       break;
     case 6:
-      return 'alumno';
+      return 'Alumno';
       break;
   }
 };
