@@ -9,12 +9,12 @@
                     <textarea class="ingreso_publicacion" name="desc" rows="4" cols="50"
                         placeholder="Escriba una publicación..."></textarea>
                     <input type="text" name="user" value="{{user.user.Nombre}}" style="display: none;">
-                    <input type="file" name="file" multiple>
+                    <input hidden id="adjuntar_archivo" type="file" name="file" multiple>
                     <div class="botones_uwu">
                         <div class="botones">
-                            <a href="" class="iconify"><span class="iconify" data-icon="simple-line-icons:paper-clip"
-                                    data-width="25"></span></a>
-                            <a href="" class="iconify"><span class="iconify" data-icon="bxs:image-add"
+                            <label for="adjuntar_archivo"><a href="" class="iconify"><span class="iconify" data-icon="simple-line-icons:paper-clip"
+                                    data-width="25"></span></a></label>
+                            <a hidden href="" class="iconify"><span class="iconify" data-icon="bxs:image-add"
                                     data-width="25"></span></a>
                             <a href="" class="iconify"><span class="iconify" data-icon="bi:emoji-smile"
                                     data-width="25"></span></a>

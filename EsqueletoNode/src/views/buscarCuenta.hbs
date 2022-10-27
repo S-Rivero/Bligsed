@@ -3,14 +3,14 @@
       <div class="contenedor_documentacion">
         <div class="contenedor_nombre_doc">
         <input type="text" name="buscador" id="buscador" placeholder="Mail" value="{{username}}">
-        <input type="submit" onclick="buscarCuenta()">
+        <input  id="enviar_consulta"  type="submit" onclick="buscarCuenta()">
         </div>
       </div>
       <div id="contenedor_tablas">
 
         <form id="form" action="../api/actualizarUsuario" method="POST">
 
-          <table class="bordered">
+          <table class="bordered" id="tabla_buscarCuenta">
             
           </table>
         </form>
@@ -46,7 +46,7 @@
 
     function usuarioAlumno(d){
       return `
-          <table class="bordered">
+          <table class="bordered" id="tabla_buscarCuenta">
             <tr>
             <th>Curso</th>
             <th>Tutor</th>

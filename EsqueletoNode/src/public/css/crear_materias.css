@@ -3,8 +3,10 @@
     background-color: rgba(4, 83, 63, 0.059);
     margin-top: 5%;
     margin-left: 7%;
-    height: 45vh;
+    height: auto;
     width: 60vw;
+    padding-bottom: 10vh;
+    padding-top: 5vh;
 }
 
 .contenedor_creacion_materia h1 {

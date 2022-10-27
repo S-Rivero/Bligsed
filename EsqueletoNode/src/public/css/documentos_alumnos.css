@@ -1,4 +1,8 @@
 
+body {
+  outline: none;
+}
+
 .bordered label {
   display: inline-block;
   width: 100%;
@@ -91,7 +95,8 @@ tr{
 .bordered td, .bordered th {
   border:1px solid rgba(152, 172, 172, 0.305);
   padding-left: 8px;
-  cursor: context-menu;
+  cursor: context-menu; 
+  height: 5vh;
 }
 
 .bordered tr:nth-child(even){background-color: #ffffff;}
@@ -133,10 +138,10 @@ tr{
     color: black;
   }
 
-.bordered a:hover {
+/* .bordered a:hover {
   color: rgb(83, 83, 83);
   transition: .1s;
-}
+} */
 
 
   .input_notas {
@@ -183,14 +188,39 @@ input::-webkit-inner-spin-button {
 }
 
 .nombre_alumnos {
-  position: relative;
-  bottom: 0.5vh;
+
 }
+
+.nombre_alumnos:hover {
+  font-weight: bold;
+  color: darkcyan;
+  transition: .2s;
+}
+
 
 .fecha {
   width: 100%;
 }
 
-.tr_cargarInasistencias {
-  
+.tr_alumno td{
+  height: 5vh;
+}
+
+#tabla_buscarCuenta {
+  width: 50vw;
+  margin-bottom: 10vh;
+  margin-top: 5vh;
+}
+
+#tabla2_buscarCuenta {
+  width: 10vw;
+}
+
+table input {
+  outline: none;
+}
+
+#enviar_consulta {
+  margin-left: 1vw;
+  height: 5vh;
 }
