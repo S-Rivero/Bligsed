@@ -291,11 +291,11 @@ input {
 .layout_boton1 {
   background-color: rgb(167, 243, 243);
   border: none;
-  padding: 10%;
+  padding: 1%;
   cursor: pointer;
   border-radius: 15px;
   width: auto;
-  height: auto;
+  height: fit-content;
 }
 
 .layout_boton1:hover {

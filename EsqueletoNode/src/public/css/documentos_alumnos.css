@@ -235,3 +235,13 @@ table input {
   color: darkcyan;
   transition: .2s;
 }
+
+.inputBtnBlock {
+  margin-left: 1vw;
+  margin-bottom: 1vh;
+}
+
+#select_trim {
+  margin-left: 1vw;
+}
+

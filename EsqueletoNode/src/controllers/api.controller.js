@@ -213,11 +213,18 @@ exports.actualizarAlumno = (async (req, res) => {
                 res.redirect('/buscarCuenta');
             }
         });
+<<<<<<< Updated upstream
     } else {
         pool.query(`SELECT id from usuarios WHERE username = ? AND Tipo_de_usuario = 5`, tutor, function (err, a) {
             console.log(a);
             if (a[0]) {
                 pool.query(`UPDATE alumno SET Padre = ?`, a[0].id, function (err, b) {
+=======
+    }else{
+        pool.query(`SELECT id from usuarios WHERE username = ? AND Tipo_de_usuario = 5`,tutor,function(err,a){
+            if(a){
+                pool.query(`UPDATE alumno SET Padre = ?`,a[0].id,function(err,b){
+>>>>>>> Stashed changes
                     res.redirect('/buscarCuenta');
                 });
             } else {
