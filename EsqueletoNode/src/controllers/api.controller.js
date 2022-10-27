@@ -230,9 +230,11 @@ exports.actualizarAlumno = (async (req, res) => {
 
 exports.eliminarCursos = ((req, res) => {
     let cursos = Object.keys(req.body);
-    pool.query(`DELETE FROM curso WHERE ID IN (?);`, cursos, function (err, a) {
+    let newCursos = cursos.map(e => parseInt(e));
+    pool.query(`DELETE FROM curso WHERE ID IN (?);`, [newCursos], function (err, a) {
         res.redirect('/editarCurso');
     });
+    
 });
 
 exports.listarDocentes = ((req, res) => {
