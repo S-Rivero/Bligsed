@@ -28,6 +28,8 @@
           
         </tr>
       </table>
+
+      
       </form>
     </div>
     
@@ -36,12 +38,18 @@
     $('#form').attr('action', `/cargarNotas/${mat}/${trim}`);
     $('#optionTrimSelected').html("Trimestre - "+trim);
 
-    fetch(`/api/listarAlumnosMateria/${mat}`)
+    fetch(`/api/listarAlumnosMateria/${mat}/${trim}`)
     .then((response) => response.json())
     .then((data) => {
+
       
     });
 
+    
+
+  /*
+    listaAlumnos
+  */
 
     fetch(`/api/ListaAlumnosNotas/${mat}/${trim}`)
     .then((response) => response.json())

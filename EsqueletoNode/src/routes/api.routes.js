@@ -25,7 +25,7 @@ const {
 router.get('/api/idCursoToName/:id',isLoggedIn, idCursoToName);
 router.get('/api/idMateriaToCurso/:id',isLoggedIn, idMateriaToCurso);
 router.get('/api/ListaAlumnosNotas/:id/:t',isLoggedIn, authLevelCargarNotas, ListaAlumnosNotas);
-router.get('/api/ListaAlumnosMateria/:idMat',isLoggedIn, authLevelCargarNotas, listarAlumnosMateria);
+router.get('/api/listarAlumnosMateria/:idMat/:trim',isLoggedIn, authLevelCargarNotas, listarAlumnosMateria);
 router.get('/api/insertNotasVacias/:idMat/:trim',isLoggedIn, authLevelCargarNotas, insertNotasVacias);
 
 router.get('/api/eliminarInasistencia/:id',isLoggedIn, authLevelCargarInasistencias, eliminarInasistencias);

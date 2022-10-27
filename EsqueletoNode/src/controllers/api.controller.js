@@ -3,33 +3,33 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const pool = require('../database');
-const {JSONListaAlumnosNotas} = require('../lib/jsonFormat');
-const {RandomString, encryptPassword} = require('../lib/helpers');
+const { JSONListaAlumnosNotas } = require('../lib/jsonFormat');
+const { RandomString, encryptPassword } = require('../lib/helpers');
 
 
-exports.idCursoToName = ((req,res) => {
+exports.idCursoToName = ((req, res) => {
     let id = req.params.id;
-    pool.query("SELECT Nombre_curso as C FROM curso WHERE ID = ?", id, function(err, a){
+    pool.query("SELECT Nombre_curso as C FROM curso WHERE ID = ?", id, function (err, a) {
         res.send(a[0]);
     });
 });
 
-exports.idMateriaToCurso = ((req,res) => {
+exports.idMateriaToCurso = ((req, res) => {
     let id = req.params.id;
     pool.query(`
         SELECT Materia as B, Nombre_curso as C
         FROM materias Z
         JOIN curso X
         ON Z.IdCurso = X.ID
-        WHERE Z.ID = ?`, id, function(err, a){
-            res.send(a[0])
+        WHERE Z.ID = ?`, id, function (err, a) {
+        res.send(a[0])
     });
 });
 
-exports.ListaAlumnosNotas = ((req,res) => {
+exports.ListaAlumnosNotas = ((req, res) => {
     let idMat = req.params.id;
     let trim = req.params.t;
-    
+
     //todos los alumnos de la materia
     pool.query(`SELECT id_alum, Nombre
     FROM usuarios U
@@ -38,12 +38,12 @@ exports.ListaAlumnosNotas = ((req,res) => {
             WHERE trimestre = ? AND id_materia = ?) N
     ON U.id = N.id_alum
     GROUP BY id_alum
-    ORDER BY Nombre`, [trim,idMat], function(err, a){
+    ORDER BY Nombre`, [trim, idMat], function (err, a) {
         //todas las notas de los alumnos
         pool.query(`SELECT id_alum, nota, numnota
         FROM notas
-        WHERE trimestre = ? AND id_materia = ?`, [trim,idMat], function(err, n){
-            res.send(JSONListaAlumnosNotas(a,n));
+        WHERE trimestre = ? AND id_materia = ?`, [trim, idMat], function (err, n) {
+            res.send(JSONListaAlumnosNotas(a, n));
         });
     });
 });
@@ -51,17 +51,17 @@ exports.ListaAlumnosNotas = ((req,res) => {
 
 exports.eliminarInasistencias = ((req, res) => {
     let id = req.params.id;
-    pool.query(`DELETE FROM inasistencias WHERE id = ?`,id, function(err, n){
-        if(err){
-            res.send({'res': 'error', err});
-        }else{
-            res.send({'res': 'eliminar', n});
+    pool.query(`DELETE FROM inasistencias WHERE id = ?`, id, function (err, n) {
+        if (err) {
+            res.send({ 'res': 'error', err });
+        } else {
+            res.send({ 'res': 'eliminar', n });
         }
     });
 });
 
 exports.actualizarInasistencias = ((req, res) => {
-    let {id, date, checkbox, select} = req.params;
+    let { id, date, checkbox, select } = req.params;
     let tiposInasistencia = {
         '0': {
             "cantidad": 0,
@@ -92,45 +92,45 @@ exports.actualizarInasistencias = ((req, res) => {
             "motivo": "Tarde TT"
         }
     }
-    let {cantidad, motivo} = tiposInasistencia[select];
-    let tipo = checkbox == 'true' ? 1:0;
+    let { cantidad, motivo } = tiposInasistencia[select];
+    let tipo = checkbox == 'true' ? 1 : 0;
     pool.query(`    UPDATE inasistencias
                     SET     tipo = ?,
                             motivo = ?,
                             cantidad = ?,
                             fecha = ?
-                    WHERE id = ?`,[tipo, motivo, cantidad, date, parseInt(id)], function(err, n){
-        if(err){
-            res.send({'res': 'error', err});
-        }else{
-            res.send({'res': 'update', n});
+                    WHERE id = ?`, [tipo, motivo, cantidad, date, parseInt(id)], function (err, n) {
+        if (err) {
+            res.send({ 'res': 'error', err });
+        } else {
+            res.send({ 'res': 'update', n });
         }
     });
 });
 
 
-exports.checkUser = ((req, res)=>{
+exports.checkUser = ((req, res) => {
     let username = req.body.username;
     pool.query(`
         SELECT id, Nombre, Tipo_de_usuario, Sexo, DNI, username, Numero_de_telefono, domicilio, Fecha_de_nacimiento FROM usuarios WHERE username = ?
-    `, username, function(err, a){
-        if(err){
-            res.send({err});
-        }else{
-            res.send({"res": a[0]});
+    `, username, function (err, a) {
+        if (err) {
+            res.send({ err });
+        } else {
+            res.send({ "res": a[0] });
         }
     });
 });
 
 
-exports.buscarCuenta = (async(req, res) => { 
+exports.buscarCuenta = (async (req, res) => {
     //username or id
-    let {username} = req.params;
-    pool.query("SELECT usuarios.*, curso.ID as idCurso, curso.Nombre_curso as Nombre_curso, B.username as padremail FROM usuarios LEFT JOIN alumno ON usuarios.id = alumno.id LEFT JOIN usuarios B ON Padre = B.id LEFT JOIN curso ON curso.ID = alumno.ID_Curso WHERE usuarios.username = ?;",[username], function(err,a){
-        if(a[0]){
+    let { username } = req.params;
+    pool.query("SELECT usuarios.*, curso.ID as idCurso, curso.Nombre_curso as Nombre_curso, B.username as padremail FROM usuarios LEFT JOIN alumno ON usuarios.id = alumno.id LEFT JOIN usuarios B ON Padre = B.id LEFT JOIN curso ON curso.ID = alumno.ID_Curso WHERE usuarios.username = ?;", [username], function (err, a) {
+        if (a[0]) {
             res.send(a[0]);
-        }else{
-            res.send({"res":"nao nao"});
+        } else {
+            res.send({ "res": "nao nao" });
         }
     })
 });
@@ -142,7 +142,7 @@ var transporter = nodemailer.createTransport({
     port: 25, // port for secure SMTP
     secureConnection: false,
     tls: {
-       ciphers:'SSLv3'
+        ciphers: 'SSLv3'
     },
     auth: {
         user: 'bligsed@hotmail.com',
@@ -150,13 +150,13 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-exports.actualizarUsuario = (async(req, res) => { 
-    if(req.body.btn == "Guardar"){
-        let {nombre, username, DNI, Sexo, telefono, nacimiento, domicilio, id, oldUsername, pass, tdu} = req.body;
+exports.actualizarUsuario = (async (req, res) => {
+    if (req.body.btn == "Guardar") {
+        let { nombre, username, DNI, Sexo, telefono, nacimiento, domicilio, id, oldUsername, pass, tdu } = req.body;
 
-        if(oldUsername != username){
-            pool.query("SELECT username FROM usuarios WHERE username = ?", username, async function(err,z){
-                if(!z[0]){
+        if (oldUsername != username) {
+            pool.query("SELECT username FROM usuarios WHERE username = ?", username, async function (err, z) {
+                if (!z[0]) {
                     try {
                         let passNoHash = RandomString(8);
                         pass = await encryptPassword(passNoHash);
@@ -166,54 +166,54 @@ exports.actualizarUsuario = (async(req, res) => {
                             subject: "Actualizacion en tu usuario", // Subject line
                             html: `<b>Nuevo usuario: ${username} Contraseña: ${passNoHash}</b>`, // html body
                         });
-                     } catch (err) {
-                        res.redirect('/buscarCuenta/'+id);
+                    } catch (err) {
+                        res.redirect('/buscarCuenta/' + id);
                         return;
-                     }
-                    
-                }else{
+                    }
+
+                } else {
                     username = oldUsername;
                 }
                 pool.query(`
                     UPDATE usuarios SET password = ?, Nombre = ?, username = ?, DNI = ?, Sexo = ?, Numero_de_telefono = ?, Fecha_de_nacimiento = ? , domicilio = ?
                     WHERE id = ?;
-                    `,[pass, nombre, username, DNI, Sexo, telefono, nacimiento, domicilio, id], function(err,a){
-                        res.redirect('/buscarCuenta');
-                    })
+                    `, [pass, nombre, username, DNI, Sexo, telefono, nacimiento, domicilio, id], function (err, a) {
+                    res.redirect('/buscarCuenta');
+                })
             });
         }
-        
-    }else{
-        let {id} = req.body;
+
+    } else {
+        let { id } = req.body;
         pool.query(`
             DELETE FROM usuarios WHERE id = ?
-        `, id, function(err,a){
+        `, id, function (err, a) {
             res.redirect('/buscarCuenta');
         });
     }
 });
 
-exports.actualizarAlumno = (async(req, res) => { 
-    let {curso, tutor, btn} = req.body;
-    if(btn == "Actualizar Curso"){
-        pool.query(`SELECT ID from CURSO WHERE Nombre_curso = ?`,curso,function(err,a){
+exports.actualizarAlumno = (async (req, res) => {
+    let { curso, tutor, btn } = req.body;
+    if (btn == "Actualizar Curso") {
+        pool.query(`SELECT ID from CURSO WHERE Nombre_curso = ?`, curso, function (err, a) {
             console.log(a);
-            if(a[0]){
-                pool.query(`UPDATE alumno SET ID_Curso = ?`,a[0].ID,function(err,b){
+            if (a[0]) {
+                pool.query(`UPDATE alumno SET ID_Curso = ?`, a[0].ID, function (err, b) {
                     res.redirect('/buscarCuenta');
                 });
-            }else{
+            } else {
                 res.redirect('/buscarCuenta');
             }
         });
-    }else{
-        pool.query(`SELECT id from usuarios WHERE username = ? AND Tipo_de_usuario = 5`,tutor,function(err,a){
+    } else {
+        pool.query(`SELECT id from usuarios WHERE username = ? AND Tipo_de_usuario = 5`, tutor, function (err, a) {
             console.log(a);
-            if(a[0]){
-                pool.query(`UPDATE alumno SET Padre = ?`,a[0].id,function(err,b){
+            if (a[0]) {
+                pool.query(`UPDATE alumno SET Padre = ?`, a[0].id, function (err, b) {
                     res.redirect('/buscarCuenta');
                 });
-            }else{
+            } else {
                 res.redirect('/buscarCuenta');
             }
         });
@@ -221,48 +221,48 @@ exports.actualizarAlumno = (async(req, res) => {
 });
 
 
-exports.eliminarCursos = ((req,res) => {
+exports.eliminarCursos = ((req, res) => {
     let cursos = Object.keys(req.body);
-    pool.query(`DELETE FROM curso WHERE ID IN (?);`, cursos, function(err,a){
+    pool.query(`DELETE FROM curso WHERE ID IN (?);`, cursos, function (err, a) {
         res.redirect('/editarCurso');
     });
 });
 
-exports.listarDocentes = ((req,res) => {
+exports.listarDocentes = ((req, res) => {
     pool.query('SELECT id, nombre FROM usuarios WHERE Tipo_de_usuario = 5 ORDER BY nombre',
-    function(err,a){
+        function (err, a) {
+            res.send(a);
+        });
+});
+
+exports.listarCursos = ((req, res) => {
+    pool.query('SELECT * FROM curso ORDER BY Nombre_curso', function (err, a) {
         res.send(a);
     });
 });
 
-exports.listarCursos = ((req,res) => {
-    pool.query('SELECT * FROM curso ORDER BY Nombre_curso', function(err,a){
-        res.send(a);
-    });
-});
-
-exports.actualizarCurso = ((req,res) => {
-    let {id, materia, curso, profesor} = req.body;
+exports.actualizarCurso = ((req, res) => {
+    let { id, materia, curso, profesor } = req.body;
     pool.query('UPDATE materias SET Materia = ?, IdCurso = ?, profesor = ?, WHERE ID = ?',
-    [materia, curso, profesor, id], function(err,a){
-        res.redirect('../editarMateria/'+id);
-    });
+        [materia, curso, profesor, id], function (err, a) {
+            res.redirect('../editarMateria/' + id);
+        });
 });
 
 /*
 SELECT A.ID, U.Nombre
 FROM alumno A
 JOIN (	SELECT IdCurso 
-      	FROM `materias` 
-      	WHERE ID = 1) Z
+            FROM `materias` 
+            WHERE ID = 1) Z
 ON Z.IdCurso = A.ID_Curso
 JOIN usuarios U 
 ON A.ID = U.ID ;
 */
 
 
-exports.listarAlumnosMateria = ((req,res) => {
-    let {idMat} = req.params;
+exports.listarAlumnosMateria = ((req, res) => {
+    let { idMat, trim } = req.params;
     pool.query(`
         SELECT A.ID, U.Nombre
         FROM alumno A
@@ -271,14 +271,82 @@ exports.listarAlumnosMateria = ((req,res) => {
                 WHERE ID = ?) Z
         ON Z.IdCurso = A.ID_Curso
         JOIN usuarios U 
-        ON A.ID = U.ID ;
-    `,idMat , function(err,a){
-        res.send(a);
+        ON A.ID = U.ID;
+
+        SELECT A.ID, N.nota, N.numnota
+        FROM alumno A
+        JOIN (	SELECT IdCurso 
+              FROM materias 
+              WHERE ID = ?) Z
+        ON Z.IdCurso = A.ID_Curso
+        LEFT JOIN(	SELECT nota, id_alum, numnota
+                  	FROM notas
+        			WHERE trimestre = ? AND id_materia = ?) N
+        ON N.id_alum = A.ID
+        ORDER BY A.ID, N.numnota;
+
+        SELECT max(N.numnota) as maxNumNota
+        FROM alumno A
+        JOIN (	SELECT IdCurso 
+              FROM materias 
+              WHERE ID = ?) Z
+        ON Z.IdCurso = A.ID_Curso
+        LEFT JOIN(	SELECT nota, id_alum, numnota
+                  	FROM notas
+        			WHERE trimestre = ? AND id_materia = ?) N
+        ON N.id_alum = A.ID
+        ORDER BY A.ID, N.numnota;
+
+    `, [idMat, idMat, trim, idMat, idMat, trim, idMat], function (err, a) {
+        let [listaAlumnos,notas, maxNumNota] = a;
+        let max = maxNumNota[0]['maxNumNota'];
+        let toInsert = [];
+        if (max) {
+            listaAlumnos.forEach(e => {
+                for (let i = 1; i < max + 1; i++) {
+                    if (!(notas.some(x => x.numnota == i && x.ID == e.ID))) {
+                        toInsert.push({
+                            id_alum: e.ID,
+                            id_materia: idMat,
+                            nota: 0,
+                            trimestre: trim,
+                            numnota: i
+                        });
+                    }
+                }
+            });
+        } else {
+            listaAlumnos.forEach(e => {
+                toInsert.push({
+                    id_alum: e.ID,
+                    id_materia: idMat,
+                    nota: 0,
+                    trimestre: trim,
+                    numnota: 1
+                });
+            })
+        }
+        let insert = prepareInsert(toInsert);
+
+        pool.query(insert, function(err,d){
+            res.send({'a':'a'});
+        })
     });
 });
 
-exports.insertNotasVacias = ((req,res) => {
-    let {idMat, trim} = req.params;
+function prepareInsert(arr){
+    console.log(arr);
+    
+    return `
+    INSERT INTO notas (id_alum, id_materia, nota, trimestre, numnota) 
+    VALUES 
+    ` + arr.map(e => {
+      return '('+e.id_alum+','+e.id_materia+','+e.nota+','+e.trimestre+','+e.numnota+')'
+    }).join(',');
+  }
+
+exports.insertNotasVacias = ((req, res) => {
+    let { idMat, trim } = req.params;
     pool.query(`
         SELECT A.ID, U.Nombre
         FROM alumno A
@@ -288,7 +356,7 @@ exports.insertNotasVacias = ((req,res) => {
         ON Z.IdCurso = A.ID_Curso
         JOIN usuarios U 
         ON A.ID = U.ID ;
-    `,idMat , function(err,a){
+    `, idMat, function (err, a) {
         res.send(a);
     });
 })
