@@ -130,12 +130,19 @@
   }
 
   function confirmSubmit(id, e) {
-    if (document.getElementById(id).checkValidity()) {
-      if (confirm('¿Esta seguro de modificar los datos de este usuario?')) {
+    if (e.value == 'Eliminar usuario'){
+      if (confirm('¿Esta seguro de eliminar este usuario?')) {
         $('#btnhid' + id).val(e.value);
-        $(id).submit();
+        $('#'+id).submit();
       }
-    } else
+    }else{
+      if (document.getElementById(id).checkValidity()) {
+        if (confirm('¿Esta seguro de modificar los datos de este usuario?')) {
+          $('#btnhid' + id).val(e.value);
+          $('#'+id).submit();
+        }
+      } else
       alert('Se ha ingresado un campo erroneamente');
+    }
   }
 </script>

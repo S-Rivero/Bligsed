@@ -15,7 +15,7 @@ const {
     eliminarCursos,
     listarDocentes,
     listarCursos,
-    actualizarCurso,
+    actualizarMateria,
     insertNotasVacias
 } = require('../controllers/api.controller');
 
@@ -39,5 +39,5 @@ router.post('/api/eliminarCursos', isLoggedIn, authLevelAdministrador, eliminarC
 
 router.get('/api/listarDocentes', isLoggedIn, authLevelAdministrador, listarDocentes);
 router.get('/api/listarCursos', isLoggedIn, authLevelAdministrador, listarCursos);
-router.post('/api/actualizarCurso', isLoggedIn, authLevelAdministrador, actualizarCurso);
+router.post('/api/actualizarMateria', isLoggedIn, authLevelAdministrador, actualizarMateria);
 module.exports = router;

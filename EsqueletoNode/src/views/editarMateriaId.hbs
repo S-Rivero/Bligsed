@@ -2,9 +2,10 @@
 <div class="contenedor_documentacion">
   <div class="contenedor_nombre_doc">
   </div>
-  <form action="/api/actualizarCurso" method="POST" name="tabla" id="tabla">
-    <input type="submit" value="Guardar">
-    <input type="submit" value="Eliminar materia">
+  <form action="/api/actualizarMateria" method="POST" name="tabla" id="tabla">
+    <input type="button" onclick="confirmSubmit(this)" value="Guardar">
+    <input type="button" onclick="confirmSubmit(this)" value="Eliminar materia">
+    <input type="hidden" name="type" id="inhid" value="">
     <table class="bordered">
       <tr>
         <th>Id</th>
@@ -52,5 +53,13 @@
 
   function profesorToHtml(c){
     return `<option value="${c.id}">${c.nombre}</option>`;
+  }
+  function confirmSubmit(e) {
+    let s;
+    e.value == 'Eliminar materia' ? s = '¿Esta seguro de eliminar esta materia?' : s = '¿Esta seguro de modificar los datos de esta materia?'
+    if (confirm(s)) {
+      $('#inhid').val(e.value);
+      $('#tabla').submit();
+    }
   }
 </script>

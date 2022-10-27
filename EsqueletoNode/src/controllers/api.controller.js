@@ -250,7 +250,7 @@ exports.listarCursos = ((req, res) => {
     });
 });
 
-exports.actualizarCurso = ((req, res) => {
+exports.actualizarMateria = ((req, res) => {
     let { id, materia, curso, profesor } = req.body;
     console.log(id, materia, curso, profesor);
     pool.query('UPDATE materias SET Materia = ?, IdCurso = ?, profesor = ? WHERE ID = ?',
