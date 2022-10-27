@@ -38,6 +38,13 @@ border-radius: 15px;
 text-decoration: none;
 color: white;
 height: 7vh;
+cursor: pointer;
+border: none;
+}
+
+.enviar_publicacion:hover {
+  background: rgb(58, 136, 133);
+  transition: .2s;
 }
 
 .enviar_publicacion p {
@@ -350,4 +357,9 @@ width: 100%;
 }
 .publicaciones {
   margin-bottom: 15vh;
+}
+
+
+.botones label {
+  background-color: red;
 }

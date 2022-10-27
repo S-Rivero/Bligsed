@@ -192,10 +192,9 @@ input::-webkit-inner-spin-button {
 }
 
 .nombre_alumnos:hover {
-  font-weight: bold;
   color: darkcyan;
   transition: .2s;
-}
+} 
 
 
 .fecha {
