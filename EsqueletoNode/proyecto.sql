@@ -107,11 +107,12 @@ CREATE TABLE `historial_inasistencias` (
 --
 
 CREATE TABLE `historial_notas` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_alum` int(11) NOT NULL,
   `id_materia` int(11) NOT NULL,
   `fecha_cambion` date NOT NULL,
-  `nota` int(11) NOT NULL
+  `nota` int(11) NOT NULL,
+  PRIMARY KEY (id)
 ) ;
 
 -- --------------------------------------------------------
