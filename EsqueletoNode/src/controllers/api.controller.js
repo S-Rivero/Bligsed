@@ -251,12 +251,18 @@ exports.listarCursos = ((req, res) => {
 });
 
 exports.actualizarMateria = ((req, res) => {
-    let { id, materia, curso, profesor } = req.body;
-    console.log(id, materia, curso, profesor);
-    pool.query('UPDATE materias SET Materia = ?, IdCurso = ?, profesor = ? WHERE ID = ?',
+    let { id, materia, curso, profesor, type } = req.body;
+
+    if(type == "Guardar"){
+        pool.query('UPDATE materias SET Materia = ?, IdCurso = ?, profesor = ? WHERE ID = ?',
         [materia, curso, profesor, id], function (err, a) {
             res.redirect('../editarMateria/' + id);
         });
+    }else{
+        pool.query(`DELETE FROM materias WHERE ID = ?`, id, function(err,a){
+            res.redirect('../editarMateria');
+        });
+    }
 });
 
 /*
