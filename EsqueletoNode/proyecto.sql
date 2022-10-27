@@ -143,19 +143,13 @@ CREATE TABLE `inasistencias` (
 --
 -- Disparadores `inasistencias`
 --
---Permite dejar un registro de todas las asistencias que son borradas de la tabla principal para recuperacion en caso de que por alguna razon un tercero modifique las inasistencias
 
 DELIMITER $$
 CREATE TRIGGER `editar-historial` BEFORE UPDATE ON `inasistencias` FOR EACH ROW INSERT INTO historial_inasistencias (id_original, tipo, motivo, cantidad, fecha, id_us, fecha_cambio, id_usuario_modif) VALUES (old.id, old.tipo, old.motivo, old.cantidad, old.fecha, old.id_us, NOW(), old.id_creador)
 $$
 DELIMITER ;
---Permite dejar un registro de todas las asistencias que son borradas de la tabla principal para recuperacion en caso de que por alguna razon se borre incorrectamente la inasistencia
 
-DELIMITER $$
-CREATE TRIGGER `borrar-inasistencias` BEFORE DELETE ON `inasistencias`
- FOR EACH ROW INSERT INTO historial_inasistencias (id_original, tipo, motivo, cantidad, fecha, id_us, fecha_cambio, id_usuario_modif) VALUES (old.id, old.tipo, old.motivo, old.cantidad, old.fecha, old.id_us, NOW(), old.id_creador)
- $$
- DELIMITER ;
+
 
 -- --------------------------------------------------------
 
@@ -193,7 +187,7 @@ CREATE TABLE `notas` (
 DELIMITER $$
 CREATE TRIGGER `carganotas` BEFORE UPDATE ON `notas`
  FOR EACH ROW INSERT INTO historial_notas 
-(id, id_alum, id_materia, fecha_cambion, nota) VALUES (old.id, old.id_alum, old.id_materia, NOW(), old.nota)
+(id_alum, id_materia, fecha_cambion, nota) VALUES (old.id_alum, old.id_materia, NOW(), old.nota)
 $$
 DELIMITER ;
 --
@@ -298,6 +292,12 @@ END; END IF $$
 DELIMITER ;
 
 
+
+DELIMITER $$
+CREATE TRIGGER `borrar-inasistencias` BEFORE DELETE ON `inasistencias`
+ FOR EACH ROW INSERT INTO historial_inasistencias (id_original, tipo, motivo, cantidad, fecha, id_us, fecha_cambio, id_usuario_modif) VALUES (old.id, old.tipo, old.motivo, old.cantidad, old.fecha, old.id_us, NOW(), old.id_creador)
+ $$
+ DELIMITER ;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
