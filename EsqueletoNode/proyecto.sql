@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
+--  
 -- Base de datos: `proyecto`
 --
 
@@ -321,7 +321,7 @@ CREATE TRIGGER `borrar-inasistencias` BEFORE DELETE ON `inasistencias`
 
 
 INSERT INTO `curso` (`Nombre_curso`) VALUES ( '7C'), ('6D'), ('1A'), ('5D');
-INSERT INTO `materias` (`Materia`, `IdCurso`, `profesor`) VALUES ( 'Matematicas', 1, 4), ( 'Lengua', 1, 4), ( 'Computacion', 3, 7), ( 'Naturales', 2, 4), ( 'Quimica', 3, 4), ( 'Redes', 4, 7);
+INSERT INTO `materias` (`Materia`, `IdCurso`, `profesor`) VALUES ( 'Matematicas', 1, 4), ( 'Lengua', 1, 4), ( 'Computacion', 3, 7), ( 'Naturales', 2, 4), ( 'Quimica', 3, 4), ( 'Redes', 4, 7), ('Base de datos', 2, 7);
 
 INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 6, 1, 1, 1, 1), ( 6, 1, 10, 1, 2), (6, 1, 9, 1, 3), (6, 1, 5, 1, 4), (6, 2, 4, 1, 5), (6, 2, 7, 1, 6), (6, 2, 8, 1, 7), (6, 2, 9, 1, 8);
 INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 6, 1, 1, 2, 1), ( 6, 1, 10, 2, 2), (6, 1, 9, 2, 3), (6, 1, 5, 2, 4), (6, 2, 4, 2, 5), (6, 2, 7, 2, 6), (6, 2, 8, 2, 7), (6, 2, 9, 2, 8);
@@ -388,9 +388,9 @@ INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono
 
 INSERT INTO `usuarios` (`DNI`, `Nombre`, `username`, `Sexo`, `Numero_de_telefono`, `Tipo_de_usuario`, `password`, `Fecha_de_nacimiento`, `colegio`, `domicilio`) VALUES(60264312, 'alumno3', 'alumno3', 'M', 47392742, 6, '$2a$10$6lmlEuJRZ6bxbskY05sFCeyL8VZOH1L3ifJi0CQ0f0AS306QFnleq', 2002-05-22, 0, 'Caballito');
 
-UPDATE `alumno` SET  `ID_Curso`= 1, `Padre`=17 WHERE `ID` = 18;  
-UPDATE `alumno` SET  `ID_Curso`= 1, `Padre`=17 WHERE `ID` = 19;  
-UPDATE `alumno` SET  `ID_Curso`= 1, `Padre`=18 WHERE `ID` = 20;
+UPDATE `alumno` SET  `ID_Curso`= 2, `Padre`=16 WHERE `ID` = 18;  
+UPDATE `alumno` SET  `ID_Curso`= 3, `Padre`=16 WHERE `ID` = 19;  
+UPDATE `alumno` SET  `ID_Curso`= 3, `Padre`=17 WHERE `ID` = 20;
 
 
 UPDATE fichamedica SET `Enfermedad` = "Asma",  `Alergia` = "Intolerancia a la lactosa", `Tratamiento_medico` = "Antibioticos", `Vacunacion` = "1", `Altura` = 170, `Peso` = 60.5, `Hospital` = "Hospital italiano", `Obra_social` = "Osecac", `N_de_afiliado_obra_social` = 112312312312, `Medico_cabeceraln` = "Morbius", `Medico_cabecerafn` = "Michael", `Domiciliomed` = "Antesana 247", `Telefono_medico` = 10293847 WHERE DNI = 68526783;
@@ -401,16 +401,22 @@ UPDATE fichamedica SET  `Internacion` = "Internacion debido a Traqueotomia", `Qu
 
 
 
-INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 18, 1, 1, 1, 1), ( 18, 1, 10, 1, 2), (18, 1, 9, 1, 3), (18, 1, 5, 1, 4), (18, 2, 4, 1, 5), (18, 2, 7, 1, 6), (18, 2, 8, 1, 7), (18, 2, 9, 1, 8);
-INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 18, 1, 1, 2, 1), ( 18, 1, 10, 2, 2), (18, 1, 9, 2, 3), (18, 1, 5, 2, 4), (18, 2, 4, 2, 5), (18, 2, 7, 2, 6), (18, 2, 8, 2, 7), (18, 2, 9, 2, 8);
-INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 18, 1, 1, 3, 1), ( 18, 1, 10, 3, 2), (18, 1, 9, 3, 3), (18, 1, 5, 3, 4), (18, 2, 4, 3, 5), (18, 2, 7, 3, 6), (18, 2, 8, 3, 7), (18, 2, 9, 3, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 18, 4, 1, 1, 1), ( 18, 4, 10, 1, 2), (18, 4, 9, 1, 3), (18, 4, 5, 1, 4), (18, 7, 4, 1, 5), (18, 7, 7, 1, 6), (18, 7, 8, 1, 7), (18, 7, 9, 1, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 18, 4, 1, 2, 1), ( 18, 4, 10, 2, 2), (18, 4, 9, 2, 3), (18, 4, 5, 2, 4), (18, 7, 4, 2, 5), (18, 7, 7, 2, 6), (18, 7, 8, 2, 7), (18, 7, 9, 2, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 18, 4, 1, 3, 1), ( 18, 4, 10, 3, 2), (18, 4, 9, 3, 3), (18, 4, 5, 3, 4), (18, 7, 4, 3, 5), (18, 7, 7, 3, 6), (18, 7, 8, 3, 7), (18, 7, 9, 3, 8);
 
-INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 19, 1, 1, 1, 1), ( 19, 1, 10, 1, 2), (19, 1, 9, 1, 3), (19, 1, 5, 1, 4), (19, 2, 4, 1, 5), (19, 2, 7, 1, 6), (19, 2, 8, 1, 7), (19, 2, 9, 1, 8);
-INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 19, 1, 1, 2, 1), ( 19, 1, 10, 2, 2), (19, 1, 9, 2, 3), (19, 1, 5, 2, 4), (19, 2, 4, 2, 5), (19, 2, 7, 2, 6), (19, 2, 8, 2, 7), (19, 2, 9, 2, 8);
-INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 19, 1, 1, 3, 1), ( 19, 1, 10, 3, 2), (19, 1, 9, 3, 3), (19, 1, 5, 3, 4), (19, 2, 4, 3, 5), (19, 2, 7, 3, 6), (19, 2, 8, 3, 7), (19, 2, 9, 3, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 19, 3, 1, 1, 1), ( 19, 3, 10, 1, 2), (19, 3, 9, 1, 3), (19, 3, 5, 1, 4), (19, 5, 4, 1, 5), (19, 5, 7, 1, 6), (19, 5, 8, 1, 7), (19, 5, 9, 1, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 19, 3, 1, 2, 1), ( 19, 3, 10, 2, 2), (19, 3, 9, 2, 3), (19, 3, 5, 2, 4), (19, 5, 4, 2, 5), (19, 5, 7, 2, 6), (19, 5, 8, 2, 7), (19, 5, 9, 2, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 19, 3, 1, 3, 1), ( 19, 3, 10, 3, 2), (19, 3, 9, 3, 3), (19, 3, 5, 3, 4), (19, 5, 4, 3, 5), (19, 5, 7, 3, 6), (19, 5, 8, 3, 7), (19, 5, 9, 3, 8);
 
-INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 20, 1, 1, 1, 1), ( 20, 1, 10, 1, 2), (20, 1, 9, 1, 3), (20, 1, 5, 1, 4), (20, 2, 4, 1, 5), (20, 2, 7, 1, 6), (20, 2, 8, 1, 7), (20, 2, 9, 1, 8);
-INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 20, 1, 1, 2, 1), ( 20, 1, 10, 2, 2), (20, 1, 9, 2, 3), (20, 1, 5, 2, 4), (20, 2, 4, 2, 5), (20, 2, 7, 2, 6), (20, 2, 8, 2, 7), (20, 2, 9, 2, 8);
-INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 20, 1, 1, 3, 1), ( 20, 1, 10, 3, 2), (20, 1, 9, 3, 3), (20, 1, 5, 3, 4), (20, 2, 4, 3, 5), (20, 2, 7, 3, 6), (20, 2, 8, 3, 7), (20, 2, 9, 3, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 20, 3, 1, 1, 1), ( 20, 3, 10, 1, 2), (20, 3, 9, 1, 3), (20, 3, 5, 1, 4), (20, 5, 4, 1, 5), (20, 5, 7, 1, 6), (20, 5, 8, 1, 7), (20, 5, 9, 1, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 20, 3, 1, 2, 1), ( 20, 3, 10, 2, 2), (20, 3, 9, 2, 3), (20, 3, 5, 2, 4), (20, 5, 4, 2, 5), (20, 5, 7, 2, 6), (20, 5, 8, 2, 7), (20, 5, 9, 2, 8);
+INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 20, 3, 1, 3, 1), ( 20, 3, 10, 3, 2), (20, 3, 9, 3, 3), (20, 3, 5, 3, 4), (20, 5, 4, 3, 5), (20, 5, 7, 3, 6), (20, 5, 8, 3, 7), (20, 5, 9, 3, 8);
 
 INSERT INTO `finales` (`id_alumno`, `id_materia`, `trimestre`, `valor`) VALUES ('6', '1', '1', '7'), ('6', '2', '1', '10'), ('8', '1', '1', '9'), ('8', '2', '1', '4');
+
+INSERT INTO `finales` (`id_alumno`, `id_materia`, `trimestre`, `valor`) VALUES ('18', '4', '1', '7'), ('18', '4', '1', '10'), ('18', '7', '1', '9'), ('18', '7', '1', '4');
+
+INSERT INTO `finales` (`id_alumno`, `id_materia`, `trimestre`, `valor`) VALUES ('19', '3', '1', '7'), ('19', '3', '1', '10'), ('19', '5', '1', '9'), ('19', '5', '1', '4');
+
+INSERT INTO `finales` (`id_alumno`, `id_materia`, `trimestre`, `valor`) VALUES ('20', '3', '1', '7'), ('20', '3', '1', '10'), ('20', '5', '1', '9'), ('20', '5', '1', '4');
