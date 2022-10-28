@@ -131,11 +131,12 @@ CREATE TABLE `historial_notas` (
 --
 
 CREATE TABLE `finales` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_alumno` int(11) NOT NULL,
   `id_materia` int(11) NOT NULL,
   `trimestre` int(11) NOT NULL COMMENT '1,2,3 son para el valor de trimestre si no es ninguna de eso asumis que es final',
-  `valor` int(11) NOT NULL
+  `valor` int(11) NOT NULL,
+  PRIMARY KEY (id)
 );
 
 
@@ -411,3 +412,5 @@ INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUE
 INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 20, 1, 1, 1, 1), ( 20, 1, 10, 1, 2), (20, 1, 9, 1, 3), (20, 1, 5, 1, 4), (20, 2, 4, 1, 5), (20, 2, 7, 1, 6), (20, 2, 8, 1, 7), (20, 2, 9, 1, 8);
 INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 20, 1, 1, 2, 1), ( 20, 1, 10, 2, 2), (20, 1, 9, 2, 3), (20, 1, 5, 2, 4), (20, 2, 4, 2, 5), (20, 2, 7, 2, 6), (20, 2, 8, 2, 7), (20, 2, 9, 2, 8);
 INSERT INTO `notas` (`id_alum`, `Id_materia`, `nota`,`trimestre`, numnota) VALUES ( 20, 1, 1, 3, 1), ( 20, 1, 10, 3, 2), (20, 1, 9, 3, 3), (20, 1, 5, 3, 4), (20, 2, 4, 3, 5), (20, 2, 7, 3, 6), (20, 2, 8, 3, 7), (20, 2, 9, 3, 8);
+
+INSERT INTO `finales` (`id_alumno`, `id_materia`, `trimestre`, `valor`) VALUES ('6', '1', '1', '7'), ('6', '2', '1', '10'), ('8', '1', '1', '9'), ('8', '2', '1', '4');
