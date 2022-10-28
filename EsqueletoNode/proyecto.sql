@@ -51,6 +51,14 @@ CREATE TABLE `curso` (
 
 -- --------------------------------------------------------
 
+ 
+
+
+
+
+
+
+
 --
 -- Estructura de tabla para la tabla `fichamedica`
 --
@@ -151,6 +159,12 @@ CREATE TRIGGER `editar-historial` BEFORE UPDATE ON `inasistencias` FOR EACH ROW 
 $$
 DELIMITER ;
 
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cursos`(IN `sus` INT(11))
+BEGIN 
+SELECT Nombre_curso as C FROM curso WHERE ID = sus;
+END$$
+DELIMITER ;
 
 
 -- --------------------------------------------------------

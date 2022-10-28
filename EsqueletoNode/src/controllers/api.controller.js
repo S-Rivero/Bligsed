@@ -9,7 +9,7 @@ const { RandomString, encryptPassword } = require('../lib/helpers');
 
 exports.idCursoToName = ((req, res) => {
     let id = req.params.id;
-    pool.query("SELECT Nombre_curso as C FROM curso WHERE ID = ?", id, function (err, a) {
+    pool.query("CALL cursos (?)", id, function (err, a) {
         res.send(a[0]);
     });
 });
