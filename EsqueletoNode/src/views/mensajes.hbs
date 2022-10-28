@@ -24,8 +24,7 @@
                            </form>
                            
                            <form id="f2P2">
-                              <input type="text" name="name" placeholder="Con quien quiere hablar?" class="form-control" required>
-                              <input type="text" name="id" class="hid" value="6" required>
+                              <input type="text" name="username" placeholder="Con quien quiere hablar?" class="form-control" required>
                               <button class="btn btn-primary">Enviar</button>
                            </form>
 
@@ -82,8 +81,9 @@
                </div>
                
                <div id="user" class="hid">
-                  <p>{{user.user.id}}</p>
-                  <p>{{user.user.Nombre}}</p>
+                  {{!-- <input type="hidden" value="{{user.user.id}}"> --}}
+                  <input type="hidden" value="{{user.user.username}}">
+                  <input type="hidden" value="{{user.user.Nombre}}">
                </div>
             </div>
 

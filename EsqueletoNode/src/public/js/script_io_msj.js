@@ -3,8 +3,9 @@ const fMsg = document.getElementById("formMsg");
 const ulChats = document.getElementById("ulChats");
 const ul = document.getElementById("ulMsg");
 const user = {
-  id: document.getElementById("user").children[0].innerText,
-  name: document.getElementById("user").children[1].innerText,
+  // id: document.getElementById("user").children[0].innerText,
+  username: document.getElementById("user").children[0].value,
+  name: document.getElementById("user").children[1].value,
 };
 var socket = io.connect();
 var actual_room = null;
@@ -21,17 +22,23 @@ window.onload = (e) => {
     else {
       arr.forEach((elem) => {
         if (/\n/.test(elem.name)) {
-          elem.name = elem.name.split("\n");
-          if (elem.name[0] == user.name) elem.name = elem.name[1];
-          else elem.name = elem.name[0];
+          elem.name = elem.name.split("\n")
+            .map((e) => e.replace("\r", ""));
+          if(elem.name[1] == user.username){
+            elem.username = elem.name[3];
+            elem.name = elem.name[2];
+          } else {
+            elem.username = elem.name[1];
+            elem.name = elem.name[0];
+          }
           ulChats.insertAdjacentHTML(
             "beforeend",
-            `<li class="clearfix cont" id="${elem.id}" onclick="switchChat(this)"><img src="/media/user2.png" alt="avatar"><div class="about"><div class="name">${elem.name}</div><div class="hid">${elem.id}</div><div class="hid">true</div></div></li>`
+            `<li class="clearfix cont" id="${elem.id}" onclick="switchChat(this)"><img src="/media/user2.png" alt="avatar"><div class="about"><div class="name">${elem.name}</div><input type="hidden" value="true"><input type="hidden" value="${elem.username}"></div></li>`
           );
         } else
           ulChats.insertAdjacentHTML(
             "beforeend",
-            `<li class="clearfix cont" id="${elem.id}" onclick="switchChat(this)"><img src="/media/user2.png" alt="avatar"><div class="about"><div class="name">${elem.name}</div><div class="hid">${elem.id}</div><div class="hid">false</div><div class="hid">${elem.email}</div></div></li>`
+            `<li class="clearfix cont" id="${elem.id}" onclick="switchChat(this)"><img src="/media/user2.png" alt="avatar"><div class="about"><div class="name">${elem.name}</div><input type="hidden" value="false"></div></li>`
           );
       });
     }
@@ -40,11 +47,15 @@ window.onload = (e) => {
 };
 
 function switchChat(elem) {
+  console.log(elem);
+  console.log(elem.id);
   let room = {
-    id: elem.children[1].children[1].innerHTML,
+    id: elem.id,
     name: elem.children[1].children[0].innerHTML,
-    priv: elem.children[1].children[2].innerHTML,
+    priv: elem.children[1].children[1].value,
   };
+  if (room.priv == 'true')
+    room.username = elem.children[1].children[2].value;
   if (actual_room != room) {
     if (actual_room)
       document.getElementById(actual_room.id).classList.remove("active");
@@ -90,18 +101,17 @@ document.getElementById("fGrupo").addEventListener("submit", (e) => {
 });
 document.getElementById("f2P2").addEventListener("submit", (e) => {
   e.preventDefault();
-  createChat(true, { name: e.target.name.value, id: e.target.id.value });
+  createChat(true, e.target.username.value);
 });
 
 function createChat(priv, f) {
   let x = true;
   if (priv) {
     o = {
-      name: f.name,
-      id: f.id,
+      username: f,
       priv: true,
     };
-
+    checkChatExist(o.username);
   } else {
     o = {
       name: f,
@@ -113,9 +123,24 @@ function createChat(priv, f) {
   //   alert('El chat seleccionado ya existe');
   x
     ? socket.emit("crearGrupo", o, user, (res) => {
-        if (res) window.location.reload();
+        // if (res) window.location.reload();
+        switch(res){
+          case 0:
+            window.location.reload();
+            break;
+          case 1:
+            alert('No se encontró al usuario seleccionado');
+            break;
+          default:
+            alert('Vino al default');
+            break;
+        }
       })
     : alert("El chat seleccionado ya existe");
+}
+
+function checkChatExist(username){
+  console.log(ulChats);
 }
 
 document.getElementById("abanGrupo").addEventListener("click", (e) => {

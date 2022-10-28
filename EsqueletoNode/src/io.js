@@ -1,11 +1,12 @@
+const bcrypt = require("bcryptjs/dist/bcrypt");
 const fs = require("fs");
 const path = require("path");
 const pool = require("./database");
 exports.io_init = function (app) {
   // Initializations
   const server = app.listen(app.get("port"), () => {
-      console.log("Server on port:", app.get("port"));
-    }),
+    console.log("Server on port:", app.get("port"));
+  }),
     { Server } = require("socket.io"),
     io = new Server(server, {
       maxHttpBufferSize: 1e9, // 1 GB
@@ -17,9 +18,9 @@ exports.io_init = function (app) {
     socket.room = "default";
 
     socket.on("loadPage", (user, cb) => {
-      fs.readFile(`./src/local_database/users/${user.id}.txt`, (err, data) => {
+      fs.readFile(`./src/local_database/users/${user.username}.txt`, (err, data) => {
         if (err) {
-          fs.writeFileSync(`./src/local_database/users/${user.id}.txt`, "");
+          fs.writeFileSync(`./src/local_database/users/${user.username}.txt`, "");
           socket.chats = false;
           cb(null);
         } else {
@@ -166,60 +167,79 @@ exports.io_init = function (app) {
     });
 
     socket.on("crearGrupo", (o, user, cb) => {
+      // Cuenta los rooms exitentes para sacar la ID del nuevo
       let files = fs.readdirSync("./src/local_database/rooms/").length;
-
-      if (socket.chats)
-        fs.appendFileSync(
-          `./src/local_database/users/${user.id}.txt`,
-          `-${files}`
-        );
-      else
-        fs.appendFileSync(
-          `./src/local_database/users/${user.id}.txt`,
-          `${files}`
-        );
-
+      let x = false;
+      // Es un booleano q da true si es un chat 2p2
       if (o.priv) {
-        // Es un booleano q da true si es un chat 2p2
-        fs.writeFileSync(
-          `./src/local_database/rooms/${files}.txt`,
-          `${user.name}\n${o.name}`
-        );
-        fs.readFile(`./src/local_database/users/${o.id}.txt`, (err, data) => {
-          if (err)
-            fs.writeFileSync(
-              `./src/local_database/users/${o.id}.txt`,
-              `${files}`
-            );
-          else {
-            if (data.toString() == "")
-              fs.appendFileSync(
-                `./src/local_database/users/${o.id}.txt`,
-                `${files}`
+        pool.query(
+          "SELECT Nombre FROM usuarios WHERE username = ?",
+          o.username,
+          (err, name) => {
+            if (err || !name[0])
+              cb(1);
+            else {
+              o.name = name[0].Nombre;
+              fs.writeFileSync(
+                `./src/local_database/rooms/${files}.txt`,
+                `${user.name}\n${user.username}\n${o.name}\n${o.username}`
               );
-            else
-              fs.appendFileSync(
-                `./src/local_database/users/${o.id}.txt`,
-                `-${files}`
-              );
+              fs.readFile(`./src/local_database/users/${o.username}.txt`, (err, data) => {
+                if (err)
+                  fs.writeFileSync(
+                    `./src/local_database/users/${o.username}.txt`,
+                    `${files}`
+                  );
+                else {
+                  if (data.toString() == "")
+                    fs.appendFileSync(
+                      `./src/local_database/users/${o.username}.txt`,
+                      `${files}`
+                    );
+                  else
+                    fs.appendFileSync(
+                      `./src/local_database/users/${o.username}.txt`,
+                      `-${files}`
+                    );
+                }
+              });
+              restanteCrearGrupo(files, cb, user.username);
+            }
           }
-        });
-      } else
+        );
+      }
+      // ES UN GRUPO
+      else {
         fs.writeFileSync(
           `./src/local_database/rooms/${files}.txt`,
           `${o.name}`
         );
-
-      fs.writeFileSync(`./src/local_database/messages/${files}.txt`, "");
-
-      cb(true);
+        restanteCrearGrupo(files, cb, user.username);
+      }
       delete files;
     });
+    function restanteCrearGrupo(files, cb, u) {
+      // USUARIO ACTUAL
+      if (socket.chats)
+        fs.appendFileSync(
+          `./src/local_database/users/${u}.txt`,
+          `-${files}`
+        );
+      else
+        fs.appendFileSync(
+          `./src/local_database/users/${u}.txt`,
+          `${files}`
+        );
+
+      // INSTANCIA MENSAJES DEL CHAT (VACIOS)
+      fs.writeFileSync(`./src/local_database/messages/${files}.txt`, "");
+      cb(0);
+    }
 
     socket.on("abanGrupo", (id, cb) => {
       let data = fs
-          .readFileSync(`./src/local_database/users/${id}.txt`)
-          .toString(),
+        .readFileSync(`./src/local_database/users/${username}.txt`)
+        .toString(),
         content = [];
       if (/-/.test(data)) {
         data.split("-").forEach((e) => {
@@ -227,12 +247,12 @@ exports.io_init = function (app) {
         });
         if (content.length >= 2)
           fs.writeFileSync(
-            `./src/local_database/users/${id}.txt`,
+            `./src/local_database/users/${username}.txt`,
             content.join("-")
           );
         else
-          fs.writeFileSync(`./src/local_database/users/${id}.txt`, content[0]);
-      } else fs.writeFileSync(`./src/local_database/users/${id}.txt`, "");
+          fs.writeFileSync(`./src/local_database/users/${username}.txt`, content[0]);
+      } else fs.writeFileSync(`./src/local_database/users/${username}.txt`, "");
       cb(true);
     });
 
