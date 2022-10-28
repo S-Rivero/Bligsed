@@ -132,11 +132,25 @@ exports.cargarNotasDocente = ((req, res) => {
                         WHERE trimestre = ? AND id_materia = ?) N
             ON N.id_alum = A.ID
             ORDER BY A.ID, N.numnota;
+
+            SELECT A.ID, N.valor
+            FROM alumno A
+            JOIN (	SELECT IdCurso 
+                  FROM materias 
+                  WHERE ID = ?) Z
+            ON Z.IdCurso = A.ID_Curso
+            JOIN    (	SELECT valor, id_alumno
+                          FROM finales
+                        WHERE trimestre = ? AND id_materia = ?) N
+            ON N.id_alumno = A.ID
+            ORDER BY A.ID;
     
-        `, [idMat, idMat, trim, idMat, idMat, trim, idMat], function (err, a) {
-                let [listaAlumnos, notas, maxNumNota] = a;
+        `, [idMat, idMat, trim, idMat, idMat, trim, idMat, idMat, trim, idMat], function (err, a) {
+                let [listaAlumnos, notas, maxNumNota, notasFinales] = a;
                 let max = maxNumNota[0]['maxNumNota'];
                 let toInsert = [];
+                let toInsertFinales = [];
+
                 if (max) {
                     listaAlumnos.forEach(e => {
                         for (let i = 1; i < max + 1; i++) {
@@ -150,6 +164,14 @@ exports.cargarNotasDocente = ((req, res) => {
                                 });
                             }
                         }
+                        if (!(notasFinales.some(x => x.ID == e.ID))) {
+                            toInsertFinales.push({
+                                id_alum: e.ID,
+                                id_materia: idMat,
+                                valor: 0,
+                                trimestre: trim
+                            });
+                        }
                     });
                 } else {
                     listaAlumnos.forEach(e => {
@@ -160,12 +182,23 @@ exports.cargarNotasDocente = ((req, res) => {
                             trimestre: trim,
                             numnota: 1
                         });
+
+                        if (!(notasFinales.some(x => x.ID == e.ID))) {
+                            toInsertFinales.push({
+                                id_alum: e.ID,
+                                id_materia: idMat,
+                                valor: 0,
+                                trimestre: trim
+                            });
+                        }
                     })
                 }
                 let insert = prepareInsert(toInsert);
-
+                let InsertFinales = prepareInsertFinales(toInsertFinales); 
                 pool.query(insert, function (err, d) {
-                    res.render('cargarNotas.hbs', { y, links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs } });
+                    pool.query(InsertFinales, function(err, s){
+                        res.render('cargarNotas.hbs', { y, links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs } });
+                    })
                 })
             });
         }
@@ -175,8 +208,6 @@ exports.cargarNotasDocente = ((req, res) => {
 
 
 function prepareInsert(arr) {
-    console.log(arr);
-
     return `
     INSERT INTO notas (id_alum, id_materia, nota, trimestre, numnota) 
     VALUES 
@@ -185,6 +216,15 @@ function prepareInsert(arr) {
     }).join(',');
 }
 
+function prepareInsertFinales(arr) {
+
+    return `
+    INSERT INTO finales (id_alumno, id_materia, valor, trimestre) 
+    VALUES 
+    ` + arr.map(e => {
+        return '(' + e.id_alum + ',' + e.id_materia + ',' + e.valor + ',' + e.trimestre +')'
+    }).join(',');
+}
 
 
 exports.POSTcargarNotasDocente = ((req, res) => {
@@ -222,7 +262,27 @@ exports.POSTcargarNotasDocente = ((req, res) => {
 
                     });
             }
+        }else if(k == "final"){
+            let notasFinales = body[k]; 
+            notasFinales.forEach((e, i) => {
+                console.log("NOTA, MATERIA, ALUMNO, TRIM")
+                console.log(e, id, body.alumno[i], t);
+                pool.query(`
+                        UPDATE finales 
+                        SET valor = ? 
+                        WHERE   id_materia = ? AND 
+                                id_alumno = ? AND
+                                trimestre = ?;
+  
+                            `
+                        , [e, id, body.alumno[i], t], function (err, a) {
+
+                        });
+            })  
         }
+        /*
+        UPDATE finales SET valor = 1 WHERE id_materia = 1, id_alumno = 6, trimestre = 1;
+        */
     }
     if (body.button == "Eliminar Nota") {
         pool.query(`

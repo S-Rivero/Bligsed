@@ -31,22 +31,54 @@ exports.ListaAlumnosNotas = ((req, res) => {
     let trim = req.params.t;
 
     //todos los alumnos de la materia
-    pool.query(`SELECT id_alum, Nombre
-    FROM usuarios U
-    JOIN (	SELECT id_alum
-            FROM notas
-            WHERE trimestre = ? AND id_materia = ?) N
-    ON U.id = N.id_alum
-    GROUP BY id_alum
-    ORDER BY Nombre`, [trim, idMat], function (err, a) {
-        //todas las notas de los alumnos
-        pool.query(`SELECT id_alum, nota, numnota
-        FROM notas
-        WHERE trimestre = ? AND id_materia = ?
-        ORDER BY numnota`, [trim, idMat], function (err, n) {
-            res.send(JSONListaAlumnosNotas(a, n));
-        });
-    });
+    //id_alum, Nombre
+    pool.query(`
+    
+        SELECT N.ID as id_alum, U.Nombre as Nombre
+        FROM usuarios U
+        JOIN (	SELECT C.IdCurso, D.ID 
+                FROM materias C
+                JOIN alumno D
+                ON D.ID_Curso = C.IdCurso
+                WHERE C.ID = ?) N
+        ON U.id = N.ID
+        GROUP BY N.ID
+        ORDER BY U.Nombre`, [idMat], function (err, a) {
+            //todas las notas de los alumnos
+            pool.query(`SELECT X.*
+            FROM (	SELECT id_alum, nota, numnota
+                    FROM notas
+                    WHERE trimestre = ? AND id_materia = ?
+                    ORDER BY numnota
+                ) X
+            JOIN (
+                SELECT C.IdCurso, D.ID 
+                FROM materias C
+                JOIN alumno D
+                ON D.ID_Curso = C.IdCurso
+                WHERE C.ID = ?
+                ) Z
+            ON X.id_alum = Z.id;
+
+
+            SELECT X.*
+            FROM (	SELECT id_alumno, valor
+                    FROM finales
+                    WHERE trimestre = ? AND id_materia = ?
+                ) X
+            JOIN (
+                SELECT C.IdCurso, D.ID 
+                FROM materias C
+                JOIN alumno D
+                ON D.ID_Curso = C.IdCurso
+                WHERE C.ID = ?
+                ) Z
+            ON X.id_alumno = Z.id;
+            `, [trim, idMat, idMat, trim, idMat, idMat], function (err, n) {
+                res.send(JSONListaAlumnosNotas(a, n));
+            });
+        }
+    );
 });
 
 

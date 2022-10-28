@@ -81,7 +81,7 @@
                 <td><input value="${n.nota}" type="number" name="nota_${i+1}" id="nota_parcial" min="0" max="10" class="input_notas"></td>
               `
             }).join('')}
-            <td><input type="number" name="final" id="nota_final" min="1" max="10" class="input_notas" style="background: red"></td>
+            <td><input type="number" name="final" id="nota_final" class="input_notas" value="${e.nota_trimestre}"></td>
           </tr>
       `);
     }

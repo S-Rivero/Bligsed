@@ -67,7 +67,7 @@ module.exports = {
         return materiasFinal;
     },
 
-    JSONListaAlumnosNotas: function(a,n){
+    JSONListaAlumnosNotas: function(a,[n,z]){
         return a.map(e => {
             let notasArr = n.filter(r => r.id_alum == e.id_alum).map(j => {
                 return {
@@ -75,10 +75,16 @@ module.exports = {
                     nota: j.nota
                 }
             });
+            let notTrim = z.filter(r => r.id_alumno == e.id_alum);
+            let notTrimDef = 0;
+            if (notTrim[0]){
+                notTrimDef = notTrim[0].valor;
+            }
             return {
                 id: e.id_alum,
                 nombre: e.Nombre,
-                notas: notasArr
+                notas: notasArr,
+                nota_trimestre: notTrimDef
             };
         })
     },
