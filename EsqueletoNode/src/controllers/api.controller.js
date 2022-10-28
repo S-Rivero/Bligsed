@@ -42,7 +42,8 @@ exports.ListaAlumnosNotas = ((req, res) => {
         //todas las notas de los alumnos
         pool.query(`SELECT id_alum, nota, numnota
         FROM notas
-        WHERE trimestre = ? AND id_materia = ?`, [trim, idMat], function (err, n) {
+        WHERE trimestre = ? AND id_materia = ?
+        ORDER BY numnota`, [trim, idMat], function (err, n) {
             res.send(JSONListaAlumnosNotas(a, n));
         });
     });
