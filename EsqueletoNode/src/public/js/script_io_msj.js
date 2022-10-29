@@ -158,11 +158,19 @@ document.getElementById("añadirMiembro").addEventListener("submit", (e) => {
     e.target.username.value,
     actual_room.id,
     (res) => {
-      if (res) {
-        alert('Se añadio a ' + e.target.username.value + ' exitosamente a ' + actual_room.name);
-        document.getElementById("añadirMiembro").username.value = "";
-      } else
-        alert('No se encontro el usuario ingresado');
+      switch (res){
+        case 0:
+          alert('Se añadio a ' + e.target.username.value + ' exitosamente a ' + actual_room.name);
+          document.getElementById("añadirMiembro").username.value = "";
+          break;
+        case 1:
+          alert('No se encontro el usuario ingresado');
+          break;
+        case 2: 
+          alert('El usuario ya pertenece al grupo');
+          break;
+          default: break;
+      }
     }
   );
 });

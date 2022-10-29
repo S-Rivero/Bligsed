@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs/dist/bcrypt");
 const fs = require("fs");
 const path = require("path");
+const { resourceUsage } = require("process");
 const pool = require("./database");
 exports.io_init = function (app) {
   // Initializations
@@ -267,14 +268,33 @@ exports.io_init = function (app) {
         email,
         function (err, id) {
           if (err || !id[0])
-            cb(false); // EL USUARIO NO EXISTE
-          else{
+            cb(1); // EL USUARIO NO EXISTE
+          else if(!estaEnGrupo(email,room)){
             addOtroGrupo(email, room);
-            cb(true);
+            cb(0);
           }
+          else 
+            cb(2);
         }
       );
     });
+    function estaEnGrupo(email,room) {
+      let data = fs
+        .readFileSync(`./src/local_database/users/${email}.txt`)
+        .toString();
+        if(/-/.test(data)){
+          data
+            .split('-')
+            .map((e) => e.replace("\r", ""));
+          if(data.includes(room)) 
+            return true;
+          else
+            return false;
+        } else if(data == room)
+          return true;
+        else
+         return false;
+    }
 
     socket.on("loadPub", (cb) => {
       socket.join("/publicaciones");
