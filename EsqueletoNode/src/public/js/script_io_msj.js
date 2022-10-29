@@ -17,7 +17,7 @@ window.onload = (e) => {
     if (arr == null)
       ulChats.insertAdjacentHTML(
         "beforeend",
-        `<li class="clearfix cont"<img src="/media/user2.png" alt="avatar"><div class="about"><div class="name">No se encontraron chats</div></div></li>`
+        `<li id="chatNotFound" class="clearfix cont"<img src="/media/user2.png" alt="avatar"><div class="about"><div class="name">No se encontraron chats</div></div></li>`
       );
     else {
       arr.forEach((elem) => {
@@ -137,13 +137,12 @@ function createChat(priv, f) {
 }
 
 function checkChatExist(username) {
-  if(ulChats.childElementCount > 1){
+  if(ulChats.children[0].id != 'chatNotFound')
     for (let i = 0; i < ulChats.children.length; i++) {
       if (ulChats.children[i].children[1].children[1].value == 'true')
         if (ulChats.children[i].children[1].children[2].value == username)
           return false;
     }
-  }
   return true;
   //priv: elem.children[1].children[1].value,
   //room.username = elem.children[1].children[2].value;
