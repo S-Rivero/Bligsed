@@ -184,25 +184,7 @@ exports.io_init = function (app) {
                 `./src/local_database/rooms/${files}.txt`,
                 `${user.name}\n${user.username}\n${o.name}\n${o.username}`
               );
-              fs.readFile(`./src/local_database/users/${o.username}.txt`, (err, data) => {
-                if (err)
-                  fs.writeFileSync(
-                    `./src/local_database/users/${o.username}.txt`,
-                    `${files}`
-                  );
-                else {
-                  if (data.toString() == "")
-                    fs.appendFileSync(
-                      `./src/local_database/users/${o.username}.txt`,
-                      `${files}`
-                    );
-                  else
-                    fs.appendFileSync(
-                      `./src/local_database/users/${o.username}.txt`,
-                      `-${files}`
-                    );
-                }
-              });
+              addOtroGrupo(o.username, files);
               restanteCrearGrupo(files, cb, user.username);
             }
           }
@@ -218,6 +200,29 @@ exports.io_init = function (app) {
       }
       delete files;
     });
+
+    function addOtroGrupo(username, room){
+      fs.readFile(`./src/local_database/users/${username}.txt`, (err, data) => {
+        if (err)
+          fs.writeFileSync(
+            `./src/local_database/users/${username}.txt`,
+            `${room}`
+          );
+        else {
+          if (data.toString() == "")
+            fs.appendFileSync(
+              `./src/local_database/users/${username}.txt`,
+              `${room}`
+            );
+          else
+            fs.appendFileSync(
+              `./src/local_database/users/${username}.txt`,
+              `-${room}`
+            );
+        }
+      });
+    } 
+
     function restanteCrearGrupo(files, cb, u) {
       // USUARIO ACTUAL
       if (socket.chats)
@@ -261,27 +266,14 @@ exports.io_init = function (app) {
         "SELECT id FROM usuarios WHERE username = ?",
         email,
         function (err, id) {
-          console.log("Hizo consulta");
-          if (err) cb(false);
-          else cb(true);
-          console.log(id);
-          // let list = JSONListaDeCursos(a);
-          // let listMat = JSONListaDeMaterias(a);
+          if (err || !id[0])
+            cb(false); // EL USUARIO NO EXISTE
+          else{
+            addOtroGrupo(email, room);
+            cb(true);
+          }
         }
       );
-      // if(ids.length > 1)
-
-      //Consulta a la base de datos buscando en base al nombre
-      // fs.readFile(`./src/local_database/users/${o.id}.txt`, (err, data) => {
-      //     if(err)
-      //         fs.writeFileSync(`./src/local_database/users/${o.id}.txt`, `${files}`);
-      //     else{
-      //         if(data.toString() == '')
-      //             fs.appendFileSync(`./src/local_database/users/${o.id}.txt`, `${files}`);
-      //         else
-      //             fs.appendFileSync(`./src/local_database/users/${o.id}.txt`, `-${files}`);
-      //     }
-      // });
     });
 
     socket.on("loadPub", (cb) => {

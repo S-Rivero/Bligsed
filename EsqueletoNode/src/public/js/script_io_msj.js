@@ -24,7 +24,7 @@ window.onload = (e) => {
         if (/\n/.test(elem.name)) {
           elem.name = elem.name.split("\n")
             .map((e) => e.replace("\r", ""));
-          if(elem.name[1] == user.username){
+          if (elem.name[1] == user.username) {
             elem.username = elem.name[3];
             elem.name = elem.name[2];
           } else {
@@ -117,25 +117,25 @@ function createChat(priv, f) {
   }
   x
     ? socket.emit("crearGrupo", o, user, (res) => {
-        switch(res){
-          case 0:
-            window.location.reload();
-            break;
-          case 1:
-            alert('No se encontró al usuario seleccionado');
-            break;
-          default:
-            alert('Vino al default');
-            break;
-        }
-      })
+      switch (res) {
+        case 0:
+          window.location.reload();
+          break;
+        case 1:
+          alert('No se encontró al usuario seleccionado');
+          break;
+        default:
+          alert('Vino al default');
+          break;
+      }
+    })
     : alert("El chat seleccionado ya existe");
 }
 
-function checkChatExist(username){
-  for(let i = 0; i < ulChats.children.length; i++){
-    if(ulChats.children[i].children[1].children[1].value == 'true')
-      if(ulChats.children[i].children[1].children[2].value == username)
+function checkChatExist(username) {
+  for (let i = 0; i < ulChats.children.length; i++) {
+    if (ulChats.children[i].children[1].children[1].value == 'true')
+      if (ulChats.children[i].children[1].children[2].value == username)
         return false;
   }
   return true;
@@ -158,11 +158,13 @@ document.getElementById("añadirMiembro").addEventListener("submit", (e) => {
     e.target.username.value,
     actual_room.id,
     (res) => {
-      if (!res) alert("No se encontro al usuario seleccionado");
-      else alert("Hizo Consulta");
+      if (res) {
+        alert('Se añadio a ' + e.target.username.value + ' exitosamente a ' + actual_room.name);
+        document.getElementById("añadirMiembro").username.value = "";
+      } else
+        alert('No se encontro el usuario ingresado');
     }
   );
-  document.getElementById("añadirMiembro").username.value = "";
 });
 
 // *********************************** Messages ***********************************
