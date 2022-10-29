@@ -115,28 +115,34 @@ function createChat(priv, f) {
       name: f,
     };
   }
-  x
-    ? socket.emit("crearGrupo", o, user, (res) => {
-      switch (res) {
-        case 0:
-          window.location.reload();
-          break;
-        case 1:
-          alert('No se encontró al usuario seleccionado');
-          break;
-        default:
-          alert('Vino al default');
-          break;
-      }
-    })
-    : alert("El chat seleccionado ya existe");
+  if(o.username != user.username){
+    x
+      ? socket.emit("crearGrupo", o, user, (res) => {
+        switch (res) {
+          case 0:
+            window.location.reload();
+            break;
+          case 1:
+            alert('No se encontró al usuario seleccionado');
+            break;
+          default:
+            alert('Vino al default');
+            break;
+        }
+      })
+      : alert("El chat seleccionado ya existe");
+  } 
+  else 
+    alert('No puedes crear un chat con tu propio usuario');
 }
 
 function checkChatExist(username) {
-  for (let i = 0; i < ulChats.children.length; i++) {
-    if (ulChats.children[i].children[1].children[1].value == 'true')
-      if (ulChats.children[i].children[1].children[2].value == username)
-        return false;
+  if(ulChats.childElementCount > 1){
+    for (let i = 0; i < ulChats.children.length; i++) {
+      if (ulChats.children[i].children[1].children[1].value == 'true')
+        if (ulChats.children[i].children[1].children[2].value == username)
+          return false;
+    }
   }
   return true;
   //priv: elem.children[1].children[1].value,
