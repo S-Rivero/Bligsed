@@ -47,8 +47,6 @@ window.onload = (e) => {
 };
 
 function switchChat(elem) {
-  console.log(elem);
-  console.log(elem.id);
   let room = {
     id: elem.id,
     name: elem.children[1].children[0].innerHTML,
@@ -111,19 +109,14 @@ function createChat(priv, f) {
       username: f,
       priv: true,
     };
-    checkChatExist(o.username);
+    x = checkChatExist(o.username);
   } else {
     o = {
       name: f,
     };
   }
-  // if(x)
-  //   socket.emit('crearGrupo', o, user, res => {if (res)window.location.reload();} );
-  // else
-  //   alert('El chat seleccionado ya existe');
   x
     ? socket.emit("crearGrupo", o, user, (res) => {
-        // if (res) window.location.reload();
         switch(res){
           case 0:
             window.location.reload();
@@ -140,7 +133,14 @@ function createChat(priv, f) {
 }
 
 function checkChatExist(username){
-  console.log(ulChats);
+  for(let i = 0; i < ulChats.children.length; i++){
+    if(ulChats.children[i].children[1].children[1].value == 'true')
+      if(ulChats.children[i].children[1].children[2].value == username)
+        return false;
+  }
+  return true;
+  //priv: elem.children[1].children[1].value,
+  //room.username = elem.children[1].children[2].value;
 }
 
 document.getElementById("abanGrupo").addEventListener("click", (e) => {
