@@ -146,8 +146,13 @@ function checkChatExist(username) {
 document.getElementById("abanGrupo").addEventListener("click", (e) => {
   e.preventDefault();
   if (confirm(`¿Esta seguro de abandonar el grupo "${actual_room.name}"?`))
-    socket.emit("abanGrupo", user.id, (res) => {
-      if (res) window.location.reload();
+    socket.emit("abanGrupo", user.username, (res) => {
+      if (res) {
+        alert('Has salido del grupo exitosamente');
+        window.location.reload();
+      }
+      else
+        alert('Ha ocurrido un error y no pudiste salir del grupo');
     });
 });
 

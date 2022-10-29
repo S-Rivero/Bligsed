@@ -202,7 +202,7 @@ exports.io_init = function (app) {
       delete files;
     });
 
-    function addOtroGrupo(username, room){
+    function addOtroGrupo(username, room) {
       fs.readFile(`./src/local_database/users/${username}.txt`, (err, data) => {
         if (err)
           fs.writeFileSync(
@@ -222,7 +222,7 @@ exports.io_init = function (app) {
             );
         }
       });
-    } 
+    }
 
     function restanteCrearGrupo(files, cb, u) {
       // USUARIO ACTUAL
@@ -242,15 +242,18 @@ exports.io_init = function (app) {
       cb(0);
     }
 
-    socket.on("abanGrupo", (id, cb) => {
+    socket.on("abanGrupo", (username, cb) => {
       let data = fs
         .readFileSync(`./src/local_database/users/${username}.txt`)
         .toString(),
         content = [];
       if (/-/.test(data)) {
-        data.split("-").forEach((e) => {
-          if (e != socket.room) content.push(e);
-        });
+        data
+          .split('-')
+          .map((e) => e.replace("\r", ""))
+          .forEach((e) => {
+            if (e != socket.room) content.push(e);
+          });
         if (content.length >= 2)
           fs.writeFileSync(
             `./src/local_database/users/${username}.txt`,
@@ -258,7 +261,9 @@ exports.io_init = function (app) {
           );
         else
           fs.writeFileSync(`./src/local_database/users/${username}.txt`, content[0]);
-      } else fs.writeFileSync(`./src/local_database/users/${username}.txt`, "");
+      }
+      else
+        fs.writeFileSync(`./src/local_database/users/${username}.txt`, "");
       cb(true);
     });
 
@@ -269,31 +274,31 @@ exports.io_init = function (app) {
         function (err, id) {
           if (err || !id[0])
             cb(1); // EL USUARIO NO EXISTE
-          else if(!estaEnGrupo(email,room)){
+          else if (!estaEnGrupo(email, room)) {
             addOtroGrupo(email, room);
             cb(0);
           }
-          else 
+          else
             cb(2);
         }
       );
     });
-    function estaEnGrupo(email,room) {
+    function estaEnGrupo(email, room) {
       let data = fs
         .readFileSync(`./src/local_database/users/${email}.txt`)
         .toString();
-        if(/-/.test(data)){
-          data
-            .split('-')
-            .map((e) => e.replace("\r", ""));
-          if(data.includes(room)) 
-            return true;
-          else
-            return false;
-        } else if(data == room)
+      if (/-/.test(data)) {
+        data
+          .split('-')
+          .map((e) => e.replace("\r", ""));
+        if (data.includes(room))
           return true;
         else
-         return false;
+          return false;
+      } else if (data == room)
+        return true;
+      else
+        return false;
     }
 
     socket.on("loadPub", (cb) => {
