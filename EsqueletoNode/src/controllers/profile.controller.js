@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const pool = require('../database');
-const {JSONPromediosAl} = require('../lib/jsonFormat');
+const {JSONPromediosAl, notasFinalesFormat} = require('../lib/jsonFormat');
 const {esAlumno, setTutor, queTrimestre, setCurso, autorizadoVerPerfil} = require('../lib/helpers');
 
 exports.test = ((req,res)=>{
@@ -111,8 +111,10 @@ exports.updateFichaMedica = ((req,res) => { //USA CURRENT USER. NADIE PUEDE PERS
 
 function inasistencias(req, res, cu){
     cu['curso'] = req.session.curso;
-    const rows = pool.query("SELECT * FROM inasistencias WHERE id_us = ? ORDER BY fecha DESC", [cu.id], function(err, inasistencias){
-        res.render('perfil.hbs', {cu, in:{in: inasistencias, tdu: req.user[0].Tipo_de_usuario}, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileInasistencias', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/inasistencias'});
+    const rows = pool.query("SELECT * FROM inasistencias WHERE id_us = ? ORDER BY fecha DESC; SELECT sum(cantidad) as a FROM inasistencias WHERE id_us = ?", [cu.id,cu.id], function(err, inasistencias){
+        console.log('inasistencias[1] :>> ', inasistencias[1][0]['a']);
+        let newObj = {in0: inasistencias[0], in1: inasistencias[1][0]['a']};
+        res.render('perfil.hbs', {cu, in:{in: newObj, tdu: req.user[0].Tipo_de_usuario}, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileInasistencias', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/inasistencias'});
     });
 };
 
@@ -150,7 +152,22 @@ function boletin(req, res, cu){
    
         });
     }else{
-        res.send("todavia no esta hecho xd");
+        pool.query(`
+            SELECT A.id_materia, B.Materia, A.valor, A.trimestre
+            FROM materias B
+            JOIN(	SELECT id_materia, valor, trimestre
+                    FROM finales
+                    WHERE 
+                        id_alumno = ?) A
+            ON A.id_materia = B.ID
+            ORDER BY B.Materia, A.trimestre;
+        `, [cu.id], function(err, materias){
+            let formateado = notasFinalesFormat(materias);
+            // res.send(formateado);
+            res.render('perfil.hbs', {cu, in: formateado, title: 'Mi Cuenta - Bligsed', links: 'headerLinks/profileBoletin', user:{user: req.user[0], childs: req.session.childs}, partial: 'profile/boletinFinal'});
+
+   
+        });
     }
 };
 
@@ -161,3 +178,34 @@ exports.Boletin = ((req,res) => {
 exports.BoletinId = ((req,res) => {
     boletin(req, res, req.session.currentUser);
 });
+
+/*
+[
+  {
+    "materia": "Lengua",
+    "notas": [
+      {
+        "valor": 10,
+        "trimestre": 1
+      }
+    ]
+  },
+  {
+    "materia": "Matematicas",
+    "notas": [
+      {
+        "valor": 7,
+        "trimestre": 1
+      },
+      {
+        "valor": 0,
+        "trimestre": 2
+      },
+      {
+        "valor": 0,
+        "trimestre": 3
+      }
+    ]
+  }
+]
+*/

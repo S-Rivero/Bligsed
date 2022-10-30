@@ -1,0 +1,52 @@
+
+
+<div class="contenedor_datos">
+    <h2 id="Juan">Boletín de calificaciones</h2>
+    <div class="contenedor_nombre_doc">
+        <select name="t" id="selectBox" onchange="changeFunc();">
+            <option id="op1" value="1">Trimestre 1</option>
+            <option id="op2" value="2">Trimestre 2</option>
+            <option id="op3" value="3">Trimestre 3</option>
+            <option id="op0" value="0">Final</option>
+        </select>
+        <table>
+        <tr id="th">
+            <th></th>
+            <th>Trimestre 1</th>
+            <th>Trimestre 2</th>
+            <th>Trimestre 3</th>
+            <th>Final</th>
+        </tr>
+        {{#each this}}
+        <tr>
+            <td>{{materia}}</td>
+            {{#each notas}}
+                <td>{{valor}}</td>
+            {{/each}}
+        </tr>
+        {{/each}}
+    </table>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+    
+    function changeFunc() {
+        var selectBox = document.getElementById("selectBox");
+        var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+        let F_url = window.location.href;
+        let F_trim = F_url.split("/Boletin")[0].split("perfil/");
+        if(F_trim[1])
+            window.location.replace("/perfil/"+F_trim[1]+"/Boletin" + selectedValue);
+        else
+            window.location.replace("/perfil/Boletin" + selectedValue);
+
+    };
+    var url = window.location.href;
+    var trim = url.split("Boletin");
+    if (trim[2]) {
+        trim[1] = 1;
+    }
+    document.getElementById("op" + trim[1]).setAttribute('selected', 'selected');
+
+</script>

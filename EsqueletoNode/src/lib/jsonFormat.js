@@ -164,52 +164,76 @@ module.exports = {
             }
         }
         return arr;
+    },
+
+    notasFinalesFormat: function(arr){
+        let newArr = [];
+        let materias = [];
+        if(arr.length){
+            arr.forEach(e =>{
+                if(!(materias.includes(e.Materia))){
+                    materias.push(e.Materia);
+                }
+            })
+            
+            return materias.map(m => {
+                let notas = [];
+                let aux = [];
+                let flag = false;
+                arr.forEach(e => {
+                    if(e.Materia == m){
+                        if(e.trimestre == 0){
+                            aux.push({valor: e.valor != 0 ? e.valor:'', trimestre: e.trimestre});
+                            flag = true;
+                        }else{
+                            notas.push({valor: e.valor != 0 ? e.valor:'', trimestre: e.trimestre});
+                        }
+                    }
+                });
+                if(flag){
+                    flag = false;
+                    notas.push(aux[0]);
+                }
+                return{
+                    "materia": m,
+                    "notas": notas
+                };
+            })
+
+        }else{
+            return {
+                materia: arr.Materia,
+                notas: [{
+                    valor: e.valor != 0 ? e.valor:'',
+                    trimestre: arr.trimestre
+                }]
+            };
+        }
     }
 }
 
-// [
-//     {
-//         id: 6,
-//         nombre: "juan",
-//         notas: [1,2,3,4]
-//     },
-//     {
-
-//     }
-// ]
-
-//A:
 /*
 [
-  {
-    "id_alum": 6,
-    "Nombre": "6"
-  }
+    {
+        materia: "lengua",
+        notas: [
+            {
+                valor: 5,
+                trimestre: 1
+            },
+            {
+                valor: 2,
+                trimestre: 2
+            }
+        ]
+    }
+]
+
+[
+  { id_materia: 2, Materia: 'Lengua', valor: 10, trimestre: 1 },
+  { id_materia: 1, Materia: 'Matematicas', valor: 7, trimestre: 1 },
+  { id_materia: 1, Materia: 'Matematicas', valor: 0, trimestre: 2 },
+  { id_materia: 1, Materia: 'Matematicas', valor: 0, trimestre: 3 }
 ]
 */
 
-//N:
-/*
-[
-  {
-    "id_alum": 6,
-    "nota": 1,
-    "numnota": 1
-  },
-  {
-    "id_alum": 6,
-    "nota": 10,
-    "numnota": 2
-  },
-  {
-    "id_alum": 6,
-    "nota": 9,
-    "numnota": 3
-  },
-  {
-    "id_alum": 6,
-    "nota": 5,
-    "numnota": 4
-  }
-]
-*/

@@ -3,13 +3,13 @@
     <tr>
         <th>Fecha</th>
         <th>Motivo</th>
-        <th>Cantidad</th>
+        <th>Cantidad ({{in.in1}})</th>
         <th>Tipo</th>
         {{#if tdu 3}}
         <th></th>
         {{/if}}
     </tr>
-    {{#each in}}
+    {{#each in.in0}}
         <tr id="{{id}}">
             <td id="fecha{{id}}" class="{{id}} A fecha">{{#dateTimeToDate fecha}}{{/dateTimeToDate}}</td>
             <td id="motivo{{id}}" class="{{id}} A motivo">{{motivo}}</td>

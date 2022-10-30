@@ -194,9 +194,9 @@ exports.cargarNotasDocente = ((req, res) => {
                     })
                 }
                 let insert = prepareInsert(toInsert);
-                let InsertFinales = prepareInsertFinales(toInsertFinales); 
+                let InsertFinales = prepareInsertFinales(toInsertFinales);
                 pool.query(insert, function (err, d) {
-                    pool.query(InsertFinales, function(err, s){
+                    pool.query(InsertFinales, function (err, s) {
                         res.render('cargarNotas.hbs', { y, links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs } });
                     })
                 })
@@ -205,7 +205,64 @@ exports.cargarNotasDocente = ((req, res) => {
     });
 });
 
+exports.cargarNotasDocenteFinal = ((req, res) => {
+    let idMat = req.params.id;
+    let trim = 0;
 
+    pool.query(`
+        SELECT IdCurso, Nombre_curso, Materia, A.ID
+        FROM materias A
+        JOIN curso B
+        ON A.IdCurso = B.ID
+        WHERE profesor = ?;
+    `, [req.user[0].id], function (err, y) {
+        if (!(y.some(e => e.ID == idMat))) {
+            res.redirect('/');
+        } else {
+            pool.query(`
+                SELECT A.ID, U.Nombre
+                FROM alumno A
+                JOIN (	SELECT IdCurso 
+                        FROM materias 
+                        WHERE ID = ?) Z
+                ON Z.IdCurso = A.ID_Curso
+                JOIN usuarios U 
+                ON A.ID = U.ID;
+                
+                SELECT A.ID, N.valor, N.trimestre
+                FROM alumno A
+                JOIN (	SELECT IdCurso 
+                    FROM materias 
+                    WHERE ID = ?) Z
+                ON Z.IdCurso = A.ID_Curso
+                JOIN    (	SELECT valor, id_alumno, trimestre
+                            FROM finales
+                            WHERE id_materia = ?) N
+                ON N.id_alumno = A.ID
+                ORDER BY A.ID;
+            `, [idMat, idMat, idMat], function(err,a){
+                let [listaAlumnos, notasFinales] = a;
+                let toInsertFinales = [];
+                listaAlumnos.forEach(e => {
+                    for (let i = 0; i < 4; i++) {
+                        if (!(notasFinales.some(x => x.ID == e.ID && x.trimestre == i))) {
+                            toInsertFinales.push({
+                                id_alum: e.ID,
+                                id_materia: idMat,
+                                valor: 0,
+                                trimestre: i
+                            });
+                        }
+                    }
+                });
+                let InsertFinales = prepareInsertFinales(toInsertFinales);
+                pool.query(InsertFinales, function (err, s) {
+                    res.render('cargarNotasFinal.hbs', { y, links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs } });
+                });
+            });
+        }
+    });
+});
 
 function prepareInsert(arr) {
     return `
@@ -222,9 +279,47 @@ function prepareInsertFinales(arr) {
     INSERT INTO finales (id_alumno, id_materia, valor, trimestre) 
     VALUES 
     ` + arr.map(e => {
-        return '(' + e.id_alum + ',' + e.id_materia + ',' + e.valor + ',' + e.trimestre +')'
+        return '(' + e.id_alum + ',' + e.id_materia + ',' + e.valor + ',' + e.trimestre + ')'
     }).join(',');
 }
+
+
+exports.POSTcargarNotasDocenteFinal = ((req, res) => {
+    let { id } = req.params;
+    let body = req.body;
+    for (let k in body) {
+        if (k != "button" && k != "alumno") {
+            if (typeof body[k] == 'object') {
+                body[k].forEach((e, i) => {
+                    pool.query(`
+                        UPDATE finales
+                        SET valor = ?
+                        WHERE trimestre = ? 
+                            AND id_materia = ? 
+                            AND id_alumno = ? 
+                            `
+                        , [e, k, id, body.alumno[i]], function (err, a) {
+
+                        });
+                });
+            } else {
+                pool.query(`
+                    UPDATE finales
+                    SET valor = ?
+                    WHERE trimestre = ? 
+                        AND id_materia = ? 
+                        AND id_alumno = ? 
+                        `
+                    , [e, k, id, body.alumno], function (err, a) {
+
+                    });
+            }
+        }
+    }
+    setTimeout(function () {
+        res.redirect(`/cargarNotas/${id}/0`);
+    }, 2000);
+});
 
 
 exports.POSTcargarNotasDocente = ((req, res) => {
@@ -262,23 +357,35 @@ exports.POSTcargarNotasDocente = ((req, res) => {
 
                     });
             }
-        }else if(k == "final"){
-            let notasFinales = body[k]; 
-            notasFinales.forEach((e, i) => {
-                console.log("NOTA, MATERIA, ALUMNO, TRIM")
-                console.log(e, id, body.alumno[i], t);
-                pool.query(`
-                        UPDATE finales 
-                        SET valor = ? 
-                        WHERE   id_materia = ? AND 
-                                id_alumno = ? AND
-                                trimestre = ?;
-  
-                            `
+        } else if (k == "final") {
+            let notasFinales = body[k];
+            if (notasFinales[1]) {
+                notasFinales.forEach((e, i) => {
+                    pool.query(`
+                            UPDATE finales 
+                            SET valor = ? 
+                            WHERE   id_materia = ? AND 
+                                    id_alumno = ? AND
+                                    trimestre = ?;
+    
+                                `
                         , [e, id, body.alumno[i], t], function (err, a) {
 
                         });
-            })  
+                })
+            } else {
+                pool.query(`
+                UPDATE finales 
+                SET valor = ? 
+                WHERE   id_materia = ? AND 
+                        id_alumno = ? AND
+                        trimestre = ?;
+
+                    `
+                    , [notasFinales, id, body.alumno, t], function (err, a) {
+
+                    });
+            }
         }
         /*
         UPDATE finales SET valor = 1 WHERE id_materia = 1, id_alumno = 6, trimestre = 1;
@@ -298,22 +405,34 @@ exports.POSTcargarNotasDocente = ((req, res) => {
 
             });
     } else if (body.button == "Agregar Nota") {
+        let bodyAlumno = body.alumno;
         pool.query(`SELECT MAX(numnota) as a
                     FROM notas
                     WHERE id_materia = ? AND trimestre = ?`
             , [id, t], function (err, a) {
+                if (typeof bodyAlumno != "string") {
+                    bodyAlumno.forEach(e => {
+                        pool.query(`
+                    INSERT INTO notas
+                    (id_alum, id_materia, trimestre, numnota)
+                    VALUES
+                    (?,?,?,?)
+                        `
+                            , [e, id, t, a[0]['a'] + 1], function (err, a) {
 
-                body.alumno.forEach(e => {
+                            });
+                    });
+                } else {
                     pool.query(`
-                INSERT INTO notas
-                (id_alum, id_materia, trimestre, numnota)
-                VALUES
-                (?,?,?,?)
-                    `
-                        , [e, id, t, a[0]['a'] + 1], function (err, a) {
+                        INSERT INTO notas
+                        (id_alum, id_materia, trimestre, numnota)
+                        VALUES
+                        (?,?,?,?)
+                            `
+                        , [bodyAlumno, id, t, a[0]['a'] + 1], function (err, a) {
 
                         });
-                });
+                }
             });
     } else {
 
@@ -355,6 +474,7 @@ exports.homeCrearCuentas = ((req, res) => {
 });
 
 const nodemailer = require("nodemailer");
+const e = require('connect-flash');
 
 var transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com", // hostname

@@ -17,16 +17,15 @@
         <iconify-icon icon="bx:save" width="30" height="30" class="lapicito_boliviano"></iconify-icon>
 
       </div>
- 
-      <input class="inputBtnBlock layout_boton1" type="SUBMIT" form="form" value="Agregar Nota" name="button">
-      <input class="inputBtnBlock layout_boton1" type="SUBMIT" form="form" value="Eliminar Nota" name="button">
       <input class="inputBtnBlock layout_boton1" type="SUBMIT" form="form" value="Guardar" name="button"/>
       <form action="" id="form" method="POST">
       <table class="bordered">
         <tr id="th">
           <th>Alumno</th>
-          
-          
+          <th>Trimestre 1</th>
+          <th>Trimestre 2</th>
+          <th>Trimestre 3</th>
+          <th>Final</th>
         </tr>
       </table>
 
@@ -36,16 +35,14 @@
     
   <script>
     let [mat,trim] = window.location.href.split("/").slice(-2);
-    $('#form').attr('action', `/cargarNotas/${mat}/${trim}`);
-    $('#optionTrimSelected').html("Trimestre - "+trim);
+    $('#form').attr('action', `/cargarNotasFinal/${mat}`);
+    $('#optionTrimSelected').html("Final");
 
 
-    fetch(`/api/ListaAlumnosNotas/${mat}/${trim}`)
+    fetch(`/api/ListaAlumnosNotasFinal/${mat}`)
     .then((response) => response.json())
     .then((data) => {
-      let numCols = getNumCols(data);
-      insertTh(numCols);
-      data.forEach(e => {insertRow(e)});
+      data.forEach(e => {insertRow(e)})
     });
 
     fetch(`/api/idMateriaToCurso/${mat}`)
@@ -54,22 +51,6 @@
       document.getElementById("optionSelected").innerHTML = data['C'].split('').join('°') + ' - ' + data['B']
       });
 
-    function insertTh(n){
-      for(let i = 0 ; i < n ; i++){
-        $('#th').append(`<th>NPA${i+1}</th>`);
-      }
-      $('#th').append(`<th>Final</th>`);
-    }
-
-    function getNumCols(data){
-      let maxLen = 0;
-      data.forEach(e => {
-        if(e.notas.length > maxLen){
-          maxLen = e.notas.length;
-        }
-      })
-      return maxLen;
-    }
 
     function insertRow(e){
       $('tbody').append(`
@@ -79,10 +60,10 @@
             ${e.notas.map((n,i) => {
                 //<td><input value="${n.nota}" type="number" name="${e.id}" id="nota_parcial" min="1" max="10" class="input_notas"></td>
               return `
-                <td><input value="${n.nota}" type="number" name="nota_${i+1}" id="nota_parcial" min="0" max="10" class="input_notas"></td>
+                <td><input value="${n.valor}" type="number" name="${i+1}" id="nota_parcial" min="0" max="10" class="input_notas"></td>
               `
             }).join('')}
-            <td><input type="number" name="final" id="nota_final" class="input_notas" value="${e.nota_trimestre}"></td>
+            <td><input type="number" name="0" id="nota_final" class="input_notas" value="${e.final}"></td>
           </tr>
       `);
     }

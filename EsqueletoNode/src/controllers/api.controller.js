@@ -81,6 +81,54 @@ exports.ListaAlumnosNotas = ((req, res) => {
     );
 });
 
+exports.ListaAlumnosNotasFinal = ((req, res) => {
+    let idMat = req.params.id;
+
+    //todos los alumnos de la materia
+    //id_alum, Nombre
+    pool.query(`
+    
+        SELECT N.ID as id_alum, U.Nombre as Nombre
+        FROM usuarios U
+        JOIN (	SELECT C.IdCurso, D.ID 
+                FROM materias C
+                JOIN alumno D
+                ON D.ID_Curso = C.IdCurso
+                WHERE C.ID = ?) N
+        ON U.id = N.ID
+        GROUP BY N.ID
+        ORDER BY U.Nombre`, [idMat], function (err, a) {
+            //todas las notas de los alumnos
+            pool.query(`
+            SELECT X.*
+            FROM (	SELECT id_alumno, valor, trimestre
+                    FROM finales
+                    WHERE id_materia = ?
+                ) X
+            JOIN (
+                SELECT C.IdCurso, D.ID 
+                FROM materias C
+                JOIN alumno D
+                ON D.ID_Curso = C.IdCurso
+                WHERE C.ID = ?
+                ) Z
+            ON X.id_alumno = Z.id
+            ORDER BY X.id_alumno, X.trimestre;
+            `, [idMat, idMat], function (err, n) {
+                res.send(formatFinales(a,n));
+            });
+        }
+    );
+});
+
+function formatFinales(a,n){
+
+    return a.map(e => {
+        let arr = n.filter(x => x.id_alumno == e.id_alum);
+        let final = arr.shift();
+        return {id: e.id_alum, nombre: e.Nombre, notas: arr, final: final['valor']};
+    })
+}
 
 exports.eliminarInasistencias = ((req, res) => {
     let id = req.params.id;
@@ -237,7 +285,6 @@ exports.actualizarAlumno = (async (req, res) => {
     let { curso, tutor, btn } = req.body;
     if (btn == "Actualizar Curso") {
         pool.query(`SELECT ID from CURSO WHERE Nombre_curso = ?`, curso, function (err, a) {
-            console.log(a);
             if (a[0]) {
                 pool.query(`UPDATE alumno SET ID_Curso = ?`, a[0].ID, function (err, b) {
                     res.redirect('/buscarCuenta');

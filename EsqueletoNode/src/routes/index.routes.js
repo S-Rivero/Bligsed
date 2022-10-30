@@ -12,7 +12,9 @@ const {
     renderTablaTodos,
 
     cargarNotasDocente,
+    cargarNotasDocenteFinal,
     POSTcargarNotasDocente,
+    POSTcargarNotasDocenteFinal,
     renderCargarInasistencias,
     PostCargarInasistencias,
     
@@ -59,8 +61,10 @@ router.get('/editarMateria/:id', isLoggedIn, authLevelAdministrador, editarMater
 
 //Id es la id de materia
 //t es el numero de trimestre. Por defecto, desde cursos, te manda al t=1
+router.get('/cargarNotas/:id/0', isLoggedIn, authLevelCargarNotas, cargarNotasDocenteFinal);
 router.get('/cargarNotas/:id/:t', isLoggedIn, authLevelCargarNotas, cargarNotasDocente);
 router.post('/cargarNotas/:id/:t', isLoggedIn, authLevelCargarNotas, POSTcargarNotasDocente);
+router.post('/cargarNotasFinal/:id', isLoggedIn, authLevelCargarNotas, POSTcargarNotasDocenteFinal);
 
 router.post('/cargar_inasistencias_render', isLoggedIn, authLevelCargarInasistencias, renderCargarInasistencias);
 router.post('/cargar_inasistencias', isLoggedIn, authLevelCargarInasistencias, PostCargarInasistencias);
