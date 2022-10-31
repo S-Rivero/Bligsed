@@ -206,11 +206,6 @@ input::-webkit-inner-spin-button {
   height: 5vh;
 }
 
-#tabla_buscarCuenta {
-  width: 50vw;
-  margin-bottom: 10vh;
-  margin-top: 5vh;
-}
 
 #tabla2_buscarCuenta {
   width: 10vw;
@@ -248,4 +243,19 @@ table input {
 .botonCargarInasistencia {
   margin-left: 1vw;
   margin-bottom: 1vh;
+}
+
+
+.div_buscarCuenta {
+  overflow: scroll;
+  height: fit-content;
+  width: 90vw;
+  margin-bottom: 10vh;
+  margin-top: 5vh;
+  margin-left: 1vw;
+}
+
+#tabla_buscarCuenta {
+  width: 100%;
+  margin: 0;
 }

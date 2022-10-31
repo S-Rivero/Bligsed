@@ -342,7 +342,7 @@ input {
 }
 
 .contenedor_crearEditar a:hover {
-  color: darkcyan;
+  color: rgb(98, 167, 167);
   transition: .2s;
 }
 
