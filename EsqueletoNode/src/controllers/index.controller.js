@@ -631,7 +631,7 @@ tdu
 exports.crearCurso = (async (req, res) => {
     // res.render('homeCrearMaterias.hbs', {links: 'headerLinks/homeCrearCuentas', user:{user: req.user[0], childs: req.session.childs}});
     pool.query(`
-    SELECT Nombre_curso as name FROM curso;`
+    SELECT Nombre_curso as name FROM curso ORDER BY Nombre_curso ASC;`
         , (err, cursos) => {
             res.render('crearCurso.hbs', { links: 'headerLinks/crearMaterias', user: { user: req.user[0], childs: req.session.childs }, cursos });
         });
@@ -640,7 +640,11 @@ exports.insertCurso = (async (req, res) => {
     pool.query(
         "INSERT INTO `curso`(`Nombre_curso`) VALUES ('" + req.body.c + "');"
         , (err, e) => {
-            if (err) console.log(err); else console.log('Se creo el curso ' + req.body.c);
+            if (err) 
+                console.log(err); 
+            else 
+                console.log('Se creo el curso ' + req.body.c);
+            res.redirect('/crear_curso');
         });
 });
 
@@ -666,8 +670,8 @@ exports.insertMaterias = (async (req, res) => {
                 console.log(err); 
             else {
                 console.log('Se creo la materia ' + req.body.name);
-                res.redirect('/crear_materias');
             }
+            res.redirect('/crear_materias');
         });
 });
 
