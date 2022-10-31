@@ -386,8 +386,8 @@ body{
     }
 }
 
-.chat-header, .chat-message {
-    /* visibility: hidden; */
+.esconder{
+    visibility: hidden;
 }
 
 
