@@ -282,25 +282,26 @@ exports.actualizarUsuario = (async (req, res) => {
 });
 
 exports.actualizarAlumno = (async (req, res) => {
-    let { curso, tutor, btn } = req.body;
+    let { id, curso, tutor, btn } = req.body;
     if (btn == "Actualizar Curso") {
         pool.query(`SELECT ID from CURSO WHERE Nombre_curso = ?`, curso, function (err, a) {
             if (a[0]) {
-                pool.query(`UPDATE alumno SET ID_Curso = ?`, a[0].ID, function (err, b) {
-                    res.redirect('/buscarCuenta');
+                pool.query(`UPDATE alumno SET ID_Curso = ? WHERE ID = ?`, [a[0].ID, id], function (err, b) {
+                    res.redirect('/buscarCuenta/'+id+'/ok');
                 });
             } else {
-                res.redirect('/buscarCuenta');
+                res.redirect('/buscarCuenta/'+id+'/ok');
             }
         });
     }else{
         pool.query(`SELECT id from usuarios WHERE username = ? AND Tipo_de_usuario = 5`,tutor,function(err,a){
-            if(a){
-                pool.query(`UPDATE alumno SET Padre = ?`,a[0].id,function(err,b){
-                    res.redirect('/buscarCuenta');
+            console.log(a);
+            if(a && a[0]){
+                pool.query(`UPDATE alumno SET Padre = ? WHERE ID = ?`,[a[0].id,id],function(err,b){
+                    res.redirect('/buscarCuenta/'+id+'/ok');
                 });
             } else {
-                res.redirect('/buscarCuenta');
+                res.redirect('/buscarCuenta/'+id+'/ok');
             }
         });
     }

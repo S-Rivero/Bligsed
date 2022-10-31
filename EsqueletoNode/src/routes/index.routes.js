@@ -81,5 +81,6 @@ router.post('/crear_curso', isLoggedIn, authLevelAdministrador, insertCurso);
 
 router.get('/buscarCuenta', isLoggedIn, authLevelAdministrador, buscarCuenta);
 router.get('/buscarCuenta/:id', isLoggedIn, authLevelAdministrador, buscarCuentaId);
+router.get('/buscarCuenta/:id/:confirm', isLoggedIn, authLevelAdministrador, buscarCuentaId);
 
 module.exports = router;

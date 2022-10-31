@@ -7,26 +7,27 @@
 </div>
 <div id="contenedor_tablas">
 
-  <form id="form" action="../api/actualizarUsuario" method="POST">
+  <form id="form" action="../../../../api/actualizarUsuario" method="POST">
     <div class="div_buscarCuenta">
       <table class="bordered" id="tabla_buscarCuenta">
 
       </table>
     </div>
   </form>
-  <form id="formAlumno" action="../api/actualizarAlumno" method="POST">
+  <form id="formAlumno" action="../../../../api/actualizarAlumno" method="POST">
   </form>
 
 </div>
 </div>
 <script>
+  
   function buscarCuenta() {
     let buscador = $('#buscador').val();
     if (buscador == "") {
       $('table').html();
       return;
     }
-    fetch('../api/buscarCuenta/' + buscador)
+    fetch('../../../../api/buscarCuenta/' + buscador)
       .then((response) => response.json())
       .then((data) => {
         if (!data.res) {
@@ -103,7 +104,11 @@
         </tr>
         `
   }
-
+  let url = window.location.href;
+  let ok = url.includes('ok');
+  if(ok){
+    $('#enviar_consulta').click();
+  }
 
 
   let sidebar = document.querySelector(".sidebar");
@@ -145,4 +150,6 @@
       alert('Se ha ingresado un campo erroneamente');
     }
   }
+
+  
 </script>
