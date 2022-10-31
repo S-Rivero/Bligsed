@@ -374,3 +374,14 @@ exports.insertNotasVacias = ((req, res) => {
         res.send(a);
     });
 })
+
+exports.consultarSiEsPadre = ((req,res) => {
+    let { username } = req.params;
+    pool.query(`
+        SELECT username 
+        FROM usuarios
+        WHERE username = ? AND Tipo_de_usuario = 5
+    `, username, function (err, a) {
+        res.send({res: a[0]});
+    });
+})

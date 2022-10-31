@@ -54,15 +54,32 @@
         <tr>
           <input type="hidden" value="${d.id}" name="id">
           <td><input type="text" value="${d.Nombre_curso}" name="curso"></td>
-          <td><input type="text" value="${d.padremail}" name="tutor"></td>
+          <td><label id="labelPadre" style="display:none"></label><input type="text" value="${d.padremail}" id="padreMail" name="tutor" onblur=" console.log('');confirmarPadre();"></td>
         </tr>
         <tr>
           <td><input type="button" value="Actualizar Curso" onclick="confirmSubmit('formAlumno', this)"></td>
-          <td><input type="button" value="Actualizar Tutor" onclick="confirmSubmit('formAlumno', this)"></td>
+          <td><input type="button" id="actualizarTutorBtn" value="Actualizar Tutor" onclick="confirmSubmit('formAlumno', this)"></td>
           <input type="hidden" id="btnhidformAlumno" name="btn">
         </tr>
           </table>
       `;
+  }
+
+  function confirmarPadre(){
+    let mail = $('#padreMail').val()
+    fetch('/api/consultarSiEsPadre/'+ mail)
+    .then((response) => response.json())
+    .then((data) => {
+      if(data.res){
+        $('#labelPadre').html('');
+        $('#labelPadre').attr('style', 'display:none');
+        $('#actualizarTutorBtn').attr('disabled', false);
+      }else{
+        $('#labelPadre').html('El usuario indicado no es del tipo padre');
+        $('#labelPadre').attr('style', 'display:block');
+        $('#actualizarTutorBtn').attr('disabled', true);
+      }
+    });
   }
 
   function generarTabla(d) {

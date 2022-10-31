@@ -17,7 +17,8 @@ const {
     listarDocentes,
     listarCursos,
     actualizarMateria,
-    insertNotasVacias
+    insertNotasVacias,
+    consultarSiEsPadre
 } = require('../controllers/api.controller');
 
 //Para mandar html --> res.sendFile(path.join(__dirname, '../views/archivo.html'));
@@ -33,6 +34,7 @@ router.get('/api/actualizarInasistencia/:id/:date/:checkbox/:select',isLoggedIn,
 
 router.post('/api/checkUser',isLoggedIn, authLevelAdministrador, checkUser);
 
+router.get('/api/consultarSiEsPadre/:username', isLoggedIn, authLevelVerUsuarios, consultarSiEsPadre);
 router.get('/api/buscarCuenta/:username', isLoggedIn, authLevelVerUsuarios, buscarCuenta);
 router.post('/api/actualizarUsuario', isLoggedIn, authLevelVerUsuarios, actualizarUsuario);
 router.post('/api/actualizarAlumno', isLoggedIn, authLevelVerUsuarios, actualizarAlumno);
