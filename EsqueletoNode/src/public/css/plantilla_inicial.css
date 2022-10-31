@@ -312,3 +312,40 @@ input {
   transition: .2s;
 }
 
+
+.contenedor_crearEditar {
+  border-radius: 15px;
+  background-color: rgba(4, 83, 63, 0.059);
+  margin-top: 5%;
+  margin-left: 7%;
+  height: auto;
+  width: 60vw;
+  padding-bottom: 10vh;
+  padding-top: 5vh;
+}
+
+.contenedor_crearEditar h1 {
+  font-size: 6vh;
+  text-align: center;
+  position: relative;
+  margin-bottom: 5vh;
+}
+
+.contenedor_crearEditar li {
+  margin-bottom: 1vh;
+  margin-left: 1vw;
+}
+
+.contenedor_crearEditar a {
+  text-decoration: none;
+  color: #333;
+}
+
+.contenedor_crearEditar a:hover {
+  color: darkcyan;
+  transition: .2s;
+}
+
+.contenedor_crearEditar ul {
+  list-style: none;
+}

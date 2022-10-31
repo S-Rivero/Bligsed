@@ -15,6 +15,7 @@
 
 
 .contenedor_creacion_materia h4{
+    margin-bottom: 1vh;
     position: relative;
     left: 4%;
 }
@@ -65,4 +66,27 @@ select, input{
     background-color: #333;
     color: white;
     transition: 0.2s;
+}
+
+ul {
+    margin-left: 1vw;
+
+}
+
+.li_crear {
+    list-style: none;
+    display: flex;
+}
+
+.li_crear a{
+    text-decoration: none;
+}
+
+.culo {
+    text-decoration: none;
+}
+
+
+.contenedor_crearEditar {
+    background-color: red;
 }
