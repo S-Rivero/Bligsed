@@ -281,6 +281,12 @@ body{
    border-radius: 5px 0px 0px 5px;
 }
 
+.icono_anashe:hover {
+    background-color: rgb(84, 133, 143);
+    transition: .2s;
+}
+
+
 .input-group >div{
     width: 7%;
 }
@@ -480,3 +486,6 @@ body{
     background-color: lightgrey;
     transition: .2s;
 }
+
+
+
