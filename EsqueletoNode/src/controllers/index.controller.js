@@ -662,7 +662,12 @@ exports.insertMaterias = (async (req, res) => {
     pool.query(
         "INSERT INTO `materias`(`Materia`, `IdCurso`, `profesor`) VALUES ('" + req.body.name + "', " + req.body.curso + ", " + req.body.doc + ");"
         , (err, e) => {
-            if (err) console.log(err); else console.log('Se creo la materia ' + req.body.name);
+            if (err) 
+                console.log(err); 
+            else {
+                console.log('Se creo la materia ' + req.body.name);
+                res.redirect('/crear_materias');
+            }
         });
 });
 

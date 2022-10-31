@@ -37,9 +37,9 @@
 <script>
     $('#form').submit(e => {
         e.preventDefault();
-        
-        if(/(<|>|\?|\\|=|\+|-|_|$|;|`|'|"|\/|\(|\)|\{|\}|\[|\])/g.test(e.target.name.value)){
-            alert('El nombre de la materia tiene caracteres no disponibles');
+        let regex = /[`!@#$%^&*+\-=\[\]{};'"\\|.<>\/¿~]/;
+        if(regex.test(e.target.name.value)){
+            alert(`El nombre de la materia tiene caracteres no disponibles\n( ! @ # $ % ^ & * + - = [ ] { } ; \` ' " \\ | . < > \/ ¿ ~ )`);
             e.target.name.value = '';
         } else if(e.target.curso.value == -1){
             alert('Debes seleccionar un curso para la materia');
