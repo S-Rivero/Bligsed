@@ -2,19 +2,19 @@
     <div class="text">Tabla de cursos</div>
       <div class="contenedor_documentacion">
       <div class="contenedor_nombre_doc">
-          <button class="input_cargar_inasistencias" id="selectTodos" onclick="selectTodos()">Seleccionar todos</button>
-          <input disabled type="button" class="input_cargar_inasistencias"  value="Eliminar"  id="eliminarBtn" onclick="submitForm()">
+          <button class="layout_boton1" id="selectTodos" onclick="selectTodos()">Seleccionar todos</button>
+          <input disabled type="button" class="layout_boton1"  value="Eliminar"  id="eliminarBtn" onclick="submitForm()">
       </div>
       <form action="../api/eliminarCursos" method="post" name="tabla" id="tabla">
         <table class="bordered">
           <tr>
-            <th>Curso</th>
-            <th></th>   
+            <th>Curso</th>   
+            <th></th>
           </tr>
           {{#each a}}
               <tr>
-                <td><a href="../tablaCurso/{{ID}}">{{Nombre_curso}}</a></td>
-                <td><input type="checkbox" name="{{ID}}" id="" onchange="verif()"></td>
+                <td><label for="checkbox_editarCurso{{ID}}"><a href="../tablaCurso/{{ID}}">{{Nombre_curso}}</a></label></td>
+                <td><label for="checkbox_editarCurso{{ID}}"><input type="checkbox" name="{{ID}}" id="checkbox_editarCurso{{ID}}" onchange="verif()"></label></td>
               </tr>
           {{/each}}
         </table>

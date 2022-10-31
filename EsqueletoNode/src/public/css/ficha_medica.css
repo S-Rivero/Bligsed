@@ -199,10 +199,17 @@ input{
 #submitBtn{
     background-color: rgba(11, 97, 75, 0.129);
     border: none;
-    padding: 1%;
+    padding: 2%;
     cursor: pointer;
     border-radius: 15px;
     width: fit-content;
     height: auto;
     margin-bottom: 1%;
+    margin-top: 1vw;
+}
+
+
+#submitBtn:hover {
+    background-color: rgba(8, 71, 56, 0.429);
+    transition: .2s;
 }

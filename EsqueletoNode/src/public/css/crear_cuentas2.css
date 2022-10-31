@@ -55,7 +55,6 @@ select{
     text-decoration: none;
     color: #333;
     position: relative;
-    left: 50%;
 }
 
 .boton_siguiente2:hover{
@@ -63,3 +62,13 @@ select{
     color: white;
     transition: 0.2s;
 }
+
+
+.botones_crearCuentas {
+    margin-top: 10vh;
+}
+
+
+
+
+

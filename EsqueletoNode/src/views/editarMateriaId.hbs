@@ -2,9 +2,9 @@
 <div class="contenedor_documentacion">
   <div class="contenedor_nombre_doc">
   </div>
-  <form action="/api/actualizarMateria" method="POST" name="tabla" id="tabla">
-    <input type="button" onclick="confirmSubmit(this)" value="Guardar">
-    <input type="button" onclick="confirmSubmit(this)" value="Eliminar materia">
+  <form class="formEditarMateria" action="/api/actualizarMateria" method="POST" name="tabla" id="tabla">
+    <input type="button" class="layout_boton1" onclick="confirmSubmit(this)" value="Guardar">
+    <input type="button" class="layout_boton1" onclick="confirmSubmit(this)" value="Eliminar materia">
     <input type="hidden" name="type" id="inhid" value="">
     <table class="bordered">
       <tr>
@@ -17,7 +17,7 @@
         <input type="hidden" name="id" value="{{a.ID}}">
         <td>{{a.ID}}</td>
         <td>
-          <input type="text" name="materia" id="mateira" value="{{a.Materia}}"></td>
+          <input type="text" name="materia" id="materia" value="{{a.Materia}}"></td>
         <td>
           <select name="curso" id="curso">
             <option value="{{a.IdCurso}}" hidden selected>{{a.Nombre_curso}}</option>

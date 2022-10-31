@@ -259,3 +259,23 @@ table input {
   width: 100%;
   margin: 0;
 }
+
+
+.label_editarCurso {
+  background-color: red;
+}
+
+
+#eliminarBtn {
+  margin-left: 1vw;
+}
+
+.formEditarMateria input {
+  margin-left: 1vw;
+  margin-bottom: 1vw;
+}
+
+
+#materia {
+  margin: 0;
+}
