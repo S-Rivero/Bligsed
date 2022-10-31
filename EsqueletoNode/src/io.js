@@ -84,9 +84,13 @@ exports.io_init = function (app) {
       data.pop();
       data.forEach((elem) => {
         let x = elem.split("«¯§¦Æ×þ®©©»");
-        x[4] = x[4].replace("\r", "");
-        if (x[4] != 0) x.push(path.extname(x[4]));
+        if(x.length == 5)
+          x[4] = x[4].replace("\r", "");
+        else 
+          x[5] = x[5].replace("\r", ""); 
         arr.push(x);
+        console.log(x);
+        console.log(x.length);
       });
       cb(arr);
       delete arr;
@@ -134,7 +138,7 @@ exports.io_init = function (app) {
         fs.writeFileSync(fileDir, o.file);
 
         //-------------str q va a ir a local_database--------------
-        content = `${o.content}«¯§¦Æ×þ®©©»${o.user}«¯§¦Æ×þ®©©»${o.date}«¯§¦Æ×þ®©©»${o.time}«¯§¦Æ×þ®©©»${o.fileName}\n`;
+        content = `${o.content}«¯§¦Æ×þ®©©»${o.user}«¯§¦Æ×þ®©©»${o.date}«¯§¦Æ×þ®©©»${o.time}«¯§¦Æ×þ®©©»${o.fileName}«¯§¦Æ×þ®©©»${o.fileType}\n`;
 
         //-------------Envia el arr a los clientes --------------
         io.sockets
@@ -145,7 +149,7 @@ exports.io_init = function (app) {
             o.date,
             o.time,
             o.fileName,
-            path.extname(o.fileName),
+            o.fileType,
           ]);
       } else {
         //-------------str q va a ir a local_database--------------

@@ -270,7 +270,7 @@ function printMessage(arr) {
   }
   spanMsg.textContent = arr[0];
 
-  if (arr[4] != "0") {
+  if (arr.length == 6) {
     let file;
     let str = "No se ha encontrado el archivo";
     let br = document.createElement("br");
@@ -332,16 +332,46 @@ function printMessage(arr) {
 
 function checkMime(mime) {
   switch (mime) {
-    case ".png":
-    case ".jpg":
-    case ".jpeg":
-    case ".gif":
+    case "image/png":
+    case "image/jpeg":
+    case "image/gif":
+    case "image/svg+xml":
+    case "image/bmp":
+    case "image/cis-cod":
+    case "image/ief":
+    case "image/pipeg":
+    case "image/tiff":
+    case "image/x-cmu-raster":
+    case "image/x-cmx":
+    case "image/x-icon":
+    case "image/x-portable-anymap":
+    case "image/x-portable-bitmap":
+    case "image/x-portable-graymap":
+    case "image/x-portable-pixmap":
+    case "image/x-rgb":
+    case "image/x-xbitmap":
+    case "image/x-xpixmap":
+    case "image/x-xwindowdump":
       return 1;
-    case ".mp3":
-    case ".wav":
+    case "audio/basic":
+    case "auido/L24":
+    case "audio/mid":
+    case "audio/mpeg":
+    case "audio/mp4":
+    case "audio/x-aiff":
+    case "audio/x-mpegurl":
+    case "audio/vnd.rn-realaudio":
+    case "audio/ogg":
+    case "audio/vorbis":
+    case "audio/vnd.wav":
       return 2;
-    case ".mp4":
-    case ".webm":
+    case "video/mpeg":
+    case "video/mp4":
+    case "video/quicktime":
+    case "video/x-la-asf":
+    case "video/x-ms-asf":
+    case "video/x-msvideo":
+    case "video/x-sgi-movie":
       return 3;
     default:
       return 0;
