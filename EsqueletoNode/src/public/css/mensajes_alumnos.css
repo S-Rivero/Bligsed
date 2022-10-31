@@ -237,12 +237,12 @@ body{
     float: right;
 }
 
-.float-right a {
+.float-right a, .my-message a {
     color:  #020024;
     text-decoration: none;
 }
 
-.float-right a:hover {
+.float-right a:hover, .my-message a:hover {
     background: rgba(0, 0, 0, 0.144);
     border-radius: 5px;
     color: #020024;
