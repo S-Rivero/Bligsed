@@ -445,7 +445,7 @@ exports.POSTcargarNotasDocente = ((req, res) => {
 
 exports.renderCargarInasistencias = ((req, res) => {
     if (req.body.idSeleccionados) {
-        let a = JSONrenderCargarInasistencias(req.body)
+        let a = JSONrenderCargarInasistencias(req.body);
         res.render('cargarInasistencias.hbs', { a, links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs } });
     } else {
         res.redirect('/Cursos');
@@ -454,8 +454,8 @@ exports.renderCargarInasistencias = ((req, res) => {
 });
 
 exports.PostCargarInasistencias = ((req, res) => {
-
     let inas = JSONcargarInasistencias(req.user[0].id, req.body);
+    console.log('inas :>> ', inas);
     pool.query(`
         INSERT INTO inasistencias
                 (tipo, motivo, cantidad, fecha, id_us, id_creador)

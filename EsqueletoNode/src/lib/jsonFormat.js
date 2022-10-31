@@ -90,11 +90,15 @@ module.exports = {
     },
 
     JSONrenderCargarInasistencias: function({idSeleccionados, idAlumnos, nombreAlumnos}){
-        let newArr = [];
-        for(let i = 0 ; i < idAlumnos.length ; i++){
-            newArr.push({id: idAlumnos[i], nombre: nombreAlumnos[i]});
+        if(typeof idAlumnos == "object"){
+            let newArr = [];
+            for(let i = 0 ; i < idAlumnos.length ; i++){
+                newArr.push({id: idAlumnos[i], nombre: nombreAlumnos[i]});
+            }
+            return newArr.filter(e => idSeleccionados.includes(e.id));
+        }else{
+            return [{id: idSeleccionados, nombre: nombreAlumnos}]
         }
-        return newArr.filter(e => idSeleccionados.includes(e.id));
     },
 
     JSONcargarInasistencias: function(id_creador, {id, fecha, inasistencia, justificado}){
@@ -130,7 +134,7 @@ module.exports = {
         }
         let arr = [];
         let idlen = id.length;
-        if(idlen == 1){
+        if(typeof id != "object"){
             let just = 0;
             if(justificado){
                 just = justificado.includes(id) ? 1:0;

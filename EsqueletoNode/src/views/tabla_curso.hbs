@@ -55,7 +55,10 @@
 
     fetch('/api/idCursoToName/'+parseInt(idCurso[1]))
     .then((response) => response.json())
-    .then((data) => document.getElementById("optionSelected").innerHTML = data['C'].split('').join('°'));
+    .then((data) => {
+      console.log(data);
+      document.getElementById("optionSelected").innerHTML = data[0]['C'].split('').join('°')
+      });
 
 
     let sidebar = document.querySelector(".sidebar");
