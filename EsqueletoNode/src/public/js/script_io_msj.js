@@ -63,8 +63,10 @@ function switchChat(elem) {
 
     if (actual_room.priv == "true")
       document.getElementById("añadirMiembro").classList.add("hid");
-    else document.getElementById("añadirMiembro").classList.remove("hid");
-
+    else { 
+    document.getElementById("añadirMiembro").classList.remove("hid");
+    document.getElementById("añadirMiembro").classList.add("anim");
+  }
     ul.innerHTML = "";
     socket.emit("switchRoom", actual_room.id, (arr) => {
       arr.forEach((elem) => {

@@ -349,3 +349,10 @@ input {
 .contenedor_crearEditar ul {
   list-style: none;
 }
+
+
+
+.efectitoPiolaInput:focus {
+  border: 1px solid darkcyan;
+  transition: .2s;
+}

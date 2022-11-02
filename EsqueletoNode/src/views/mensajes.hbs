@@ -11,25 +11,40 @@
                      <!-- <span class="input-group-text"></span>
                         <i class="fa fa-ellipsis-v"></i> -->
                      <div class="dropdown">  
-                        <button onclick="optionslist()" class="dropbtn"><i class="fa fa-ellipsis-v"></i></button>
+                        <div class="botonesDropdown">
+                              <button class="dropbtn" id="abanGrupo"><a href="#" id="abanGrupo"></a><i class="bx bx-trash bx-tada-hover"></i></button>
+                              <button onclick="optionslist2()" class="dropbtn group" title="Crear Grupo"><i class='bx bx-group' ></i></button>
+                              <button onclick="optionslist3()" class="dropbtn group" title="Enviar Mensaje"><i class='bx bx-message-add bx-tada-hover' ></i></button>
+                              <button onclick="optionslist4()" id="añadirMiembro" class="dropbtn group hid"><i class="bx bx-user-plus"></i></button>
+                        </div>
                         <div id="myDropdown1" class="dropdown-content">
-                           <a href="#" id="crearGrupo">Crear grupo</a>
-                           <a href="#" id="linkAñadirMiembro">Añadir miembro</a>
                            {{!-- <a href="#" id="abanGrupo">Abandonar grupo</a> --}}
-                           <a href="#" id="abanGrupo">Abandonar grupo</a>
+                           {{!-- <a href="#" id="abanGrupo">Abandonar grupo</a> --}}
 
+                           
+
+                        </div>
+
+                        <div id="myDropdown2" class="dropdown-content">
+                           <h4>Crear Grupo</h4>
                            <form id="fGrupo">
                               <input type="text" name="name" placeholder="Escriba el nombre del grupo" class="form-control" required>
                               <button class="btn btn-primary">Enviar</button>
                            </form>
-                           
+                        </div>
+
+                        <div id="myDropdown3" class="dropdown-content">
+                           <h4>Abrir Chat</h4>
                            <form id="f2P2">
-                              <input type="text" name="username" placeholder="Con quien quiere hablar?" class="form-control" required>
+                              <input type="text" name="username" placeholder="Con quién quiere hablar?" class="form-control" required>
                               <button class="btn btn-primary">Enviar</button>
                            </form>
+                        </div>
 
-                           <form id="añadirMiembro" class="hid">
-                              <input type="text" name="username" placeholder="¿A quien queres meter? Ingrese su email" class="form-control" required>
+                        <div id="myDropdown4" class="dropdown-content">
+                           <h4>¿A qué usuario quiere meter?</h4>
+                           <form>
+                              <input type="text" name="username" placeholder="¿A quién quieres meter?" class="form-control" required>
                               <button class="btn btn-primary">Enviar</button>
                            </form>
                         </div>
@@ -42,7 +57,8 @@
             </div>
 
             <div class="chat " id="divChatContainer">
-               <div class="chat-header clearfix esconder">
+               <div class="chat-header clearfix">
+                  {{!-- Ponerle clase "esconder" al chat-header --}}
                   <div class="row">
                      <div class="col-lg-6">
                         <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
@@ -63,7 +79,8 @@
                      
                   </ul>
                </div>
-               <div class="chat-message clearfix esconder">
+               <div class="chat-message clearfix">
+                  {{!-- Ponerle clase "esconder" al chat-message --}}
                   <div class="input-group mb-0" style="margin: 0;">
                      <div class="input-group-prepend">
                         <label for="boton_enviar">

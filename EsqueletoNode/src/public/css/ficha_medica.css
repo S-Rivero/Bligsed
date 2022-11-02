@@ -156,10 +156,10 @@
 }
 
 .contenedor_datos .ingreso{
-    border: 1px solid rgb(161, 160, 160);
+    border: 1.2px solid rgb(161, 160, 160);
     border-radius: 15px;
     padding: 0.5%;
-    outline: none;
+    /* outline: none; */
     margin-left: 2%;
     margin-top: 1%;
     margin-bottom: 2%;
@@ -214,3 +214,11 @@ input{
     background-color: rgba(8, 71, 56, 0.429);
     transition: .2s;
 }
+
+
+
+
+.efectitoPiolaInput:focus {
+    border: 1.2px solid darkcyan;
+    transition: .2s;
+  }
