@@ -88,13 +88,6 @@ socket.on("updateMembers", (num) => {
 });
 
 // *********************************** Chat Management ***********************************
-
-document.getElementById("crearGrupo").addEventListener("click", (e) => {
-  e.preventDefault();
-  console.log("crear_Grupo");
-  // Mostrar un modal con un form para crearlo
-});
-
 document.getElementById("fGrupo").addEventListener("submit", (e) => {
   e.preventDefault();
   createChat(false, e.target.name.value);
