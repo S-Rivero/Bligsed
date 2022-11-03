@@ -10,7 +10,10 @@ const { RandomString, encryptPassword } = require('../lib/helpers');
 exports.idCursoToName = ((req, res) => {
     let id = req.params.id;
     pool.query("CALL cursos (?)", id, function (err, a) {
-        res.send(a[0]);
+        if(a && a[0])
+            res.send(a[0]);
+        else
+            res.send({among: "us"})
     });
 });
 

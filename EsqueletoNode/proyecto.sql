@@ -219,24 +219,6 @@ CREATE TABLE `profesores` (
   `ID` int(11) NOT NULL
 );
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `sessions`
---
-
-CREATE TABLE `sessions` (
-  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `expires` int(11) UNSIGNED NOT NULL,
-  `data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`session_id`)
-);
-
--- --------------------------------------------------------
-
---
---
-
 CREATE TABLE `superusuarios` (
   `id` int(11) NOT NULL,
   `fecha_creacion` date NOT NULL,
