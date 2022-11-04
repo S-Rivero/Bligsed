@@ -5,6 +5,8 @@
 
 
         <div class="input_fichamedica">
+            <h4>Obra Social</h4>
+            <p>¿Cuál es su N° de Obra Social, y cuál es su número de afiliado?</p>
             <input type="text" name="Obra_social" placeholder="Obra Social" class="ingreso efectitoPiolaInput" value="{{ina.Obra_social}}">
             <input type="text" name="N_de_afiliado_obra_social" placeholder="Nº Afiliado" class="ingreso efectitoPiolaInput" value="{{ina.N_de_afiliado_obra_social}}">
 
@@ -15,21 +17,20 @@
             <input  name="Internacion" type="text" placeholder="¿Por qué?" class="ingreso efectitoPiolaInput" value="{{ina.Internacion}}">
 
             <h4>Alergias</h4>
-            <p>¿Recibe tratamiento médico?</p>
+            <p>¿Usted tiene alguna alergia? Si es así, ¿De qué manera se manifiesta?</p>
             <input  name="Alergia" type="text" placeholder="Alergia a..." class="ingreso efectitoPiolaInput" value="{{ina.Alergia}}">
             <input  name="manifestalergia" type="text" placeholder="Manifestaciones" class="ingreso efectitoPiolaInput" value="{{ina.manifestalergia}}">
 
             <h4>Tratamientos</h4>
-            <p>¿Recibe tratamiento médico?</p>
+            <p>¿Usted recibe tratamiento médico?</p>
             <input  name="Tratamiento_medico" type="text" placeholder="Especifique" class="ingreso efectitoPiolaInput" value="{{ina.Tratamiento_medico}}">
-            <p>¿Procedimientos quirúrgicos?</p>
+            <p>¿Procedimientos quirúrgicos? Si es así, ¿A qué edad? ¿Y Cuales?</p>
             <input  name="edad_quirurjico" type="text" placeholder="¿A que edad?" class="ingreso efectitoPiolaInput" value="{{ina.edad_quirurjico}}">
             <input  name="Quirurjico" type="text" placeholder="Tipo de cirugía" class="ingreso efectitoPiolaInput" value="{{ina.Quirurjico}}">
             <p>¿Presenta alguna limitación física?</p>
             <input  name="Discapacidad_fisica" type="text" placeholder="Aclaración" class="ingreso efectitoPiolaInput" value="{{ina.Discapacidad_fisica}}">
             <input  name="problemas_salud" type="text" placeholder="Otros problemas de salud..." class="ingreso efectitoPiolaInput"
                 value="{{ina.problemas_salud}}">
-
             <br><label for="" id="texto_vac">Elija la opción que corresponda</label>
             <select name="select_vacunacion" id="select_vacunacion">
                 <option value="{{ina.Vacunacion}}" hidden="hidden" selected="selected">{{#selectVacunacion ina.Vacunacion}}{{/selectVacunacion}}</option>

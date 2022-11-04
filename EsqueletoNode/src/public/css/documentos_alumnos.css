@@ -279,3 +279,14 @@ table input {
 #materia {
   margin: 0;
 }
+
+.bx-edit {
+  margin-top: 1vh;
+  font-size: 25px;
+
+}
+
+.bx-edit:hover {
+  color: darkcyan;
+  transition: .2s;
+}

@@ -89,8 +89,6 @@ exports.io_init = function (app) {
         else 
           x[5] = x[5].replace("\r", ""); 
         arr.push(x);
-        console.log(x);
-        console.log(x.length);
       });
       cb(arr);
       delete arr;

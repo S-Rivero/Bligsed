@@ -251,29 +251,29 @@ body{
 }
 
 .float-right img {
-    cursor: pointer;
-    width: 100%;
-    height: auto;
+   cursor: pointer;
+   width: 100%;
+   height: auto;
 }
 
 .input-group{
-    background-color: white;
-    width: 100%;
-    padding-bottom:10px;
-    padding-top: 20px;
-    display: flex;
-    margin: 0;
-    margin-left: 0;
-    position: sticky;
-    top: 0px;
+   background-color: white;
+   width: 100%;
+   padding-bottom:10px;
+   padding-top: 20px;
+   display: flex;
+   margin: 0;
+   margin-left: 0;
+   position: sticky;
+   top: 0px;
 }
 
 
 .input-group .icono_icono{
-    display: flex;
-    align-items: center;
-    margin: auto;
-    color: #eaeaea;
+   display: flex;
+   align-items: center;
+   margin: auto;
+   color: #eaeaea;
 }
 
 .input-group .icono_anashe {
@@ -429,7 +429,7 @@ body{
     width: 100%;
     height: 100%;
     background-color: white;
-  }
+}
   
 .dropbtn i {
     padding: 15%;
@@ -494,6 +494,7 @@ body{
 }
   
 .dropdown a:hover {
+    transition: .2s;
     background-color: #ddd;
 }
 
@@ -557,4 +558,17 @@ body{
 
 #añadirMiembro {
     float: right;
+}
+
+
+#abanGrupo:hover {
+    color: white;
+    background-color: red;
+    transition: .2s;
+}
+
+
+#formMsg input:focus {
+    transition: .2s;
+    border: 1px solid #333;
 }
