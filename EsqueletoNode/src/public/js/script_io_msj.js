@@ -55,6 +55,8 @@ function switchChat(elem) {
   if (room.priv == 'true')
     room.username = elem.children[1].children[2].value;
   if (actual_room != room) {
+    if(document.getElementsByClassName('esconder').length)
+      document.getElementsByClassName('esconder')[0].classList.remove('esconder');
     if (actual_room)
       document.getElementById(actual_room.id).classList.remove("active");
     elem.classList.add("active");
@@ -63,10 +65,10 @@ function switchChat(elem) {
 
     if (actual_room.priv == "true")
       document.getElementById("añadirMiembro").classList.add("hid");
-    else { 
-    document.getElementById("añadirMiembro").classList.remove("hid");
-    document.getElementById("añadirMiembro").classList.add("anim");
-  }
+    else {
+      document.getElementById("añadirMiembro").classList.remove("hid");
+      document.getElementById("añadirMiembro").classList.add("anim");
+    }
     ul.innerHTML = "";
     socket.emit("switchRoom", actual_room.id, (arr) => {
       arr.forEach((elem) => {
@@ -110,7 +112,7 @@ function createChat(priv, f) {
       name: f,
     };
   }
-  if(o.username != user.username){
+  if (o.username != user.username) {
     x
       ? socket.emit("crearGrupo", o, user, (res) => {
         switch (res) {
@@ -126,13 +128,13 @@ function createChat(priv, f) {
         }
       })
       : alert("El chat seleccionado ya existe");
-  } 
-  else 
+  }
+  else
     alert('No puedes crear un chat con tu propio usuario');
 }
 
 function checkChatExist(username) {
-  if(ulChats.children[0].id != 'chatNotFound')
+  if (ulChats.children[0].id != 'chatNotFound')
     for (let i = 0; i < ulChats.children.length; i++) {
       if (ulChats.children[i].children[1].children[1].value == 'true')
         if (ulChats.children[i].children[1].children[2].value == username)
@@ -163,7 +165,7 @@ document.getElementById("añadirMiembro").addEventListener("submit", (e) => {
     e.target.username.value,
     actual_room.id,
     (res) => {
-      switch (res){
+      switch (res) {
         case 0:
           alert('Se añadio a ' + e.target.username.value + ' exitosamente a ' + actual_room.name);
           document.getElementById("añadirMiembro").username.value = "";
@@ -171,10 +173,10 @@ document.getElementById("añadirMiembro").addEventListener("submit", (e) => {
         case 1:
           alert('No se encontro el usuario ingresado');
           break;
-        case 2: 
+        case 2:
           alert('El usuario ya pertenece al grupo');
           break;
-          default: break;
+        default: break;
       }
     }
   );
