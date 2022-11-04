@@ -55,8 +55,10 @@ function switchChat(elem) {
   if (room.priv == 'true')
     room.username = elem.children[1].children[2].value;
   if (actual_room != room) {
-    if(document.getElementsByClassName('esconder').length)
+    if(document.getElementsByClassName('esconder').length){
+      document.getElementsByClassName('esconder')[1].classList.remove('esconder');
       document.getElementsByClassName('esconder')[0].classList.remove('esconder');
+    }
     if (actual_room)
       document.getElementById(actual_room.id).classList.remove("active");
     elem.classList.add("active");
