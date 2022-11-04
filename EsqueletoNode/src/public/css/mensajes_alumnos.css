@@ -258,7 +258,7 @@ body{
 
 .input-group{
     background-color: white;
-    width: 106%;
+    width: 100%;
     padding-bottom:10px;
     padding-top: 20px;
     display: flex;
@@ -555,3 +555,6 @@ body{
     animation: spin 1s alternate-reverse;
 }
 
+#añadirMiembro {
+    float: right;
+}
