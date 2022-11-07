@@ -26,7 +26,7 @@ exports.matchPassword = async function(password, savedPassword){
 // }
 
 let findChild = function(idPadre){
-    return pool.promise().query("SELECT a.ID, us.Nombre FROM alumno a JOIN usuarios u ON a.Padre = u.id JOIN usuarios us ON a.ID = us.id WHERE u.id = ?", [idPadre]);
+    return pool.promise().query("SELECT Nombre_curso FROM `curso` JOIN alumno a ON a.ID_Curso = curso.ID WHERE a.ID = ?", [idUs]);
 }
 
 exports.setChild = function(user){
