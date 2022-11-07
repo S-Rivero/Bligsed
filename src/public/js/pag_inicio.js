@@ -15,3 +15,9 @@ sign_up_btn.addEventListener("click", () => {
 sign_in_btn.addEventListener("click", () => {
   container.classList.remove("sign-up-mode");
 });
+
+document.getElementById('formRegistro').addEventListener('submit', e => {
+  e.preventDefault();
+  alert('En la brevedad nos pondremos en contacto');
+  //e.target.children[3].textContent = 'En la brevedad te contactaremos ' + e.target.username.value;
+});
