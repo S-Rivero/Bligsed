@@ -54,7 +54,7 @@
         <tr>
           <input type="hidden" value="${d.id}" name="id">
           <td><input type="text" value="${d.Nombre_curso}" name="curso"></td>
-          <td><label id="labelPadre" style="display:none"></label><input type="text" value="${d.padremail}" id="padreMail" name="tutor" onblur=" console.log('');confirmarPadre();"></td>
+          <td><label id="labelPadre" style="display:none"></label><input type="text" value="${d.padremail}" id="padreMail" name="tutor" onblur=" let e; delete e;confirmarPadre();"></td>
         </tr>
         <tr>
           <td><input type="button" value="Actualizar Curso" onclick="confirmSubmit('formAlumno', this)"></td>
