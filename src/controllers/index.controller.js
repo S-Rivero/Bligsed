@@ -455,7 +455,6 @@ exports.renderCargarInasistencias = ((req, res) => {
 
 exports.PostCargarInasistencias = ((req, res) => {
     let inas = JSONcargarInasistencias(req.user[0].id, req.body);
-    console.log('inas :>> ', inas);
     pool.query(`
         INSERT INTO inasistencias
                 (tipo, motivo, cantidad, fecha, id_us, id_creador)
@@ -641,9 +640,7 @@ exports.insertCurso = (async (req, res) => {
         "INSERT INTO `curso`(`Nombre_curso`) VALUES ('" + req.body.c + "');"
         , (err, e) => {
             if (err) 
-                console.log(err); 
-            else 
-                console.log('Se creo el curso ' + req.body.c);
+                console.log(err);
             res.redirect('/crear_curso');
         });
 });
@@ -668,9 +665,6 @@ exports.insertMaterias = (async (req, res) => {
         , (err, e) => {
             if (err) 
                 console.log(err); 
-            else {
-                console.log('Se creo la materia ' + req.body.name);
-            }
             res.redirect('/crear_materias');
         });
 });
