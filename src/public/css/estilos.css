@@ -77,12 +77,13 @@ body{
 
 .list__show{
     width: 60%;
+    width: 90%;
     float: left;
     margin-left: 13.5%;
+    margin-left: 0;
     border-left: 2px solid white;
     list-style: none;
     transition: 0.4s;
-    height: 100%;
 }
 
 ::-webkit-scrollbar {

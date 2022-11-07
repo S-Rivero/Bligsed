@@ -8,10 +8,13 @@
 
 }
 
+:root {
+  --tamañoSIdebar: 18vw;
+}
+
 input {
   outline: none;
 }
-
 .sidebar{
   position: fixed;
   left: 0;
@@ -26,6 +29,7 @@ input {
 }
 .sidebar.open{
   width: 250px;
+  width: var(--tamañoSIdebar);
 }
 .sidebar .logo{
   height: 60px;
@@ -77,6 +81,7 @@ input {
   overflow: scroll;
   scrollbar-width: none;
 
+  width: 100%;
 }
 
 .sidebar .nav-list::-webkit-scrollbar {
@@ -200,7 +205,7 @@ input {
   overflow: hidden;
 }
 .sidebar.open li.profile{
-  width: 250px;
+  width: var(--tamañoSidebar);
 }
 .sidebar li .profile-details{
   display: flex;
