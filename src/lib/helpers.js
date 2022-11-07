@@ -73,7 +73,7 @@ exports.queTrimestre = function(n){
 
 
 let findCurso = function(idUs){
-    return pool.promise().query("SELECT Nombre_curso FROM `curso` JOIN alumno a ON a.ID_Curso = curso.ID WHERE a.ID = ?", [idUs]);
+    return pool.promise().query("SELECT Nombre_curso FROM `curso` JOIN alumno a WHERE a.ID = ?", [idUs]);
 }
 
 exports.setCurso = function(idUs){
