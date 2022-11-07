@@ -9,7 +9,7 @@
 }
 
 :root {
-  --tamañoSIdebar: 18vw;
+  --tamañoSidebar: 18vw;
 }
 
 input {
@@ -29,7 +29,7 @@ input {
 }
 .sidebar.open{
   width: 250px;
-  width: var(--tamañoSIdebar);
+  width: var(--tamañoSidebar);
 }
 .sidebar .logo{
   height: 60px;
@@ -77,7 +77,7 @@ input {
 }
 .sidebar .nav-list{
   margin-top: 20px;
-  height: 82%;
+  height: 80%;
   overflow: scroll;
   scrollbar-width: none;
 
@@ -360,4 +360,9 @@ input {
 .efectitoPiolaInput:focus {
   border: 1px solid darkcyan;
   transition: .2s;
+}
+
+
+.hijes a {
+  color: white;
 }

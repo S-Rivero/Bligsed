@@ -32,12 +32,16 @@ module.exports = {
       return n+1;
     },
     imprimirCursoPerfil: function(curso){
-      switch(curso){
-        case "7C":
-        case "6C":
-        case "5C":
-        case "4C":
-          return curso + " - Técnico en informática personal y profesional";
+      switch(curso[0]){
+        case "8":
+        case "7":
+        case "6":
+        case "5":
+        case "4":
+        case "3":
+        case "2":
+        case "1":
+          return "Alumno de " + curso;
         default:
           return tipoUsuarioToString(curso);
       }
