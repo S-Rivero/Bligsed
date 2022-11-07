@@ -298,7 +298,6 @@ exports.actualizarAlumno = (async (req, res) => {
         });
     }else{
         pool.query(`SELECT id from usuarios WHERE username = ? AND Tipo_de_usuario = 5`,tutor,function(err,a){
-            console.log(a);
             if(a && a[0]){
                 pool.query(`UPDATE alumno SET Padre = ? WHERE ID = ?`,[a[0].id,id],function(err,b){
                     res.redirect('/buscarCuenta/'+id+'/ok');
