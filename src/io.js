@@ -10,7 +10,7 @@ exports.io_init = function (app) {
   }),
     { Server } = require("socket.io"),
     io = new Server(server, {
-      maxHttpBufferSize: 2e8, // 200 MB
+      maxHttpBufferSize: 1e9, // 1 GB
     });
   const clients = {};
 
