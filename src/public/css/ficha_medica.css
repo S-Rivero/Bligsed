@@ -157,7 +157,7 @@
 
 .contenedor_datos .ingreso{
     border: 1.2px solid rgb(161, 160, 160);
-    border-radius: 15px;
+    border-radius: 5px;
     padding: 0.5%;
     /* outline: none; */
     margin-left: 2%;
@@ -226,3 +226,5 @@ input{
     border: 1.2px solid darkcyan;
     transition: .2s;
   }
+
+
