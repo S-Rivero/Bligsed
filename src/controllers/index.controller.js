@@ -483,7 +483,7 @@ var transporter = nodemailer.createTransport({
         ciphers: 'SSLv3'
     },
     auth: {
-        user: 'bligsededatingcorporation@hotmail.com',
+        user: 'bligsedJ23@hotmail.com',
         pass: 'pipaBenedetto09'
     }
 });
@@ -528,7 +528,7 @@ exports.insertCuentas = (async (req, res) => {
             (?,?,?,?,?,?,?,?,?);`
             , [tdu, username, Nombre, DNI, Sexo, Fecha_de_nacimiento, Numero_de_telefono, domicilio, hashPass], function (err, a) {
                 transporter.sendMail({
-                    from: 'bligsededatingcorporation@hotmail.com', // sender address
+                    from: 'bligsedJ23@hotmail.com', // sender address
                     to: username, // list of receivers
                     subject: "Bienvenido a Bligsed", // Subject line
                     html: `<b>Usuario: ${username} Contraseña: ${passNoHash}</b>`, // html body
@@ -549,7 +549,7 @@ exports.insertCuentas = (async (req, res) => {
                     UPDATE alumno SET Padre = ?, ID_Curso = ? WHERE ID = ?;
                 `, [idTutor, idCurso, insertId], function (err, b) {
                         transporter.sendMail({
-                            from: 'bligsededatingcorporation@hotmail.com', // sender address
+                            from: 'bligsedJ23@hotmail.com', // sender address
                             to: username, // list of receivers
                             subject: "Bienvenido a Bligsed", // Subject line
                             html: `<b>Usuario: ${username} Contraseña: ${passNoHash}</b>`, // html body
@@ -567,7 +567,7 @@ exports.insertCuentas = (async (req, res) => {
                 (?,?,?,?,?,?,?,?,?);`
                 , [5, tutorusername, tutorNombre, tutorDNI, tutorSexo, tutorFecha_de_nacimiento, tutorNumero_de_telefono, tutordomicilio, hashPassTutor], async function (err, z) {
                     await transporter.sendMail({
-                        from: 'bligsededatingcorporation@hotmail.com', // sender address
+                        from: 'bligsedJ23@hotmail.com', // sender address
                         to: tutorusername, // list of receivers
                         subject: "Bienvenido a Bligsed", // Subject line
                         html: `<b>Usuario: ${tutorusername} Contraseña: ${passNoHashTutor}</b>`, // html body
@@ -583,7 +583,7 @@ exports.insertCuentas = (async (req, res) => {
                             UPDATE alumno SET Padre = ?, ID_Curso = ? WHERE ID = ?;
                             `, [tutorId, idCurso, insertId], function (err, b) {
                                 transporter.sendMail({
-                                    from: 'bligsededatingcorporation@hotmail.com', // sender address
+                                    from: 'bligsedJ23@hotmail.com', // sender address
                                     to: username, // list of receivers
                                     subject: "Bienvenido a Bligsed", // Subject line
                                     html: `<b>Usuario: ${username} Contraseña: ${passNoHash}</b>`, // html body

@@ -229,7 +229,8 @@ var transporter = nodemailer.createTransport({
         ciphers: 'SSLv3'
     },
     auth: {
-        user: 'bligsededatingcorporation@hotmail.com',
+        
+        user: 'bligsedJ23@hotmail.com',
         pass: 'pipaBenedetto09'
     }
 });
@@ -245,7 +246,7 @@ exports.actualizarUsuario = (async (req, res) => {
                         let passNoHash = RandomString(8);
                         pass = await encryptPassword(passNoHash);
                         transporter.sendMail({
-                            from: 'bligsededatingcorporation@hotmail.com', // sender address
+                            from: 'bligsedJ23@hotmail.com', // sender address
                             to: username, // list of receivers
                             subject: "Actualizacion en tu usuario", // Subject line
                             html: `<b>Nuevo usuario: ${username} Contraseña: ${passNoHash}</b>`, // html body
