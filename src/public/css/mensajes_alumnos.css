@@ -471,6 +471,18 @@ body{
     transition: opacity 2s;
 }
 
+.dropdown-content input {
+    margin-top: 2vh;
+    margin-left: 1vw;
+    border: 1.2px;
+    border-radius: 5px !important;
+}
+
+.dropdown-content input:focus {
+    border: 1.2px solid rgb(84, 133, 143);
+    transition: all .2s ease-in-out;
+}
+
 .show {
     opacity: 1;
     display: block;
@@ -483,11 +495,6 @@ body{
 
 #myDropdown2, #myDropdown4{
     width: 220px;
-}
-
-#myDropdown4 input {
-    margin-top: 1vh;
-    margin-left: 1vw;
 }
 
   
@@ -503,15 +510,15 @@ body{
     background-color: #ddd;
 }
 
-#fGrupo input, #f2P2 input {
-    margin-left: 1vw;
-    margin-top: 2vh;
-}
+
 
 
 .dropdown-content button {
     margin: 1vh 0 1vh 0;
 }
+
+
+
 
 .dropdown-content h4 {
     margin-top: 1vh;
