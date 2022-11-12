@@ -477,14 +477,19 @@ body{
 }
 
 
-#myDropdown1, #myDropdown2 {
-    min-width: 12vw;
-    width: 20vw;
+#myDropdown1{
+    width: 240px;
 }
 
-#myDropdown2 {
-    width: 18vw;
+#myDropdown2, #myDropdown4{
+    width: 220px;
 }
+
+#myDropdown4 input {
+    margin-top: 1vh;
+    margin-left: 1vw;
+}
+
   
 .dropdown-content a {
     color: black;
