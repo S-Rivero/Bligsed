@@ -248,11 +248,11 @@ table input {
 
 .div_buscarCuenta {
   overflow: scroll;
+  overflow-y: hidden;
   height: fit-content;
-  width: 90vw;
+  width: 100%;
   margin-bottom: 10vh;
   margin-top: 5vh;
-  margin-left: 1vw;
 }
 
 #tabla_buscarCuenta {
@@ -289,4 +289,17 @@ table input {
 .bx-edit:hover {
   color: darkcyan;
   transition: .2s;
+}
+
+#contenedor_tablas {
+  margin-left: 1vw;
+  width: calc(100% - 150px);
+}
+
+#contenedor_tablas form {
+  width: 100%;
+}
+
+#contenedor_tablas tr:hover {
+  background-color: white;
 }
