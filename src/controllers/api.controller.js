@@ -387,4 +387,26 @@ exports.consultarSiEsPadre = ((req,res) => {
     `, username, function (err, a) {
         res.send({res: a[0]});
     });
+});
+
+exports.listarMateriasCurso = ((req,res) => {
+    let { curso } = req.params;
+    pool.query(`
+        SELECT * 
+        FROM materias
+        WHERE IdCurso = ?
+    `, curso, function (err, a) {
+        res.send({res: a});
+    });
+})
+
+exports.nombreMateria = ((req,res) => {
+    let { id } = req.params;
+    pool.query(`
+        SELECT Materia 
+        FROM materias
+        WHERE ID = ?
+    `, id, function (err, a) {
+        res.send({res: a[0]});
+    });
 })

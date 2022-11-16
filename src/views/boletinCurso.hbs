@@ -1,0 +1,129 @@
+   <input type="hidden" id="hiddenCurso" value="{{curso}}">
+   <input type="hidden" id="hiddenMateria" value="{{mat}}">
+   <input type="hidden" id="hiddenTrim" value="{{trim}}">
+   <div class="text" id="tituloBoletinDe">
+    Boletin de 
+  </div>
+      <div class="contenedor_documentacion">
+      <div class="contenedor_nombre_doc">
+      
+      </div>
+ 
+      <form>
+      <table class="bordered">
+        <tr id="th">
+          <th>Alumno</th>
+          
+          
+        </tr>
+      </table>
+
+      
+      </form>
+    </div>
+    
+  <script>
+    let trim = $('#hiddenTrim').val();
+    let mat = $('#hiddenMateria').val();
+    let curso = $('#hiddenCurso').val();
+
+    fetch(`/api/ListaAlumnosNotas/${mat}/${trim}`)
+    .then((response) => response.json())
+    .then((data) => {
+      let numCols = getNumCols(data);
+      insertTh(numCols);
+      data.forEach(e => {insertRow(e)});
+    });
+
+    fetch(`/api/idMateriaToCurso/${mat}`)
+    .then((response) => response.json())
+    .then((data) => {
+      document.getElementById("optionSelected").innerHTML = data['C'].split('').join('°') + ' - ' + data['B']
+      });
+
+    fetch(`/api/nombreMateria/${mat}`)
+    .then((response) => response.json())
+    .then((data) => {
+      $("#tituloBoletinDe").html(`Boletin de ${data.res['Materia']} - Trimestre ${trim}`);
+      });
+
+    function insertTh(n){
+      for(let i = 0 ; i < n ; i++){
+        $('#th').append(`<th>NPA${i+1}</th>`);
+      }
+      $('#th').append(`<th>Final</th>`);
+    }
+
+    function getNumCols(data){
+      let maxLen = 0;
+      data.forEach(e => {
+        if(e.notas.length > maxLen){
+          maxLen = e.notas.length;
+        }
+      })
+      return maxLen;
+    }
+
+    function insertRow(e){
+      $('tbody').append(`
+          <tr>
+            <input type="hidden" name="alumno" value="${e.id}">
+            <td><a href="/perfil/p/${e.id}">${e.nombre}</a></td>
+            ${e.notas.map((n,i) => {
+                //<td><input value="${n.nota}" type="number" name="${e.id}" id="nota_parcial" min="1" max="10" class="input_notas"></td>
+              return `
+                <td>${n.nota}</td>
+              `
+            }).join('')}
+            <td>${e.nota_trimestre}</td>
+          </tr>
+      `);
+    }
+
+    
+    function updateURLCurso() {
+        let selectBoxCurso = document.getElementById("select_curso");
+        let selectedValueCurso = selectBoxCurso.options[selectBoxCurso.selectedIndex].value;
+        window.location.replace("/cargarNotas/" + selectedValueCurso+"/"+trim);
+    };
+
+    function updateURLTrim(){
+      let selectBoxTrim = document.getElementById("select_trim");
+      let selectedValueTrim = selectBoxTrim.options[selectBoxTrim.selectedIndex].value;
+      window.location.replace("/cargarNotas/" + mat+"/"+selectedValueTrim);
+    };
+
+    $('#form').submit(function(){
+        $('.inputBtnBlock').each(function (index) {
+          $(this).clone(false).removeAttr('id').prop('disabled', true).insertBefore($(this));
+          $(this).hide();
+          $('#form').prepend($(this));
+          $('select').prop('disabled', true);
+      });
+    });
+
+
+
+    let sidebar = document.querySelector(".sidebar");
+    let closeBtn = document.querySelector("#btn");
+    let searchBtn = document.querySelector(".bx-search");
+
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("open");
+      menuBtnChange();//calling the function(optional)
+    });
+
+    searchBtn.addEventListener("click", () => { // Sidebar open when you click on the search iocn
+      sidebar.classList.toggle("open");
+      menuBtnChange(); //calling the function(optional)
+    });
+
+    // following are the code to change sidebar button(optional)
+    function menuBtnChange() {
+      if (sidebar.classList.contains("open")) {
+        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+      } else {
+        closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
+      }
+    }
+  </script>

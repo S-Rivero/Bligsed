@@ -68,7 +68,7 @@ exports.renderTablaCursos = ((req, res) => {
                 ON A.Padre = P.id;
             `, req.params.id, function (err, a) {
                 const r = pool.query("SELECT * FROM curso ORDER BY Nombre_curso ASC", function (err, b) {
-                    res.render('tabla_curso.hbs', { a, b, tdu: req.user[0].Tipo_de_usuario, links: 'headerLinks/tabla_curso_docente', user: { user: req.user[0], childs: req.session.childs } });
+                    res.render('tabla_curso.hbs', { cId: req.params.id,a, b, tdu: req.user[0].Tipo_de_usuario, links: 'headerLinks/tabla_curso_docente', user: { user: req.user[0], childs: req.session.childs } });
                     // res.send(a);
                 });
             });
@@ -714,4 +714,9 @@ exports.editarMateriaId = ((req, res) => {
         res.render('editarMateriaId.hbs', { a: a[0], links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs } });
     });
 
+});
+
+exports.verBoletin = ((req, res) => {
+    let {curso} = req.params;    
+    res.render('boletinCurso.hbs', {curso, mat: req.query.materia, trim: req.query.trim, links: 'headerLinks/cargarNotas', user: { user: req.user[0], childs: req.session.childs } });
 });

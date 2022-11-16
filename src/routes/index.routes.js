@@ -34,7 +34,9 @@ const {
     editar,
     editarMateria,
     editarMateriaId,
-    editarCurso
+    editarCurso,
+
+    verBoletin
 
 } = require('../controllers/index.controller');
 
@@ -51,6 +53,8 @@ router.get('/documentos', isLoggedIn, renderDocumentos);
 router.get('/Cursos', isLoggedIn, authLevelCursos, renderCursos);
 
 router.get('/tablaCurso/:id', isLoggedIn, authLevelTablaCursos, renderTablaCursos);
+router.get('/boletinCurso/:curso', isLoggedIn, authLevelCursos, verBoletin);
+
 router.get('/tablaTodos', isLoggedIn, authLevelVerUsuarios, renderTablaTodos);
 
 router.get('/crear', isLoggedIn, authLevelAdministrador, crear);
@@ -82,5 +86,6 @@ router.post('/crear_curso', isLoggedIn, authLevelAdministrador, insertCurso);
 router.get('/buscarCuenta', isLoggedIn, authLevelAdministrador, buscarCuenta);
 router.get('/buscarCuenta/:id', isLoggedIn, authLevelAdministrador, buscarCuentaId);
 router.get('/buscarCuenta/:id/:confirm', isLoggedIn, authLevelAdministrador, buscarCuentaId);
+
 
 module.exports = router;
